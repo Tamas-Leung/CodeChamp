@@ -2,55 +2,91 @@
 
 \usepackage{tabularx}
 \usepackage{booktabs}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=blue,
+    pdftitle={Overleaf Example},
+    pdfpagemode=FullScreen,
+    }
 
-\title{Problem Statement and Goals\\\progname}
+\title{Problem Statement and Goals}
 
-\author{\authname}
-
-\date{}
-
-\input{../Comments}
-\input{../Common}
+\author{
+  Kanugalawattage, Anton
+  \and
+  Subedi, Dipendra
+  \and
+  Rizkalla, Youssef
+  \and
+  Leung, Tamas
+  \and
+  Zhao, Zhiming
+}
 
 \begin{document}
-
 \maketitle
 
 \begin{table}[hp]
 \caption{Revision History} \label{TblRevisionHistory}
-\begin{tabularx}{\textwidth}{llX}
+\begin{tabularx}{\textwidth}{l4X}
 \toprule
 \textbf{Date} & \textbf{Developer(s)} & \textbf{Change}\\
 \midrule
-Date1 & Name(s) & Description of changes\\
-Date2 & Name(s) & Description of changes\\
-... & ... & ...\\
+09/20/2022 & Anton Kanugalawattage & Initial Document\\
+  & Dipendra Subedi & \\
+  & Youssef Rizkalla &\\
+  & Tamas Leung & \\
+  & Zhiming Zhao & \\
 \bottomrule
 \end{tabularx}
 \end{table}
 
 \section{Problem Statement}
 
-\wss{You should check your problem statement with the
-\href{https://github.com/smiths/capTemplate/blob/main/docs/Checklists/ProbState-Checklist.pdf}
-{problem statement checklist}.}
-\wss{You can change the section headings, as long as you include the required information.}
 
 \subsection{Problem}
 
-\subsection{Inputs and Outputs}
+Practicing coding the traditional way can be daunting. The current most popular method to learn is to use a problem database site like \href{http://www.leetcode.com}{LeetCode}. This method of learning can often feel tiring and endless. There are over 2000 problems on the website which can be intimidating to many new coders. CodeChamp will introduce a collaborative and fun way to interact with your friends while improving your algorithmic skills.
 
-\wss{Characterize the problem in terms of ``high level'' inputs and outputs.  
-Use abstraction so that you can avoid details.}
 
 \subsection{Stakeholders}
+Anyone that is learning and wanting to practise data structures \& algorithms with friends and others in real time, as well as any coders looking for a new method of learning data structures and algorithms
 
 \subsection{Environment}
 
-\wss{Hardware and software}
+Web application supporting every major browser (Chrome, Firefox, Safari).
 
 \section{Goals}
+\subsection{Improve user experience in learning data structures and algorithms}
+CodeChamp aims to make the studying process for DSA fun and less stressful. This is the main attraction for the platform, as it is what differentiates it from other traditional alternatives.
+
+\subsection{Multiplayer Online Learning}
+A collaborative and accessible environment is essential to gamifying the learning experience. Thus, CodeChamp will allow users to code against other users over the internet.
+
+\subsection{Cross-Platform Compatibility}
+Players using different devices (Mobile, PC, any device supporting a major web browser) will be able to compete with and against each other, allowing for a universal platform accessible to all.
+
+\subsection{Progression History}
+Players will be able to see a history of their games and track their progress. This helps the players feel a sense of pride and accomplishment 
+
+\subsection{Large Database of Problems}
+Users will be able to attempt a large pool of questions to expand their knowledge on all data structures \& algorithms concepts. This should cover multiple programming topics as well as different skill ranges, so that the platform is accessible for a larger breadth of users.
 
 \section{Stretch Goals}
+
+\subsection{Support Multiple Languages}
+Supporting more languages makes the platform more accessible as it allows users with different backgrounds and interests to have an opportunity to participate.
+
+\subsection{Fair Matchmaking}
+The platform should be able to match players with others who they perceive as equally skilled. This is important so that players feel challenged but also not frustrated, which can happen if they are put against players too far out of their ability range.
+
+\subsection{Customizability for the Text Editor}
+For added convenience and accessibility, the users will be able to customize the text editor with features such as color schemes and shortcuts.
+
+\subsection{Leaderboard}
+Users will be able to see their skill progression and how they rank against other players. This will give players motivation to rank up and learn more along the way and gauge their skill level.
 
 \end{document}
