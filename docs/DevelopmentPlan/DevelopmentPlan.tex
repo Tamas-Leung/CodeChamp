@@ -3,7 +3,7 @@
 \usepackage{booktabs}
 \usepackage{tabularx}
 
-\title{Development Plan\\\progname}
+\title{Development Plan\\CodeChamp}
 
 \author{\authname}
 
@@ -20,9 +20,11 @@
 \toprule
 \textbf{Date} & \textbf{Developer(s)} & \textbf{Change}\\
 \midrule
-Date1 & Name(s) & Description of changes\\
-Date2 & Name(s) & Description of changes\\
-... & ... & ...\\
+09/20/2022 & Anton Kanugalawattage & Initial Document\\
+  & Dipendra Subedi & \\
+  & Youssef Rizkalla &\\
+  & Tamas Leung & \\
+  & Zhiming Zhao & \\
 \bottomrule
 \end{tabularx}
 \end{table}
@@ -31,20 +33,62 @@ Date2 & Name(s) & Description of changes\\
 
 \maketitle
 
-\wss{Put your introductory blurb here.}
+% \wss{Put your introductory blurb here.}
 
 \section{Team Meeting Plan}
+\begin{itemize}
+\item Weekly meetings on Tuesday 6:30pm
+\item Adhoc calls when necessary
+\item Every member will add items to the meeting agenda
+\end{itemize}
 
 \section{Team Communication Plan}
+\begin{itemize}
+\item Discord
+\item Github Issues
+\end{itemize}
 
 \section{Team Member Roles}
+\begin{itemize}
+\item Scrum Master: Tamas Leung
+\item Front-end Lead: Anton Kanugalawattage
+\item Back-end Lead: Youssef Rizkalla
+\item Design Lead: Dipendra Subedi
+\item Testing Lead: Zhiming Zhao
+\end{itemize}
 
 \section{Workflow Plan}
 
 \begin{itemize}
-	\item How will you be using git, including branches, pull request, etc.?
-	\item How will you be managing issues, including template issues, issue
-	classificaiton, etc.?
+    \item Git: \begin{itemize}
+        \item All features are developed onto separate branches
+        \item Each feature branch can only be merged into the master branch via a pull request
+        \item Each pull request must be at least approved by at least two members
+        
+        \item Github Actions CI to auto test new pull requests
+    \end{itemize}
+	\item Issues: \begin{itemize}
+	    \item Tasks will be placed into issues board based on priority, type and technology
+        \item Issue Types:
+            \begin{itemize}
+                \item Feature
+                \item Bug
+                \item DevOps
+            \end{itemize}
+        \item Technology: 
+        \begin{itemize}
+                \item Front End
+                \item Back End
+                \item Database
+            \end{itemize}
+        \item Priority:
+        \begin{itemize}
+            \item P0: Needs to be addressed this week
+            \item P1: Needs to be addressed this month
+            \item P2: Will be addressed whenever there is no higher priority items available
+        \end{itemize}
+        \item Issues will be prioritized on a bi-weekly basis during scrum meetings
+	\end{itemize}
 \end{itemize}
 
 \section{Proof of Concept Demonstration Plan}
@@ -56,22 +100,49 @@ you will be able to overcome this risk?
 \section{Technology}
 
 \begin{itemize}
-\item Specific programming language
-\item Specific linter tool (if appropriate)
-\item Specific unit testing framework
-\item Investigation of code coverage measuring tools
-\item Specific plans for Continuous Integration (CI), or an explanation that CI
-  is not being done
-\item Specific performance measuring tools (like Valgrind), if
-  appropriate
-\item Libraries you will likely be using?
+\item Languages: JavaScript/TypeScript
+\item Frontend Framework: Angular
+\item Backend Framework: Node.js / Express
+\item Testing:
+   \begin{itemize}
+       \item Backend: Jest
+       \item Frontend: Jasmine
+       \item End-to-End: TestCafe
+   \end{itemize}
+\item Code Coverage: Included with test frameworks
+\item Github Actions CI 
+    \begin{itemize}
+        \item Auto build and test new pull requests
+        \item Auto Linting
+        \item Auto Formatting
+    \end{itemize}
+\item Performance Testing: 
+    \begin{itemize}
+       \item Backend: Postman Performance Testing
+       \item Frontend: Chrome Dev Tools Performance Tester
+   \end{itemize}
+\item Database: NoSQL Database (MongoDB)
+\item Deployment: Amazon Web Services (AWS)
+\item Libraries / Tools
+\begin{itemize}
+    \item Web Sockets: for real time connections
+    \item Auth0: for authentication & identity management
+    \item HTTP: Endpoints for CRUD operations
+\end{itemize}
 \item Tools you will likely be using?
 \end{itemize}
 
 \section{Coding Standard}
 
+\begin{itemize}
+    \item Linter: ESlint
+    \item Code formatter: Prettier
+    \item The \href{https://github.com/airbnb/javascript}{Airbnb style guide} will be enforced during code review for all back-end code
+    \item The \href{https://angular.io/guide/styleguide}{official style guide} will be enforced during code review for all front-end code
+\end{itemize}
+
 \section{Project Scheduling}
 
-\wss{How will the project be scheduled?}
+Major milestones will be placed onto deadlines. Each tasks will be assigned bi-weekly at the scrum meetings.
 
 \end{document}
