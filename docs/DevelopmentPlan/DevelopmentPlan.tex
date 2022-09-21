@@ -46,16 +46,41 @@
 \begin{itemize}
 \item Discord
 \item Github Issues
+\item Github Project Board
 \end{itemize}
 
 \section{Team Member Roles}
 \begin{itemize}
 \item Scrum Master: Tamas Leung
-\item Front-end Lead: Anton Kanugalawattage
-\item Back-end Lead: Youssef Rizkalla
-\item Design Lead: Dipendra Subedi
-\item Testing Lead: Zhiming Zhao
+\begin{itemize}
+    \item Will focus on making sure people are doing their tasks
+    \item Focus on re-prioritizing features and bugs
 \end{itemize}
+\item Front-end Lead: Anton Kanugalawattage
+\begin{itemize}
+    \item Designs architecture for front-end of the system
+    \item Oversees and reviews frontend pull requests
+    \item Works on Web Socket connections
+\end{itemize}
+\item Back-end Lead: Youssef Rizkalla
+\begin{itemize}
+    \item Designs architecture for back-end of the system
+    \item Oversees and reviews back-end pull requests
+\end{itemize}
+\item Design Lead: Dipendra Subedi
+\begin{itemize}
+    \item Designing backend APIs
+    \item Designing database schemas
+    \item Ensures HCI requirements are met
+\end{itemize}
+\item Testing Lead: Zhiming Zhao
+\begin{itemize}
+    \item Create test plans during different development phases
+    \item Run tests on various components and features in order to identify and fix issues
+    \item Analyzing results and identifying the cause of problems
+\end{itemize}
+\end{itemize}   
+All team members will participate in creating features all around the tech stack. The roles are intended for each member to have a focus-area, which can later change depending on the team's needs.
 
 \section{Workflow Plan}
 
@@ -64,7 +89,6 @@
         \item All features are developed onto separate branches
         \item Each feature branch can only be merged into the master branch via a pull request
         \item Each pull request must be at least approved by at least two members
-        
         \item Github Actions CI to auto test new pull requests
     \end{itemize}
 	\item Issues: \begin{itemize}
@@ -88,14 +112,19 @@
             \item P2: Will be addressed whenever there is no higher priority items available
         \end{itemize}
         \item Issues will be prioritized on a bi-weekly basis during scrum meetings
+        \item Use Github Project board, to rearrange issues and assign task
 	\end{itemize}
 \end{itemize}
 
 \section{Proof of Concept Demonstration Plan}
 
-What is the main risk, or risks, for the success of your project?  What will you
-demonstrate during your proof of concept demonstration to convince yourself that
-you will be able to overcome this risk?
+% What is the main risk, or risks, for the success of your project?  What will you
+% demonstrate during your proof of concept demonstration to convince yourself that
+% you will be able to overcome this risk?
+
+Our main risk is not knowing if our back-end server will be able to handle multiple concurrent compilations at the same time.
+
+We will demonstrate running a multiplayer game with concurrent compilation of programs, as the multiplayer aspect is the core of the project.
 
 \section{Technology}
 
@@ -126,10 +155,9 @@ you will be able to overcome this risk?
 \item Libraries / Tools
 \begin{itemize}
     \item Web Sockets: for real time connections
-    \item Auth0: for authentication & identity management
+    \item Auth0: for authentication \& identity management
     \item HTTP: Endpoints for CRUD operations
 \end{itemize}
-\item Tools you will likely be using?
 \end{itemize}
 
 \section{Coding Standard}
@@ -143,6 +171,14 @@ you will be able to overcome this risk?
 
 \section{Project Scheduling}
 
-Major milestones will be placed onto deadlines. Each tasks will be assigned bi-weekly at the scrum meetings.
+Major milestones will be placed onto deadlines. Each task will be assigned bi-weekly at the scrum meetings.
+
+\begin{itemize} 
+    \item CI/CD Setup: October 10st
+    \item Backend Architecture: October 16st
+    \item Frontend Development for PoC: October 21th
+    \item WebSocket Connection: October 26th
+    \item PoC Demo Completion: November 7th
+\end{itemize}
 
 \end{document}
