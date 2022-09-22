@@ -1,16 +1,16 @@
-require('dotenv').config()
-const express = require('express')
+import express, { json, urlencoded } from 'express';
 
-const judge = require('./routes/judge')
+import judge from './routes/judge.js';
 
-const app = express()
-const PORT = process.env.PORT
+const app = express();
+const PORT = 3000;
 
-app.use(express.json()) //http://expressjs.com/en/api.html#express.json
-app.use(express.urlencoded({ extended: false })) //http://expressjs.com/en/5x/api.html#express.urlencoded
+app.use(json()); //http://expressjs.com/en/api.html#express.json
+app.use(urlencoded({ extended: false })); //http://expressjs.com/en/5x/api.html#express.urlencoded
 
-app.use('/judge', judge)
+app.use('/judge', judge);
 
 app.listen(PORT, () => {
-  console.info(`App listening on port ${PORT}`)
-})
+  // eslint-disable-next-line no-console, no-undef
+  console.info(`App listening on port ${PORT}`);
+});
