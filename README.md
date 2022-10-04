@@ -1,10 +1,15 @@
 # Project Name
+Code Champ (McMaster Software Engineering Capstone 2022)
+Developer Names: 
+- Kanugalawattage, Anton
+- Subedi, Dipendra
+- Rizkalla, Youssef
+- Leung, Tamas
+- Zhao, Zhiming
 
-Developer Names:
+Date of project start: 2022/9/19
 
-Date of project start:
-
-This project is ...
+CodeChamp aims to make the studying process for DSA fun and less stressful. This is the main attraction for the platform, as it is what differentiates it from other traditional alternatives.
 
 The folders and files for this project are as follows:
 
