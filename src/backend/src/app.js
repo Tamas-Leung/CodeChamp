@@ -1,6 +1,6 @@
 import express, { json, urlencoded } from 'express';
 
-import judge from './routes/judge';
+import judge from './routes/judge.js';
 
 const app = express();
 const PORT = 3000;
