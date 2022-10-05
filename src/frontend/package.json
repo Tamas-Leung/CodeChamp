@@ -8,7 +8,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "ng lint",
-    "prepare": "husky install"
+    "prepare": "cd ../.. && husky install"
   },
   "private": true,
   "dependencies": {
@@ -50,7 +50,10 @@
     "typescript": "~4.7.2"
   },
   "lint-staged": {
-    "*.{js,ts}": ["eslint --fix", "prettier --write"],
+    "*.{js,ts}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
     "*": "prettier --write"
   }
 }
