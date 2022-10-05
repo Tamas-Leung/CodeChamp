@@ -1,5 +1,5 @@
 # Project Name
-Code Champ (McMaster Software Engineering Capstone 2022)
+Code Champ (McMaster Software Engineering Capstone 2022, Team #12)
 Developer Names: 
 - Kanugalawattage, Anton
 - Subedi, Dipendra
