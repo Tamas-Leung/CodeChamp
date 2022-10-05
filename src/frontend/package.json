@@ -8,6 +8,8 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "ng lint",
+    "format": "prettier --write .",
+    "formatlint": "npm run format && npm run lint",
     "prepare": "cd ../.. && husky install"
   },
   "private": true,
