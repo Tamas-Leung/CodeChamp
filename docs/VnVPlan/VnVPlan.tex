@@ -1,6 +1,8 @@
 \documentclass[12pt, titlepage]{article}
+\usepackage{longtable}
 
 \usepackage{booktabs}
+\usepackage{float}
 \usepackage{tabularx}
 \usepackage{hyperref}
 \hypersetup{
@@ -30,8 +32,7 @@
 \begin{tabularx}{\textwidth}{p{3cm}p{2cm}X}
 \toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
 \midrule
-Date 1 & 1.0 & Notes\\
-Date 2 & 1.1 & Notes\\
+November 1, 2022 & 1.0 & Added initial version.\\
 \bottomrule
 \end{tabularx}
 
@@ -40,335 +41,873 @@ Date 2 & 1.1 & Notes\\
 \tableofcontents
 
 \listoftables
-\wss{Remove this section if it isn't needed}
-
-\listoffigures
-\wss{Remove this section if it isn't needed}
 
 \newpage
 
 \section{Symbols, Abbreviations and Acronyms}
 
 \renewcommand{\arraystretch}{1.2}
-\begin{tabular}{l l} 
-  \toprule		
-  \textbf{symbol} & \textbf{description}\\
-  \midrule 
-  T & Test\\
-  \bottomrule
-\end{tabular}\\
 
-\wss{symbols, abbreviations or acronyms -- you can simply reference the SRS
-  \citep{SRS} tables, if appropriate}
+\begin{table}[H]
+\begin{center}
+\begin{tabular}{|p{3cm}|p{9cm}|}
+\hline
+  \textbf{Symbol} & \textbf{Description}\\
+  \hline
+  Data Structures and Algorithms & A topic of study for Computer Scientists.\\
+  \hline
+  CodeChamp & The system being built and tested.\\
+  \hline
+  Angular & A web framework for building web applications.\\
+  \hline
+  JavaScript & A programming language that can be executed by browsers.\\
+  \hline
+  TypeScript & A syntactical superset of JavaScript.\\
+  \hline
+  WebSocket & A communications protocol used for two-way interaction.\\
+  \hline
+  Client & A device used to connect to a CodeChamp instance.\\
+  \hline
+  DSA & Abbreviation for Data Structures and Algorithms.\\
+  \hline
+  CI & Abbreviation for Continuous Integration.\\
+  \hline
+  SRS & Abbreviation for Software Requirements Specification.\\
+  \hline
+  MIS & Abbreviation for Module Interface Specification.\\
+  \hline
+  MG & Abbreviation for Module Guide.\\
+  \hline
+  TestCafe & An end-to-end testing framework for web applications. \\
+  \hline
+  VSCode & A light weight code editor.\\
+  \hline
+  Jest & A JavaScript testing framework.\\
+  \hline
+  Jasmine &  A JavaScript testing framework.\\
+  \hline
+  Git & A version control system for software.\\
+  \hline
+  Husky & A tool used to setup Git hooks.\\
+  \hline
+\end{tabular}
+\end{center}
+\caption{Symbols, Abbreviations and Acronyms}            
+
+\end{table}
 
 \newpage
 
 \pagenumbering{arabic}
 
-This document ... \wss{provide an introductory blurb and roadmap of the
-  Verification and Validation plan}
+% This document ... \wss{provide an introductory blurb and roadmap of the
+%   Verification and Validation plan}
 
 \section{General Information}
 
 \subsection{Summary}
 
-\wss{Say what software is being tested.  Give its name and a brief overview of
-  its general functions.}
+This document’s purpose is to show the detailed testing plan for the game
+CodeChamp. This document contains sections regarding information on the
+test plans, system test descriptions (functional and non-function require-
+ments) and the unit testing plans. It explains how tests will be performed
+with details about initial state, input and output. This document will include
+descriptions of all the testing, validating and verification procedures.
 
 \subsection{Objectives}
 
-\wss{State what is intended to be accomplished.  The objective will be around
-  the qualities that are most important for your project.  You might have
-  something like: ``build confidence in the software correctness,''
-  ``demonstrate adequate usability.'' etc.  You won't list all of the qualities,
-  just those that are most important.}
+  The objective of the test plan is to test the functionality of CodeChamp. The
+final goal of the test plan is to show that all the functional requirements and
+the non functional requirements from the software requirements specification are met.
+This way, we can demonstrate adequate usability and build confidence in the correctness of our software.
 
 \subsection{Relevant Documentation}
 
-\wss{Reference relevant documentation.  This will definitely include your SRS
-  and your other project documents (MG, MIS, etc).  You can include these even
-  before they are written, since by the time the project is done, they will be
-  written.}
+% \wss{Reference relevant documentation.  This will definitely include your SRS
+%   and your other project documents (MG, MIS, etc).  You can include these even
+%   before they are written, since by the time the project is done, they will be
+%   written.}
 
-\citet{SRS}
+\begin{enumerate}
+    \item \href{https://github.com/Tamas-Leung/CodeChamp/tree/main/docs/DevelopmentPlan}{Development Plan}
+    \item \href{https://github.com/Tamas-Leung/CodeChamp/tree/main/docs/SRS}{System Requirements Specification} 
+    \item \href{https://github.com/Tamas-Leung/CodeChamp/blob/main/docs/HazardAnalysis/HazardAnalysis.md}{Hazard Analysis} 
+    \item \href{https://github.com/Tamas-Leung/CodeChamp/tree/main/docs/Design/MIS}{Module Interface Specification} 
+    \item \href{https://github.com/Tamas-Leung/CodeChamp/tree/main/docs/Design/MG}{Module Guide} 
+\end{enumerate}
 
 \section{Plan}
 
-\wss{Introduce this section.   You can provide a roadmap of the sections to
-  come.}
+% \wss{Introduce this section.   You can provide a roadmap of the sections to
+%   come.}
+
+This section outlines the verification and validation team for CodeChamp alongside their roles. Additionally, it describes how different components will be tested, including the SRS, design and implementation. Finally, it specifies the testing and verification tools that will be used to accomplish that.
 
 \subsection{Verification and Validation Team}
 
-\wss{You, your classmates and the course instructor.  Maybe your supervisor.
-  You shoud do more than list names.  You should say what each person's role is
-  for the project.  A table is a good way to summarize this information.}
+% \wss{You, your classmates and the course instructor.  Maybe your supervisor.
+%   You shoud do more than list names.  You should say what each person's role is
+%   for the project.  A table is a good way to summarize this information.}
+
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{|l | l|}
+\hline
+  \textbf{Member} & \textbf{Role}\\
+  \hline
+  Anton Kanugalawattage & Automatic verification of front-end code; Manual code review\\
+  \hline
+  Dipendra Subedi & End-to-End testing; Manual SRS verification\\
+  \hline
+  Youssef Rizkalla & Automatic verification of back-end code; Manual code review\\
+  \hline
+  Tamas Leung & Performance testing; End-to-End testing\\
+  \hline
+  Zhiming Zhao & Integration of CI actions; Manual SRS verification\\
+  \hline
+  Spencer Smith & Manual review of documents and system\\
+  \hline
+  Chris Schankula & Manual review of documents and system\\
+  \hline
+  Classmate Review Groups & Manual review of documents and system\\
+  \hline
+\end{tabular}
+\end{center}
+\caption{Verification and Validation Team Members and Roles}            
+
+\end{table}
 
 \subsection{SRS Verification Plan}
 
-\wss{List any approaches you intend to use for SRS verification.  This may just
-  be ad hoc feedback from reviewers, like your classmates, or you may have
-  something more rigorous/systematic in mind..}
+% \wss{List any approaches you intend to use for SRS verification.  This may just
+%   be ad hoc feedback from reviewers, like your classmates, or you may have
+%   something more rigorous/systematic in mind..}
+The SRS checklist will be utilized to ensure that all requirements are verifiable. In turn, system tests will be derived to ensure that all functional and non-functional requirements are verified. Automated tests will be done when possible, using the end-to-end testing framework TestCafe. This will simulate the experience of a real user interacting with the system and will allow developers to easily identify regressions. Parts of the system that may be difficult to test this way will be tested and/or reviewed manually by the project developers as well as members of the testing team.
 
-\wss{Remember you have an SRS checklist}
+% \wss{Remember you have an SRS checklist}
 
 \subsection{Design Verification Plan}
 
-\wss{Plans for design verification}
+The MG and MIS checklists will ensure that the modules specified in the MIS and MG are designed with high quality. Additionally, the designs individually architected by each engineer will be reviewed by the other engineers on the team. Finally, the design will be peer-reviewed by engineers belonging to other capstone groups, as well as the instructors. Feedback from peers and instructors will be considered in the final iteration of the design.
 
-\wss{The review will include reviews by your classmates}
+% \wss{Plans for design verification}
 
-\wss{Remember you have MG and MIS checklists}
+% \wss{The review will include reviews by your classmates}
+
+% \wss{Remember you have MG and MIS checklists}
 
 \subsection{Implementation Verification Plan}
 
-\wss{You should at least point to the tests listed in this document and the unit
-  testing plan.}
+Outlined system tests will be used to verify that the implementation of the system meets the requirements. Unit tests will be expected alongside each code change to the main branch of the repository. Each pull request will be reviewed by at least 2 other engineers. During each code walk-through/review the implemented changes will be verified by the reviewers. Additionally, the CI will automatically run tests against each new pull request to verify that it passes all unit tests and to help developers identify regressions in code coverage.
 
-\wss{In this section you would also give any details of any plans for static verification of
-  the implementation.  Potential techniques include code walkthroughs, code
-  inspection, static analyzers, etc.}
+% \wss{You should at least point to the tests listed in this document and the unit
+%   testing plan.}
+
+% \wss{In this section you would also give any details of any plans for static verification of
+%   the implementation.  Potential techniques include code walkthroughs, code
+%   inspection, static analyzers, etc.}
 
 \subsection{Automated Testing and Verification Tools}
 
-\wss{What tools are you using for automated testing.  Likely a unit testing
-  framework and maybe a profiling tool, like ValGrind.  Other possible tools
-  include a static analyzer, make, continuous integration tools, test coverage
-  tools, etc.  Explain your plans for summarizing code coverage metrics.
-  Linters are another important class of tools.  For the programming language
-  you select, you should look at the available linters.  There may also be tools
-  that verify that coding standards have been respected, like flake9 for
-  Python.}
+% \wss{What tools are you using for automated testing.  Likely a unit testing
+%   framework and maybe a profiling tool, like ValGrind.  Other possible tools
+%   include a static analyzer, make, continuous integration tools, test coverage
+%   tools, etc.  Explain your plans for summarizing code coverage metrics.
+%   Linters are another important class of tools.  For the programming language
+%   you select, you should look at the available linters.  There may also be tools
+%   that verify that coding standards have been respected, like flake9 for
+%   Python.}
 
-\wss{The details of this section will likely evolve as you get closer to the
-  implementation.}
+\begin{itemize}
+    \item Programming Language: JavaScript
+    \item Testing Frameworks:
+   \begin{itemize}
+       \item Backend (Unit-Tests): Jest
+       \item Frontend (Unit-Tests): Jasmine
+       \item End-to-End: TestCafe
+   \end{itemize}
+   \item Code Linting / Formatting / Style:
+   \begin{itemize}
+       \item Linter: ESLint
+       \item Formatter: Prettier
+        \item The \href{https://github.com/airbnb/javascript}{Airbnb style guide} will be enforced during code review for all back-end code
+        \item The \href{https://angular.io/guide/styleguide}{official Angular style guide} will be enforced during code review for all front-end code
+       \item Husky pre-commit hooks will be used to automatically apply linters and formatters before pushing to remote repository
+   \end{itemize}
+\item Github Actions CI 
+    \begin{itemize}
+        \item Auto build and test new pull requests using aforementioned testing frameworks
+        \item Test new pull requests for linting
+        \item Test new pull requests for formatting
+    \end{itemize}
+\item Code Coverage
+    \begin{itemize}
+        \item All testing frameworks chosen support options for providing code coverage
+        \item Github Actions CI will state code coverage on new pull requests and report regressions
+        
+    \end{itemize}
+
+\item Performance Testing: 
+    \begin{itemize}
+       \item Backend: Postman Performance Testing
+       \item Frontend: Chrome Dev Tools Performance Tester
+   \end{itemize}
+\end{itemize}
+
+% \wss{The details of this section will likely evolve as you get closer to the
+%   implementation.}
 
 \subsection{Software Validation Plan}
 
-\wss{If there is any external data that can be used for validation, you should
-  point to it here.  If there are no plans for validation, you should state that
-  here.}
+An external software validation plan is not planned because the requirements are set by the main developers of the project. An internal software validation will be done by the developers on a weekly basis by reviewing the changes that were made and by doing a walk-through of the system. This will allow the stakeholders (developers in the team) to validate that the implementation of the system meets the desired needs.
+
+% \wss{If there is any external data that can be used for validation, you should
+%   point to it here.  If there are no plans for validation, you should state that
+%   here.}
 
 \section{System Test Description}
 	
 \subsection{Tests for Functional Requirements}
 
-\wss{Subsets of the tests may be in related, so this section is divided into
-  different areas.  If there are no identifiable subsets for the tests, this
-  level of document structure can be removed.}
+% \wss{Subsets of the tests may be in related, so this section is divided into
+%   different areas.  If there are no identifiable subsets for the tests, this
+%   level of document structure can be removed.}
 
-\wss{Include a blurb here to explain why the subsections below
-  cover the requirements.  References to the SRS would be good.}
+% \wss{Include a blurb here to explain why the subsections below
+%   cover the requirements.  References to the SRS would be good.}
 
-\subsubsection{Area of Testing1}
+\subsubsection{Match Making Tests}
 
-\wss{It would be nice to have a blurb here to explain why the subsections below
-  cover the requirements.  References to the SRS would be good.  If a section
-  covers tests for input constraints, you should reference the data constraints
-  table in the SRS.}
+% \wss{It would be nice to have a blurb here to explain why the subsections below
+%   cover the requirements.  References to the SRS would be good.  If a section
+%   covers tests for input constraints, you should reference the data constraints
+%   table in the SRS.}
 		
-\paragraph{Title for Test}
+\paragraph{}
 
 \begin{enumerate}
 
-\item{test-id1\\}
+\item{TC-MM-1: Join a random match}
 
-Control: Manual versus Automatic
+Testing Type: Functional, Automatic, Dynamic
 					
-Initial State: 
+Initial State: On Main Menu Page
 					
-Input: 
+Input: Press the ``find a match" button
 					
-Output: \wss{The expected result for the given inputs}
+Output: Screen changes to lobby page
 
-Test Case Derivation: \wss{Justify the expected value given in the Output field}
+Test Case Derivation: The system receives the ``find a match" input and return the user a lobby match id to join, in which sends the user to the lobby page.
 					
-How test will be performed: 
+How test will be performed: TestCafe will be used to find and press the ``find a match" button, waits INPUT\_RESPONSE\_TIME, and then checks the HTML of the page to ensure the lobby page is displayed.
 					
-\item{test-id2\\}
+\item{TC-MM-2: Join an existing page with a code}
 
-Control: Manual versus Automatic
+Testing Type: Functional, Manual, Dynamic
 					
-Initial State: 
+Initial State: On Main Menu Page
 					
-Input: 
+Input: Inputs an existing lobby's code and presses the ``join match" button.
 					
-Output: \wss{The expected result for the given inputs}
+Output: Screen changes to lobby page.
 
-Test Case Derivation: \wss{Justify the expected value given in the Output field}
+Test Case Derivation: The system receives the ``join match" input with a code and return the user the lobby match that matches the inputted code, in which sends the user to the lobby page.
+					
+How test will be performed: Tester creates a lobby with one machine, receives the code from the screen, then uses the code to join the match. Tester then checks to see if the page changes to the lobby page and the lobby code matches the inputted lobby code.
 
-How test will be performed: 
+\item{TC-MM-3: Create a match}
+
+Testing Type: Functional, Automatic, Dynamic 
+					
+Initial State: On Main Menu Page
+					
+Input: Press the ``create match" button.
+					
+Output: Screen changes to lobby page.
+
+Test Case Derivation: The system receives the ``create match" input with a code and return the user the lobby match with a new code, which sends the user to the lobby page.
+					
+How test will be performed: TestCafe will be used to press the ``create match" button, waits INPUT\_RESPONSE\_TIME, and then checks the HTML of the page to ensure the lobby page is displayed.
 
 \end{enumerate}
 
-\subsubsection{Area of Testing2}
+\subsubsection{In-Game Tests}
 
-...
+\begin{enumerate}
+
+\item{TC-IG-1: Complete a full match}
+
+Testing Type: Functional, Manual, Dynamic
+					
+Initial State: Start of In-game Page
+					
+Input: Enter correct code and submit code in NUMBER\_OF\_ROUNDS rounds.
+					
+Output: After every successful submit code input, a new problem is displayed. After the last round's successful submission, a win end game page is displayed.
+
+Test Case Derivation: The system receives the submit code input with user written code. The system then validates and allows the user to move to the next round. There is only NUMBER\_OF\_ROUNDS rounds per game, on the last round, the game ends and gives the user a win.
+					
+How test will be performed: A user will start a game. The user will manually find out the answers for each question and inputs them. The user will submit every round and ensure a new problem is displayed when the next round starts or the win end game screen appears if it was the last round. The user also counts to ensure the number of rounds played is equal to NUMBER\_OF\_ROUNDS.
+
+\item{TC-IG-2: Compiles code}
+
+Testing Type: Functional, Automatic, Dynamic
+					
+Initial State: In-game Page
+					
+Input: The following code snippet with the JavaScript language option:
+\begin{verbatim}
+console.log(`Hello, World!');
+\end{verbatim}
+					
+Output: Returns success status and presents user with the number of passed test cases.
+
+Test Case Derivation: The system receives the submit code input with user written code. The system then validates and compiles the code. The system then returns the number of passed test cases.
+					
+How test will be performed: TestCafe will type the input code into a pre-determined Hello World problem and input it into the code editor. TestCafe will choose the JavaScript language option from a dropdown menu. TestCafe will wait for INPUT\_RESPONSE\_TIME and check the HTML to ensure that all test cases were passed.
+
+\item{TC-IG-3: Submit malicious code}
+
+Testing Type: Functional, Automatic, Dynamic
+					
+Initial State: In-game Page
+					
+Input: Enter ``rm -rf *" into code editor and submit code
+					
+Output: Code is rejected and displays number of passed test cases is equal to 0. It also displays that there was an error with the inputted code.
+
+Test Case Derivation: The system receives the malicious code input. The system then validates and rejects the code. The system then returns the 0 passed test cases.
+					
+How test will be performed:  TestCafe will type the malicious code and input it into the code editor. TestCafe will choose the JavaScript language option from a dropdown menu. TestCafe will wait for INPUT\_RESPONSE\_TIME and check the HTML to ensure that none of the test cases were passed. 
+
+\end{enumerate}
+
+\subsubsection{Problem Maintenance Tests}
+\begin{enumerate}
+\item{TC-PM-1: Add a new problem}
+
+Testing Type: Functional, Automatic, Dynamic
+					
+Initial State: problem maintenance page
+					
+Input: Input new problem with the following data and clicks ``Add Problem" 
+\begin{verbatim}
+{
+    name: "Hello World Test Problem",
+    description: "Data"
+}
+\end{verbatim}
+					
+Output: List of problems on problem maintenance page shows new problem with the new name and description
+
+Test Case Derivation: The system receives the new problem and updates the database. The system then updates the display to show the new problem.
+					
+How test will be performed: TestCafe will type the test problem data and clicks ``Add Problem". TestCafe will check the list of problems displayed includes the new problem.
+
+\item{TC-PM-2: Modify a problem}
+
+Testing Type: Functional, Automatic, Dynamic
+					
+Initial State: problem maintenance page
+					
+Input: Clicks ``Edit" button onto a problem and edits the problem name to ``Test Problem Name".
+					
+Output: List of problems on problem maintenance page shows the problem with name ``Test Problem Name".
+
+Test Case Derivation: The system receives the new problem name and updates the database. They system then updates the display to show the updated problem name.
+					
+How test will be performed: TestCafe will click edit on a test problem and edit the problem name. TestCafe will check the list of problems displayed includes the new problem name.
+
+\item{TC-PM-3: Delete a problem}
+
+Testing Type: Functional, Automatic, Dynamic
+					
+Initial State: problem maintenance page
+					
+Input: Clicks ``Delete" button onto a problem
+					
+Output: List of problems on problem maintenance page does not shows the problem
+
+Test Case Derivation: The system receives the delete problem and updates the database. The system then updates the display to show the problem is gone from the list.
+					
+How test will be performed: TestCafe will click delete on a test problem. TestCafe will check the list of problems displayed does not include the deleted test problem.
+\end{enumerate}
+
+\subsubsection{Login/Sign up Tests}
+
+\begin{enumerate}
+\item {TC-LS-1: Sign Up}
+    
+Testing Type: Functional, Automatic, Dynamic
+					
+Initial State: Sign Up Page
+					
+Input: Types username ``test1" and password ``testpassword1" into text-boxes and then clicks the sign-up button.
+					
+Output: Page displays that the sign-up was successful and logs the user into the system.
+
+Test Case Derivation: The system receives the credentials and updates the database. The system then sends a successful response which prompts an update to the display. 
+					
+How test will be performed: TestCafe will run in a special environment to ensure that the username is available. TestCafe will find the username and password text-box inputs and type the aforementioned input. TestCafe will click the sign-up button and check the HTML to ensure that the sign-up success dialog was displayed and that the user was redirected to the page with logged in credentials.
+
+\item {TC-LS-2: Login}
+    
+Testing Type: Functional, Automatic, Dynamic
+					
+Initial State: Login Page
+					
+Input: Types username ``test1" and password ``testpassword1" into text-boxes and then clicks the login button.
+					
+Output: Page displays that the login was successful and logs the user into the system.
+
+Test Case Derivation: The system receives the credentials and verifies that the account exists and that the credentials are correct. The system then sends a successful response which prompts an update to the display.
+					
+How test will be performed: TestCafe will run in a special environment to ensure that the account is registered. TestCafe will find the username and password text-box inputs and type the aforementioned input. TestCafe will click the login button and check the HTML to ensure that the login success dialog was displayed and that the user was redirected to the page with logged in credentials.
+
+\item {TC-LS-3: Login Failure}
+    
+Testing Type: Functional, Automatic, Dynamic
+					
+Initial State: Login Page
+					
+Input: Types username ``test1" and password ``testpassword2" into text-boxes and then clicks the login button.
+					
+Output: Page displays that the login was unsuccessful.
+
+Test Case Derivation: The system receives the credentials and discovers that the account credentials are incorrect. The system then sends a failure response which prompts an update to the display.
+					
+How test will be performed: TestCafe will run in a special environment to ensure that the account is not registered with the input credentials. TestCafe will find the username and password text-box inputs and type the aforementioned input. TestCafe will click the login button and check the HTML to ensure that the login failure dialog was displayed.
+\end{enumerate}
+
+
+\subsubsection{Profile View Tests}
+
+%%FR28, FR27, FR26, FR25 
+
+\begin{enumerate}
+\item {TC-PV-1: Profile View Displays Win Percentage}
+
+Testing Type: Functional, Automatic, Dynamic
+					
+Initial State: Profile View Page
+					
+Input: Clicks a button to view their match statistics.
+					
+Output: Page displays the number of matches the player has played, the number they have won as well as their win percentage.
+
+Test Case Derivation: The system retrieves the match statistics from the database and sends it to the client. The system then calculates and displays the appropriate statistics for the player.
+					
+How test will be performed: TestCafe will run in a special environment with mock-data which includes several matches. TestCafe will check the HTML for an element which contains the win percentage number and ensure it matches the expected value in accordance with the mock-data.
+
+\item {TC-PV-2: Profile View Displays Match History}
+
+Testing Type: Functional, Automatic, Dynamic
+					
+Initial State: Profile View Page
+					
+Input: Clicks a match on the page.
+					
+Output: Match history displays the match result, the result for each round in that match and the coding problem for each match.
+
+Test Case Derivation: The system retrieves the match statistics from the database and sends it to the client. The system then displays the appropriate statistics for match which the user specified.
+					
+How test will be performed: TestCafe will run in a special environment with mock-data which includes several matches. TestCafe will click on the first match on the list and check the HTML to ensure that the match data is displayed correctly in accordance with the provided mock-data.
+
+\end{enumerate}
+
+\subsubsection{Leader-board Tests}
+
+
+\begin{enumerate}
+    \item {TC-LB-1}
+    Testing Type: Functional, Automatic, Dynamic
+					
+Initial State: Home Page
+					
+Input: Clicks the leader-board tab.
+					
+Output: The system displays up to 100 users, sorted by their number of wins in descending order.
+
+Test Case Derivation: The system receives the leader board input and queries the database for the top 100 users by based on the number of wins of each user. The system then displays the results from the query.
+					
+How test will be performed: TestCafe will run in a special environment with mock-data which includes multiple users with different number of wins. TestCafe will click on the leaderboard tab. TestCafe will check HTML for each leader-board placement element to ensure that it is in the correct location in accordance with the mock-data.
+\end{enumerate}
+
 
 \subsection{Tests for Nonfunctional Requirements}
 
-\wss{The nonfunctional requirements for accuracy will likely just reference the
-  appropriate functional tests from above.  The test cases should mention
-  reporting the relative error for these tests.}
 
-\wss{Tests related to usability could include conducting a usability test and
-  survey.}
+\subsubsection{Look and Feel}
 
-\subsubsection{Area of Testing1}
-		
-\paragraph{Title for Test}
+\paragraph{Interface Navigability}
+
+\begin{enumerate}
+\item{TC-LF-1: Interface should be easy to navigate}
+
+Type: Non-Functional, Manual, Static
+					
+Initial State: Initial state of the game
+					
+Input/Condition: User actions
+					
+Output/Result: Completed game
+					
+How test will be performed: The test will be performed manually by a new user. They will have to navigate through the system to join a game and complete a game and will score the navigation on a scale out of 10 based on how easy they found it to navigate. A minimum of 8/10 should be achieved. If this is not achieved, we will implement the user's feedback and  re-run on a new user.
+\end{enumerate}
+
+\paragraph{Screen Size Compatibility}
+
+\begin{enumerate}
+\item{TC-LF-2: Problem description and code editor should be fully visible on all screen sizes}
+
+Type: Non-Functional, Manual, Dynamic
+					
+Initial State: The game screen is presented to the user
+					
+Input/Condition: The screen is viewed on devices (simulated or real) with different screen sizes
+					
+Output/Result: The description and editor must be fully visible on each screen size and aspect ratio tested without the need for scrolling the view
+					
+How test will be performed: The test will be performed manually by a member of the team. They will utilize Google Chrome's dev tools to simulate various aspect ratios and screen sizes.
+\end{enumerate}
+
+
+\subsubsection{Performance}
+
+\paragraph{Maximum Action Latency}
+
+\begin{enumerate}
+\item{TC-P-1: The server should synchronize the state of the game to all clients in no more than INPUT\_RESPONSE\_TIME seconds}
+
+Type: Non-Functional, Performance, Manual, Dynamic,
+					
+Initial State: The game is started and in its initial state
+					
+Input/Condition: The user sends actions to the server using various buttons and controls
+					
+Output/Result: The server should receive, process and synchronize those actions across all connected clients in no more than INPUT\_RESPONSE\_TIME seconds.
+					
+How test will be performed: The test will be performed manually by a member of the team. They will open Chrome's Dev Tools and record themselves performing the actions and getting the results back. They will then profile the recorded data to verify the time constraint was met.
+\end{enumerate}
+
+\paragraph{Maximum Compiling Latency}
+
+\begin{enumerate}
+\item{TC-P-2: The server should compile a solution and return results in no more than BACKEND\_COMPILE\_TIME seconds}
+
+Type: Non-Functional, Performance, Manual, Dynamic,
+					
+Initial State: The game is started and in its first round
+
+Input/Condition: The user sends a solution to the server.
+					
+Output/Result: Compiled results of the solution returned BACKEND\_COMPILE\_TIME seconds.
+					
+How test will be performed: The test will be performed manually by a member of the team. They will open Chrome's Dev Tools and record themselves performing the actions and getting the results back. They will then profile the recorded data to verify the time constraint was met.
+\end{enumerate}
+
+\paragraph{Concurrent Game Capacity}
 
 \begin{enumerate}
 
-\item{test-id1\\}
+\item{TC-P-3: The server should be able to handle at least 50 concurrent games without performance impacts}
 
-Type: 
+Type: Non-Functional, Performance, Stress, Automatic, Dynamic
 					
-Initial State: 
+Initial State: The server has no games running
 					
-Input/Condition: 
+Input/Condition: 50 games are created and started.
 					
-Output/Result: 
+Output/Result: The server should be able to receive inputs from all games and handle them accordingly without violating the INPUT\_RESPONSE\_TIME max latency requirement.
 					
-How test will be performed: 
-					
-\item{test-id2\\}
-
-Type: Functional, Dynamic, Manual, Static etc.
-					
-Initial State: 
-					
-Input: 
-					
-Output: 
-					
-How test will be performed: 
+How test will be performed: The test will be performed with a script that automatically creates 50 games and sends inputs to all the games. It will time responses and output them to a file for later viewing.
 
 \end{enumerate}
 
-\subsubsection{Area of Testing2}
+\subsubsection{Operational and Environmental}
 
-...
+\paragraph{Browser and Device Compatibility}
+
+\begin{enumerate}
+
+\item{TC-OE-1: The game should be able to be viewed and run on any modern browser}
+
+Type: Compatibility, Manual, Dynamic
+					
+Initial State: The game is not running or being displayed on browser window
+					
+Input/Condition: The game website is accessed on various modern browsers
+					
+Output/Result: The game should load all dependencies correctly and render the game properly
+					
+How test will be performed: The test will be performed manually by a team member. They will run the game site on the most commonly used modern browsers on multiple devices. They will note if any errors occur.
+
+\end{enumerate}
+
+\subsubsection{Security}
+
+\paragraph{User authenticity}
+
+\begin{enumerate}
+\item{TC-S-1: The server must only accept input from verified clients to update the game}
+
+Type: Security, Manual, Dynamic
+					
+Initial State: The game is started and is in any valid state of play
+					
+Input/Condition: The server receives an action from a simulated WebSocket connection from a client that is not logged in or not part of the game
+					
+Output/Result: The server blocks the connection and ignores any requests sent from it
+					
+How test will be performed: The test will be performed manually by a team member. They will create a WebSocket session outside of the game client and send events to the server. They will note whether or not those actions affected the game.
+\end{enumerate}
+
+\paragraph{User Privacy}
+
+\begin{enumerate}
+\item{TC-S-2: The server must only store the minimum required data about the player}
+
+Type: Security, Manual, Dynamic
+					
+Initial State: The game is started, no users are connected
+					
+Input/Condition: A user connects to the game
+					
+Output/Result: The server only obtains the minimum amount of information from the user to run the game. Only the game stats is stored after the game ends and other information is disposed.
+					
+How test will be performed: The test will be performed manually by a team member. They will connect to the game through normal means. They will then view the server's logs to see what information was accessed by the server.
+\end{enumerate}
+
+\subsubsection{Cultural}
+
+\paragraph{Content Moderation}
+\begin{enumerate}
+\item{TC-C-1: The system must not have any culturally inappropriate content}
+
+Type: Manual, Static
+					
+Initial State: Current state of the codebase
+					
+Input/Condition: Snapshot of the current codebase 
+					
+Output/Result: True or False that content is verified to not be culturally inappropriate.
+					
+How test will be performed: The test will be performed manually by a team member. They will review the code snapshot, and will find any cultural references. If there are at least one cultural reference the test fails. Based on findings, cultural references are to be removed.
+\end{enumerate}
+
+\subsubsection{Legal}
+
+\paragraph{Legal protection}
+\begin{enumerate}
+\item{TC-L-1: The system repository is protected by the GNU General Public License}
+
+Type: Manual, Static
+					
+Initial State: Current state of the codebase
+					
+Input/Condition: System repository
+					
+Output/Result: True or False that the repository is protected by the GNU General Public License.
+					
+How test will be performed: The test will be performed manually by a team member. They will review the repository and ensure the legal protection is present.
+\end{enumerate}
+
+\subsubsection{Health and Safety}
+
+\paragraph{Epilepsy shock test}
+\begin{enumerate}
+\item{TC-HS-1: The system has no flashing lights that could cause harm to user}
+
+Type: Manual
+					
+Initial State: The game is started and is in its initial state
+					
+Input/Condition: System interface
+					
+Output/Result: True or false that the system did not cause epilepsy.
+					
+How test will be performed: The test will be performed manually by a team member. The member will navigate the site and ensure that there are no flashing lights that could result in an epilepsy shock.
+\end{enumerate}
 
 \subsection{Traceability Between Test Cases and Requirements}
 
-\wss{Provide a table that shows which test cases are supporting which
-  requirements.}
 
-\section{Unit Test Description}
+\begin{longtable}{| p{2.5cm} | p{3cm} | p{8cm}| }
+    \hline
+    Test Case ID & Requirement ID & Requirement Description\\
+    \hline
+    TC-MM-1 & FR.1 & Should join a random match.\\
+    \hline
+    TC-MM-2 & FR.24 & Should join an existing page with a code. \\
+     \hline
+    TC-MM-3 & FR.23 & Should create a match. \\
+     \hline
+    TC-IG-1 & FR.2, FR.3, FR.4, FR.5, FR.8, FR.9, FR.10, FR.11 & Should complete a match. \\
+     \hline
+    TC-IG-2 & FR.6, FR.7, FR.20, FR.21 & Should compile solutions from input.\\
+     \hline
+    TC-IG-3 & FR.14, FR.15, FR.16   & Should detect and not run malicious code.\\
+     \hline
+    TC-PM-1 & FR.12, FR.13, FR.22, NFR.10 & Should be able to add new problems (admin).\\
+     \hline
+    TC-PM-2 & FR.12, FR.13, FR.22, NFR.10 & Should be able to modify problems (admin).\\
+     \hline
+    TC-PM-3 & FR.12, FR.13, FR.22, NFR.10 & Should be able to delete problems (admin).\\
+     \hline
+    TC-LS-1 & FR.17 & New users can sign up. \\
+     \hline
+    TC-LS-2 & FR.18  & Existing users can log in. \\
+     \hline
+    TC-LS-3 & FR.19  & Login with invalid information is rejected and a error message is displayed. \\
+     \hline
+    TC-PV-1 & FR.26 & Profile should view win percentage.\\
+     \hline
+    TC-PV-2 & FR.25, FR.27, FR.28  & Profile should view match history.\\
+     \hline
+    TC-LB-1 & FR.29 & Leaderboard view should show the players sorted by their scores.\\
+     \hline
+    TC-LF-1 & NFR.1, NFR.2, NFR.3, NFR.4, NFR.5 & Ease of navigation.\\
+    \hline
+    TC-LF-2 & NFR.1, NFR.3  & Compatibility among devices.\\
+    \hline
+     TC-P-1 & NFR.6 & Performance of user actions.\\
+    \hline
+    TC-P-2 & NFR.7 & Performance of user solution compilation.\\
+     \hline
+    TC-OE-1 & NFR.9 & Should run on any modern browser on any device. \\
+     \hline
+    TC-S-1 & NFR.11, NFR.12 & Only requests from authenticated users should be accepted. \\
+     \hline
+    TC-S-2 & NFR.11 & Only minimal data about a user should be stored.\\
+     \hline
+    TC-C-1 & NFR.13 & Content of the system should not contain any cultural references.\\
+     \hline
+    TC-L-2 & NFR.14 & System should be protected by GNU License.\\
+     \hline
+    % \end{tabularx}
+    \caption{Traceability Table for Test Cases and Requirements}
+    \label{tab:trace}
+\end{longtable}
 
-\wss{Reference your MIS and explain your overall philosophy for test case
-  selection.}  
-\wss{This section should not be filled in until after the MIS has
-  been completed.}
+% \wss{Provide a table that shows which test cases are supporting which
+%   requirements.}
 
-\subsection{Unit Testing Scope}
+% \section{Unit Test Description}
 
-\wss{What modules are outside of the scope.  If there are modules that are
-  developed by someone else, then you would say here if you aren't planning on
-  verifying them.  There may also be modules that are part of your software, but
-  have a lower priority for verification than others.  If this is the case,
-  explain your rationale for the ranking of module importance.}
+% \wss{Reference your MIS and explain your overall philosophy for test case
+%   selection.}  
+% \wss{This section should not be filled in until after the MIS has
+%   been completed.}
 
-\subsection{Tests for Functional Requirements}
+% \subsection{Unit Testing Scope}
 
-\wss{Most of the verification will be through automated unit testing.  If
-  appropriate specific modules can be verified by a non-testing based
-  technique.  That can also be documented in this section.}
+% \wss{What modules are outside of the scope.  If there are modules that are
+%   developed by someone else, then you would say here if you aren't planning on
+%   verifying them.  There may also be modules that are part of your software, but
+%   have a lower priority for verification than others.  If this is the case,
+%   explain your rationale for the ranking of module importance.}
 
-\subsubsection{Module 1}
+% \subsection{Tests for Functional Requirements}
 
-\wss{Include a blurb here to explain why the subsections below cover the module.
-  References to the MIS would be good.  You will want tests from a black box
-  perspective and from a white box perspective.  Explain to the reader how the
-  tests were selected.}
+% \wss{Most of the verification will be through automated unit testing.  If
+%   appropriate specific modules can be verified by a non-testing based
+%   technique.  That can also be documented in this section.}
 
-\begin{enumerate}
+% \subsubsection{Module 1}
 
-\item{test-id1\\}
+% \wss{Include a blurb here to explain why the subsections below cover the module.
+%   References to the MIS would be good.  You will want tests from a black box
+%   perspective and from a white box perspective.  Explain to the reader how the
+%   tests were selected.}
 
-Type: \wss{Functional, Dynamic, Manual, Automatic, Static etc. Most will
-  be automatic}
+% \begin{enumerate}
+
+% \item{test-id1\\}
+
+% Type: \wss{Functional, Dynamic, Manual, Automatic, Static etc. Most will
+%   be automatic}
 					
-Initial State: 
+% Initial State: 
 					
-Input: 
+% Input: 
 					
-Output: \wss{The expected result for the given inputs}
+% Output: \wss{The expected result for the given inputs}
 
-Test Case Derivation: \wss{Justify the expected value given in the Output field}
+% Test Case Derivation: \wss{Justify the expected value given in the Output field}
 
-How test will be performed: 
+% How test will be performed: 
 					
-\item{test-id2\\}
+% \item{test-id2\\}
 
-Type: \wss{Functional, Dynamic, Manual, Automatic, Static etc. Most will
-  be automatic}
+% Type: \wss{Functional, Dynamic, Manual, Automatic, Static etc. Most will
+%   be automatic}
 					
-Initial State: 
+% Initial State: 
 					
-Input: 
+% Input: 
 					
-Output: \wss{The expected result for the given inputs}
+% Output: \wss{The expected result for the given inputs}
 
-Test Case Derivation: \wss{Justify the expected value given in the Output field}
+% Test Case Derivation: \wss{Justify the expected value given in the Output field}
 
-How test will be performed: 
+% How test will be performed: 
 
-\item{...\\}
+% \item{...\\}
     
-\end{enumerate}
+% \end{enumerate}
 
-\subsubsection{Module 2}
+% \subsubsection{Module 2}
 
-...
+% ...
 
-\subsection{Tests for Nonfunctional Requirements}
+% \subsection{Tests for Nonfunctional Requirements}
 
-\wss{If there is a module that needs to be independently assessed for
-  performance, those test cases can go here.  In some projects, planning for
-  nonfunctional tests of units will not be that relevant.}
+% \wss{If there is a module that needs to be independently assessed for
+%   performance, those test cases can go here.  In some projects, planning for
+%   nonfunctional tests of units will not be that relevant.}
 
-\wss{These tests may involve collecting performance data from previously
-  mentioned functional tests.}
+% \wss{These tests may involve collecting performance data from previously
+%   mentioned functional tests.}
 
-\subsubsection{Module ?}
+% \subsubsection{Module ?}
 		
-\begin{enumerate}
+% \begin{enumerate}
 
-\item{test-id1\\}
+% \item{test-id1\\}
 
-Type: \wss{Functional, Dynamic, Manual, Automatic, Static etc. Most will
-  be automatic}
+% Type: \wss{Functional, Dynamic, Manual, Automatic, Static etc. Most will
+%   be automatic}
 					
-Initial State: 
+% Initial State: 
 					
-Input/Condition: 
+% Input/Condition: 
 					
-Output/Result: 
+% Output/Result: 
 					
-How test will be performed: 
+% How test will be performed: 
 					
-\item{test-id2\\}
+% \item{test-id2\\}
 
-Type: Functional, Dynamic, Manual, Static etc.
+% Type: Functional, Dynamic, Manual, Static etc.
 					
-Initial State: 
+% Initial State: 
 					
-Input: 
+% Input: 
 					
-Output: 
+% Output: 
 					
-How test will be performed: 
+% How test will be performed: 
 
-\end{enumerate}
+% \end{enumerate}
 
-\subsubsection{Module ?}
+% \subsubsection{Module ?}
 
-...
+% ...
 
-\subsection{Traceability Between Test Cases and Modules}
+% \subsection{Traceability Between Test Cases and Modules}
 
-\wss{Provide evidence that all of the modules have been considered.}
+%\wss{Provide evidence that all of the modules have been considered.}
 				
 \bibliographystyle{plainnat}
 
@@ -378,16 +917,31 @@ How test will be performed:
 
 \section{Appendix}
 
-This is where you can place additional information.
-
 \subsection{Symbolic Parameters}
 
 The definition of the test cases will call for SYMBOLIC\_CONSTANTS.
 Their values are defined in this section for easy maintenance.
 
-\subsection{Usability Survey Questions?}
+\begin{table}[H]
+    \begin{tabularx}{\textwidth}{ | p{6cm} | p{6.85cm} | }
+    \hline
+    Symbolic Constant & Value \\
+    \hline
+    INPUT\_RESPONSE\_TIME & 2 seconds \\
+    \hline
+    BACKEND\_COMPILE\_TIME & 10 seconds \\
+    \hline
+    NUMBER\_OF\_ROUNDS & 3 \\
+    \hline
+    \end{tabularx}
+    \caption{Symbolic Constants}
+    \label{tab:trace}
+\end{table}
 
-\wss{This is a section that would be appropriate for some projects.}
+\subsection{Usability Survey Questions}
+
+% \wss{This is a section that would be appropriate for some projects.}
+N/A
 
 \newpage{}
 \section*{Appendix --- Reflection}
@@ -396,8 +950,44 @@ The information in this section will be used to evaluate the team members on the
 graduate attribute of Lifelong Learning.  Please answer the following questions:
 
 \begin{enumerate}
-  \item 
-  \item 
+  \item What knowledge and skills will the team collectively need to acquire to
+  successfully complete the verification and validation of your project?
+  Examples of possible knowledge and skills include dynamic testing knowledge,
+  static testing knowledge, specific tool usage etc.  You should look to
+  identify at least one item for each team member.
+  
+  \begin{enumerate}
+    \item  \textbf{Jasmine (Frontend Unit Tests)}: Frontend of the system, implemented in Angular is to be tested using Jasmine. Jasmine allows modular testing allowing tests to be written for each component individually. Jasmine also allows state manipulation and monitoring of the systems outputs as the state changes. This will be a crucial part of the verification plan to verify the correctness of responsive user interface based on it's state.
+    
+    \item  \textbf{TestCafe (End-to-End)}: End to End testing is important to ensure the end user experiences correctly corresponds with the requirements. TestCafe works well as it is able to simulate user inputs onto a web page, mimicking a real user. This is a important as it allows building test plans for user scenarios.
+    
+    \item \textbf{Jest (Backend Unit Tests) - Youssef Rizkalla}: The backend of the system will be implemented in Node.js and will be tested using Jest. This will help ensure the correctness of the code-base and help identify regressions and weak-points for developers and reviewers, as it can track code coverage across the back-end. Ultimately, this will give the team a high-degree of confidence that the implementation matches the design and requirements needed for the project to succeed.
+    
+    \item  \textbf{CI testing - Zhiming Zhao}:
+    Continuous integration testing focuses on execution during the continuous integration process. Testing in the CI process allows for rapid feedback and stops the progression of the artifact if minimum quality is not met. CI testing has the benefit of repeatability, it's also able to run builds or tests in parallel with other team members. To summarize, CI testing allows for iteration and rapid feedback, it also saves the team a lot of time since a failing build is much less severe than a failing deployment.
+    
+    \item \textbf{Performance testing (Postman/Chrome dev tools) - Tamas Leung}: Performance testing is important to ensure website is to common web standards. Skills to identify common performance issues such as large CSS files or back end algorithms are important to ensure websites are snappy and are a smooth experience for users.
+    
+\end{enumerate}
+
+  \item For each of the knowledge areas and skills identified in the previous
+  question, what are at least two approaches to acquiring the knowledge or
+  mastering the skill?  Of the identified approaches, which will each team
+  member pursue, and why did they make this choice?
+  
+  \begin{enumerate}
+\item \textbf{Jasmine (Frontend Unit Tests) - Anton Kanugalawattage} This skill could be acquired by reading and following examples of existing implementation of tests using this technology. Another approach to acquire this skill is to read the documentation or blogs of how this testing technology is used in systems (software testing classes, technology company's engineering blogs). Anton will pursue this skill as he has worked on a project which has utilized a similar testing technology before. Also, as he is the front-end lead this verifying components and changes to the front-end will be a crucial part as he will also we reviewing these changes.
+
+\item  \textbf{Performance testing - Tamas Leung}: In order to learn performance testing, Tamas will study the common issues faced when doing performance testing. For front-end, the google developer tools can generate a lighthouse report in which shows the best practices for web developoment. Tamas will use these reports to learn and understand how to improve the software to run at the webs standards. For back-end, Tamas will study common issues with building heavy load backend systems and will watch videos on methods to improve the servers such as load balancing.
+
+\item \textbf{Jest (Backend Unit Tests) - Youssef Rizkalla}: This can be developed by observing and critiquing open-source projects and identifying the testing techniques utilized. Youssef will work on this as he is the back-end lead and main code-reviewer, so it is important to understand testing patterns that will maintain good code health. Observing open-source projects allows us to identify issues that have occurred in other projects and develop a design to get around them. Additionally, testing patterns can be learned from official documentation or trustworthy blog posts that are published by professional Software Engineers. This allows us to learn from engineers who developed the tooling in the first place, which will allow us to understand and set best practices in our code-base. When reviewing code, Youssef can ensure that others are submitting unit tests according to the standards set, and that no regressions are occurring from new pull requests.
+
+\item \textbf{TestCafe (End-to-End)  - Dipendra Subedi}: This skill could be developed by reading web tutorials, video examples, and seeing the use of TestCafe in existing open source projects. Web tutorials run through specific examples of how to use TestCafe, and similar code structure shall be utilized when developing end to end tests for CodeChamp. Open source projects will also be useful since previously identified issues can be mitigated when implemented for CodeChamp. As the design lead, Dipendra is knowledge-able in the design of the entire web application, so developing this skill will ensure that CodeChamp simulates what a real use case scenario looks like from start to finish.
+
+\item \textbf{CI Testing - Zhiming Zhao}: To start learning CI testing, it's better to start small and catch easiest errors first. Some of the simplest and easiest to fix errors can end up causing the biggest problems if they make it into production workloads. It's a good choice to configure some automatic testing to take place on developer machines before code is committed. The second approach would be built on top of first, and it would be making security a part of CI testing. Catching security issues early in the software development life-cycle means they are much easier, cheaper and safer to fix. Adding some basic static code analysis tools and dependency checkers can vastly improve the security posture of an application by providing fast feedback and early detection of common security problems and potential vulnerabilities. Since approach 2 builds on approach 1, it's fair to start learning by starting small and then builds on to approach 2 by implementing security into the CI testing. 
+
+  \end{enumerate}
+  
 \end{enumerate}
 
 \end{document}
