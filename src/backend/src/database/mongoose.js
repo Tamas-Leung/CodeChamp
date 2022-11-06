@@ -1,57 +1,82 @@
-const mongoose = require('mongoose');
+import { Schema, connect, model } from 'mongoose';
+import dotenv from 'dotenv'
+dotenv.config()
 
-mongoose.connect(process.env.Mongodb_URL, {
-    useNewUrlParser: true,
+connect(process.env.MONGODB_URL, {
 })
 
-const parameters = {
-    title: {
+const ProblemDifficulty = {
+    Easy: "Easy",
+    Medium: "Medium",
+    Hard: "Hard"
+}
+
+const ProblemType = {
+    ArrayAndHashing: "Array and Hashing",
+    TwoPointers: "Two Pointers",
+    SlidingWindow: "Sliding Window",
+    Stack: "Stack",
+    BinarySearch: "Binary Search",
+    LinkedList: "Linked List",
+    Trees: "Tress",
+    Tries: "Tries",
+    Heap: "Heap",
+    PriorityQueue: "Priority Queue",
+    Backtracking: "Back Tracking",
+    Graphs: "Graphs",
+    DynamicProgramming: "Dynamic Programming",
+    Greedy: "Greedy",
+    Intervals: "Intervals",
+    MathAndGeometry: "Math And Geometry",
+    BitManipulation: "Bit Manupulation"
+}
+
+const ProblemSchema = new Schema({
+    name: {
         type: String,
         required: true
     },
-    organization: {
+    description: {
         type: String,
         required: true
     },
-    type: {
-        type: String,
-        required: true
-    },
-    category: {
-        type: String,
-        required: true
-    },
-    price: {
-        type: Boolean,
-        required: true
-    },
-    likes: {
+    time_limit: {
         type: Number,
         required: true
     },
-    languages: {
-        type: Array,
+    memory_limit: {
+        type: Number,
         required: true
     },
-    color: {
-        type: String,
+    test_cases: {
+        type: [{
+            input: {
+                type: String,
+                required: true
+            },
+            output: {
+                type: String,
+                required: true
+            },
+        }],
         required: true
     },
-    url: {
+    difficulty: {
         type: String,
+        enum: Object.values(ProblemDifficulty),
         required: true
     },
-    image: {
-        type: String,
+    problem_type: {
+        type: [
+            {
+                type: String,
+                enum: Object.values(ProblemType),
+            }
+        ],
         required: true
     }
-}
+});
 
-const SoftwareToolRequest = mongoose.model("softwaretools-requests", parameters)
+const Problems = model("problems", ProblemSchema)
 
-const SoftwareTool = mongoose.model("softwaretools", parameters)
-
-module.exports = {
-    SoftwareToolRequest: SoftwareToolRequest,
-    SoftwareTool: SoftwareTool
-};
+export { Problems, ProblemType, ProblemDifficulty }
