@@ -1,6 +1,7 @@
 import { Schema, connect, model } from 'mongoose';
 import dotenv from 'dotenv'
 dotenv.config()
+import m2s from 'mongoose-to-swagger';
 
 connect(process.env.MONGODB_URL, {
 })
@@ -79,4 +80,8 @@ const ProblemSchema = new Schema({
 
 const Problems = model("problems", ProblemSchema)
 
-export { Problems, ProblemType, ProblemDifficulty }
+const Schemas = {
+    Problems: m2s(Problems)
+}
+
+export { Problems, ProblemType, ProblemDifficulty, Schemas }
