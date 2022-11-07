@@ -2,37 +2,133 @@ import { Router } from 'express';
 const router = Router();
 import { ProblemDifficulty, Problems, ProblemType } from "../database/mongoose.js";
 
-router.get('/', (_req, res) => {
-  res.send('GET /problems works');
-});
-
-router.get('/add', async (_req, res) => {
+/**
+ * @swagger
+ * /problems:
+ *   post:
+ *     tags: 
+ *        - problems
+ *     summary: Add a new problem
+ *     description: Adds a new problem
+ *     requestBody:
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Problems'
+ *     responses:
+ *       '200':
+ *         description: Successful operation
+ *       '500':
+ *         description: Internal Failure
+ * 
+*/
+router.post('/', async (req, res) => {
   try {
-    let newProblem = new Problems(
-      {
-        name: "Two Sum",
-        description: "Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.\nYou may assume that each input would have exactly one solution, and you may not use the same element twice.\nYou can return the answer in any order.",
-        time_limit: 10,
-        memory_limit: 10,
-        test_cases: [
-          {
-            input: "[2,7,11,15], 9",
-            output: "[0,1]"
-          }
-        ],
-        difficulty: ProblemDifficulty.Easy,
-        problem_type: [
-          ProblemType.ArrayAndHashing
-        ]
-      }
-    )
-    await newProblem.save();
+    await Problems(req.body).save();
     res.status(200).send('OK');
   } catch (e) {
-    console.log(e)
-    res.sendStatus(500)
+    res.status(500).send({
+      message: e
+    });
   }
-
 });
+
+/**
+ * @swagger
+ * /problems:
+ *   put:
+ *     tags: 
+ *        - problems
+ *     summary: Update a problem
+ *     description: Updates a problem by _id
+ *     requestBody:
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Problems'
+ *     responses:
+ *       '200':
+ *         description: Successful operation
+ *       '500':
+ *         description: Internal Failure
+ * 
+*/
+router.put('/', async (req, res) => {
+  try {
+    await Problems.replaceOne({ _id: req.body._id }, req.body);
+    res.status(200).send('OK');
+  } catch (e) {
+    res.status(500).send({
+      message: e
+    });
+  }
+});
+
+/**
+ * @swagger
+ * /problems:
+ *   get:
+ *     tags: 
+ *        - problems
+ *     summary: Gets all problems
+ *     description: Gets all problem
+ *     responses:
+ *       '200':
+ *         description: Successful operation
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Problems'
+ *       '500':
+ *         description: Internal Failure
+ * 
+*/
+router.get('/', async (req, res) => {
+  try {
+    const filter = {};
+    const problems = await Problems.find(filter);
+    res.status(200).send(problems);
+  } catch (e) {
+    res.status(500).send({
+      message: e
+    });
+  }
+})
+
+/**
+ * @swagger
+ * /problems/{_id}:
+ *   delete:
+ *     tags: 
+ *        - problems
+ *     summary: Deletes a problem
+ *     description: Delets a problem by _id
+ *     parameters:
+ *       - name: _id
+ *         in: path
+ *         description: Id to delete
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       '200':
+ *         description: Successful operation
+ *       '500':
+ *         description: Internal Failure
+ * 
+*/
+router.delete('/:_id', async (req, res) => {
+  try {
+    await Problems.deleteMany({_id: req.params._id});
+    res.status(200).send("OK");
+  } catch (e) {
+    res.status(500).send({
+      message: e
+    });
+  }
+})
+
 
 export default router;
