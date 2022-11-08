@@ -3,8 +3,21 @@
   "env": {
     "es2021": true
   },
-  "extends": ["airbnb-base", "prettier"],
-  "overrides": [],
+  "extends": [
+    "airbnb-base",
+    "prettier"
+  ],
+  "overrides": [
+    {
+      "files": [
+        "*.js",
+        "*.ts"
+      ],
+      "rules": {
+        "no-underscore-dangle": "off"
+      }
+    }
+  ],
   "parserOptions": {
     "ecmaVersion": "latest",
     "sourceType": "module"
