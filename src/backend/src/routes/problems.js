@@ -1,12 +1,13 @@
 import { Router } from 'express';
+import { Problems } from '../database/mongoose.js';
+
 const router = Router();
-import { ProblemDifficulty, Problems, ProblemType } from "../database/mongoose.js";
 
 /**
  * @swagger
  * /problems:
  *   post:
- *     tags: 
+ *     tags:
  *        - problems
  *     summary: Add a new problem
  *     description: Adds a new problem
@@ -20,15 +21,15 @@ import { ProblemDifficulty, Problems, ProblemType } from "../database/mongoose.j
  *         description: Successful operation
  *       '500':
  *         description: Internal Failure
- * 
-*/
+ *
+ */
 router.post('/', async (req, res) => {
   try {
     await Problems(req.body).save();
     res.status(200).send('OK');
   } catch (e) {
     res.status(500).send({
-      message: e
+      message: e,
     });
   }
 });
@@ -37,7 +38,7 @@ router.post('/', async (req, res) => {
  * @swagger
  * /problems:
  *   put:
- *     tags: 
+ *     tags:
  *        - problems
  *     summary: Update a problem
  *     description: Updates a problem by _id
@@ -51,15 +52,15 @@ router.post('/', async (req, res) => {
  *         description: Successful operation
  *       '500':
  *         description: Internal Failure
- * 
-*/
+ *
+ */
 router.put('/', async (req, res) => {
   try {
     await Problems.replaceOne({ _id: req.body._id }, req.body);
     res.status(200).send('OK');
   } catch (e) {
     res.status(500).send({
-      message: e
+      message: e,
     });
   }
 });
@@ -68,7 +69,7 @@ router.put('/', async (req, res) => {
  * @swagger
  * /problems:
  *   get:
- *     tags: 
+ *     tags:
  *        - problems
  *     summary: Gets all problems
  *     description: Gets all problem
@@ -83,8 +84,8 @@ router.put('/', async (req, res) => {
  *                 $ref: '#/components/schemas/Problems'
  *       '500':
  *         description: Internal Failure
- * 
-*/
+ *
+ */
 router.get('/', async (req, res) => {
   try {
     const filter = {};
@@ -92,16 +93,16 @@ router.get('/', async (req, res) => {
     res.status(200).send(problems);
   } catch (e) {
     res.status(500).send({
-      message: e
+      message: e,
     });
   }
-})
+});
 
 /**
  * @swagger
  * /problems/{_id}:
  *   delete:
- *     tags: 
+ *     tags:
  *        - problems
  *     summary: Deletes a problem
  *     description: Delets a problem by _id
@@ -117,18 +118,17 @@ router.get('/', async (req, res) => {
  *         description: Successful operation
  *       '500':
  *         description: Internal Failure
- * 
-*/
+ *
+ */
 router.delete('/:_id', async (req, res) => {
   try {
-    await Problems.deleteMany({_id: req.params._id});
-    res.status(200).send("OK");
+    await Problems.deleteMany({ _id: req.params._id });
+    res.status(200).send('OK');
   } catch (e) {
     res.status(500).send({
-      message: e
+      message: e,
     });
   }
-})
-
+});
 
 export default router;
