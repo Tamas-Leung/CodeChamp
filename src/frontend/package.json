@@ -60,6 +60,6 @@
       "eslint --fix",
       "prettier --write"
     ],
-    "*": "prettier --write"
+    "*.{html,css,scss}": "prettier --write"
   }
 }
