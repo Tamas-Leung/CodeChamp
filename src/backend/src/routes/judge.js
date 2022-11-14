@@ -1,6 +1,7 @@
 import { Router } from 'express';
-import { Problems } from '../database/mongoose.js';
+import { isValidObjectId } from 'mongoose';
 
+import { Problems } from '../database/mongoose.js';
 import judge from '../services/judge/index.js';
 
 const router = Router();
@@ -35,7 +36,11 @@ const router = Router();
  *                 type: string
  *     responses:
  *       '200':
- *         description: If code passes all cases then All test cases passed! otherwise A test case failed.
+ *         description: Returns an object containing a result. If code passes all cases then All test cases passed! otherwise A test case failed.
+ *       '400':
+ *         description: The given id is invalid
+ *       '404':
+ *         description: No problem was found for the problem with the given id
  *       '500':
  *         description: Internal Failure
  *
@@ -43,10 +48,17 @@ const router = Router();
 router.post('/:_id', async (req, res) => {
   const { _id } = req.params;
   const { code, language } = req.body;
+
+  if (!isValidObjectId(_id)) {
+    res.status(400).send({ error: `${_id} is not a valid id.` });
+    return;
+  }
+
   try {
     const problem = await Problems.findById(_id);
     if (!problem) {
-      res.status(404).send({ message: `Problem ${_id} not found.` });
+      res.status(404).send({ error: `Problem ${_id} not found.` });
+      return;
     }
     // eslint-disable-next-line no-restricted-syntax
     for await (const { input, output } of problem.test_cases) {
@@ -58,14 +70,14 @@ router.post('/:_id', async (req, res) => {
         timeout: problem.time_limit,
       });
       if (!judgeResult) {
-        res.status(200).send('A test case failed.');
+        res.status(200).send({ result: 'A test case failed.' });
         return;
       }
     }
-    res.status(200).send('All test cases passed!');
-  } catch (e) {
+    res.status(200).send({ result: 'All test cases passed!' });
+  } catch (error) {
     res.status(500).send({
-      message: e,
+      error,
     });
   }
 });
