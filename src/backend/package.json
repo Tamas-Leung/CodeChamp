@@ -40,5 +40,10 @@
       "prettier --write"
     ],
     "*.{css,html,scss}": "prettier --write"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "temp-judge/*"
+    ]
   }
 }
