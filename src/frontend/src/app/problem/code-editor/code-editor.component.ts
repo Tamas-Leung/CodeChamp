@@ -1,5 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { CodeModel } from '@ngstack/code-editor';
+import { SolutionSubmitService } from '../solution-submit/solution-submit.service';
 
 @Component({
   selector: 'app-code-editor',
@@ -7,6 +9,11 @@ import { CodeModel } from '@ngstack/code-editor';
   styleUrls: ['./code-editor.component.scss'],
 })
 export class CodeEditorComponent {
+
+  constructor(private submitSolutionService: SolutionSubmitService) {
+
+  }
+
   theme = 'vs-dark';
 
   codeModel: CodeModel = {
@@ -24,7 +31,15 @@ export class CodeEditorComponent {
     },
   };
 
-  onCodeChanged(value: any) {
-    console.log('CODE', value);
+
+  solution = "";
+
+  onCodeChanged(value: string) {
+    this.solution = value;
+  }
+
+  submitCode() {
+    this.submitSolutionService.submitSolution(this.solution, this.codeModel.language);
   }
 }
+
