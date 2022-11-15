@@ -16,8 +16,8 @@ export class SolutionSubmitService {
   constructor(private http: HttpClient) {
   }
 
-  submitSolution(code: string, language: string) {
-    return this.http.post('https://google.com', { code: code, language: language });
+  submitSolution(id: number, code: string, language: string) {
+    return this.http.post('https://localhost:4200/judge/' + String(id), { code: code, language: language });
   }
 
 }
