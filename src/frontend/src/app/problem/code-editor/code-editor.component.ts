@@ -1,7 +1,9 @@
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { CodeModel } from '@ngstack/code-editor';
 import { SolutionSubmitService } from '../solution-submit/solution-submit.service';
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-code-editor',
@@ -10,8 +12,7 @@ import { SolutionSubmitService } from '../solution-submit/solution-submit.servic
 })
 export class CodeEditorComponent {
 
-  constructor(private submitSolutionService: SolutionSubmitService) {
-
+  constructor(private submitSolutionService: SolutionSubmitService, public dialog: MatDialog) {
   }
 
   theme = 'vs-dark';
@@ -33,13 +34,26 @@ export class CodeEditorComponent {
 
 
   solution = "";
-
   onCodeChanged(value: string) {
     this.solution = value;
   }
 
   submitCode() {
-    this.submitSolutionService.submitSolution(this.solution, this.codeModel.language);
+    this.dialog.open(SubmissionDialog, {
+      data: this.submitSolutionService.submitSolution(this.solution, this.codeModel.language)
+    });
+  }
+}
+
+@Component({
+  selector: 'submit-dialog.component',
+  templateUrl: 'submit-dialog.component.html',
+})
+export class SubmissionDialog {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: Observable<any>) { }
+
+  ngOnInit() {
+    console.log(this.data)
   }
 }
 
