@@ -17,7 +17,7 @@ export class SolutionSubmitService {
   }
 
   submitSolution(code: string, language: string) {
-    return this.http.post('https://localhost:3000/judge/' + "a2241a", { code: code, language: language });
+    return this.http.post('http://localhost:3000/judge/' + "63747e5dfffe067b61c7e67e", { code: code, language: language });
   }
 
 }
