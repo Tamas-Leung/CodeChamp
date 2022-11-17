@@ -1,4 +1,5 @@
 import express, { json, urlencoded } from 'express';
+import cors from 'cors';
 
 import judge from './routes/judge.js';
 import problems from './routes/problems.js';
@@ -38,8 +39,10 @@ const options = {
 
 const openapiSpecification = swaggerJsdoc(options);
 
-
 const app = express();
+app.use(cors({
+  origin: '*'
+}));
 const PORT = 3000;
 
 app.use(json()); // http://expressjs.com/en/api.html#express.json
