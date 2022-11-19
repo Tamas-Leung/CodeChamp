@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import { format } from "prettier/standalone";
 import { parsers } from "prettier/parser-babel";
 
+
 @Component({
   selector: 'app-code-editor',
   templateUrl: './code-editor.component.html',
@@ -45,25 +46,28 @@ export class CodeEditorComponent {
     this.submitSolutionService.submitSolution("63747e5dfffe067b61c7e67e", this.solution, this.codeModel.language).subscribe(
       (data) => {
         this.dialog.open(SubmissionDialog, {
-          data: data
+          data: data.result
         });
       }
     );
   }
 }
 
+export interface Result {
+  result: string
+}
+
+
 @Component({
   selector: 'submit-dialog.component',
   templateUrl: 'submit-dialog.component.html',
 })
 export class SubmissionDialog {
-  result = ""
+
   constructor(@Inject(MAT_DIALOG_DATA) public data: string) {
-    this.result = data;
   }
 
   ngOnInit() {
-    console.log(this.data);
   }
 }
 
