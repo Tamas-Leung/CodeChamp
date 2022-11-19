@@ -5,7 +5,8 @@ import { SolutionSubmitService } from '../solution-submit/solution-submit.servic
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { format } from "prettier/standalone";
-import { parsers } from "prettier/parser-babel";
+import * as prettier from 'prettier/standalone';
+import * as tsParser from "prettier/parser-babel";
 
 
 @Component({
@@ -36,6 +37,10 @@ export class CodeEditorComponent {
   ngOnInit() {
     // this.codeModel.value = format(this.codeModel.value, { parser: "babel" });
     this.solution = this.codeModel.value;
+    this.codeModel.value = prettier.format(this.codeModel.value, {
+      parser: "babel",
+      plugins: [tsParser],
+    });
   }
 
   onCodeChanged(value: string) {
