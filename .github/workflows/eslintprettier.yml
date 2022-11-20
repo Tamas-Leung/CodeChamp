@@ -39,7 +39,7 @@ jobs:
       - name: Prettify code backend
         run: |
           cd src/backend
-          npx prettier --check  "**/*.{ts,html,css,js}"
+          npx prettier --check .
 
       - name: Install npm frontend
         run: |
@@ -54,7 +54,7 @@ jobs:
       - name: Prettify code frontend
         run: |
           cd src/frontend
-          npx prettier --check "**/*.{ts,html,css,js}"
+          npx prettier --check .
 
       # - name: Check for modified files
       #   id: git-check
