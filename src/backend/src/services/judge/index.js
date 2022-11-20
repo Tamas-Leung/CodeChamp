@@ -13,6 +13,8 @@ const ensureJudgeDirExists = () =>
       if (accessFailed) {
         mkdir(JUDGE_DIR, (err) => {
           if (err) {
+
+
             reject(err);
           }
           resolve();
