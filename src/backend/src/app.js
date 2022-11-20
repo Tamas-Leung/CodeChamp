@@ -1,4 +1,5 @@
 import express, { json, urlencoded } from 'express';
+import cors from 'cors';
 
 import swaggerUi from 'swagger-ui-express';
 import swaggerJsdoc from 'swagger-jsdoc';
@@ -37,6 +38,11 @@ const options = {
 const openapiSpecification = swaggerJsdoc(options);
 
 const app = express();
+app.use(
+  cors({
+    origin: '*',
+  })
+);
 const PORT = 3000;
 
 app.use(json()); // http://expressjs.com/en/api.html#express.json

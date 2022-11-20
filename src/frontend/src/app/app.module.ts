@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -45,6 +46,9 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SolutionSubmitService } from './problem/solution-submit/solution-submit.service';
+import { ProblemsComponent } from './problems/problems.component';
+import { ProblemsService } from './services/problems/problems.service';
 import { StartpageComponent } from './startpage/startpage.component';
 
 @NgModule({
@@ -53,6 +57,7 @@ import { StartpageComponent } from './startpage/startpage.component';
     CodeEditorComponent,
     ProblemComponent,
     ProblemDescriptionComponent,
+    ProblemsComponent,
     StartpageComponent,
   ],
   imports: [
@@ -60,6 +65,7 @@ import { StartpageComponent } from './startpage/startpage.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     CodeEditorModule.forRoot(),
+    HttpClientModule,
     MatBadgeModule,
     MatBottomSheetModule,
     MatButtonModule,
@@ -95,7 +101,7 @@ import { StartpageComponent } from './startpage/startpage.component';
     MatTooltipModule,
     MatFormFieldModule,
   ],
-  providers: [],
+  providers: [SolutionSubmitService, ProblemsService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
