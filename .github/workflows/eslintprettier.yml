@@ -68,5 +68,5 @@ jobs:
           git config --global user.name 'Tamas Leung'
           git config --global user.email 'noreply@codechamp.com'
           git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
-          git commit -am "Automated changes"
+          git commit -am "Automated changes" --no-verify
           git push
