@@ -51,13 +51,16 @@ router.post('/:_id', async (req, res) => {
 
   if (!isValidObjectId(_id)) {
     res.status(400).send({ error: `${_id} is not a valid id.` });
+
+
     return;
   }
 
   try {
-    const problem = await Problems.findById(_id);
+    const problem =
+      await Problems.findById(_id);
     if (!problem) {
-      res.status(404).send({ error: `Problem ${_id} not found.` });
+      res.status(404).send({ error: `Problem ${_id} not found.` })
       return;
     }
     // eslint-disable-next-line no-restricted-syntax
