@@ -34,12 +34,12 @@ jobs:
       - name: Run ESLint backend
         run: |
           cd src/backend
-          npx eslint . --config .eslintrc.json --ext .js,.jsx,.ts,.tsx --fix
+          npx eslint . --config .eslintrc.json --ext .js,.jsx,.ts,.tsx
 
       - name: Prettify code backend
         run: |
           cd src/backend
-          npx prettier --write "**/*.{ts,html,css,js}"
+          npx prettier --check  "**/*.{ts,html,css,js}"
 
       - name: Install npm frontend
         run: |
@@ -49,13 +49,13 @@ jobs:
       - name: Run ESLint frontend
         run: |
           cd src/frontend
-          npx eslint . --config .eslintrc.json --ext .js,.jsx,.ts,.tsx --fix
+          npx eslint . --config .eslintrc.json --ext .js,.jsx,.ts,.tsx
 
       - name: Prettify code frontend
         run: |
           cd src/frontend
-          npx prettier --write "**/*.{ts,html,css,js}"
+          npx prettier --check "**/*.{ts,html,css,js}"
 
-      - name: Check for modified files
-        id: git-check
-        run: echo "modified=$(if git diff-index --quiet HEAD --; then echo "false"; else exit 1; fi)" >> $GITHUB_OUTPUT
+      # - name: Check for modified files
+      #   id: git-check
+      #   run: echo "modified=$(if git diff-index --quiet HEAD --; then echo "false"; else  echo "Failed check" exit 1; fi)" >> $GITHUB_OUTPUT
