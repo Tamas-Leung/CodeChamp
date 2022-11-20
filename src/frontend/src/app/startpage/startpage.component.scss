@@ -45,7 +45,7 @@
   border-color: #000000;
 }
 
-.loginbutton {
+.login-button {
   margin: 16px;
   border-radius: 20px;
   background-color: #000000;
@@ -61,11 +61,11 @@
   text-transform: uppercase;
 }
 
-.logintext {
+.login-text {
   margin-left: 50px;
 }
 
-.loginicon {
+.login-icon {
   margin-right: 20px;
   width: 40px;
   flex-shrink: 0;
@@ -79,7 +79,7 @@
   text-transform: uppercase;
 }
 
-.personbackground {
+.person-background {
   width: 0.9em;
   height: 0.9em;
   margin-bottom: 45px;
@@ -90,12 +90,12 @@
   font-size: 2.1875rem;
 }
 
-.rightarrow {
+.right-arrow {
   color: white;
   background-color: white;
 }
 
-.buttoncontainer {
+.button-container {
   position: relative;
   display: flex;
   -webkit-flex-direction: column;
