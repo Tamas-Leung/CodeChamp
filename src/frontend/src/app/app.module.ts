@@ -101,10 +101,7 @@ import { StartpageComponent } from './startpage/startpage.component';
     MatTooltipModule,
     MatFormFieldModule,
   ],
-  providers: [
-    SolutionSubmitService,
-    ProblemsService,
-  ],
+  providers: [SolutionSubmitService, ProblemsService],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

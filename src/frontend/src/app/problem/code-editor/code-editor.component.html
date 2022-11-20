@@ -1,6 +1,13 @@
-<ngs-code-editor class="editor" [theme]="theme" [codeModel]="codeModel" [options]="options"
-  (valueChanged)="onCodeChanged($event)">
+<ngs-code-editor
+  class="editor"
+  [theme]="theme"
+  [codeModel]="codeModel"
+  [options]="options"
+  (valueChanged)="onCodeChanged($event)"
+>
 </ngs-code-editor>
 <div class="row" style="float: right; margin: 10px">
-  <button style="width: 100px" mat-flat-button (click)="submitCode()">Submit</button>
+  <button style="width: 100px" mat-flat-button (click)="submitCode()">
+    Submit
+  </button>
 </div>

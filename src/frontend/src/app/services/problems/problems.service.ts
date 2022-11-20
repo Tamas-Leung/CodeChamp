@@ -3,18 +3,15 @@ import { Injectable } from '@angular/core';
 import { filter, map } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-
 export class ProblemsService {
-
-  url = "http://localhost:3000"
-  constructor(private http: HttpClient) { }
+  url = 'http://localhost:3000';
+  constructor(private http: HttpClient) {}
 
   getProblems() {
-    return this.http.get<Problem[]>(this.url + '/problems')
+    return this.http.get<Problem[]>(this.url + '/problems');
   }
-
 }
 
 export interface Problem {

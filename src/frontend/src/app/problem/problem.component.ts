@@ -12,26 +12,26 @@ export class ProblemComponent implements OnInit {
   description: string = '';
   id: string = '';
 
-  constructor(private problemService: ProblemsService, private aRoute: ActivatedRoute, private router: Router) {
-
-  }
+  constructor(
+    private problemService: ProblemsService,
+    private aRoute: ActivatedRoute,
+    private router: Router
+  ) {}
 
   ngOnInit() {
-    const id = this.aRoute.snapshot.paramMap.get("id");
+    const id = this.aRoute.snapshot.paramMap.get('id');
     if (id != null) {
-      this.problemService.getProblems().subscribe(
-        problems => {
-          for (var i = 0; i < problems.length; i++) {
-            if (problems[i]._id === id) {
-              this.title = problems[i].name;
-              this.description = problems[i].description;
-              this.id = problems[i]._id;
-            }
+      this.problemService.getProblems().subscribe((problems) => {
+        for (var i = 0; i < problems.length; i++) {
+          if (problems[i]._id === id) {
+            this.title = problems[i].name;
+            this.description = problems[i].description;
+            this.id = problems[i]._id;
           }
         }
-      );
+      });
     } else {
-      this.router.navigate(["/"]);
+      this.router.navigate(['/']);
     }
   }
 }

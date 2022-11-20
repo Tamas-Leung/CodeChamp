@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-startpage',
   templateUrl: './startpage.component.html',
-  styleUrls: ['./startpage.component.scss']
+  styleUrls: ['./startpage.component.scss'],
 })
-export class StartpageComponent {
-}
+export class StartpageComponent {}
