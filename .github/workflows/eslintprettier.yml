@@ -10,8 +10,6 @@
 name: ESLint
 
 on:
-  push:
-    branches: ["main"]
   pull_request:
     # The branches below must be a subset of the branches above
     branches: ["main"]
@@ -69,4 +67,4 @@ jobs:
           git config --global user.email 'noreply@codechamp.com'
           git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
           git commit -am "Automated changes" --no-verify
-          git push -u origin ${{ github.ref }}
+          git push
