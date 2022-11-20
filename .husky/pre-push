@@ -10,5 +10,3 @@ cd src/frontend
 npx lint-staged
 cd ../backend
 npx lint-staged
-
-exit 1
