@@ -33,28 +33,27 @@ jobs:
           cd src/backend
           npm install
 
-      - name: Run ESLint
+      - name: Run ESLint backend
         run: |
           cd src/backend
           npx eslint . --config .eslintrc.json --ext .js,.jsx,.ts,.tsx --fix
 
-      - name: Prettify code
+      - name: Prettify code backend
         run: |
-          pwd
+          cd src/backend
           prettier --write **/*.{ts,html,css,js}
 
       - name: Install npm frontend
         run: |
-          cd ./../frontend
+          cd src/frontend
           npm install
 
-      - name: Run ESLint
-        run: npx eslint .
-          --config .eslintrc.js
-          --ext .js,.jsx,.ts,.tsx
+      - name: Run ESLint frontend
+        run: |
+          cd src/frontend
+          npx eslint . --config .eslintrc.json --ext .js,.jsx,.ts,.tsx --fix
 
-      - name: Prettify code
-        uses: creyD/prettier_action@v4.2
-        with:
-          prettier_options: --write **/*.{ts,html,css,js}
-          only_changed: True
+      - name: Prettify code frontend
+        run: |
+          cd src/frontend
+          prettier --write **/*.{ts,html,css,js}
