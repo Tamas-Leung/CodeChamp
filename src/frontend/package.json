@@ -9,7 +9,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "format": "prettier --write  .",
-    "format:check": "prettier --write  .",
+    "format:check": "prettier --check  .",
     "formatlint": "npm run format && npm run lint",
     "prepare": "cd ../.. && husky install"
   },
