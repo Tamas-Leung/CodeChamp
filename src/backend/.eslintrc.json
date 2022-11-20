@@ -3,16 +3,10 @@
   "env": {
     "es2021": true
   },
-  "extends": [
-    "airbnb-base",
-    "prettier"
-  ],
+  "extends": ["airbnb-base", "prettier"],
   "overrides": [
     {
-      "files": [
-        "*.js",
-        "*.ts"
-      ],
+      "files": ["*.js", "*.ts"],
       "rules": {
         "no-underscore-dangle": "off"
       }
