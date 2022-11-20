@@ -49,6 +49,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SolutionSubmitService } from './problem/solution-submit/solution-submit.service';
 import { ProblemsComponent } from './problems/problems.component';
 import { ProblemsService } from './services/problems/problems.service';
+import { StartpageComponent } from './startpage/startpage.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,7 @@ import { ProblemsService } from './services/problems/problems.service';
     ProblemComponent,
     ProblemDescriptionComponent,
     ProblemsComponent,
+    StartpageComponent,
   ],
   imports: [
     BrowserModule,

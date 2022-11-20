@@ -1,0 +1,115 @@
+.header {
+  display: flex;
+  justify-content: center;
+  overflow-y: hidden;
+  height: auto;
+}
+.iconcontainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 100px;
+}
+.center {
+  display: flex;
+  justify-content: center;
+  overflow-y: hidden;
+  height: auto;
+}
+.share {
+  background-color: white;
+  color: black;
+  transform: scale(2);
+}
+
+.MuiBox-root {
+  align-items: center;
+}
+
+.round-button {
+  border-radius: 20px;
+  background: transparent;
+  padding: 6px 12px;
+  width: 400px;
+  max-width: 80vw;
+  height: 55px;
+  text-align: center;
+  font-size: 30px;
+  letter-spacing: 2px;
+  color: #ffffff;
+  background-color: #000000;
+  font-weight: 800;
+  margin: 16px;
+  text-transform: uppercase;
+  cursor: pointer;
+  border: 7px solid;
+  border-color: #000000;
+}
+
+.login-button {
+  margin: 16px;
+  border-radius: 20px;
+  background-color: #000000;
+  color: #ffffff;
+  height: 55px;
+  display: flex;
+  align-items: center;
+  font-weight: 800;
+  font-size: 30px;
+  overflow: hidden;
+  padding: 10px;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+
+.login-text {
+  margin-left: 50px;
+}
+
+.login-icon {
+  margin-right: 20px;
+  width: 40px;
+  flex-shrink: 0;
+  height: 40px;
+  background-color: #000000;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  text-transform: uppercase;
+}
+
+.person-background {
+  width: 0.9em;
+  height: 0.9em;
+  margin-bottom: 45px;
+  display: inline-block;
+  fill: white;
+  scale: 1.5;
+  background-color: transparent;
+  font-size: 2.1875rem;
+}
+
+.right-arrow {
+  color: white;
+  background-color: white;
+}
+
+.button-container {
+  position: relative;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
+  -webkit-justify-content: flex-start;
+  justify-content: flex-start;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  overflow: hidden;
+  height: 500px;
+  width: 100%;
+}

@@ -22,7 +22,7 @@ export class ProblemsComponent implements OnInit {
   }
 
   viewProblem(id: string) {
-    this.router.navigate(['/problem/' + id]);
+    this.router.navigate(['/problems/' + id]);
   }
 
 }

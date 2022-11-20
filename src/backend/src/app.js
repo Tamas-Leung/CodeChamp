@@ -1,11 +1,10 @@
 import express, { json, urlencoded } from 'express';
 import cors from 'cors';
 
-import judge from './routes/judge.js';
-import problems from './routes/problems.js';
-
 import swaggerUi from 'swagger-ui-express';
 import swaggerJsdoc from 'swagger-jsdoc';
+import judge from './routes/judge.js';
+import problems from './routes/problems.js';
 
 import { Schemas } from './database/mongoose.js';
 
@@ -16,8 +15,7 @@ const options = {
     info: {
       title: 'Code Champ API',
       version: '1.0.0',
-      description:
-        'REST API for Code Champ',
+      description: 'REST API for Code Champ',
     },
     servers: [
       {
@@ -27,12 +25,12 @@ const options = {
     ],
     tags: [
       {
-        name: "problems"
-      }
+        name: 'problems',
+      },
     ],
     components: {
-      schemas: Schemas
-    }
+      schemas: Schemas,
+    },
   },
   apis: ['./src/routes/*.js'],
 };
