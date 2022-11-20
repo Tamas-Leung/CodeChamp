@@ -1,0 +1,22 @@
+.header {
+  display: flex;
+  justify-content: center;
+  overflow-y: hidden;
+  height: auto;
+}
+.iconcontainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 100px;
+}
+.center {
+  display: flex;
+  justify-content: center;
+  overflow-y: hidden;
+  height: auto;
+}
+.share {
+  background-color: white;
+  color: black;
+  transform: scale(2);
+}
