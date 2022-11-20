@@ -9,7 +9,9 @@ const commands = Object.freeze({
   js: `node `,
 });
 
-export const generatePath = (language) => `${PATH_START + v4()}.${language}`;
+export const generatePath =
+
+  (language) => `${PATH_START + v4()}.${language}`;
 
 export const generateCommand = (language, filePath) =>
   commands[language] + filePath;
