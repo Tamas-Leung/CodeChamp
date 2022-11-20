@@ -37,10 +37,7 @@ jobs:
         run: |
           cd src/backend
           pwd
-          npx eslint .
-          --config .eslintrc.js
-          --ext .js,.jsx,.ts,.tsx
-          --fix
+          npx eslint . --config .eslintrc.js --ext .js,.jsx,.ts,.tsx --fix
 
       - name: Prettify code
         uses: creyD/prettier_action@v4.2
