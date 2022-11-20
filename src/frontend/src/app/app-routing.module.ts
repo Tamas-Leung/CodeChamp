@@ -4,8 +4,8 @@ import { ProblemComponent } from './problem/problem.component';
 import { StartpageComponent } from './startpage/startpage.component';
 
 const routes: Routes = [
-  { path: '', component:  StartpageComponent},
-  { path: 'Problem', component: ProblemComponent},
+  { path: '', component: StartpageComponent },
+  { path: 'problem', component: ProblemComponent },
 ];
 
 @NgModule({
