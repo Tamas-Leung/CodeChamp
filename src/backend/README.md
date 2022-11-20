@@ -9,9 +9,10 @@ This project is an Express API.
 Run `npm install` to install packages.
 
 ### Step 2: Setup Variables
+
 #### Method 1: Using Export
 
-Run 
+Run
 
 ```
 export MONGODB_URL="mongodb+srv://<mongodbUserName>:<mongodbPassword>@codechamp.pdu38rq.mongodb.net/CodeChamp?retryWrites=true&w=majority"
@@ -21,14 +22,13 @@ Replace `<mongodbUserName>` and `<mongodbPassword>` with your mongodb access use
 
 #### Method 2: Using .env
 
-Create .env file with the following content 
+Create .env file with the following content
 
 ```
 MONGODB_URL="mongodb+srv://<mongodbUserName>:<mongodbPassword>@codechamp.pdu38rq.mongodb.net/CodeChamp?retryWrites=true&w=majority"
 ```
 
 Replace `<mongodbUserName>` and `<mongodbPassword>` with your mongodb access user
-
 
 ## Running
 
