@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProblemsService } from '../services/problems/problems.service';
 
@@ -7,7 +7,7 @@ import { ProblemsService } from '../services/problems/problems.service';
   templateUrl: './problem.component.html',
   styleUrls: ['./problem.component.scss'],
 })
-export class ProblemComponent {
+export class ProblemComponent implements OnInit {
   title: string = '';
   description: string = '';
   id: string = '';
