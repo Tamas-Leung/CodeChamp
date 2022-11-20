@@ -1,0 +1,10 @@
+<ul class="list-group" *ngFor="let problem of problems">
+    <li class="list-group-item" (click)="viewProblem(problem._id)">
+        <div>
+            <h1>{{problem.name}}</h1>
+            <small>{{problem.problem_type}}</small>
+            <br>
+            <p>{{problem.description}}</p>
+        </div>
+    </li>
+</ul>

@@ -1,10 +1,8 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, Input } from '@angular/core';
 import { CodeModel } from '@ngstack/code-editor';
 import { SolutionSubmitService } from '../solution-submit/solution-submit.service';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Observable } from 'rxjs';
-import { format } from "prettier/standalone";
 import * as prettier from 'prettier/standalone';
 import * as tsParser from "prettier/parser-babel";
 
@@ -15,6 +13,7 @@ import * as tsParser from "prettier/parser-babel";
   styleUrls: ['./code-editor.component.scss'],
 })
 export class CodeEditorComponent {
+  @Input() id = '';
   theme = 'vs-dark';
 
   codeModel: CodeModel = {
@@ -35,7 +34,6 @@ export class CodeEditorComponent {
   }
 
   ngOnInit() {
-    // this.codeModel.value = format(this.codeModel.value, { parser: "babel" });
     this.solution = this.codeModel.value;
     this.codeModel.value = prettier.format(this.codeModel.value, {
       parser: "babel",
@@ -48,7 +46,7 @@ export class CodeEditorComponent {
   }
 
   submitCode() {
-    this.submitSolutionService.submitSolution("63747e5dfffe067b61c7e67e", this.solution, this.codeModel.language).subscribe(
+    this.submitSolutionService.submitSolution(this.id, this.solution, this.codeModel.language).subscribe(
       (data) => {
         this.dialog.open(SubmissionDialog, {
           data: data.result
