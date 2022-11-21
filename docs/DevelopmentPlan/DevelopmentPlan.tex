@@ -20,6 +20,12 @@
 \toprule
 \textbf{Date} & \textbf{Developer(s)} & \textbf{Change}\\
 \midrule
+11/20/2022 & Anton Kanugalawattage & Revised PoC Demo Plan\\
+  & Dipendra Subedi & \\
+  & Youssef Rizkalla &\\
+  & Tamas Leung & \\
+  & Zhiming Zhao & \\
+\midrule
 09/20/2022 & Anton Kanugalawattage & Initial Document\\
   & Dipendra Subedi & \\
   & Youssef Rizkalla &\\
@@ -122,9 +128,20 @@ All team members will participate in creating features all around the tech stack
 % demonstrate during your proof of concept demonstration to convince yourself that
 % you will be able to overcome this risk?
 
-Our main risk is not knowing if our back-end server will be able to handle multiple concurrent compilations at the same time.
+% old
+% Our main risk is not knowing if our back-end server will be able to handle multiple concurrent compilations at the same time.
 
-We will demonstrate running a multiplayer game with concurrent compilation of programs, as the multiplayer aspect is the core of the project.
+% We will demonstrate running a multiplayer game with concurrent compilation of programs, as the multiplayer aspect is the core of the project.
+
+% new
+
+% Risk?
+
+Our main risk is not knowing if our back-end server can execute given code and evaluate it for correction for a set problem.
+
+We will demonstrate that a front-end can communicate with a back-end server to compile code, compute and return results based on evaluation against set test cases. The front-end will show a code editor with syntax highlighting, a basic homepage, as well as problem descriptions. The front-end will also call the back end for a list of problems against a problems API to demonstrate that we can effectively store and retrieve problems.
+
+The demonstration will also show a documentation page to show diligence in knowledge transfer.
 
 \section{Technology}
 
