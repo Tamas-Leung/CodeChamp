@@ -16,8 +16,7 @@ export class CodeEditorComponent implements OnInit {
   theme = 'vs-dark';
 
   codeModel: CodeModel = {
-    language: 'typescript',
-    fileType: 'js',
+    language: 'javascript',
     uri: 'solution.js',
     value:
       "import readline from 'readline'; const stdin = readline.createInterface({ input: process.stdin, output: process.stdout, }); stdin.question('', (input) => { const x = input.split(' '); const target = parseInt(x[1]); const nums = x[0].split(',').map(Number); const map = new Map(); let result = []; for (let i = 0; i < nums.length; i++) { const current = nums[i]; const match = map.get(target - current); if (match !== undefined) { result = [i, match]; break; } map.set(current, i); } console.log(result); stdin.close(); });",
@@ -50,7 +49,7 @@ export class CodeEditorComponent implements OnInit {
 
   submitCode() {
     this.submitSolutionService
-      .submitSolution(this.id, this.solution, this.codeModel.fileType)
+      .submitSolution(this.id, this.solution, 'js')
       .subscribe((data) => {
         this.dialog.open(SubmissionDialogComponent, {
           data: data.result,
