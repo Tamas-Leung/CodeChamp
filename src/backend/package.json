@@ -1,52 +1,52 @@
 {
-    "name": "code-champ",
-    "version": "1.0.0",
-    "description": "",
-    "type": "module",
-    "main": "./src/app.js",
-    "scripts": {
-        "start": "nodemon ./src/app.js",
-        "test": "echo \"Error: no test specified\" && exit 1",
-        "format:check": "prettier --check .",
-        "format:fix": "prettier --write .",
-        "lint:check": "eslint .",
-        "lint:fix": "eslint --fix .",
-        "prepare": "cd ../.. && husky install"
-    },
-    "author": "",
-    "license": "ISC",
-    "dependencies": {
-        "cors": "^2.8.5",
-        "dotenv": "^16.0.3",
-        "eslint-plugin-import": "^2.26.0",
-        "express": "^4.18.1",
-        "lint-staged": "^13.0.3",
-        "mongoose": "^6.7.0",
-        "mongoose-to-swagger": "^1.4.0",
-        "morgan": "^1.10.0",
-        "nodemon": "^2.0.20",
-        "swagger-jsdoc": "^6.2.5",
-        "swagger-ui-express": "^4.6.0",
-        "uuid": "^9.0.0",
-        "ws": "^8.11.0"
-    },
-    "devDependencies": {
-        "eslint": "^8.23.1",
-        "eslint-config-airbnb-base": "^15.0.0",
-        "eslint-config-prettier": "^8.5.0",
-        "husky": "^8.0.1",
-        "prettier": "^2.7.1"
-    },
-    "lint-staged": {
-        "*.{js,ts}": [
-            "eslint --fix",
-            "prettier --write"
-        ],
-        "*.{css,html,scss}": "prettier --write"
-    },
-    "nodemonConfig": {
-        "ignore": [
-            "temp-judge/*"
-        ]
-    }
+  "name": "code-champ",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "./src/app.js",
+  "scripts": {
+    "start": "nodemon ./src/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "format:check": "prettier --check .",
+    "format:fix": "prettier --write .",
+    "lint:check": "eslint .",
+    "lint:fix": "eslint --fix .",
+    "prepare": "cd ../.. && husky install"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "eslint-plugin-import": "^2.26.0",
+    "express": "^4.18.1",
+    "lint-staged": "^13.0.3",
+    "mongoose": "^6.7.0",
+    "mongoose-to-swagger": "^1.4.0",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.20",
+    "swagger-jsdoc": "^6.2.5",
+    "swagger-ui-express": "^4.6.0",
+    "uuid": "^9.0.0",
+    "ws": "^8.11.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.23.1",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^8.5.0",
+    "husky": "^8.0.1",
+    "prettier": "^2.7.1"
+  },
+  "lint-staged": {
+    "*.{js,ts}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{css,html,scss}": "prettier --write"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "temp-judge/*"
+    ]
+  }
 }
