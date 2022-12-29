@@ -1,12 +1,12 @@
 import express, { json, urlencoded } from 'express';
 import cors from 'cors';
+import { WebSocketServer } from 'ws';
 
 import swaggerUi from 'swagger-ui-express';
 import swaggerJsdoc from 'swagger-jsdoc';
 import judge from './routes/judge.js';
 import problems from './routes/problems.js';
-import { WebSocketServer } from 'ws';
-import WebSocketManager, { Events } from './services/ws/index.js';
+import WebSocketManager, { Events, uuidv4 } from './services/ws/index.js';
 import { Schemas } from './database/mongoose.js';
 
 const options = {
@@ -64,7 +64,7 @@ const wss = new WebSocketServer({ port: 7070 });
 const wsm = new WebSocketManager();
 
 wss.on('connection', (ws) => {
-  const id = wsm.uuidv4();
+  const id = uuidv4();
   const metadata = { id };
 
   wsm.addClient(ws, metadata);
@@ -72,11 +72,11 @@ wss.on('connection', (ws) => {
   ws.on('message', (messageAsString) => {
     const message = JSON.parse(messageAsString);
 
-    if (message.method == Events.CREATE) wsm.createGame(ws);
-    if (message.method == Events.JOIN) wsm.joinGame(ws, message.gameID);
+    if (message.method === Events.CREATE) wsm.createGame(ws);
+    if (message.method === Events.JOIN) wsm.joinGame(ws, message.gameID);
   });
 });
 
-wss.on('close', () => {
-  clients.delete(ws);
+wss.on('close', (ws) => {
+  wsm.deleteClient(ws);
 });
