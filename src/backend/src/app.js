@@ -6,7 +6,7 @@ import swaggerUi from 'swagger-ui-express';
 import swaggerJsdoc from 'swagger-jsdoc';
 import judge from './routes/judge.js';
 import problems from './routes/problems.js';
-import WebSocketManager, { Events, uuidv4 } from './services/ws/index.js';
+import WebSocketManager, { Events } from './services/ws/index.js';
 import { Schemas } from './database/mongoose.js';
 
 const options = {
@@ -64,10 +64,7 @@ const wss = new WebSocketServer({ port: 7070 });
 const wsm = new WebSocketManager();
 
 wss.on('connection', (ws) => {
-  const id = uuidv4();
-  const metadata = { id };
-
-  wsm.addClient(ws, metadata);
+  wsm.addClient(ws);
 
   ws.on('message', (messageAsString) => {
     const message = JSON.parse(messageAsString);

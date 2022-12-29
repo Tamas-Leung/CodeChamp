@@ -8,8 +8,7 @@
     {
       "files": ["*.js", "*.ts"],
       "rules": {
-        "no-underscore-dangle": "off",
-        "no-bitwise": "off"
+        "no-underscore-dangle": "off"
       }
     }
   ],
