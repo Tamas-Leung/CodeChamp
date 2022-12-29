@@ -5,6 +5,7 @@ import swaggerUi from 'swagger-ui-express';
 import swaggerJsdoc from 'swagger-jsdoc';
 import judge from './routes/judge.js';
 import problems from './routes/problems.js';
+import auth from './routes/auth.js';
 
 import { Schemas } from './database/mongoose.js';
 
@@ -26,6 +27,12 @@ const options = {
     tags: [
       {
         name: 'problems',
+      },
+      {
+        name: 'auth',
+      },
+      {
+        name: 'judge',
       },
     ],
     components: {
@@ -50,6 +57,7 @@ app.use(urlencoded({ extended: false })); // http://expressjs.com/en/5x/api.html
 
 app.use('/judge', judge);
 app.use('/problems', problems);
+app.use('/auth', auth);
 
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(openapiSpecification));
 

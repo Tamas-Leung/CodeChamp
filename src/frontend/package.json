@@ -26,6 +26,7 @@
     "@angular/platform-browser-dynamic": "^14.2.0",
     "@angular/router": "^14.2.0",
     "@ngstack/code-editor": "^4.0.0",
+    "@types/google-one-tap": "^1.2.2",
     "bootstrap": "^5.2.2",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
