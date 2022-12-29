@@ -5,7 +5,8 @@ import swaggerUi from 'swagger-ui-express';
 import swaggerJsdoc from 'swagger-jsdoc';
 import judge from './routes/judge.js';
 import problems from './routes/problems.js';
-
+import { WebSocketServer } from 'ws';
+import WebSocketManager, { Events } from './services/ws/index.js';
 import { Schemas } from './database/mongoose.js';
 
 const options = {
@@ -56,4 +57,26 @@ app.use('/docs', swaggerUi.serve, swaggerUi.setup(openapiSpecification));
 app.listen(PORT, () => {
   // eslint-disable-next-line no-console, no-undef
   console.info(`App listening on port ${PORT}`);
+});
+
+// https://github.com/ably-labs/websockets-cursor-sharing/blob/main/api/index.js
+const wss = new WebSocketServer({ port: 7070 });
+const wsm = new WebSocketManager();
+
+wss.on('connection', (ws) => {
+  const id = wsm.uuidv4();
+  const metadata = { id };
+
+  wsm.addClient(ws, metadata);
+
+  ws.on('message', (messageAsString) => {
+    const message = JSON.parse(messageAsString);
+
+    if (message.method == Events.CREATE) wsm.createGame(ws);
+    if (message.method == Events.JOIN) wsm.joinGame(ws, message.gameID);
+  });
+});
+
+wss.on('close', () => {
+  clients.delete(ws);
 });
