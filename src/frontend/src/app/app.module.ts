@@ -50,6 +50,7 @@ import { SolutionSubmitService } from './problem/solution-submit/solution-submit
 import { ProblemsComponent } from './problems/problems.component';
 import { ProblemsService } from './services/problems/problems.service';
 import { StartpageComponent } from './startpage/startpage.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -59,6 +60,7 @@ import { StartpageComponent } from './startpage/startpage.component';
     ProblemDescriptionComponent,
     ProblemsComponent,
     StartpageComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
