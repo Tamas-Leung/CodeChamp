@@ -80,6 +80,7 @@ wss.on('connection', (ws) => {
 
     if (message.method === Events.CREATE) wsm.createGame(ws);
     if (message.method === Events.JOIN) wsm.joinGame(ws, message.gameID);
+    if (message.method === Events.NEXT_ROUND) wsm.gameNextRound(message.gameID);
   });
 });
 

@@ -35,4 +35,8 @@ export class LobbyComponent implements OnInit {
       });
     }
   }
+
+  startGame() {
+    this.ws.nextRound();
+  }
 }
