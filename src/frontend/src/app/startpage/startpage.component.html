@@ -19,20 +19,9 @@ Welcome to CodeChamp!
       transform: translateX(0%) translateZ(0px);
     "
   >
-    <div class="round-button" [routerLink]="['/problems']">Start Game</div>
-    <div
-      class="round-button"
-      matTooltip="Coming soon!"
-      matTooltipPosition="after"
-    >
-      Host room
-    </div>
-    <div
-      class="login-button"
-      matTooltip="Coming soon!"
-      matTooltipPosition="after"
-      (click)="onLogout()"
-    >
+    <div class="round-button" (click)="createGame()">Create Game</div>
+    <div class="round-button">Join Game</div>
+    <div class="login-button" (click)="onLogout()">
       <div class="login-icon">
         <button mat-fab class="person-background">
           <mat-icon>person</mat-icon>
@@ -45,13 +34,6 @@ Welcome to CodeChamp!
           d="M10 6 8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"
         ></path>
       </svg>
-    </div>
-    <div
-      class="round-button"
-      matTooltip="Coming soon!"
-      matTooltipPosition="after"
-    >
-      Settings
     </div>
   </div>
 </div>

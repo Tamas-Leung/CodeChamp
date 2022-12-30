@@ -26,17 +26,14 @@ export default class WebSocketManager {
     this.games.set(gameID, { clients: [ws], round: 0 });
     this.clients.get(ws).game = gameID;
     ws.send(JSON.stringify({ method: Events.CREATE, gameID }));
+    this.sendUpdatedPlayers(this.games.get(gameID));
   }
 
   joinGame(ws, gameID) {
     const game = this.games.get(gameID);
     game.clients.push(ws);
     this.clients.get(ws).game = gameID;
-
-    const players = game.clients.map((client) => this.clients.get(client).id); // Player data to send
-    game.clients.forEach((client) => {
-      client.send(JSON.stringify({ method: Events.JOIN, players }));
-    });
+    this.sendUpdatedPlayers(game);
   }
 
   endGame(gameID) {
@@ -65,6 +62,13 @@ export default class WebSocketManager {
     const players = game.clients.map((client) => this.clients.get(client)); // Player data to send
     game.clients.forEach((client) => {
       client.send(JSON.stringify({ method: Events.PLAYERS_UPDATE, players }));
+    });
+  }
+
+  sendUpdatedPlayers(game) {
+    const players = game.clients.map((client) => this.clients.get(client).id); // Player data to send
+    game.clients.forEach((client) => {
+      client.send(JSON.stringify({ method: Events.JOIN, players }));
     });
   }
 }
