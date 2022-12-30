@@ -9,7 +9,7 @@ const router = Router();
  *     tags:
  *        - auth
  *     summary: Login into service
- *     description: Adds user to database if doesnt exist
+ *     description: Adds user to database if it doesn't exist
  *     responses:
  *       '200':
  *         description: Successful operation

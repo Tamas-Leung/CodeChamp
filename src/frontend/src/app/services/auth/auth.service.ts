@@ -11,9 +11,6 @@ export class AuthService {
 
   logout = () => {
     localStorage.removeItem('token');
-    console.log('token deleted');
-
-    // this.router.navigateByUrl('/login', { skipLocationChange: false });
     location.reload();
   };
 

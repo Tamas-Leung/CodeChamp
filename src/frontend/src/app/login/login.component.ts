@@ -2,6 +2,7 @@ import { Component, NgZone, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CredentialResponse } from 'google-one-tap';
 import { AuthService } from '../services/auth/auth.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -21,15 +22,11 @@ export class LoginComponent implements OnInit {
       // @ts-ignore
       google.accounts.id.initialize({
         // Ref: https://developers.google.com/identity/gsi/web/reference/js-reference#IdConfiguration
-        client_id:
-          '1049277800628-djvnt32n0odf07kqelkn1t0iee33kk0n.apps.googleusercontent.com',
-        callback: this.handleCredentialResponse.bind(this), // Whatever function you want to trigger...
+        client_id: environment.googleClientId,
+        callback: this.handleCredentialResponse.bind(this),
         auto_select: false,
         cancel_on_tap_outside: false,
       });
-
-      // @ts-ignore
-      // google.accounts.id.prompt((notification: PromptMomentNotification) => {});
 
       // @ts-ignore
       google.accounts.id.renderButton(
