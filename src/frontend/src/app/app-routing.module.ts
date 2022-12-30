@@ -5,6 +5,7 @@ import { ProblemsComponent } from './problems/problems.component';
 import { StartpageComponent } from './startpage/startpage.component';
 import { LoginComponent } from './login/login.component';
 import { AuthGuardService } from './services/auth-guard/auth-guard.service';
+import { LobbyComponent } from './lobby/lobby.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -17,6 +18,16 @@ const routes: Routes = [
   {
     path: 'problems/:id',
     component: ProblemComponent,
+    canActivate: [AuthGuardService],
+  },
+  {
+    path: 'lobby',
+    component: LobbyComponent,
+    canActivate: [AuthGuardService],
+  },
+  {
+    path: 'lobby/:id',
+    component: LobbyComponent,
     canActivate: [AuthGuardService],
   },
 ];

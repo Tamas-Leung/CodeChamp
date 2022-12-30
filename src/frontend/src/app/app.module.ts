@@ -51,6 +51,8 @@ import { ProblemsComponent } from './problems/problems.component';
 import { ProblemsService } from './services/problems/problems.service';
 import { StartpageComponent } from './startpage/startpage.component';
 import { LoginComponent } from './login/login.component';
+import { WebSocketService } from './services/websocket/websocket.service';
+import { LobbyComponent } from './lobby/lobby.component';
 
 @NgModule({
   declarations: [
@@ -61,6 +63,7 @@ import { LoginComponent } from './login/login.component';
     ProblemsComponent,
     StartpageComponent,
     LoginComponent,
+    LobbyComponent,
   ],
   imports: [
     BrowserModule,
@@ -103,7 +106,7 @@ import { LoginComponent } from './login/login.component';
     MatTooltipModule,
     MatFormFieldModule,
   ],
-  providers: [SolutionSubmitService, ProblemsService],
+  providers: [SolutionSubmitService, ProblemsService, WebSocketService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { WebSocketService } from './services/websocket/websocket.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'code-champ';
+
+  constructor(private ws: WebSocketService) {
+    this.ws.open();
+  }
 }
