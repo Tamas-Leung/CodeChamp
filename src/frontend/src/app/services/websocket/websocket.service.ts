@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { Route, Router } from '@angular/router';
+
 import { BehaviorSubject, Subject } from 'rxjs';
 import { LobbyService } from '../lobby/lobby.service';
 import { GameEvent } from './interfaces';
@@ -9,10 +11,10 @@ import { GameEvent } from './interfaces';
 export class WebSocketService {
   private websocket!: WebSocket;
   private address = 'ws://localhost:7070/ws';
-  public newGameID = new BehaviorSubject<string>('Creating new game...');
+  public newGameID = new BehaviorSubject<string>('');
   public gameJoined = new Subject<boolean>();
 
-  constructor(private lobbyService: LobbyService) {}
+  constructor(private lobbyService: LobbyService, private router: Router) {}
 
   public open() {
     this.websocket = new WebSocket(this.address);
@@ -32,6 +34,8 @@ export class WebSocketService {
       case GameEvent.JOIN:
         this.lobbyService.updateWaitingRoom(data.players);
         return;
+      case GameEvent.NEXT_ROUND:
+        this.router.navigate(['/problems/' + data.problemID]);
     }
   }
 
@@ -40,7 +44,19 @@ export class WebSocketService {
   }
 
   joinGame(gameID: string) {
+    this.newGameID.next(gameID);
     this.sendMessage(JSON.stringify({ method: GameEvent.JOIN, gameID }));
+  }
+
+  nextRound() {
+    if (this.newGameID.value) {
+      this.sendMessage(
+        JSON.stringify({
+          method: GameEvent.NEXT_ROUND,
+          gameID: this.newGameID.value,
+        })
+      );
+    }
   }
 
   public sendMessage(message: string) {

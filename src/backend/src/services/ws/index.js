@@ -49,7 +49,11 @@ export default class WebSocketManager {
 
     game.clients.forEach((client) => {
       client.send(
-        JSON.stringify({ method: Events.NEXT_ROUND, round: game.round })
+        JSON.stringify({
+          method: Events.NEXT_ROUND,
+          round: game.round,
+          problemID: '63794a6952d8441c74627f63', // hard coded for now
+        })
       );
     });
   }
