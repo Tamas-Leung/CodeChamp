@@ -9,8 +9,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "format:check": "prettier --check .",
     "format:fix": "prettier --write .",
-    "lint:check": "eslint .",
-    "lint:fix": "eslint --fix .",
+    "lint:check": "eslint . --config .eslintrc.json --ext .js,.jsx,.ts,.tsx",
+    "lint:fix": "eslint . --config .eslintrc.json --ext .js,.jsx,.ts,.tsx  --fix",
     "prepare": "cd ../.. && husky install"
   },
   "author": "",
