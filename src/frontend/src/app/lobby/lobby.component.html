@@ -1,3 +1,7 @@
 <h2>Game ID: {{ id }}</h2>
-<p *ngFor="let player of players">{{ player }}</p>
+
+<div *ngFor="let player of players">
+    <img src={{player.picture}}>
+    {{ player.name }}
+</div>
 <button (click)="startGame()">Start Game</button>

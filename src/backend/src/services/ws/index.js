@@ -1,4 +1,5 @@
 import { v4 } from 'uuid';
+import { decodeToken } from '../auth/token.js';
 
 export const Events = {
   CREATE: 'create',
@@ -13,15 +14,17 @@ export default class WebSocketManager {
 
   games = new Map();
 
-  addClient(ws) {
-    this.clients.set(ws, { id: v4(), game: null, lastCompletedRound: 0 });
+  addClient(ws, token) {
+    const decodedToken = decodeToken(token)
+    this.clients.set(ws, { id: decodedToken.email, name: decodedToken.name, picture: decodedToken.picture, game: null, lastCompletedRound: 0 });
   }
 
   deleteClient(ws) {
     this.clients.delete(ws);
   }
 
-  createGame(ws) {
+  createGame(ws, token) {
+    this.addClient(ws, token)
     const gameID = v4();
     this.games.set(gameID, { clients: [ws], round: 0 });
     this.clients.get(ws).game = gameID;
@@ -29,7 +32,8 @@ export default class WebSocketManager {
     this.sendUpdatedPlayers(this.games.get(gameID));
   }
 
-  joinGame(ws, gameID) {
+  joinGame(ws, token, gameID) {
+    this.addClient(ws, token)
     const game = this.games.get(gameID);
     game.clients.push(ws);
     this.clients.get(ws).game = gameID;
@@ -43,7 +47,7 @@ export default class WebSocketManager {
     });
   }
 
-  gameNextRound(gameID) {
+  gameNextRound(token, gameID) {
     const game = this.games.get(gameID);
     game.round += 1;
 
@@ -63,16 +67,32 @@ export default class WebSocketManager {
     const game = this.games.get(player.game);
     player.lastCompletedRound += 1;
 
-    const players = game.clients.map((client) => this.clients.get(client)); // Player data to send
+    const players = this.getPlayersDataToSend(game);
     game.clients.forEach((client) => {
       client.send(JSON.stringify({ method: Events.PLAYERS_UPDATE, players }));
     });
   }
 
   sendUpdatedPlayers(game) {
-    const players = game.clients.map((client) => this.clients.get(client).id); // Player data to send
+    const players = this.getPlayersDataToSend(game);
     game.clients.forEach((client) => {
       client.send(JSON.stringify({ method: Events.JOIN, players }));
     });
   }
+
+  getPlayersDataToSend(game) {
+    const players = game.clients.map((client_id) => {
+      const client = this.clients.get(client_id);
+      return {
+        id: client.id,
+        name: client.name,
+        picture: client.picture
+      }
+    });
+    return players
+  }
+}
+
+const getTokenFromSocket = (ws) => {
+  return url.parse(request.url, true).query.token
 }

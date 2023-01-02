@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Route, Router } from '@angular/router';
 
 import { BehaviorSubject, Subject } from 'rxjs';
+import { AuthService } from '../auth/auth.service';
 import { LobbyService } from '../lobby/lobby.service';
 import { GameEvent } from './interfaces';
 
@@ -14,7 +15,11 @@ export class WebSocketService {
   public newGameID = new BehaviorSubject<string>('');
   public gameJoined = new Subject<boolean>();
 
-  constructor(private lobbyService: LobbyService, private router: Router) {}
+  constructor(
+    private lobbyService: LobbyService,
+    private router: Router,
+    private auth: AuthService
+  ) {}
 
   public open() {
     this.websocket = new WebSocket(this.address);
@@ -40,12 +45,20 @@ export class WebSocketService {
   }
 
   createGame() {
-    this.sendMessage(JSON.stringify({ method: GameEvent.CREATE }));
+    this.sendMessage(
+      JSON.stringify({ method: GameEvent.CREATE, token: this.auth.getToken() })
+    );
   }
 
   joinGame(gameID: string) {
     this.newGameID.next(gameID);
-    this.sendMessage(JSON.stringify({ method: GameEvent.JOIN, gameID }));
+    this.sendMessage(
+      JSON.stringify({
+        method: GameEvent.JOIN,
+        token: this.auth.getToken(),
+        gameID,
+      })
+    );
   }
 
   nextRound() {
@@ -53,6 +66,7 @@ export class WebSocketService {
       this.sendMessage(
         JSON.stringify({
           method: GameEvent.NEXT_ROUND,
+          token: this.auth.getToken(),
           gameID: this.newGameID.value,
         })
       );

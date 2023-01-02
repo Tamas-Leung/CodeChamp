@@ -73,14 +73,13 @@ const wss = new WebSocketServer({ port: 7070 });
 const wsm = new WebSocketManager();
 
 wss.on('connection', (ws) => {
-  wsm.addClient(ws);
 
   ws.on('message', (messageAsString) => {
     const message = JSON.parse(messageAsString);
 
-    if (message.method === Events.CREATE) wsm.createGame(ws);
-    if (message.method === Events.JOIN) wsm.joinGame(ws, message.gameID);
-    if (message.method === Events.NEXT_ROUND) wsm.gameNextRound(message.gameID);
+    if (message.method === Events.CREATE) wsm.createGame(ws, message.token);
+    if (message.method === Events.JOIN) wsm.joinGame(ws, message.token, message.gameID);
+    if (message.method === Events.NEXT_ROUND) wsm.gameNextRound(message.token, message.gameID);
   });
 });
 
