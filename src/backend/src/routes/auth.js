@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import { decodeToken } from '../services/auth/token.js'
 
 const router = Router();
 
@@ -19,7 +20,7 @@ const router = Router();
  */
 router.post('/login', async (req, res) => {
   try {
-    const decodedToken = JSON.parse(atob(req.body.token.split('.')[1]));
+    const decodedToken = decodeToken(req.body.token);
 
     res.status(200).send({
       token: decodedToken,
