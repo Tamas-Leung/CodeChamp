@@ -15,8 +15,14 @@ export default class WebSocketManager {
   games = new Map();
 
   addClient(ws, token) {
-    const decodedToken = decodeToken(token)
-    this.clients.set(ws, { id: decodedToken.email, name: decodedToken.name, picture: decodedToken.picture, game: null, lastCompletedRound: 0 });
+    const decodedToken = decodeToken(token);
+    this.clients.set(ws, {
+      id: decodedToken.email,
+      name: decodedToken.name,
+      picture: decodedToken.picture,
+      game: null,
+      lastCompletedRound: 0,
+    });
   }
 
   deleteClient(ws) {
@@ -24,7 +30,7 @@ export default class WebSocketManager {
   }
 
   createGame(ws, token) {
-    this.addClient(ws, token)
+    this.addClient(ws, token);
     const gameID = v4();
     this.games.set(gameID, { clients: [ws], round: 0 });
     this.clients.get(ws).game = gameID;
@@ -33,7 +39,7 @@ export default class WebSocketManager {
   }
 
   joinGame(ws, token, gameID) {
-    this.addClient(ws, token)
+    this.addClient(ws, token);
     const game = this.games.get(gameID);
     game.clients.push(ws);
     this.clients.get(ws).game = gameID;
@@ -81,18 +87,14 @@ export default class WebSocketManager {
   }
 
   getPlayersDataToSend(game) {
-    const players = game.clients.map((client_id) => {
-      const client = this.clients.get(client_id);
+    const players = game.clients.map((clientID) => {
+      const client = this.clients.get(clientID);
       return {
         id: client.id,
         name: client.name,
-        picture: client.picture
-      }
+        picture: client.picture,
+      };
     });
-    return players
+    return players;
   }
-}
-
-const getTokenFromSocket = (ws) => {
-  return url.parse(request.url, true).query.token
 }

@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { decodeToken } from '../services/auth/token.js'
+import { decodeToken } from '../services/auth/token.js';
 
 const router = Router();
 
