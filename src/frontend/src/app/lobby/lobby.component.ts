@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { LobbyService } from '../services/lobby/lobby.service';
 import { WebSocketService } from '../services/websocket/websocket.service';
-import { PlayerData } from '../types';
+import { PlayerData } from '../types/PlayerData';
 import { Location } from '@angular/common';
 
 @Component({
