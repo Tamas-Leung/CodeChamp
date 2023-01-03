@@ -16,6 +16,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "camelcase": "^7.0.1",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "eslint-plugin-import": "^2.26.0",
@@ -25,6 +26,7 @@
     "mongoose-to-swagger": "^1.4.0",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.20",
+    "random-words": "^1.2.0",
     "swagger-jsdoc": "^6.2.5",
     "swagger-ui-express": "^4.6.0",
     "uuid": "^9.0.0",
