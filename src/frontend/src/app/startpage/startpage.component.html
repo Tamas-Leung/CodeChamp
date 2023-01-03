@@ -20,7 +20,16 @@ Welcome to CodeChamp!
     "
   >
     <div class="round-button" (click)="createGame()">Create Game</div>
-    <div class="round-button">Join Game</div>
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="Lobby Code" #lobbyCode />
+    </mat-form-field>
+    <button
+      mat-button
+      [disabled]="!lobbyCode.value"
+      [routerLink]="['/lobby/' + lobbyCode.value]"
+    >
+      Join Game
+    </button>
     <div class="login-button" (click)="onLogout()">
       <div class="login-icon">
         <button mat-fab class="person-background">
