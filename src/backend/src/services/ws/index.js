@@ -1,4 +1,5 @@
-import { v4 } from 'uuid';
+import words from 'random-words';
+import camelCase from 'camelcase';
 import { decodeToken } from '../auth/token.js';
 
 export const Events = {
@@ -31,7 +32,7 @@ export default class WebSocketManager {
 
   createGame(ws, token) {
     this.addClient(ws, token);
-    const gameID = v4();
+    const gameID = camelCase(words({ exactly: 2 }), { pascalCase: true });
     this.games.set(gameID, { clients: [ws], round: 0 });
     this.clients.get(ws).game = gameID;
     ws.send(JSON.stringify({ method: Events.CREATE, gameID }));
