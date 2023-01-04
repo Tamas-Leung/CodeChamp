@@ -13,13 +13,12 @@ export class StartpageComponent implements OnInit {
     private auth: AuthService,
     private router: Router,
     private ws: WebSocketService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.ws.findGameID.subscribe((gameID) => {
       if (gameID === '') {
-        this.ws.createGame();
-        this.router.navigate(['/lobby']);
+        this.createGame();
       } else {
         this.router.navigate(['/lobby/' + gameID]);
       }
