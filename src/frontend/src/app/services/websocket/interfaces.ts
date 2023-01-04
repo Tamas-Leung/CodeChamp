@@ -4,7 +4,7 @@ export enum GameEvent {
   END = 'end',
   NEXT_ROUND = 'nextRound',
   PLAYERS_UPDATE = 'playersUpdate',
-  FIND_GAME = "findGame",
+  FIND_GAME = 'findGame',
 }
 
 export interface CreateGameResponse {

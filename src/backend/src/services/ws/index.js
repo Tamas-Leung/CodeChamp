@@ -101,11 +101,11 @@ export default class WebSocketManager {
   }
 
   findGame(ws, token) {
-    let gameID = "";
+    let gameID = '';
     // Find a game that hasn't started yet
     for (let [key, value] of this.games) {
       if (value.round === 0) {
-        gameID = key
+        gameID = key;
       }
     }
 

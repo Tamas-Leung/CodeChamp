@@ -6,7 +6,6 @@ import { AuthService } from '../auth/auth.service';
 import { LobbyService } from '../lobby/lobby.service';
 import { GameEvent } from './interfaces';
 
-
 @Injectable({
   providedIn: 'root',
 })
@@ -21,7 +20,7 @@ export class WebSocketService {
     private lobbyService: LobbyService,
     private router: Router,
     private auth: AuthService
-  ) { }
+  ) {}
 
   public open() {
     this.websocket = new WebSocket(this.address);
@@ -52,7 +51,10 @@ export class WebSocketService {
 
   findGame() {
     this.sendMessage(
-      JSON.stringify({ method: GameEvent.FIND_GAME, token: this.auth.getToken() })
+      JSON.stringify({
+        method: GameEvent.FIND_GAME,
+        token: this.auth.getToken(),
+      })
     );
   }
 
@@ -95,7 +97,7 @@ export class WebSocketService {
     this.websocket.close();
   }
 
-  private handleOnOpen(event: any) { }
+  private handleOnOpen(event: any) {}
 
-  private handleOnClose(event: any) { }
+  private handleOnClose(event: any) {}
 }
