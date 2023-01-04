@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth/auth.service';
 import { WebSocketService } from '../services/websocket/websocket.service';
@@ -8,12 +8,22 @@ import { WebSocketService } from '../services/websocket/websocket.service';
   templateUrl: './startpage.component.html',
   styleUrls: ['./startpage.component.scss'],
 })
-export class StartpageComponent {
+export class StartpageComponent implements OnInit {
   constructor(
     private auth: AuthService,
     private router: Router,
-    private ws: WebSocketService
+    public ws: WebSocketService
   ) {}
+
+  ngOnInit() {
+    this.ws.findGameID.subscribe((gameID) => {
+      if (gameID === '') {
+        this.createGame();
+      } else {
+        this.router.navigate(['/lobby/' + gameID]);
+      }
+    });
+  }
 
   onLogout() {
     this.auth.logout();

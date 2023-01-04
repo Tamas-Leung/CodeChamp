@@ -7,6 +7,7 @@ export const Events = {
   END: 'end',
   NEXT_ROUND: 'nextRound',
   PLAYERS_UPDATE: 'playersUpdate',
+  FIND_GAME: 'findGame',
 };
 
 export default class WebSocketManager {
@@ -96,5 +97,22 @@ export default class WebSocketManager {
       };
     });
     return players;
+  }
+
+  findGame(ws) {
+    // Find a game that hasn't started yet
+    const gamesInLobby = [];
+    this.games.forEach((value, key) => {
+      if (value.round === 0) {
+        gamesInLobby.push(key);
+      }
+    });
+    const rand = Math.floor(Math.random() * gamesInLobby.length);
+    ws.send(
+      JSON.stringify({
+        method: Events.FIND_GAME,
+        gameID: gamesInLobby.length > 0 ? gamesInLobby[rand] : '',
+      })
+    );
   }
 }

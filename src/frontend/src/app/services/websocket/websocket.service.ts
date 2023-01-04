@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Route, Router } from '@angular/router';
 
-import { BehaviorSubject, Subject } from 'rxjs';
+import { AsyncSubject, BehaviorSubject, Observable, of, Subject } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
 import { LobbyService } from '../lobby/lobby.service';
 import { GameEvent } from './interfaces';
@@ -14,6 +14,7 @@ export class WebSocketService {
   private address = 'ws://localhost:7070/ws';
   public newGameID = new BehaviorSubject<string>('');
   public gameJoined = new Subject<boolean>();
+  public findGameID = new Subject();
 
   constructor(
     private lobbyService: LobbyService,
@@ -41,7 +42,20 @@ export class WebSocketService {
         return;
       case GameEvent.NEXT_ROUND:
         this.router.navigate(['/problems/' + data.problemID]);
+        return;
+      case GameEvent.FIND_GAME:
+        this.findGameID.next(data.gameID);
+        return;
     }
+  }
+
+  findGame() {
+    this.sendMessage(
+      JSON.stringify({
+        method: GameEvent.FIND_GAME,
+        token: this.auth.getToken(),
+      })
+    );
   }
 
   createGame() {
