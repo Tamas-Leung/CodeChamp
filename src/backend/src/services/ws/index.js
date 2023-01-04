@@ -110,7 +110,10 @@ export default class WebSocketManager {
     });
     const rand = Math.floor(Math.random() * gamesInLobby.length);
     ws.send(
-      JSON.stringify({ method: Events.FIND_GAME, gameID: gamesInLobby[rand] })
+      JSON.stringify({
+        method: Events.FIND_GAME,
+        gameID: gamesInLobby.length > 0 ? gamesInLobby[rand] : '',
+      })
     );
   }
 }
