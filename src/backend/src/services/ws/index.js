@@ -101,13 +101,16 @@ export default class WebSocketManager {
   }
 
   findGame(ws) {
-    let gameID = '';
     // Find a game that hasn't started yet
+    let gamesInLobby = [];
     this.games.forEach((value, key) => {
       if (value.round === 0) {
-        gameID = key;
+        gamesInLobby.push(key);
       }
     });
-    ws.send(JSON.stringify({ method: Events.FIND_GAME, gameID }));
+    let rand = Math.floor(Math.random() * gamesInLobby.length);
+    ws.send(
+      JSON.stringify({ method: Events.FIND_GAME, gameID: gamesInLobby[rand] })
+    );
   }
 }
