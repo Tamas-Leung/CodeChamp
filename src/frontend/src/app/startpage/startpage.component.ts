@@ -16,8 +16,12 @@ export class StartpageComponent {
   ) { }
 
   ngOnInit() {
-    this.ws.findGameID.subscribe(data => {
-      console.log(data);
+    this.ws.findGameID.subscribe(gameID => {
+      if (gameID === "") {
+        console.log("No lobbies found.");
+      } else {
+        this.router.navigate(["/lobby/" + gameID]);
+      }
     })
   }
 
@@ -31,6 +35,6 @@ export class StartpageComponent {
   }
 
   findGame() {
-    const gameFound = this.ws.findGame();
+    this.ws.findGame();
   }
 }

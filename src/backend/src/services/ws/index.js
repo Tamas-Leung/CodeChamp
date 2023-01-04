@@ -109,6 +109,6 @@ export default class WebSocketManager {
       }
     }
 
-    ws.send(JSON.stringify({ method: Events.FIND, gameID }));
+    ws.send(JSON.stringify({ method: Events.FIND_GAME, gameID }));
   }
 }
