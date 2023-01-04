@@ -100,15 +100,14 @@ export default class WebSocketManager {
     return players;
   }
 
-  findGame(ws, token) {
+  findGame(ws) {
     let gameID = '';
     // Find a game that hasn't started yet
-    for (let [key, value] of this.games) {
+    this.games.forEach((value, key) => {
       if (value.round === 0) {
         gameID = key;
       }
-    }
-
+    });
     ws.send(JSON.stringify({ method: Events.FIND_GAME, gameID }));
   }
 }
