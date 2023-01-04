@@ -1,5 +1,4 @@
-import words from 'random-words';
-import camelCase from 'camelcase';
+import { hri } from 'human-readable-ids';
 import { decodeToken } from '../auth/token.js';
 
 export const Events = {
@@ -32,7 +31,7 @@ export default class WebSocketManager {
 
   createGame(ws, token) {
     this.addClient(ws, token);
-    const gameID = camelCase(words({ exactly: 2 }), { pascalCase: true });
+    const gameID = hri.random();
     this.games.set(gameID, { clients: [ws], round: 0 });
     this.clients.get(ws).game = gameID;
     ws.send(JSON.stringify({ method: Events.CREATE, gameID }));
