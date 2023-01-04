@@ -12,8 +12,8 @@ export class StartpageComponent implements OnInit {
   constructor(
     private auth: AuthService,
     private router: Router,
-    private ws: WebSocketService
-  ) { }
+    public ws: WebSocketService
+  ) {}
 
   ngOnInit() {
     this.ws.findGameID.subscribe((gameID) => {
@@ -32,9 +32,5 @@ export class StartpageComponent implements OnInit {
   createGame() {
     this.ws.createGame();
     this.router.navigate(['/lobby']);
-  }
-
-  findGame() {
-    this.ws.findGame();
   }
 }
