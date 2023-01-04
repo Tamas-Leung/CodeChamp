@@ -12,22 +12,17 @@ Welcome to CodeChamp!
 </div>
 
 <div class="button-container">
-  <div
-    style="
+  <div style="
       position: absolute;
       opacity: 1;
       transform: translateX(0%) translateZ(0px);
-    "
-  >
+    ">
     <div class="round-button" (click)="createGame()">Create Game</div>
+    <div class="round-button" (click)="findGame()">Find Game</div>
     <mat-form-field class="example-full-width">
       <input matInput placeholder="Lobby Code" #lobbyCode />
     </mat-form-field>
-    <button
-      mat-button
-      [disabled]="!lobbyCode.value"
-      [routerLink]="['/lobby/' + lobbyCode.value]"
-    >
+    <button mat-button [disabled]="!lobbyCode.value" [routerLink]="['/lobby/' + lobbyCode.value]">
       Join Game
     </button>
     <div class="login-button" (click)="onLogout()">
@@ -38,10 +33,7 @@ Welcome to CodeChamp!
       </div>
       <div class="login-text">Logout</div>
       <svg fill="white" viewBox="0 0 24 24">
-        <path
-          class="right-arrow"
-          d="M10 6 8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"
-        ></path>
+        <path class="right-arrow" d="M10 6 8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path>
       </svg>
     </div>
   </div>

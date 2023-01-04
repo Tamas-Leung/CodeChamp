@@ -13,7 +13,13 @@ export class StartpageComponent {
     private auth: AuthService,
     private router: Router,
     private ws: WebSocketService
-  ) {}
+  ) { }
+
+  ngOnInit() {
+    this.ws.findGameID.subscribe(data => {
+      console.log(data);
+    })
+  }
 
   onLogout() {
     this.auth.logout();
@@ -22,5 +28,9 @@ export class StartpageComponent {
   createGame() {
     this.ws.createGame();
     this.router.navigate(['/lobby']);
+  }
+
+  findGame() {
+    const gameFound = this.ws.findGame();
   }
 }

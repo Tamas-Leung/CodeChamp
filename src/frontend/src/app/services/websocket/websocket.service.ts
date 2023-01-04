@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Route, Router } from '@angular/router';
 
-import { BehaviorSubject, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
 import { LobbyService } from '../lobby/lobby.service';
 import { GameEvent } from './interfaces';
+
 
 @Injectable({
   providedIn: 'root',
@@ -14,12 +15,13 @@ export class WebSocketService {
   private address = 'ws://localhost:7070/ws';
   public newGameID = new BehaviorSubject<string>('');
   public gameJoined = new Subject<boolean>();
+  public findGameID = new BehaviorSubject<any>(null);
 
   constructor(
     private lobbyService: LobbyService,
     private router: Router,
     private auth: AuthService
-  ) {}
+  ) { }
 
   public open() {
     this.websocket = new WebSocket(this.address);
@@ -41,7 +43,18 @@ export class WebSocketService {
         return;
       case GameEvent.NEXT_ROUND:
         this.router.navigate(['/problems/' + data.problemID]);
+        return;
+      case GameEvent.FIND_GAME:
+        this.findGameID.next(data);
+        return;
     }
+  }
+
+  findGame() {
+    this.sendMessage(
+      JSON.stringify({ method: GameEvent.FIND_GAME, token: this.auth.getToken() })
+    );
+    return false;
   }
 
   createGame() {
@@ -83,7 +96,7 @@ export class WebSocketService {
     this.websocket.close();
   }
 
-  private handleOnOpen(event: any) {}
+  private handleOnOpen(event: any) { }
 
-  private handleOnClose(event: any) {}
+  private handleOnClose(event: any) { }
 }

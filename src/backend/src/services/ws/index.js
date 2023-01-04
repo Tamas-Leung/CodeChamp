@@ -8,6 +8,7 @@ export const Events = {
   END: 'end',
   NEXT_ROUND: 'nextRound',
   PLAYERS_UPDATE: 'playersUpdate',
+  FIND_GAME: 'findGame',
 };
 
 export default class WebSocketManager {
@@ -97,5 +98,17 @@ export default class WebSocketManager {
       };
     });
     return players;
+  }
+
+  findGame(ws, token) {
+    let gameID = "";
+    // Find a game that hasn't started yet
+    for (let [key, value] of this.games) {
+      if (value.round === 0) {
+        gameID = key
+      }
+    }
+
+    ws.send(JSON.stringify({ method: Events.FIND, gameID }));
   }
 }
