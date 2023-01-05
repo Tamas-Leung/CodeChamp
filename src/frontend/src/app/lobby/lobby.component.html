@@ -1,7 +1,10 @@
 <h2>Game ID: {{ id }}</h2>
 
-<div *ngFor="let player of players">
-  <img src="{{ player.picture }}" />
-  {{ player.name }}
+<div class="grid grid-padding">
+  <div *ngFor="let player of players">
+    <img src="{{ player.picture }}" />
+    {{ player.name }}
+  </div>
 </div>
+
 <button (click)="startGame()">Start Game</button>

@@ -1,0 +1,10 @@
+.grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+.grid-padding {
+    padding-right: 50px;
+    padding-left: 50px;
+}
