@@ -8,3 +8,23 @@
     padding-right: 50px;
     padding-left: 50px;
 }
+
+.round-button {
+    border-radius: 20px;
+    background: transparent;
+    padding: 12px;
+    width: 400px;
+    max-width: 80vw;
+    height: 55px;
+    text-align: center;
+    font-size: 30px;
+    letter-spacing: 2px;
+    color: #ffffff;
+    background-color: #000000;
+    font-weight: 800;
+    margin: 16px;
+    text-transform: uppercase;
+    cursor: pointer;
+    border: 7px solid;
+    border-color: #000000;
+}
