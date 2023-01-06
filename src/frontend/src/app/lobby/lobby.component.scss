@@ -1,12 +1,23 @@
+h2 {
+    padding: 0;
+}
+
+.game-id {
+    padding-top: 10px;
+    font-size: 30px;
+    height: 55px;
+    font-weight: 800;
+}
+
 .grid {
     display: grid;
     gap: 1rem;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    grid-template-columns: repeat(5, minmax(240px, 1fr));
 }
 
 .grid-padding {
-    padding-right: 50px;
-    padding-left: 50px;
+    padding-right: 15%;
+    padding-left: 15%;
 }
 
 .round-button {
@@ -27,4 +38,28 @@
     cursor: pointer;
     border: 7px solid;
     border-color: #000000;
+    float: left;
+}
+
+img {
+    border-radius: 50%;
+    width: 75px;
+    height: auto;
+}
+
+.profile-card {
+    border-radius: 5%;
+    max-width: 175px;
+    background-color: #000000;
+}
+
+
+.buttons {
+    display: flex;
+    justify-content: center;
+}
+
+
+.player-name {
+    color: #ffffff;
 }
