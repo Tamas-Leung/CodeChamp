@@ -110,4 +110,4 @@ import { LobbyComponent } from './lobby/lobby.component';
   providers: [SolutionSubmitService, ProblemsService, WebSocketService],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
