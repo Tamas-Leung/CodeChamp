@@ -105,8 +105,9 @@ import { LobbyComponent } from './lobby/lobby.component';
     MatToolbarModule,
     MatTooltipModule,
     MatFormFieldModule,
+    ReactiveFormsModule,
   ],
   providers: [SolutionSubmitService, ProblemsService, WebSocketService],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

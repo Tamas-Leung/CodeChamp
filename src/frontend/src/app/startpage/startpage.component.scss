@@ -1,3 +1,13 @@
+.title {
+  width: 500px;
+  height: 70px;
+  padding-top: 138px;
+  font-weight: 400;
+  font-size: 68px;
+  font-family: 'Mulish';
+  color: white;
+}
+
 .header {
   display: flex;
   justify-content: center;
@@ -99,6 +109,7 @@
 }
 
 .button-container {
+  padding-top: 64px;
   position: relative;
   display: flex;
   -webkit-flex-direction: column;
@@ -115,4 +126,108 @@
   overflow: hidden;
   height: 500px;
   width: 100%;
+}
+
+.long-button {
+  box-sizing: border-box;
+  text-align: left;
+  width: 374px;
+  height: 60px;
+  left: calc(50% - 374px/2);
+  top: calc(50% - 60px/2 - 90px);
+
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+
+  letter-spacing: 1px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 70px;
+
+  color: white;
+}
+
+.button-padding {
+  padding: 10px;
+}
+
+.button-topright {
+  box-sizing: border-box;
+
+  position: absolute;
+  width: 92px;
+  height: 33px;
+  right: 24px;
+  top: 18px;
+
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  float: right;
+  color: white;
+
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+}
+
+.short-button {
+  box-sizing: border-box;
+  text-align: left;
+  width: 144px;
+  height: 60px;
+  left: calc(50% - 374px/2);
+  top: calc(50% - 60px/2 - 90px);
+
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+
+  letter-spacing: 1px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 70px;
+
+  color: white;
+}
+
+.short-button-flex {
+  display: flex;
+}
+
+.join-input {
+  width: 217px;
+  height: 60px;
+  left: calc(50% - 217px/2 + 76.5px);
+  top: calc(50% - 60px/2 - 20px);
+
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.05);
+
+  letter-spacing: 1px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 70px;
+  color: white;
+}
+
+.join-input:hover {
+  cursor: pointer;
+  border: 2px solid rgba(0, 0, 0, 0.2);
+}
+
+.long-button:hover {
+  border: 2px solid rgba(0, 0, 0, 0.2);
+}
+
+.short-button:hover {
+  border: 2px solid rgba(0, 0, 0, 0.2);
 }
