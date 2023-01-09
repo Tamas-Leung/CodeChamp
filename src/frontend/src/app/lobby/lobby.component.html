@@ -1,16 +1,19 @@
+<button class="button-topleft">Leave</button>
+
 <div align="center">
-  <div class="buttons">
-    <div class="round-button" (click)="startGame()">Start Game</div>
-    <div class="round-button">Invite Friends</div>
-    <div class="round-button">Leave Lobby</div>
-  </div>
+  <h1 class="title">CodeChamp</h1>
 
   <div class="grid grid-padding">
     <div *ngFor="let player of players">
-      <mat-card class="profile-card">
+      <mat-card class="profile-card" style="float: left">
         <img src="{{ player.picture }}" />
         <h1 class="player-name">{{ player.name }}</h1>
       </mat-card>
     </div>
   </div>
+
+  <button class="button-bottom">
+    <span style="padding: 150px;">
+      Start
+    </span> </button>
 </div>

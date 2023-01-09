@@ -63,3 +63,68 @@ img {
 .player-name {
     color: #ffffff;
 }
+
+.title {
+    width: 214px;
+    height: 70px;
+    left: calc(50% - 214px/2);
+    top: calc(50% - 70px/2 - 328px);
+
+    font-family: 'Mulish';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 36px;
+    line-height: 70px;
+    /* identical to box height, or 194% */
+
+    color: #FFFFFF;
+}
+
+.button-topleft {
+    box-sizing: border-box;
+
+    position: absolute;
+    width: 92px;
+    height: 33px;
+    left: 24px;
+    top: 18px;
+
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    color: white;
+
+    font-family: 'Mulish';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+}
+
+.player-card {}
+
+.button-bottom {
+
+    box-sizing: border-box;
+
+    width: 374px;
+    height: 60px;
+    left: calc(50% - 374px/2);
+    top: calc(50% - 60px/2 + 304px);
+
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid #FFFFFF;
+    border-radius: 10px;
+
+    font-family: 'Mulish';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 70px;
+    /* or 292% */
+
+    color: #FFFFFF;
+
+    display: flex;
+    align-items: center;
+    letter-spacing: 1px;
+}
