@@ -21,8 +21,8 @@ export class LobbyComponent implements OnInit {
     private lobbyService: LobbyService,
     private location: Location,
     private clipboard: Clipboard,
-    private router: Router,
-  ) { }
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.lobbyService.waitingRoom.subscribe((players) => {
@@ -52,6 +52,6 @@ export class LobbyComponent implements OnInit {
   }
 
   leave() {
-    this.router.navigate(["/"]);
+    this.router.navigate(['/']);
   }
 }

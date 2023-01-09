@@ -1,144 +1,141 @@
 h2 {
-    padding: 0;
+  padding: 0;
 }
 
 .game-id {
-    padding-top: 10px;
-    font-size: 30px;
-    height: 55px;
-    font-weight: 800;
+  padding-top: 10px;
+  font-size: 30px;
+  height: 55px;
+  font-weight: 800;
 }
 
 .grid {
-    display: grid;
-    gap: 1rem;
-    grid-template-columns: repeat(3, 310px);
-    padding-top: 70px;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(3, 310px);
+  padding-top: 70px;
 }
 
 .grid-padding {
-    padding-right: 25%;
-    padding-left: 25%;
+  padding-right: 25%;
+  padding-left: 25%;
 }
 
 .player-img {
-    border-radius: 50%;
-    width: 45.22px;
-    height: 45.22px;
+  border-radius: 50%;
+  width: 45.22px;
+  height: 45.22px;
 }
 
 .profile-card {
-    width: 310.62px;
-    height: 78.11px;
-    border-radius: 5px;
-    background: rgba(255, 255, 255, 0.05);
-    border: 2px solid #FFFFFF;
-    color: white;
-    float: left;
+  width: 310.62px;
+  height: 78.11px;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid #ffffff;
+  color: white;
+  float: left;
 
-    display: grid;
-    align-items: center;
-    grid-template-columns: 10px 200px;
-    column-gap: 10px;
+  display: grid;
+  align-items: center;
+  grid-template-columns: 10px 200px;
+  column-gap: 10px;
 }
-
 
 .buttons {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
-
 .player-name {
-    color: #ffffff;
-    font-family: 'Mulish';
+  color: #ffffff;
+  font-family: 'Mulish';
 }
 
 .title {
-    width: 214px;
-    height: 70px;
-    left: calc(50% - 214px/2);
-    top: calc(50% - 70px/2 - 328px);
+  width: 214px;
+  height: 70px;
+  left: calc(50% - 214px / 2);
+  top: calc(50% - 70px / 2 - 328px);
 
-    font-family: 'Mulish';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 36px;
-    line-height: 70px;
-    /* identical to box height, or 194% */
+  font-family: 'Mulish';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 36px;
+  line-height: 70px;
+  /* identical to box height, or 194% */
 
-    color: #FFFFFF;
+  color: #ffffff;
 }
 
 .button-topleft {
-    box-sizing: border-box;
+  box-sizing: border-box;
 
-    position: absolute;
-    width: 92px;
-    height: 33px;
-    left: 24px;
-    top: 18px;
+  position: absolute;
+  width: 92px;
+  height: 33px;
+  left: 24px;
+  top: 18px;
 
-    background: rgba(255, 255, 255, 0.05);
-    border: 2px solid rgba(255, 255, 255, 0.2);
-    border-radius: 10px;
-    color: white;
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  color: white;
 
-    font-family: 'Mulish';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
+  font-family: 'Mulish';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
 }
 
 .button-bottom {
+  box-sizing: border-box;
 
-    box-sizing: border-box;
+  width: 374px;
+  height: 60px;
+  left: calc(50% - 374px / 2);
+  top: calc(50% - 60px / 2 + 304px);
 
-    width: 374px;
-    height: 60px;
-    left: calc(50% - 374px/2);
-    top: calc(50% - 60px/2 + 304px);
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid #ffffff;
+  border-radius: 10px;
 
-    background: rgba(255, 255, 255, 0.1);
-    border: 2px solid #FFFFFF;
-    border-radius: 10px;
+  font-family: 'Mulish';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 70px;
+  /* or 292% */
 
-    font-family: 'Mulish';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 24px;
-    line-height: 70px;
-    /* or 292% */
+  color: #ffffff;
 
-    color: #FFFFFF;
-
-    display: flex;
-    align-items: center;
-    letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+  letter-spacing: 1px;
 }
 
 .code-text {
-    font-family: 'Mulish';
-    font-style: normal;
-    color: #FFFFFF;
-    font-weight: 400;
-    font-size: 24px;
-    line-height: 70px;
-    padding-top: 78px;
+  font-family: 'Mulish';
+  font-style: normal;
+  color: #ffffff;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 70px;
+  padding-top: 78px;
 }
 
 .button-bottom:hover {
-    border-color: rgb(2, 2, 2)
+  border-color: rgb(2, 2, 2);
 }
 
 .button-topleft:hover {
-    border-color: rgb(2, 2, 2)
+  border-color: rgb(2, 2, 2);
 }
 
 .copy-icon {
-    padding-bottom: 0.5%;
+  padding-bottom: 0.5%;
 }
 
 .copy-icon:hover {
-    border-color: black;
+  border-color: black;
 }

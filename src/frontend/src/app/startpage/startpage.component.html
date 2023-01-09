@@ -11,7 +11,12 @@
 
   <div class="button-padding short-button-flex">
     <form style="padding-right: 12px">
-      <input class="join-input" id="joinGameFormControl" type="text" [formControl]="joinGameFormControl" />
+      <input
+        class="join-input"
+        id="joinGameFormControl"
+        type="text"
+        [formControl]="joinGameFormControl"
+      />
     </form>
     <button class="short-button" (click)="joinGame()">Join Game</button>
   </div>

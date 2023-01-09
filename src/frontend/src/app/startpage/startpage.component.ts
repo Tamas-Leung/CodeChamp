@@ -14,7 +14,7 @@ export class StartpageComponent implements OnInit {
     private auth: AuthService,
     private router: Router,
     public ws: WebSocketService
-  ) { }
+  ) {}
 
   joinGameFormControl = new FormControl('', Validators.required);
 
