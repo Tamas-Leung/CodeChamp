@@ -1,4 +1,4 @@
-<button class="button-topleft">Leave</button>
+<button class="button-topleft" (click)="leave()">Leave</button>
 
 <div align="center">
   <h1 class="title">CodeChamp</h1>
@@ -6,15 +6,19 @@
   <div class="grid grid-padding">
     <div *ngFor="let player of players">
       <mat-card class="profile-card">
-        <img src="{{ player.picture }}" />
+        <img class="player-img" src="{{ player.picture }}" />
         <h1 class="player-name">{{ player.name }}</h1>
       </mat-card>
     </div>
   </div>
 
-  <h1 class="code-text">Code: {{id}}</h1>
 
-  <button class="button-bottom">
+  <h1 class="code-text">Code: {{id}}
+    <img class="copy-icon" src="assets/img/content_copy.png" (click)="copyCode()" />
+  </h1>
+
+
+  <button class="button-bottom" (click)="startGame()">
     <div style="padding-left: 150px;">
       Start
     </div>

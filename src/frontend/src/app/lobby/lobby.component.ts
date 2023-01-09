@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { LobbyService } from '../services/lobby/lobby.service';
 import { WebSocketService } from '../services/websocket/websocket.service';
 import { PlayerData } from '../types/PlayerData';
 import { Location } from '@angular/common';
+import { Clipboard } from '@angular/cdk/clipboard';
 
 @Component({
   selector: 'app-lobby',
@@ -18,8 +19,10 @@ export class LobbyComponent implements OnInit {
     private aRoute: ActivatedRoute,
     private ws: WebSocketService,
     private lobbyService: LobbyService,
-    private location: Location
-  ) {}
+    private location: Location,
+    private clipboard: Clipboard,
+    private router: Router,
+  ) { }
 
   ngOnInit(): void {
     this.lobbyService.waitingRoom.subscribe((players) => {
@@ -42,5 +45,13 @@ export class LobbyComponent implements OnInit {
 
   startGame() {
     this.ws.nextRound();
+  }
+
+  copyCode() {
+    this.clipboard.copy(this.id);
+  }
+
+  leave() {
+    this.router.navigate(["/"]);
   }
 }

@@ -21,7 +21,7 @@ h2 {
     padding-left: 25%;
 }
 
-img {
+.player-img {
     border-radius: 50%;
     width: 45.22px;
     height: 45.22px;
@@ -128,9 +128,17 @@ img {
 }
 
 .button-bottom:hover {
-    border-color: rgba(2, 2, 2, 0.05)
+    border-color: rgb(2, 2, 2)
 }
 
 .button-topleft:hover {
-    border-color: rgba(2, 2, 2, 0.05)
+    border-color: rgb(2, 2, 2)
+}
+
+.copy-icon {
+    padding-bottom: 0.5%;
+}
+
+.copy-icon:hover {
+    border-color: black;
 }
