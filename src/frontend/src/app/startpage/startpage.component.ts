@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth/auth.service';
 import { WebSocketService } from '../services/websocket/websocket.service';
@@ -14,6 +15,8 @@ export class StartpageComponent implements OnInit {
     private router: Router,
     public ws: WebSocketService
   ) {}
+
+  joinGameFormControl = new FormControl('', Validators.required);
 
   ngOnInit() {
     this.ws.findGameID.subscribe((gameID) => {
@@ -32,5 +35,11 @@ export class StartpageComponent implements OnInit {
   createGame() {
     this.ws.createGame();
     this.router.navigate(['/lobby']);
+  }
+
+  joinGame() {
+    if (this.joinGameFormControl.valid) {
+      this.router.navigate(['/lobby/' + this.joinGameFormControl.value]);
+    }
   }
 }

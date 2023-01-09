@@ -1,49 +1,35 @@
-<div class="iconcontainer">
-  <button mat-fab class="share">
-    <mat-icon>share</mat-icon>
-  </button>
-</div>
+<button class="button-topright" (click)="onLogout()">Logout</button>
 
-<div class="center">
-  <pre><h1 style="font-size:400%"><b>
-
-Welcome to CodeChamp!
-</b></h1></pre>
+<div align="center">
+  <h1 class="title">CodeChamp</h1>
 </div>
 
 <div class="button-container">
-  <div
-    style="
-      position: absolute;
-      opacity: 1;
-      transform: translateX(0%) translateZ(0px);
-    "
-  >
-    <div class="round-button" (click)="createGame()">Create Game</div>
-    <div class="round-button" (click)="ws.findGame()">Find Game</div>
-    <mat-form-field class="example-full-width">
-      <input matInput placeholder="Lobby Code" #lobbyCode />
-    </mat-form-field>
-    <button
-      mat-button
-      [disabled]="!lobbyCode.value"
-      [routerLink]="['/lobby/' + lobbyCode.value]"
-    >
-      Join Game
-    </button>
-    <div class="login-button" (click)="onLogout()">
-      <div class="login-icon">
-        <button mat-fab class="person-background">
-          <mat-icon>person</mat-icon>
-        </button>
-      </div>
-      <div class="login-text">Logout</div>
-      <svg fill="white" viewBox="0 0 24 24">
-        <path
-          class="right-arrow"
-          d="M10 6 8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"
-        ></path>
-      </svg>
-    </div>
+  <div class="button-padding">
+    <button class="long-button" (click)="createGame()">Create Game</button>
+  </div>
+
+  <div class="button-padding short-button-flex">
+    <form style="padding-right: 12px">
+      <input
+        class="join-input"
+        id="joinGameFormControl"
+        type="text"
+        [formControl]="joinGameFormControl"
+      />
+    </form>
+    <button class="short-button" (click)="joinGame()">Join Game</button>
+  </div>
+
+  <div class="button-padding">
+    <button class="long-button" (click)="ws.findGame()">Find Game</button>
+  </div>
+
+  <div class="button-padding">
+    <button class="long-button">My Profile</button>
+  </div>
+
+  <div class="button-padding">
+    <button class="long-button">Leaderboard</button>
   </div>
 </div>
