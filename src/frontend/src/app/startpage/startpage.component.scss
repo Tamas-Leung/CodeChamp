@@ -1,104 +1,15 @@
-.header {
-  display: flex;
-  justify-content: center;
-  overflow-y: hidden;
-  height: auto;
-}
-
-.iconcontainer {
-  display: flex;
-  justify-content: center;
-  margin-top: 100px;
-}
-
-.center {
-  display: flex;
-  justify-content: center;
-  overflow-y: hidden;
-  height: auto;
-}
-
-.share {
-  background-color: white;
-  color: black;
-  transform: scale(2);
-}
-
-.MuiBox-root {
-  align-items: center;
-}
-
-.round-button {
-  border-radius: 20px;
-  background: transparent;
-  padding: 12px;
-  width: 400px;
-  max-width: 80vw;
-  height: 55px;
-  text-align: center;
-  font-size: 30px;
-  letter-spacing: 2px;
-  color: #ffffff;
-  background-color: #000000;
-  font-weight: 800;
-  margin: 16px;
-  text-transform: uppercase;
-  cursor: pointer;
-  border: 7px solid;
-  border-color: #000000;
-}
-
-.login-button {
-  margin: 16px;
-  border-radius: 20px;
-  background-color: #000000;
-  color: #ffffff;
-  height: 55px;
-  display: flex;
-  align-items: center;
-  font-weight: 800;
-  font-size: 30px;
-  overflow: hidden;
-  padding: 10px;
-  cursor: pointer;
-  text-transform: uppercase;
-}
-
-.login-text {
-  margin-left: 50px;
-}
-
-.login-icon {
-  margin-right: 20px;
-  width: 40px;
-  flex-shrink: 0;
-  height: 40px;
-  background-color: #000000;
-  border-radius: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #ffffff;
-  text-transform: uppercase;
-}
-
-.person-background {
-  width: 0.9em;
-  height: 0.9em;
-  margin-bottom: 45px;
-  display: inline-block;
-  fill: white;
-  scale: 1.5;
-  background-color: transparent;
-  font-size: 2.1875rem;
-}
-
-.right-arrow {
+.title {
+  width: 500px;
+  height: 70px;
+  padding-top: 138px;
+  font-weight: 400;
+  font-size: 68px;
+  font-family: 'Mulish';
   color: white;
-  background-color: white;
 }
 
 .button-container {
+  padding-top: 64px;
   position: relative;
   display: flex;
   -webkit-flex-direction: column;
@@ -115,4 +26,108 @@
   overflow: hidden;
   height: 500px;
   width: 100%;
+}
+
+.long-button {
+  box-sizing: border-box;
+  text-align: left;
+  width: 374px;
+  height: 60px;
+  left: calc(50% - 374px / 2);
+  top: calc(50% - 60px / 2 - 90px);
+
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+
+  letter-spacing: 1px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 70px;
+
+  color: white;
+}
+
+.button-padding {
+  padding: 10px;
+}
+
+.button-topright {
+  box-sizing: border-box;
+
+  position: absolute;
+  width: 92px;
+  height: 33px;
+  right: 24px;
+  top: 18px;
+
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  float: right;
+  color: white;
+
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+}
+
+.short-button {
+  box-sizing: border-box;
+  text-align: left;
+  width: 144px;
+  height: 60px;
+  left: calc(50% - 374px / 2);
+  top: calc(50% - 60px / 2 - 90px);
+
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+
+  letter-spacing: 1px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 70px;
+
+  color: white;
+}
+
+.short-button-flex {
+  display: flex;
+}
+
+.join-input {
+  width: 217px;
+  height: 60px;
+  left: calc(50% - 217px / 2 + 76.5px);
+  top: calc(50% - 60px / 2 - 20px);
+
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.05);
+
+  letter-spacing: 1px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 70px;
+  color: white;
+}
+
+.join-input:hover {
+  cursor: pointer;
+  border: 2px solid rgba(0, 0, 0, 0.2);
+}
+
+.long-button:hover {
+  border: 2px solid rgba(0, 0, 0, 0.2);
+}
+
+.short-button:hover {
+  border: 2px solid rgba(0, 0, 0, 0.2);
 }
