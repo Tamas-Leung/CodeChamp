@@ -1,7 +1,8 @@
 <button class="button-topleft" (click)="leave()">Leave</button>
 
 <div align="center">
-  <h1 class="title">CodeChamp</h1>
+  <h1 class="title">CodeChamp Lobby</h1>
+  <h1 class="lobby-title"> Players: {{numOfPlayers}} /20</h1>
 
   <div class="grid grid-padding">
     <div *ngFor="let player of players">
@@ -14,11 +15,7 @@
 
   <h1 class="code-text">
     Code: {{ id }}
-    <img
-      class="copy-icon"
-      src="assets/img/content_copy.png"
-      (click)="copyCode()"
-    />
+    <img class="copy-icon" src="assets/img/content_copy.png" (click)="copyCode()" />
   </h1>
 
   <button class="button-bottom" (click)="startGame()">

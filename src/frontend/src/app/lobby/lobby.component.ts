@@ -14,6 +14,7 @@ import { Clipboard } from '@angular/cdk/clipboard';
 export class LobbyComponent implements OnInit {
   id: string = '';
   players: PlayerData[] = [];
+  numOfPlayers = 0;
 
   constructor(
     private aRoute: ActivatedRoute,
@@ -22,11 +23,12 @@ export class LobbyComponent implements OnInit {
     private location: Location,
     private clipboard: Clipboard,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.lobbyService.waitingRoom.subscribe((players) => {
       this.players = players;
+      this.numOfPlayers = this.players.length;
     });
 
     const id = this.aRoute.snapshot.paramMap.get('id');
