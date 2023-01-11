@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { LobbyService } from '../services/lobby/lobby.service';
 import { ProblemsService } from '../services/problems/problems.service';
+import { PlayerData } from '../types/PlayerData';
 
 @Component({
   selector: 'app-problem',
@@ -12,13 +14,22 @@ export class ProblemComponent implements OnInit {
   description: string = '';
   id: string = '';
 
+  players: PlayerData[] = [];
+
+
   constructor(
     private problemService: ProblemsService,
     private aRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private lobbyService: LobbyService
   ) {}
 
   ngOnInit() {
+    this.lobbyService.waitingRoom.subscribe((players) => {
+      console.log("Players")
+      this.players = players;
+    });
+
     const id = this.aRoute.snapshot.paramMap.get('id');
     if (id != null) {
       this.problemService.getProblems().subscribe((problems) => {

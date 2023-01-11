@@ -57,7 +57,11 @@ const PORT = 3000;
 app.use(json()); // http://expressjs.com/en/api.html#express.json
 app.use(urlencoded({ extended: false })); // http://expressjs.com/en/5x/api.html#express.urlencoded
 
-app.use('/judge', judge);
+// https://github.com/ably-labs/websockets-cursor-sharing/blob/main/api/index.js
+const wss = new WebSocketServer({ port: 7070 });
+const wsm = new WebSocketManager();
+
+app.use('/judge', judge(wsm));
 app.use('/problems', problems);
 app.use('/auth', auth);
 
@@ -68,9 +72,7 @@ app.listen(PORT, () => {
   console.info(`App listening on port ${PORT}`);
 });
 
-// https://github.com/ably-labs/websockets-cursor-sharing/blob/main/api/index.js
-const wss = new WebSocketServer({ port: 7070 });
-const wsm = new WebSocketManager();
+
 
 wss.on('connection', (ws) => {
   ws.on('message', (messageAsString) => {
@@ -80,7 +82,7 @@ wss.on('connection', (ws) => {
     if (message.method === Events.JOIN)
       wsm.joinGame(ws, message.token, message.gameID);
     if (message.method === Events.NEXT_ROUND)
-      wsm.gameNextRound(message.token, message.gameID);
+      wsm.gameNextRound(message.gameID);
     if (message.method === Events.FIND_GAME) wsm.findGame(ws);
   });
 });

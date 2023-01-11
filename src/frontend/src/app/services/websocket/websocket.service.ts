@@ -46,6 +46,11 @@ export class WebSocketService {
       case GameEvent.FIND_GAME:
         this.findGameID.next(data.gameID);
         return;
+      case GameEvent.PLAYERS_UPDATE:
+        this.lobbyService.updateWaitingRoom(data.players);
+        return;
+      case GameEvent.END:
+        return;
     }
   }
 
@@ -80,7 +85,6 @@ export class WebSocketService {
       this.sendMessage(
         JSON.stringify({
           method: GameEvent.NEXT_ROUND,
-          token: this.auth.getToken(),
           gameID: this.newGameID.value,
         })
       );
