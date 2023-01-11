@@ -1,10 +1,10 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, Inject, Input, OnInit } from '@angular/core';
 import { CodeModel } from '@ngstack/code-editor';
 import { SolutionSubmitService } from '../solution-submit/solution-submit.service';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import * as prettier from 'prettier/standalone';
 import * as tsParser from 'prettier/parser-babel';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
   selector: 'app-code-editor',
@@ -32,7 +32,8 @@ export class CodeEditorComponent implements OnInit {
   solution = '';
   constructor(
     private submitSolutionService: SolutionSubmitService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private authService: AuthService,
   ) {}
 
   ngOnInit() {
@@ -49,7 +50,7 @@ export class CodeEditorComponent implements OnInit {
 
   submitCode() {
     this.submitSolutionService
-      .submitSolution(this.id, this.solution, 'js')
+      .submitSolution(this.id, this.solution, 'js', this.authService.getToken()!)
       .subscribe((data) => {
         this.dialog.open(SubmissionDialogComponent, {
           data: data.result,
