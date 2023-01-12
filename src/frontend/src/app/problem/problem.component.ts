@@ -5,6 +5,7 @@ import { ProblemsService } from '../services/problems/problems.service';
 import { EndData } from '../types/EndData';
 import { PlayerData } from '../types/PlayerData';
 import {MatDialog, MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-problem',
@@ -17,6 +18,7 @@ export class ProblemComponent implements OnInit {
   id: string = '';
 
   players: PlayerData[] = [];
+  endDataSub: Subscription | undefined;
 
   constructor(
     private problemService: ProblemsService,
@@ -31,8 +33,7 @@ export class ProblemComponent implements OnInit {
       this.players = players;
     });
 
-    this.lobbyService.endData.subscribe((endData) => {
-
+    this.endDataSub = this.lobbyService.endData.subscribe((endData) => {
       if (endData) {
         this.dialog.open(EndGameDialog, {
           data: endData,
@@ -63,6 +64,10 @@ export class ProblemComponent implements OnInit {
 
     
   }
+
+  ngOnDestroy() {
+    this.endDataSub?.unsubscribe()
+}
 }
 
 
