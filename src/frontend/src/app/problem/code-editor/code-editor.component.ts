@@ -46,7 +46,9 @@ export class CodeEditorComponent implements OnInit {
       parser: 'babel',
       plugins: [tsParser],
     });
-    this.lobbyService.currentRound.subscribe((round) => this.currentRound = round);
+    this.lobbyService.currentRound.subscribe(
+      (round) => (this.currentRound = round)
+    );
   }
 
   onCodeChanged(value: string) {
@@ -56,7 +58,12 @@ export class CodeEditorComponent implements OnInit {
   submitCode() {
     const roundWhenSent = this.currentRound;
     this.submitSolutionService
-      .submitSolution(this.id, this.solution, 'js', this.authService.getToken()!)
+      .submitSolution(
+        this.id,
+        this.solution,
+        'js',
+        this.authService.getToken()!
+      )
       .subscribe((data) => {
         // Prevent race condition in which switches rounds but still displays this dialog
         if (roundWhenSent == this.currentRound) {
@@ -65,7 +72,6 @@ export class CodeEditorComponent implements OnInit {
             disableClose: data.correct,
           });
         }
-        
       });
   }
 }
