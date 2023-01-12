@@ -47,7 +47,16 @@ export default class WebSocketManager {
     const decodedToken = decodeToken(token);
     const client = this.clients[decodedToken.email]
     const game = this.games[gameID];
-    game.clients.push(client);
+    //Prevent clients from same email
+    const clientIndex = game.clients.findIndex((findClient) => findClient.id == client.id)
+    if (clientIndex >= 0) { 
+      //Replace client if new client with same 
+      game.clients[clientIndex] = client
+      //TODO: Send event to front end of old client to kick them out
+    } else {
+      game.clients.push(client);
+    } 
+      
     this.clients[decodedToken.email].game = gameID;
     this.sendUpdatedPlayers(game);
   }
