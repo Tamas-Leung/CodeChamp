@@ -35,12 +35,15 @@ export class WebSocketService {
     console.log(data);
     switch (data.method) {
       case GameEvent.CREATE:
+        this.lobbyService.updateCurrentRound(0);
         this.newGameID.next(data.gameID);
         return;
       case GameEvent.JOIN:
+        this.lobbyService.updateCurrentRound(0);
         this.lobbyService.updateWaitingRoom(data.players);
         return;
       case GameEvent.NEXT_ROUND:
+        this.lobbyService.updateCurrentRound(data.round);
         this.router.navigate(['/problems/' + data.problemID]);
         return;
       case GameEvent.FIND_GAME:
@@ -50,6 +53,8 @@ export class WebSocketService {
         this.lobbyService.updateWaitingRoom(data.players);
         return;
       case GameEvent.END:
+        this.lobbyService.updateCurrentRound(0);
+        this.lobbyService.updateEndData(data.endData)
         return;
     }
   }
