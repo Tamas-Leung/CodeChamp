@@ -4,7 +4,7 @@ import { isValidObjectId } from 'mongoose';
 import { Problems } from '../database/mongoose.js';
 import judge from '../services/judge/index.js';
 
-export default function (webSocketManager) {
+export default function Judge(webSocketManager) {
   const router = Router();
 
   /**
@@ -81,7 +81,6 @@ export default function (webSocketManager) {
 
       res.status(200).send({ correct: true, result: 'All test cases passed!' });
     } catch (error) {
-      console.error(error);
       res.status(500).send({
         error,
       });
