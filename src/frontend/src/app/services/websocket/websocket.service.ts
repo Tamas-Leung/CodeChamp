@@ -54,7 +54,7 @@ export class WebSocketService {
         return;
       case GameEvent.END:
         this.lobbyService.updateCurrentRound(0);
-        this.lobbyService.updateEndData(data.endData)
+        this.lobbyService.updateEndData(data.endData);
         return;
     }
   }
