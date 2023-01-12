@@ -1,4 +1,3 @@
 export type EndData = {
-    won: boolean;
+  won: boolean;
 };
-  

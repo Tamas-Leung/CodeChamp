@@ -24,6 +24,6 @@ export class LobbyService {
   }
 
   updateCurrentRound(round: number) {
-    this.currentRound.next(round)
+    this.currentRound.next(round);
   }
 }

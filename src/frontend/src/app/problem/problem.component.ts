@@ -1,10 +1,14 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { LobbyService } from '../services/lobby/lobby.service';
 import { ProblemsService } from '../services/problems/problems.service';
 import { EndData } from '../types/EndData';
 import { PlayerData } from '../types/PlayerData';
-import {MatDialog, MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {
+  MatDialog,
+  MAT_DIALOG_DATA,
+  MatDialogRef,
+} from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -12,7 +16,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './problem.component.html',
   styleUrls: ['./problem.component.scss'],
 })
-export class ProblemComponent implements OnInit {
+export class ProblemComponent implements OnInit, OnDestroy {
   title: string = '';
   description: string = '';
   id: string = '';
@@ -35,15 +39,15 @@ export class ProblemComponent implements OnInit {
 
     this.endDataSub = this.lobbyService.endData.subscribe((endData) => {
       if (endData) {
-        this.dialog.open(EndGameDialog, {
+        this.dialog.open(EndGameDialogComponent, {
           data: endData,
-          disableClose: true
+          disableClose: true,
         });
       }
-    })
+    });
 
     this.aRoute.paramMap.subscribe((params) => {
-      const id = params.get('id')
+      const id = params.get('id');
       if (id != null) {
         //Close dialogs
         this.dialog.closeAll();
@@ -60,26 +64,22 @@ export class ProblemComponent implements OnInit {
         this.router.navigate(['/']);
       }
     });
-      
-
-    
   }
 
   ngOnDestroy() {
-    this.endDataSub?.unsubscribe()
+    this.endDataSub?.unsubscribe();
+  }
 }
-}
-
 
 @Component({
-  selector: 'end-game-dialog',
+  selector: 'app-end-game-dialog',
   templateUrl: 'end-game-dialog.component.html',
 })
-export class EndGameDialog {
+export class EndGameDialogComponent {
   constructor(
-    public dialogRef: MatDialogRef<EndGameDialog>,
+    public dialogRef: MatDialogRef<EndGameDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: EndData,
-    private router: Router,
+    private router: Router
   ) {}
 
   onHomeClick() {

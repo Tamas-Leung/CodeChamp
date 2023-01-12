@@ -19,7 +19,7 @@ export class SolutionSubmitService {
     return this.http.post<Result>('http://localhost:3000/judge/' + id, {
       code: code,
       language: language,
-      token: token
+      token: token,
     });
   }
 }
