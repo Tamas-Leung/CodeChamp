@@ -38,7 +38,11 @@ export default class WebSocketManager {
     const decodedToken = decodeToken(token);
     const gameID = hri.random();
     const client = this.clients[decodedToken.email];
-    this.games[gameID] = { clientIds: [decodedToken.email], round: 0, problemsPlayed: [] };
+    this.games[gameID] = {
+      clientIds: [decodedToken.email],
+      round: 0,
+      problemsPlayed: [],
+    };
     client.game = gameID;
     ws.send(JSON.stringify({ method: Events.CREATE, gameID }));
     this.sendUpdatedPlayers(this.games[gameID]);
@@ -71,9 +75,7 @@ export default class WebSocketManager {
       const client = this.clients[clientId];
 
       const won = client.lastCompletedRound === game.round;
-      client.ws.send(
-        JSON.stringify({ method: Events.END, endData: { won } })
-      );
+      client.ws.send(JSON.stringify({ method: Events.END, endData: { won } }));
     });
   }
 
@@ -82,16 +84,14 @@ export default class WebSocketManager {
 
     // Remove players who did not finish, ignore first round
     if (game.round > 0) {
-      const clientIdsThatLost = game.clientIds.filter(
-        (clientId) => {
-          const client = this.clients[clientId];
-          return client.lastCompletedRound < game.round
-        } 
-      );
+      const clientIdsThatLost = game.clientIds.filter((clientId) => {
+        const client = this.clients[clientId];
+        return client.lastCompletedRound < game.round;
+      });
       clientIdsThatLost.forEach((clientId) => {
-        const client = this.clients[clientId]
+        const client = this.clients[clientId];
         game.clientIds = game.clientIds.filter(
-          oldClientId => oldClientId !== client.id
+          (oldClientId) => oldClientId !== client.id
         );
         client.ws.send(
           JSON.stringify({ method: Events.END, endData: { won: false } })
@@ -116,7 +116,7 @@ export default class WebSocketManager {
     game.problemsPlayed.push(newProblem);
 
     game.clientIds.forEach((clientId) => {
-      const client = this.clients[clientId]
+      const client = this.clients[clientId];
       client.ws.send(
         JSON.stringify({ method: Events.PLAYERS_UPDATE, players })
       );
@@ -141,12 +141,10 @@ export default class WebSocketManager {
     }
 
     // Calculate number of people completed
-    const numberOfCompletedPlayers = game.clientIds.filter(
-      (clientId) => {
-        const client = this.clients[clientId];
-        return client.lastCompletedRound >= game.round
-      }
-    ).length;
+    const numberOfCompletedPlayers = game.clientIds.filter((clientId) => {
+      const client = this.clients[clientId];
+      return client.lastCompletedRound >= game.round;
+    }).length;
 
     const numberOfPlayersEligibleForNextRound = Math.floor(
       game.clientIds.length / 2
@@ -154,7 +152,7 @@ export default class WebSocketManager {
 
     // Check if eligible for next round or not
     if (numberOfCompletedPlayers >= numberOfPlayersEligibleForNextRound) {
-      if (numberOfPlayersEligibleForNextRound == 1) {
+      if (numberOfPlayersEligibleForNextRound === 1) {
         this.endGame(player.game);
       } else {
         this.gameNextRound(player.game);
@@ -165,7 +163,7 @@ export default class WebSocketManager {
     const players = this.getPlayersDataToSend(game);
 
     game.clientIds.forEach((clientId) => {
-      const client = this.clients[clientId]
+      const client = this.clients[clientId];
       client.ws.send(
         JSON.stringify({ method: Events.PLAYERS_UPDATE, players })
       );
@@ -175,20 +173,20 @@ export default class WebSocketManager {
   sendUpdatedPlayers(game) {
     const players = this.getPlayersDataToSend(game);
     game.clientIds.forEach((clientId) => {
-      const client = this.clients[clientId]
+      const client = this.clients[clientId];
       client.ws.send(JSON.stringify({ method: Events.JOIN, players }));
     });
   }
 
   getPlayersDataToSend(game) {
     const players = game.clientIds.map((clientId) => {
-      const client = this.clients[clientId]
+      const client = this.clients[clientId];
       return {
         id: client.id,
         name: client.name,
         picture: client.picture,
-        finishedCurrentRound: client.lastCompletedRound == game.round || false,
-      }
+        finishedCurrentRound: client.lastCompletedRound === game.round || false,
+      };
     });
     return players;
   }
@@ -196,7 +194,7 @@ export default class WebSocketManager {
   findGame(ws) {
     // Find a game that hasn't started yet
     const gamesInLobby = [];
-    Object.entries(this.games).forEach(entry => {
+    Object.entries(this.games).forEach((entry) => {
       const [key, value] = entry;
       if (value.round === 0) {
         gamesInLobby.push(key);
