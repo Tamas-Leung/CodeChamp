@@ -4,7 +4,7 @@ import { isValidObjectId } from 'mongoose';
 import { Problems } from '../database/mongoose.js';
 import judge from '../services/judge/index.js';
 
-export default function(webSocketManager) {
+export default function (webSocketManager) {
   const router = Router();
 
   /**
@@ -49,12 +49,12 @@ export default function(webSocketManager) {
   router.post('/:_id', async (req, res) => {
     const { _id } = req.params;
     const { code, language, token } = req.body;
-  
+
     if (!isValidObjectId(_id)) {
       res.status(400).send({ error: `${_id} is not a valid id.` });
       return;
     }
-  
+
     try {
       const problem = await Problems.findById(_id);
       if (!problem) {
@@ -71,7 +71,9 @@ export default function(webSocketManager) {
           timeout: problem.time_limit,
         });
         if (!judgeResult) {
-          res.status(200).send({ correct: false, result: 'A test case failed.' });
+          res
+            .status(200)
+            .send({ correct: false, result: 'A test case failed.' });
           return;
         }
       }
@@ -79,12 +81,12 @@ export default function(webSocketManager) {
 
       res.status(200).send({ correct: true, result: 'All test cases passed!' });
     } catch (error) {
-      console.error(error)
+      console.error(error);
       res.status(500).send({
         error,
       });
     }
   });
 
-  return router
+  return router;
 }
