@@ -36,7 +36,7 @@ export default class WebSocketManager {
     const decodedToken = decodeToken(token);
     const gameID = hri.random();
     const client = this.clients[decodedToken.email]
-    this.games[gameID] = { clients: [client], round: 0 };
+    this.games[gameID] = { clients: [client], round: 0, problemsPlayed: [] };
     client.game = gameID;
     ws.send(JSON.stringify({ method: Events.CREATE, gameID }));
     this.sendUpdatedPlayers(this.games[gameID]);
@@ -55,23 +55,47 @@ export default class WebSocketManager {
   endGame(gameID) {
     const game = this.games[gameID];
     game.clients.forEach((client) => {
-      client.ws.send(JSON.stringify({ method: Events.END }));
+      const won = client.lastCompletedRound == game.round;
+      client.ws.send(JSON.stringify({ method: Events.END, endData: {won: won} }));
     });
   }
 
   gameNextRound(gameID) {
     const game = this.games[gameID];
+
+    // Remove players who did not finish, ignore first round
+    if (game.round > 0) {
+      const clientsThatLost = game.clients.filter((client) => (
+        client.lastCompletedRound < game.round
+      ))
+      clientsThatLost.forEach((client) => {
+        game.clients = game.clients.filter((oldClient) => oldClient.id != client.id);
+        client.ws.send(JSON.stringify({ method: Events.END,  endData: {won: false} }))
+        client.game = null;
+        client.lastCompletedRound = 0;
+      })
+    }
+    
     game.round += 1;
 
     const players = this.getPlayersDataToSend(game);
     
+    let newProblem = '63794a6952d8441c74627f63'
+
+    //TEMPORARY HARDCODE TO FORCE A DIFFERENT PROBLEM ON 2nd round
+    if (game.problemsPlayed.includes(newProblem)) {
+      newProblem = "63747e5dfffe067b61c7e67e"
+    }
+    
+    game.problemsPlayed.push(newProblem);
+
     game.clients.forEach((client) => {
       client.ws.send(JSON.stringify({ method: Events.PLAYERS_UPDATE, players }));
       client.ws.send(
         JSON.stringify({
           method: Events.NEXT_ROUND,
           round: game.round,
-          problemID: '63794a6952d8441c74627f63', // hard coded for now
+          problemID: newProblem,
         })
       );
     });

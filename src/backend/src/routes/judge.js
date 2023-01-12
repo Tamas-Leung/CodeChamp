@@ -71,12 +71,13 @@ export default function(webSocketManager) {
           timeout: problem.time_limit,
         });
         if (!judgeResult) {
-          res.status(200).send({ result: 'A test case failed.' });
+          res.status(200).send({ correct: false, result: 'A test case failed.' });
           return;
         }
       }
       webSocketManager.playerCompleteRound(token);
-      res.status(200).send({ result: 'All test cases passed!' });
+
+      res.status(200).send({ correct: true, result: 'All test cases passed!' });
     } catch (error) {
       console.error(error)
       res.status(500).send({
