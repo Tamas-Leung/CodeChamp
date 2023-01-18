@@ -72,9 +72,8 @@ This section records information for easy reference.
   R & Requirement\\
   SC & Scientific Computing \\
   SRS & Software Requirements Specification\\
-  \progname & Explanation of program name\\
+  \progname & The Software Engineering Capstone Project Course at McMaster University\\
   UC & Unlikely Change \\
-  \wss{etc.} & \wss{...}\\
   \bottomrule
 \end{tabular}\\
 
@@ -125,7 +124,7 @@ potential readers of this document are as follows:
   important for a maintainer to update the relevant sections of the document
   after changes have been made.
 \item Designers: Once the module guide has been written, it can be used to
-  check for consistency, feasibility and flexibility. Designers can verify the
+  check for consistency, feasibility, and flexibility. Designers can verify the
   system in various ways, such as consistency among modules, feasibility of the
   decomposition, and flexibility of the design.
 \end{itemize}
@@ -157,11 +156,12 @@ adapted here is called design for
 change.
 
 \begin{description}
-\item[\refstepcounter{acnum} \actheacnum \label{acHardware}:] The specific
-  hardware on which the software is running.
-\item[\refstepcounter{acnum} \actheacnum \label{acInput}:] The format of the
-  initial input data.
-\item ...
+\item[\refstepcounter{acnum} \actheacnum \label{acStats}:] The statistics collected in matches for each user.
+\item[\refstepcounter{acnum} \actheacnum \label{acDocker}:] The container engine used to compile and run code.
+\item[\refstepcounter{acnum} \actheacnum \label{acDb}:] The database engine used to store and retrieve data.
+\item[\refstepcounter{acnum} \actheacnum \label{acSelection}:] The algorithm used to select a problem for a round. 
+\item[\refstepcounter{acnum} \actheacnum \label{acRounds}:] The number of players which get to qualify for a given round.
+
 \end{description}
 
 \subsection{Unlikely Changes} \label{SecUchange}
@@ -176,7 +176,10 @@ decisions will be changed.
 \begin{description}
 \item[\refstepcounter{ucnum} \uctheucnum \label{ucIO}:] Input/Output devices
   (Input: File and/or Keyboard, Output: File, Memory, and/or Screen).
-\item ...
+\item[\refstepcounter{ucnum} \uctheucnum \label{ucI1}:] The client will be accessed through a browser.
+\item[\refstepcounter{ucnum} \uctheucnum \label{ucI2}:] Persistent data will always be stored in a database.
+\item[\refstepcounter{ucnum} \uctheucnum \label{ucI3}:] .
+
 \end{description}
 
 \section{Module Hierarchy} \label{SecMH}
@@ -187,34 +190,92 @@ below, which are leaves in the hierarchy tree, are the modules that will
 actually be implemented.
 
 \begin{description}
-\item [\refstepcounter{mnum} \mthemnum \label{mHH}:] Hardware-Hiding Module
-\item ...
+\item [\refstepcounter{mnum} \mthemnum \label{mHH}:] Hardware Hiding Module
+\item [\refstepcounter{mnum} \mthemnum \label{mClientT}:] ClientT Module
+\item [\refstepcounter{mnum} \mthemnum \label{mGameT}:] GameT Module
+\item [\refstepcounter{mnum} \mthemnum \label{mMatchT}:] MatchT Module
+\item [\refstepcounter{mnum} \mthemnum \label{mUserT}:] UserT Module
+\item [\refstepcounter{mnum} \mthemnum \label{mUserStatsT}:] UserStatsT Module
+\item [\refstepcounter{mnum} \mthemnum \label{mProblemT}:] ProblemT Module
+\item [\refstepcounter{mnum} \mthemnum \label{mDifficulty}:] Difficulty Module
+\item [\refstepcounter{mnum} \mthemnum \label{mLanguage}:] Difficulty Module
+\item [\refstepcounter{mnum} \mthemnum \label{mTestCaseT}:] TestCaseT Module
+\item [\refstepcounter{mnum} \mthemnum \label{mSubmissionT}:] SubmissionT Module
+\item [\refstepcounter{mnum} \mthemnum \label{mJudgeResultT}:] JudgeResultT Module
+\item [\refstepcounter{mnum} \mthemnum \label{mJudgeVerdict}:] JudgeVerdict Module
+\item [\refstepcounter{mnum} \mthemnum \label{mTestCaseVerdictT}:] TestCaseVerdictT Module
+\item [\refstepcounter{mnum} \mthemnum \label{mHome}:] Home Page Module
+\item [\refstepcounter{mnum} \mthemnum \label{mProfile}:] Profile Page Module
+\item [\refstepcounter{mnum} \mthemnum \label{mLeaderboard}:] Leaderboard Page Module
+\item [\refstepcounter{mnum} \mthemnum \label{mLobby}:] Lobby Page Module
+\item [\refstepcounter{mnum} \mthemnum \label{mGame}:] Game Page Module
+\item [\refstepcounter{mnum} \mthemnum \label{mLogin}:] Login Page Module
+\item [\refstepcounter{mnum} \mthemnum \label{mSubmissionService}:] SubmissionService Module
+\item [\refstepcounter{mnum} \mthemnum \label{mProblemService}:] ProblemsService Module
+\item [\refstepcounter{mnum} \mthemnum \label{mUserService}:] UserService Module
+\item [\refstepcounter{mnum} \mthemnum \label{mAuthService}:] AuthService Module
+\item [\refstepcounter{mnum} \mthemnum \label{mLobbyService}:] LobbyService Module
+\item [\refstepcounter{mnum} \mthemnum \label{mWebSocketService}:] WebSocketService Module
+\item [\refstepcounter{mnum} \mthemnum \label{mGameHandler}:] GameHandler Module
+\item [\refstepcounter{mnum} \mthemnum \label{mJudge}:] Judge Module
+\item [\refstepcounter{mnum} \mthemnum \label{mAuth}:] Auth Module
+\item [\refstepcounter{mnum} \mthemnum \label{mProblems}:] Problems Module
+\item [\refstepcounter{mnum} \mthemnum \label{mUser}:] User Module
+\item [\refstepcounter{mnum} \mthemnum \label{mCodeRunner}:] CodeRunner Interface Module
+\item [\refstepcounter{mnum} \mthemnum \label{mDatabase}:] Database Module
+\item [\refstepcounter{mnum} \mthemnum \label{mRouter}:] Router Module
+
+
+\item 
 \end{description}
 
 
-\begin{table}[h!]
+\begin{table}[H]
 \centering
 \begin{tabular}{p{0.3\textwidth} p{0.6\textwidth}}
 \toprule
 \textbf{Level 1} & \textbf{Level 2}\\
 \midrule
 
-{Hardware-Hiding Module} & ~ \\
+{Hardware-Hiding Module} & \\
 \midrule
 
-\multirow{7}{0.3\textwidth}{Behaviour-Hiding Module} & ?\\
-& ?\\
-& ?\\
-& ?\\
-& ?\\
-& ?\\
-& ?\\ 
-& ?\\
+\multirow{7}{0.3\textwidth}{Behaviour-Hiding Module} 
+& ClientT Module\\
+& GameT Module\\
+& MatchT Module\\
+& UserT Module\\
+& UserStatsT Module\\
+& ProblemT Module\\ 
+& Difficulty Module\\
+& Language Module\\
+& TestCaseT Module\\
+& SubmissionT Module\\
+& JudgeResultT Module\\
+& JudgeVerdict Module\\
+& TestCaseVerdictT Module\\
+& HomePage Module\\
+& ProfilePage Module\\
+& LeaderboardPage Module\\
+& LobbyPage Module\\
+& GamePage Module\\
+& LoginPage Moudle\\
+& SubmissionService Module\\
+& ProblemsService Module\\
+& UserService Module\\
+& AuthService Module\\
+& LobbyService Module\\
+& WebSocketService Module\\
+& GameHandler Module\\
+& Judge Module\\
+& Auth Module\\
+& Problems Module\\
+& User Module\\
 \midrule
 
-\multirow{3}{0.3\textwidth}{Software Decision Module} & {?}\\
-& ?\\
-& ?\\
+\multirow{3}{0.3\textwidth}{Software Decision Module} & {CodeRunner Module}\\
+& Database Module\\
+& Router Module\\
 \bottomrule
 
 \end{tabular}
@@ -226,16 +287,7 @@ actually be implemented.
 
 The design of the system is intended to satisfy the requirements developed in
 the SRS. In this stage, the system is decomposed into modules. The connection
-between requirements and modules is listed in Table \ref{TblRT}.
-
-\wss{The intention of this section is to document decisions that are made
-  ``between'' the requirements and the design.  To satisfy some requirements,
-  design decisions need to be made.  Rather than make these decisions implicit,
-  they are explicitly recorded here.  For instance, if a program has security
-  requirements, a specific design decision may be made to satisfy those
-  requirements with a password.  In scientific examples, the choice of algorithm
-could potentially go here, if that is a decision that is exposed by the
-interface.}
+between requirements and modules is listed in Table~\ref{TblRT}.
 
 \section{Module Decomposition} \label{SecMD}
 
@@ -253,7 +305,7 @@ Only the leaf modules in the hierarchy have to be implemented. If a dash
 (\emph{--}) is shown, this means that the module is not a leaf and will not have
 to be implemented.
 
-\subsection{Hardware Hiding Modules (\mref{mHH})}
+\subsection{Hardware Hiding Modules (\mref{mHH})} 
 
 \begin{description}
 \item[Secrets:]The data structure and algorithm used to implement the virtual
@@ -266,44 +318,310 @@ to be implemented.
 
 \subsection{Behaviour-Hiding Module}
 
+% \begin{description}
+% \item[Secrets:]The contents of the required behaviours.
+% \item[Services:]Includes programs that provide externally visible behaviour of
+%   the system as specified in the software requirements specification (SRS)
+%   documents. This module serves as a communication layer between the
+%   hardware-hiding module and the software decision module. The programs in this
+%   module will need to change if there are changes in the SRS.
+% \item[Implemented By:] --
+% \end{description}
+
+\subsubsection{ ClientT Module (\mref{mClientT})}
+
 \begin{description}
-\item[Secrets:]The contents of the required behaviours.
-\item[Services:]Includes programs that provide externally visible behaviour of
-  the system as specified in the software requirements specification (SRS)
-  documents. This module serves as a communication layer between the
-  hardware-hiding module and the software decision module. The programs in this
-  module will need to change if there are changes in the SRS.
-\item[Implemented By:] --
+\item[Secrets:] The data structures used to represent a connected browser client.
+\item[Services:] Holds the data of a browser client.
+\item[Implemented By:] CodeChamp
+\item[Type of Module:] Abstract Data Type
 \end{description}
 
-\subsubsection{Input Format Module (\mref{mInput})}
+\subsubsection{ GameT Module (\mref{mGameT})}
 
 \begin{description}
-\item[Secrets:]The format and structure of the input data.
-\item[Services:]Converts the input data into the data structure used by the
-  input parameters module.
-\item[Implemented By:] [Your Program Name Here]
-\item[Type of Module:] [Record, Library, Abstract Object, or Abstract Data Type]
-  [Information to include for leaf modules in the decomposition by secrets tree.]
+\item[Secrets:] The data structures used to represent a game instance.
+\item[Services:] Holds the data of a game instance.
+\item[Implemented By:] CodeChamp
+\item[Type of Module:] Abstract Data Type
 \end{description}
 
-\subsubsection{Etc.}
+\subsubsection{ MatchT Module (\mref{mMatchT})}
 
+\begin{description}
+\item[Secrets:] The data structures used to represent a completed match.
+\item[Services:] Holds the data of a completed match for a specific user.
+\item[Implemented By:] CodeChamp
+\item[Type of Module:] Abstract Data Type
+\end{description}
+
+\subsubsection{ UserT Module (\mref{mUserT})}
+
+\begin{description}
+\item[Secrets:] The data structures used to represent a user.
+\item[Services:] Holds the data of a user.
+\item[Implemented By:] CodeChamp
+\item[Type of Module:] Abstract Data Type
+\end{description}
+
+\subsubsection{ UserStatsT Module (\mref{mUserStatsT})}
+
+\begin{description}
+\item[Secrets:] The data structures used to represent the game stats of a user.
+\item[Services:] Holds the data of a user's stats.
+\item[Implemented By:] CodeChamp
+\item[Type of Module:] Abstract Data Type
+\end{description}
+
+\subsubsection{ ProblemT Module (\mref{mProblemT})}
+
+\begin{description}
+\item[Secrets:] The data structures used to represent a problem.
+\item[Services:] Stores the data of a problem.
+\item[Implemented By:] CodeChamp
+\item[Type of Module:] Abstract Data Type
+\end{description}
+
+\subsubsection{ Difficulty Module (\mref{mDifficulty})}
+
+\begin{description}
+\item[Secrets:] None
+\item[Services:] Defines the set of possible difficulties for a problem.
+\item[Implemented By:] CodeChamp
+\item[Type of Module:] Record
+\end{description}
+
+\subsubsection{ Language Module (\mref{mLanguage})}
+
+\begin{description}
+\item[Secrets:] None
+\item[Services:] Defines the set of supported languages.
+\item[Implemented By:] CodeChamp
+\item[Type of Module:] Record
+\end{description}
+
+\subsubsection{ TestCaseT Module (\mref{mTestCaseT})}
+
+\begin{description}
+\item[Secrets:] The data structures used to hold the values for a problem's test case.
+\item[Services:] Stores values for a test case's inputs and outputs.
+\item[Implemented By:] CodeChamp
+\item[Type of Module:] Abstract Data Type
+\end{description}
+
+\subsubsection{ SubmissionT Module (\mref{mSubmissionT})}
+
+\begin{description}
+\item[Secrets:] The data structures used to hold the values for a user's code submission.
+\item[Services:] Stores values for a user's code submission and ensures that the user selected a language supported by the system. 
+\item[Implemented By:] CodeChamp
+\item[Type of Module:] Abstract Data Type
+\end{description}
+
+\subsubsection{ JudgeResultT Module (\mref{mJudgeResultT})}
+
+\begin{description}
+\item[Secrets:] The algorithm used to calculate the overall verdict for a submission.
+\item[Services:] Outputs a verdict given the user's outputs for a set of test cases to inform them of their submission's result.
+\item[Implemented By:] CodeChamp
+\item[Type of Module:] Abstract Data Type
+\end{description}
+
+\subsubsection{ JudgeVerdict Module (\mref{mJudgeVerdict})}
+
+\begin{description}
+\item[Secrets:] None
+\item[Services:] Defines the set of possible judging verdicts for a code submission.
+\item[Implemented By:] CodeChamp
+\item[Type of Module:] Record
+\end{description}
+
+\subsubsection{ TestCaseVerdictT Module (\mref{mTestCaseVerdictT})}
+
+\begin{description}
+\item[Secrets:] The data structures used to hold the values for a test case's result.
+\item[Services:] Stores values for a test case's results.
+\item[Implemented By:] CodeChamp
+\item[Type of Module:] Abstract Data Type
+\end{description}
+
+\subsubsection{ Home Page Module (\mref{mHome})}
+
+\begin{description}
+\item[Secrets:] The algorithms used to handle inputs and display interactions on the Home Page.
+\item[Services:] Host buttons that let user navigate to each page,
+\item[Implemented By:] CodeChamp
+\item[Type of Module:] Abstract Object
+\end{description}
+
+\subsubsection{ Profile Page Module (\mref{mProfile})}
+
+\begin{description} 
+\item[Secrets:] The algorithms used to retrieve player statistics and display the Profile Page.
+\item[Services:] Displays user statistics.
+\item[Implemented By:] CodeChamp
+\item[Type of Module:] Abstract Object
+\end{description}
+
+\subsubsection{ Leaderboard Page Module (\mref{mLeaderboard})}
+
+\begin{description}
+\item[Secrets:] The algorithms used to retrieve Leaderboard data and display the Leaderboard Page.
+\item[Services:] Displays Leaderboard data.
+\item[Implemented By:] CodeChamp
+\item[Type of Module:] Abstract Object
+\end{description}
+
+\subsubsection{ Lobby Page Module (\mref{mLobby})}
+
+\begin{description}
+\item[Secrets:] The algorithms used to retrieve Lobby data and display the Lobby Page.
+\item[Services:] Displays the lobby of the current game, shows start button and lobby code
+\item[Implemented By:] CodeChamp
+\item[Type of Module:] Abstract Object
+\end{description}
+
+\subsubsection{ Game Page Module (\mref{mGame})}
+
+\begin{description}
+\item[Secrets:] The algorithms used to handle inputs and display interactions on the Game Page.
+\item[Services:] Displays the game page, takes in input allowing use to input code, select submit button or leave.
+\item[Implemented By:] CodeChamp
+\item[Type of Module:] Abstract Object
+\end{description}
+
+\subsubsection{ Login Page Module (\mref{mLogin})}
+
+\begin{description}
+\item[Secrets:] The algorithms used to allow user to login and display on the Login Page.
+\item[Services:] Displays the login page and allows users to sign in.
+\item[Implemented By:] CodeChamp
+\item[Type of Module:] Abstract Object
+\end{description}
+
+\subsubsection{ SubmissionService Module (\mref{mSubmissionService})}
+
+\begin{description}
+\item[Secrets:] The algorithm used to send code submissions and return submission results from a server module.
+\item[Services:] Accepts code inputs, sends network requests, receives network responses and returns appropriate responses based on the user's submission.
+\item[Implemented By:] CodeChamp
+\item[Type of Module:] Abstract Object
+\end{description}
+
+\subsubsection{ ProblemsService Module (\mref{mProblemService})}
+
+\begin{description}
+\item[Secrets:] The algorithms used to send and retrieve problem data from a server module.
+\item[Services:] Get problems by problem id from the server
+\item[Implemented By:] CodeChamp
+\item[Type of Module:] Abstract Object
+\end{description}
+
+\subsubsection{ UserService Module (\mref{mUserService})}
+
+\begin{description}
+\item[Secrets:] The algorithms used to send and retrieve user data from a server module.
+\item[Services:] Get leaderboard data and user stats from the server
+\item[Implemented By:] CodeChamp
+\item[Type of Module:] Abstract Object
+\end{description}
+
+\subsubsection{ AuthService Module (\mref{mAuthService})}
+
+\begin{description}
+\item[Secrets:] The algorithm used to authorize users to the server
+\item[Services:] Login, login and get the current user logged in
+\item[Implemented By:] CodeChamp
+\item[Type of Module:] Abstract Object
+\end{description}
+
+\subsubsection{ LobbyService Module (\mref{mLobbyService})}
+
+\begin{description}
+\item[Secrets:] The algorithm used to connect clients to a lobby of a game instance.
+\item[Services:] Adds, removes and send lobby state updates to clients from a game instance
+\item[Implemented By:] CodeChamp
+\item[Type of Module:] Abstract Object
+\end{description}
+
+\subsubsection{ WebSocketService Module (\mref{mWebSocketService})}
+
+\begin{description}
+\item[Secrets:] The algorithm used to send and receive bi-directional messages between clients and servers for a client.
+\item[Services:] Sends, receives and processes messages/events between clients and servers on the client.
+\item[Implemented By:] CodeChamp
+\item[Type of Module:] Abstract Object
+\end{description}
+
+\subsubsection{ GameHandler Module (\mref{mGameHandler})}
+
+\begin{description}
+\item[Secrets:] The algorithm used to handle game events on the server.
+\item[Services:] Sends, receives and processes messages/events between from the server to clients. Handles logic of the game events such as a client completing a round and moving the game to the next round.
+\item[Implemented By:] CodeChamp
+\item[Type of Module:] Abstract Object
+\end{description}
+
+
+\subsubsection{ Judge Module (\mref{mJudge})}
+
+\begin{description}
+\item[Secrets:] The algorithm used to compute verdicts for individual test cases.
+\item[Services:] Judges submissions and returns their result. Informs the GameHandler (\mref{mGameHandler}) of correct submissions.
+\item[Implemented By:] CodeChamp
+\item[Type of Module:] Abstract Object
+\end{description}
+
+
+\subsubsection{ Auth Module (\mref{mAuth})}
+
+\begin{description}
+\item[Secrets:] The algorithm used to authorize user login.
+\item[Services:] Authorizes user login attempts for the game.
+\item[Implemented By:] CodeChamp
+\item[Type of Module:] Abstract Object
+\end{description}
+
+\subsubsection{ Problems Module (\mref{mProblems})}
+
+\begin{description}
+\item[Secrets:] The algorithm used to handle problem creation and retrieval.
+\item[Services:] Get Problems, Add problems, Get random problem, and get problem from id from the database
+\item[Implemented By:] CodeChamp
+\item[Type of Module:] Abstract Object
+\end{description}
+
+\subsubsection{ User Module (\mref{mUser})}
+
+\begin{description}
+\item[Secrets:] The algorithm used to handle users and matches.
+\item[Services:] Save user matches, creating user, getting users, getting leaderboard and getting user stats.
+\item[Implemented By:] CodeChamp
+\item[Type of Module:] Abstract Object
+\end{description}
 
 \subsection{Software Decision Module}
 
+\subsubsection{ CodeRunner Module (\mref{mCodeRunner})}
 \begin{description}
-\item[Secrets:] The design decision based on mathematical theorems, physical
-  facts, or programming considerations. The secrets of this module are
-  \emph{not} described in the SRS.
-\item[Services:] Includes data structure and algorithms used in the system that
-  do not provide direct interaction with the user. 
-  % Changes in these modules are more likely to be motivated by a desire to
-  % improve performance than by externally imposed changes.
-\item[Implemented By:] --
+\item[Secrets:] The data structures and algorithms used to compile and run code.
+\item[Services:] Provides code compilation, a containerized run-time environment and interactability with the run-time's standard input and standard output streams.
+\item[Implemented By:] Docker
 \end{description}
 
-\subsubsection{Etc.}
+\subsubsection{ Database Module (\mref{mDatabase})}
+\begin{description}
+\item[Secrets:] The data structures and algorithms used to store and retrieve data.
+\item[Services:] Allows concurrent storage and retrieval of abstract data types.
+\item[Implemented By:] MongoDB
+\end{description}
+
+\subsubsection{ Router Module (\mref{mRouter})}
+\begin{description}
+\item[Secrets:] The network protocols used to navigate web pages.
+\item[Services:] Provides a routing function to navigate between page modules.
+\item[Implemented By:] Browser
+\end{description}
 
 \section{Traceability Matrix} \label{SecTM}
 
@@ -318,21 +636,67 @@ requirements and between the modules and the anticipated changes.
 \toprule
 \textbf{Req.} & \textbf{Modules}\\
 \midrule
-R1 & \mref{mHH}, \mref{mInput}, \mref{mParams}, \mref{mControl}\\
-R2 & \mref{mInput}, \mref{mParams}\\
-R3 & \mref{mVerify}\\
-R4 & \mref{mOutput}, \mref{mControl}\\
-R5 & \mref{mOutput}, \mref{mODEs}, \mref{mControl}, \mref{mSeqDS}, \mref{mSolver}, \mref{mPlot}\\
-R6 & \mref{mOutput}, \mref{mODEs}, \mref{mControl}, \mref{mSeqDS}, \mref{mSolver}, \mref{mPlot}\\
-R7 & \mref{mOutput}, \mref{mEnergy}, \mref{mControl}, \mref{mSeqDS}, \mref{mPlot}\\
-R8 & \mref{mOutput}, \mref{mEnergy}, \mref{mControl}, \mref{mSeqDS}, \mref{mPlot}\\
-R9 & \mref{mVerifyOut}\\
-R10 & \mref{mOutput}, \mref{mODEs}, \mref{mControl}\\
-R11 & \mref{mOutput}, \mref{mODEs}, \mref{mEnergy}, \mref{mControl}\\
+FR1 &  \mref{mGameHandler}, \mref{mLobby}, \mref{mLobbyService} \mref{mWebSocketService}\\
+FR2 &  \mref{mGameHandler}, \mref{mLobby}, \mref{mLobbyService} \mref{mWebSocketService}\\
+FR3 &  \mref{mGameHandler} \\
+FR4 &  \mref{mGame}, \mref{mProblemService}, \mref{mWebSocketService}\\
+FR5 &  \mref{mGame}, \mref{mGameHandler}\\
+FR6 &  \mref{mJudge}, \mref{mGame} \\
+FR7 &  \mref{mJudgeVerdict} \\
+FR8 &  \mref{mGame}, \mref{mTestCaseT}, \mref{mJudgeResultT} \\
+FR9 &  \mref{mGameHandler}, \mref{mWebSocketService}, \mref{mLobbyService} \\
+FR10 & \mref{mGameHandler}, \mref{mWebSocketService}, \mref{mLobbyService} \\
+FR11 & \mref{mGameHandler}, \mref{mWebSocketService}, \mref{mLobbyService} \\
+FR12 & \mref{mProblems} \\
+FR13 & \mref{mTestCaseT}, \mref{mTestCaseVerdictT}\\
+FR14 & \mref{mCodeRunner} \\
+FR15 & \mref{mCodeRunner} \\
+FR16 & \mref{mGame}, \mref{mJudge} \\
+FR17 & \mref{mAuth}, \mref{mUser}\\
+FR18 & \mref{mLogin}, \mref{mAuth}, \mref{mUser}\\
+FR19 & \mref{mLogin}, \mref{mAuth}\\
+FR20 & \mref{mJudge}, \mref{mCodeRunner}\\
+FR21 & \mref{mJudge}, \mref{mCodeRunner}\\
+FR22 & \mref{mProblems}\\
+FR23 & \mref{mGameHandler}, \mref{mLobby}, \mref{mLobbyService}\\
+FR24 & \mref{mGameHandler}, \mref{mHome}, \mref{mLobby}, \mref{mLobbyService}\\
+FR25 & \mref{mUser}, \mref{mProfile}\\
+FR26 & \mref{mUser}, \mref{mProfile}\\
+FR27 & \mref{mUser}, \mref{mProfile}\\
+FR28 & \mref{mUser}, \mref{mProfile}\\
+FR29 & \mref{mLeaderboard}, \mref{mUser}, \mref{mProfile}\\
+
 \bottomrule
 \end{tabular}
-\caption{Trace Between Requirements and Modules}
+\caption{Trace Between Functional Requirements and Modules}
 \label{TblRT}
+\end{table}
+
+\begin{table}[H]
+\centering 
+\begin{tabular}{p{0.2\textwidth} p{0.6\textwidth}}
+\toprule
+\textbf{Req.} & \textbf{Modules}\\
+\midrule
+NFR1 & \mref{mHome}, \mref{mProfile}, \mref{mLeaderboard}, \mref{mLogin}, \mref{mLobby}, \mref{mGame} \\ %interface is easy to read
+NFR2 & \mref{mHome}, \mref{mProfile}, \mref{mLeaderboard}, \mref{mLogin}, \mref{mLobby}, \mref{mGame} \\ %elements are well organized
+NFR3 & \mref{mHome}, \mref{mProfile}, \mref{mLeaderboard}, \mref{mLogin}, \mref{mLobby} \\ %Interface can be easily navigated
+NFR4 & \mref{mHome}, \mref{mProfile}, \mref{mLeaderboard}, \mref{mLogin}, \mref{mLobby}, \mref{mGame}\\
+NFR5 & \mref{mHome}, \mref{mProfile}, \mref{mLeaderboard}, \mref{mLogin}, \mref{mLobby}, \mref{mGame}\\ %Pages can be navigated without the use of mouse
+NFR6 & \mref{mHome}, \mref{mProfile}, \mref{mLeaderboard}, \mref{mLogin}, \mref{mLobby}, \mref{mGame} \\
+NFR7 & \mref{mGame}, \mref{mJudgeResultT}\\
+NFR8 & All\\ 
+NFR9 & \mref{mHome}, \mref{mProfile}, \mref{mLeaderboard}, \mref{mLogin}, \mref{mLobby}, \mref{mGame} \\ %Supports all browsers
+NFR10 & \mref{mProblems}, \mref{mProblemService}, \mref{mDatabase}\\
+NFR11 & \mref{mAuth}, \mref{mAuthService}, \mref{mLogin}\\ 
+NFR12 & \mref{mAuth}, \mref{mAuthService}, \mref{mLogin}\\
+NFR13 & \mref{mHome}, \mref{mProfile}, \mref{mLeaderboard}, \mref{mLogin}, \mref{mLobby}, \mref{mGame}\\
+NFR14 & All\\
+NFR15 & \mref{mHome}, \mref{mProfile}, \mref{mLeaderboard}, \mref{mLogin}, \mref{mLobby}, \mref{mGame}\\
+\bottomrule
+\end{tabular}
+\caption{Trace Between Non-functional Requirements and Modules}
+\label{TblRT2}
 \end{table}
 
 \begin{table}[H]
@@ -341,18 +705,11 @@ R11 & \mref{mOutput}, \mref{mODEs}, \mref{mEnergy}, \mref{mControl}\\
 \toprule
 \textbf{AC} & \textbf{Modules}\\
 \midrule
-\acref{acHardware} & \mref{mHH}\\
-\acref{acInput} & \mref{mInput}\\
-\acref{acParams} & \mref{mParams}\\
-\acref{acVerify} & \mref{mVerify}\\
-\acref{acOutput} & \mref{mOutput}\\
-\acref{acVerifyOut} & \mref{mVerifyOut}\\
-\acref{acODEs} & \mref{mODEs}\\
-\acref{acEnergy} & \mref{mEnergy}\\
-\acref{acControl} & \mref{mControl}\\
-\acref{acSeqDS} & \mref{mSeqDS}\\
-\acref{acSolver} & \mref{mSolver}\\
-\acref{acPlot} & \mref{mPlot}\\
+\acref{acStats} & \mref{mUserStatsT}\\
+\acref{acDocker} & \mref{mCodeRunner}\\
+\acref{acDb} & \mref{mDatabase}\\
+\acref{acSelection} & \mref{mProblems}\\
+\acref{acRounds} & \mref{mGameHandler}\\
 \bottomrule
 \end{tabular}
 \caption{Trace Between Anticipated Changes and Modules}
@@ -374,25 +731,19 @@ because they use modules from the lower levels.
 
 \begin{figure}[H]
 \centering
-%\includegraphics[width=0.7\textwidth]{UsesHierarchy.png}
+\includegraphics[width=1\textwidth]{UserHierarchy.png}
+
 \caption{Use hierarchy among modules}
+
 \label{FigUH}
 \end{figure}
 
 %\section*{References}
 
 \bibliographystyle {plainnat}
-\bibliography{../../../refs/References}
+%\bibliography{References}
+\bibliography {../../../refs/References}
 
 \newpage{}
-\section*{Appendix --- Reflection}
-
-The information in this section will be used to evaluate the team members on the
-graduate attribute of Lifelong Learning.  Please answer the following questions:
-
-\begin{enumerate}
-  \item 
-  \item 
-\end{enumerate}
 
 \end{document}
