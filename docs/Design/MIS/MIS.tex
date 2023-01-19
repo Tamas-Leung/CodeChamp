@@ -53,8 +53,8 @@ urlcolor=cyan          % color of external links
 \begin{tabularx}{\textwidth}{p{3cm}p{2cm}X}
 \toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
 \midrule
-Date 1 & 1.0 & Notes\\
-Date 2 & 1.1 & Notes\\
+01/17/2023 & 1.0 & Initial draft\\
+01/18/2023 & 1.1 & Small Changes\\
 \bottomrule
 \end{tabularx}
 
@@ -63,9 +63,6 @@ Date 2 & 1.1 & Notes\\
 \section{Symbols, Abbreviations and Acronyms}
 
 See SRS Documentation \href{https://github.com/Tamas-Leung/CodeChamp/tree/main/docs/SRS}{here}.
-
-
-\wss{Also add any additional symbols, abbreviations or acronyms}
 
 \newpage
 
@@ -85,9 +82,6 @@ found at \url{https://github.com/Tamas-Leung/CodeChamp}.
 
 \section{Notation}
 
-\wss{You should describe your notation.  You can use what is below as
-  a starting point.}
-
 The structure of the MIS for modules comes from \citet{HoffmanAndStrooper1995},
 with the addition that template modules have been adapted from
 \cite{GhezziEtAl2003}.  The mathematical notation comes from Chapter 3 of
@@ -95,7 +89,7 @@ with the addition that template modules have been adapted from
 multiple assignment statement and conditional rules follow the form $(c_1
 \Rightarrow r_1 | c_2 \Rightarrow r_2 | ... | c_n \Rightarrow r_n )$.
 
-The following table summarizes the primitive data types used by \progname. 
+The following table summarizes the primitive data types used by \progname. The boolean and map data types were added as well.
 
 \begin{center}
 \renewcommand{\arraystretch}{1.2}
@@ -108,6 +102,8 @@ character & char & a single symbol or digit\\
 integer & $\mathbb{Z}$ & a number without a fractional component in (-$\infty$, $\infty$) \\
 natural number & $\mathbb{N}$ & a number without a fractional component in [1, $\infty$) \\
 real & $\mathbb{R}$ & any number in (-$\infty$, $\infty$)\\
+boolean & $\mathbb{B}$ & truth values in $\{true, false\}$\\
+map &  $map<T1, T2>$ & a generic \href{https://en.wikipedia.org/wiki/Symbol_table}{symbol table} supporting getting and setting values using indexing notation\\
 \bottomrule
 \end{tabular} 
 \end{center}
@@ -124,28 +120,52 @@ described by giving their type signature followed by their specification.
 
 The following table is taken directly from the Module Guide document for this project.
 
-\begin{table}[h!]
+\begin{table}[H]
 \centering
 \begin{tabular}{p{0.3\textwidth} p{0.6\textwidth}}
 \toprule
 \textbf{Level 1} & \textbf{Level 2}\\
 \midrule
 
-{Hardware-Hiding} & ~ \\
+{Hardware-Hiding Module} & \\
 \midrule
 
-\multirow{7}{0.3\textwidth}{Behaviour-Hiding} & Input Parameters\\
-& Output Format\\
-& Output Verification\\
-& Temperature ODEs\\
-& Energy Equations\\ 
-& Control Module\\
-& Specification Parameters Module\\
+\multirow{7}{0.3\textwidth}{Behaviour-Hiding Module} 
+& ClientT Module\\
+& GameT Module\\
+& MatchT Module\\
+& UserT Module\\
+& UserStatsT Module\\
+& ProblemT Module\\ 
+& Difficulty Module\\
+& Language Module\\
+& TestCaseT Module\\
+& SubmissionT Module\\
+& JudgeResultT Module\\
+& JudgeVerdict Module\\
+& TestCaseVerdictT Module\\
+& HomePage Module\\
+& ProfilePage Module\\
+& LeaderboardPage Module\\
+& LobbyPage Module\\
+& GamePage Module\\
+& LoginPage Moudle\\
+& SubmissionService Module\\
+& ProblemsService Module\\
+& UserService Module\\
+& AuthService Module\\
+& LobbyService Module\\
+& WebSocketService Module\\
+& GameHandler Module\\
+& Judge Module\\
+& Auth Module\\
+& Problems Module\\
+& User Module\\
 \midrule
 
-\multirow{3}{0.3\textwidth}{Software Decision} & {Sequence Data Structure}\\
-& ODE Solver\\
-& Plotting\\
+\multirow{3}{0.3\textwidth}{Software Decision Module} & {CodeRunner Module}\\
+& Database Module\\
+& Router Module\\
 \bottomrule
 
 \end{tabular}
@@ -360,7 +380,8 @@ None
 MatchT
 
 \subsection{Uses}
-\nameref{Problems}
+
+None
 
 
 \subsection{Syntax}
@@ -376,10 +397,9 @@ MatchT = ?
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-MatchT & String, seq of ProblemT, $\mathbb{Z}$, String  & MatchT & \\
+MatchT & String, $\mathbb{Z}$, String  & MatchT & \\
 getUserID & & String & \\
-getProblems & & seq of ProblemT & \\
-getRanking & & $\mathbb{Z}$ & \\
+getIsWin & & $\mathbb{B}$ & \\
 getDate & & String & \\
 
 \hline
@@ -392,8 +412,7 @@ getDate & & String & \\
 \subsubsection{State Variables}
 
 userID: String\\
-problems: seq of ProblemT\\
-ranking: $\mathbb{Z}$\\
+win: $\mathbb{B}$\\
 date: String
 
 \subsubsection{Environment Variables}
@@ -404,9 +423,9 @@ The constructor MatchT is called for each object instance before any other acces
 
 \subsubsection{Access Routine Semantics}
 
-\noindent MatchT(uid, ps, r, d):
+\noindent MatchT(uid, r, d):
 \begin{itemize}
-\item transition: $userID, problems, ranking, date := uid, ps, r, d$
+\item transition: $userID, ranking, date := uid, r, d$
 \item output: $out := self$
 \item exception: None
 \end{itemize}
@@ -417,15 +436,9 @@ The constructor MatchT is called for each object instance before any other acces
 \item exception: None
 \end{itemize}
 
-\noindent getProblems():
+\noindent getIsWin():
 \begin{itemize}
-\item output: $out := problems$
-\item exception: None
-\end{itemize}
-
-\noindent getRanking():
-\begin{itemize}
-\item output: $out := ranking$
+\item output: $out := win$
 \item exception: None
 \end{itemize}
 
@@ -459,7 +472,7 @@ UserT = ?
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-UserT & String, String, String, String, String  & UserT & \\
+UserT & String, String, String, String  & UserT & \\
 getUserID & & String & \\
 getUsername & & String & \\
 getEmail & & String & \\
@@ -475,7 +488,6 @@ getProfilePicture & & String & \\
 
 userID: String \\
 username: String\\
-password: String\\
 email: String\\
 profilePicture: String\\
 
@@ -489,9 +501,9 @@ The password for the user is not sent or stored by any of the modules and is ins
 
 \subsubsection{Access Routine Semantics}
 
-\noindent UserT(id, u, p, e, pic):
+\noindent UserT(id, u, e, pic):
 \begin{itemize}
-\item transition: $userID, username, password, email, profilePicture := id, u, p, e, pic$
+\item transition: $userID, username, email, profilePicture := id, u, e, pic$
 \item output: $out := self$
 \item exception: None
 \end{itemize}
@@ -529,6 +541,7 @@ None
 \subsection{Template Module}
 UserStatsT
 \subsection{Uses}
+None
 
 \subsection{Syntax}
 \subsubsection{Exported Types}
@@ -617,6 +630,10 @@ ProblemT
 
 \subsection{Syntax}
 
+\subsubsection{Exported Constants}
+
+MINIMUM\_MEMORY = 32\\
+MINIMUM\_TIME = 0.5
 
 \subsubsection{Exported Types}
 
@@ -629,7 +646,7 @@ ProblemT = ?
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-ProblemT & String, String, String, $\mathbb{R}$, $\mathbb{N}$, seq of TestCaseT, Difficulty, seq of String  & ProblemT  & \\
+ProblemT & String, String, String, $\mathbb{R}$, $\mathbb{N}$, seq of TestCaseT, Difficulty, seq of String  & ProblemT  & IllegalArgumentException \\
 getID & & String & \\
 getName & & String & \\
 getDescription & & String & \\
@@ -650,11 +667,14 @@ getProblemType & & seq of String & \\
 id: string\\
 name: string\\
 description: string\\
-time\_limit: $\mathbb{R}$\\
-memory\_limit: $\mathbb{N}$\\
-test\_cases: seq of TestCaseT\\
+timeLimit: $\mathbb{R}$\\
+memoryLimit: $\mathbb{N}$\\
+testCases: seq of TestCaseT\\
 difficulty: Difficulty\\
-problem\_type: seq of string
+problemType: seq of string
+
+\subsubsection{State Invariant}
+$\forall \, tc : TestCaseT \,|\,  tc \in testCases \,:\, tc.getMemoryLimit() = memoryLimit \, \land \, tc.getTimeLimit() = timeLimit$
 
 \subsubsection{Environment Variables}
 None
@@ -662,13 +682,16 @@ None
 \subsubsection{Assumptions}
 The constructor ProblemT is called for each object instance before any other access routine is called for that object. The constructor cannot be called on an existing object.
 
+\subsubsection{Considerations}
+The minimum memory represents the memory in megabytes. The minimum time represents the time in seconds.
+
 \subsubsection{Access Routine Semantics}
 
 \noindent ProblemT(id, n, d, tl, ml, tc, d, pt):
 \begin{itemize}
 \item transition: $id, name, description, time\_limit, memory\_limit, test\_cases, difficulty, problem\_type := id, n, d, tl, ml, tc, d, pt$
 \item output: $out := self$
-\item exception: None
+\item exception: $exc := (tl < MINIMUM\_TIME \, \lor \, ml < MINIMUM\_MEMORY) \implies \\IllegalArgumentException$
 \end{itemize}
 
 \noindent getID():
@@ -691,19 +714,19 @@ The constructor ProblemT is called for each object instance before any other acc
 
 \noindent getTimeLimit():
 \begin{itemize}
-\item output: $out := time\_limit$
+\item output: $out := timeLimit$
 \item exception: None
 \end{itemize}
 
 \noindent getMemoryLimit():
 \begin{itemize}
-\item output: $out := memory\_limit$
+\item output: $out := memoryLimit$
 \item exception: None
 \end{itemize}
 
 \noindent getTestCases():
 \begin{itemize}
-\item output: $out := test\_cases$
+\item output: $out := testCases$
 \item exception: None
 \end{itemize}
 
@@ -715,7 +738,7 @@ The constructor ProblemT is called for each object instance before any other acc
 
 \noindent getProblemType():
 \begin{itemize}
-\item output: $out := problem\_type$
+\item output: $out := problemType$
 \item exception: None
 \end{itemize}
 
@@ -1153,7 +1176,6 @@ None
 \subsection{Module}
 HomePage
 \subsection{Uses}
-\nameref{Router}\\
 \nameref{WebSocketService}
 
 \subsection{Syntax}
@@ -1376,8 +1398,6 @@ On-click onto leave button & handleLeave() \\
 LobbyPage
 
 \subsection{Uses}
-\nameref{LobbyService}\\
-\nameref{Router}\\
 \nameref{WebSocketService}
 
 \subsection{Syntax}
@@ -1471,9 +1491,7 @@ GamePage
 
 \subsection{Uses}
 \nameref{ProblemsServiceModule}\\
-\nameref{LobbyService}\\
 \nameref{SubmissionService}\\
-\nameref{Router}
 
 \subsection{Syntax}
 
@@ -1831,7 +1849,8 @@ AuthService
 
 \subsection{Uses}
 \nameref{Auth}\\
-\nameref{User}
+\nameref{User}\\
+\nameref{Router}
 
 \subsection{Syntax}
 
@@ -1871,7 +1890,7 @@ user: UserT
 \noindent login(username, password, password, profilepic):
 \begin{itemize}
 \item transition: user := Auth.login(username, password)\\
-if user is empty then User.createUser(username, email, password, profilepic) then user := User.getUserByEmail(email)
+if user is empty then User.createUser(username, email, password, profilepic) then user := User.getUserByEmail(email) then Router.navigate("/")
 \end{itemize}
 
 \noindent isLoggedIn():
@@ -1907,13 +1926,13 @@ None
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-updateWaitingRoom & Seq of User & - & - \\
+updateWaitingRoom & seq of User & - & - \\
 \hline
 updateEndData & $\mathbb{B}$ & - & - \\
 \hline
 updateCurrentRound & $\mathbb{N}$& - & - \\
 \hline
-getWaitingRoom & - & Seq of User & - \\
+getWaitingRoom & - & seq of User & - \\
 \hline
 getEndData & - & $\mathbb{B}$ & - \\
 \hline
@@ -1980,10 +1999,10 @@ currentRound: $\mathbb{N}$
 
 WebSocketService
 
-\subsection{Uses/Imports}
+\subsection{Uses}
 
 \nameref{GameHandler} \\
-\nameref{Router}
+\nameref{User}
 
 \subsection{Syntax}
 
@@ -2075,7 +2094,6 @@ GameHandler
 
 \subsection{Uses}
 
-\nameref{ClientT} \\
 \nameref{GameT}\\
 \nameref{Router}\\
 \nameref{Problems}\\
@@ -2126,6 +2144,13 @@ gen() $\rightarrow$ string:
     \item exception:    None
 \end{itemize}
 
+Date: Gets the current time on the machine\\
+getTime() $\rightarrow$ string:
+\begin{itemize}
+    \item output: $out := $ returns the current time on the machine
+    \item exception:    None
+\end{itemize}
+
 \subsubsection{Assumptions}
 
 UUID technology is supported by implementation environment
@@ -2135,21 +2160,21 @@ UUID technology is supported by implementation environment
 
 \subsubsection{State Variables}
 
-clients: Seq of Tuple(ID, ClientT) \\
-games: Seq of Tuple(ID, GameT)
+clients: map$<$String, ClientT$>$ \\
+games: map$<$String, GameT$>$
 
 
 \subsubsection{Access Routine Semantics}
 
 \noindent addClient(clientID: String, email: String, name: String, picture: String)
 \begin{itemize}
-\item transition:$clients := clients \cup Client(clientID, email, name, picture, NULL, 0)$ \\
+\item transition:$clients := clients \;\cup\;  Tuple(clientID, ClientT(clientID, email, name, picture, NULL, 0))$ \\
 \end{itemize}
 
 
-\noindent createGame(clientID: String) : String
+\noindent createGame(clientID: String, ) : String
 \begin{itemize}
-\item transition: \\$gameID := UUID.gen() \;\land\; games := games \; \cup \; Game(gameID, [Clients[ClidentID]], 0)$
+\item transition: \\$gameID := UUID.gen() \;\land\; games := games \; \cup \;$ \\ $Tuple(gameID, GameT(gameID, [Clients[ClidentID]], 0))$
 \item output: out := $gameID$ \\
 \end{itemize}
 
@@ -2174,7 +2199,7 @@ $clients[clientID].game := gameID) \Rightarrow sendUpdatedPlayers(gameID)$ \\
 \noindent endGame(gameID: String)
 \begin{itemize}
 \item transition: \\
-$ client \in games[gameID].clients: client.ls.updateEndData(client.lastCompletedRound = games[gameID].round) \Rightarrow games := games - games[gameID] $ \\
+$ client \in games[gameID].clients: client.ls.updateEndData(client.lastCompletedRound = games[gameID].round) \Rightarrow games := games - games[gameID] \Rightarrow \\ User.saveMatch(MatchT(client.getUserId(), \\client.lastCompletedRound = games[gameID].round, Date.getTime())) $
 \end{itemize}
 
 \noindent gameNextRound(gameID: String)
@@ -2182,7 +2207,7 @@ $ client \in games[gameID].clients: client.ls.updateEndData(client.lastCompleted
 \item transition: \\ 
 $(game, games[gameID].round := games[gameID], games[gameID].round+1) \Rightarrow$ \\
 $(game.round \textgreater 1 \Rightarrow client \in game.clients : client.lastCompletedRound < game.round \Rightarrow client.ls.updateEndData(false)) \Rightarrow game.clients := game.clients - client \Rightarrow$ \\
-$sendUpdatedPlayers(gameID) \Rightarrow client \in clients: client.rm.('problem/' + ProblemsModule.getRandomProblem())$ \\
+$sendUpdatedPlayers(gameID) \Rightarrow \\client \in clients: client.rm.('problem/' + ProblemsModule.getRandomProblem())$ \\
 \end{itemize}
 
 
@@ -2220,10 +2245,7 @@ Judge
 \subsection{Uses}
 \nameref{CodeRunner}\\
 \nameref{GameHandler}\\
-\nameref{ProblemT}\\
-\nameref{SubmissionT}\\
-\nameref{JudgeResultT}\\
-\nameref{JudgeVerdict}
+\nameref{JudgeResultT}
 
 \subsection{Syntax}
 
@@ -2287,7 +2309,6 @@ CodeRunner
 \subsection{Uses}
 
 \nameref{SubmissionT}\\
-\nameref{TestCaseT}\\
 \nameref{TestCaseVerdictT}
 
 \subsection{Syntax}
@@ -2375,7 +2396,8 @@ None
 Auth
 
 \subsection{Uses}
-\nameref{Database}
+
+None
 
 \subsection{Syntax}
 
@@ -2397,21 +2419,31 @@ login & String, String &  UserT &  \\
 
 \subsubsection{State Variables}
 
+None
+
 \subsubsection{Environment Variables}
 
+OAuth: Authentication provided by oauth
+
 \subsubsection{Assumptions}
+
+None
 
 \subsubsection{Access Routine Semantics}
 
 \noindent login(username, password):
 
 \begin{itemize}
-\item output:= Database.getUserByUsernameAndPassword(username, password)
+\item output:= OAuth.login(username, password)
 \end{itemize}
 
 
 \subsubsection{Local Functions}
 None
+
+\subsubsection{Considerations}
+
+This module will be implemented through the usage of Google's OAuth
 
 \newpage
 \section{Problems Module} \label{Problems} 
@@ -2477,9 +2509,7 @@ User
 
 \subsection{Uses}
 
-\nameref{Database} \\
-\nameref{UserT} \\
-\nameref{MatchT} \\
+\nameref{Database}
 
 \subsection{Syntax}
 
@@ -2523,15 +2553,15 @@ UUID technology is supported by implementation environment
 
 \subsubsection{Access Routine Semantics}
 
-\noindent createUser( username, password, email, profilepic):
+\noindent createUser( username, email, profilepic):
 \begin{itemize}
-\item transition: Database.createUser(new UserT(UUID.gen(), username, password, email, profilepic))
+\item transition: Database.createUser(new UserT(UUID.gen(), username, email, profilepic))
 \item exception: None
 \end{itemize}
 
 \noindent saveUserMatch(match):
 \begin{itemize}
-\item transition: userMatches[userID] :=  userMatches[userID] $\cup$ match 
+\item transition: Database.saveMatch(match) 
 \item exception: None
 \end{itemize}
 
@@ -2592,7 +2622,7 @@ Database
 \subsubsection{Exported Access Programs}
 
 \begin{center}
-\begin{tabular}{p{3cm} p{2cm} p{2cm} p{2cm}}
+\begin{tabular}{p{6cm} p{2cm} p{3cm} p{2cm}}
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
@@ -2602,7 +2632,6 @@ createUser & UserT & - & - \\
 saveMatch & MatchT & - & - \\
 getUserMatches & String & set of MatchT & - \\
 getUser & String & UserT & - \\
-getUserByUsernameAndPassword & String, String & UserT & - \\
 getUserStats & String & UserStatsT & - \\
 getLeaderboard & - & seq of UserT & - \\
 \hline
@@ -2664,13 +2693,6 @@ None
 \item output: $out :=$ user such that user exists in users where user.userID = userID
 \item exception: None 
 \end{itemize}
-
-\noindent getUserByUsernameAndPassword(username):
-\begin{itemize}
-\item output: $out :=$ user such that user exists in users where user.getUsername() = username and user.getPassword() = password
-\item exception: DoesNotExist when user is not in users 
-\end{itemize}
-
 
 \noindent getUserStats(userID):
 \begin{itemize}
@@ -2754,7 +2776,6 @@ None
 \newpage
 
 \bibliographystyle {plainnat}
-%\bibliography {References}
 \bibliography {../../../refs/References}
 
 \newpage
