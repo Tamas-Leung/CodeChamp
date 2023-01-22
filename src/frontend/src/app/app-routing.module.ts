@@ -6,6 +6,7 @@ import { StartpageComponent } from './startpage/startpage.component';
 import { LoginComponent } from './login/login.component';
 import { AuthGuardService } from './services/auth-guard/auth-guard.service';
 import { LobbyComponent } from './lobby/lobby.component';
+import { MyprofileComponent } from './myprofile/myprofile.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -28,6 +29,12 @@ const routes: Routes = [
   {
     path: 'lobby/:id',
     component: LobbyComponent,
+    canActivate: [AuthGuardService],
+  },
+
+  {
+    path: 'profile',
+    component: MyprofileComponent,
     canActivate: [AuthGuardService],
   },
 ];
