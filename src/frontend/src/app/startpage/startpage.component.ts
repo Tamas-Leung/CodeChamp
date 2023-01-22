@@ -46,4 +46,8 @@ export class StartpageComponent implements OnInit {
   gotoProfile() {
     this.router.navigate(['/profile']);
   }
+
+  gotoLeaderboard() {
+    this.router.navigate(['/leaderboard']);
+  }
 }
