@@ -48,7 +48,7 @@
 }
 
 .right-half {
-  background: rgba(255, 255, 255, 0.05);
+  //background: rgba(255, 255, 255, 0.05);
   grid-column: 2;
 }
 
@@ -89,7 +89,9 @@
 
 .match-history-card {
   width: 100%;
-  height: 120px;
+  height: 100px;
+  margin-top: 10px;
+  margin-bottom: 10px;
   border-radius: 5px;
   background: rgba(255, 255, 255, 0.05);
   border: 2px solid #ffffff;
