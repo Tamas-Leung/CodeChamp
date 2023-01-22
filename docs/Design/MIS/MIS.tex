@@ -53,8 +53,8 @@ urlcolor=cyan          % color of external links
 \begin{tabularx}{\textwidth}{p{3cm}p{2cm}X}
 \toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
 \midrule
-Date 1 & 1.0 & Notes\\
-Date 2 & 1.1 & Notes\\
+01/17/2023 & 1.0 & Initial draft\\
+01/18/2023 & 1.1 & Small Changes\\
 \bottomrule
 \end{tabularx}
 
@@ -62,9 +62,7 @@ Date 2 & 1.1 & Notes\\
 
 \section{Symbols, Abbreviations and Acronyms}
 
-See SRS Documentation at \wss{give url}
-
-\wss{Also add any additional symbols, abbreviations or acronyms}
+See SRS Documentation \href{https://github.com/Tamas-Leung/CodeChamp/tree/main/docs/SRS}{here}.
 
 \newpage
 
@@ -76,17 +74,13 @@ See SRS Documentation at \wss{give url}
 
 \section{Introduction}
 
-The following document details the Module Interface Specifications for
-\wss{Fill in your project name and description}
+The following document details the Module Interface Specifications for CodeChamp which is a collaborative and accessible environment is intended to gamify the learning experience.
 
 Complementary documents include the System Requirement Specifications
 and Module Guide.  The full documentation and implementation can be
-found at \url{...}.  \wss{provide the url for your repo}
+found at \url{https://github.com/Tamas-Leung/CodeChamp}. 
 
 \section{Notation}
-
-\wss{You should describe your notation.  You can use what is below as
-  a starting point.}
 
 The structure of the MIS for modules comes from \citet{HoffmanAndStrooper1995},
 with the addition that template modules have been adapted from
@@ -95,7 +89,7 @@ with the addition that template modules have been adapted from
 multiple assignment statement and conditional rules follow the form $(c_1
 \Rightarrow r_1 | c_2 \Rightarrow r_2 | ... | c_n \Rightarrow r_n )$.
 
-The following table summarizes the primitive data types used by \progname. 
+The following table summarizes the primitive data types used by \progname. The boolean and map data types were added as well.
 
 \begin{center}
 \renewcommand{\arraystretch}{1.2}
@@ -108,6 +102,8 @@ character & char & a single symbol or digit\\
 integer & $\mathbb{Z}$ & a number without a fractional component in (-$\infty$, $\infty$) \\
 natural number & $\mathbb{N}$ & a number without a fractional component in [1, $\infty$) \\
 real & $\mathbb{R}$ & any number in (-$\infty$, $\infty$)\\
+boolean & $\mathbb{B}$ & truth values in $\{true, false\}$\\
+map &  $map<T1, T2>$ & a generic \href{https://en.wikipedia.org/wiki/Symbol_table}{symbol table} supporting getting and setting values using indexing notation\\
 \bottomrule
 \end{tabular} 
 \end{center}
@@ -124,28 +120,52 @@ described by giving their type signature followed by their specification.
 
 The following table is taken directly from the Module Guide document for this project.
 
-\begin{table}[h!]
+\begin{table}[H]
 \centering
 \begin{tabular}{p{0.3\textwidth} p{0.6\textwidth}}
 \toprule
 \textbf{Level 1} & \textbf{Level 2}\\
 \midrule
 
-{Hardware-Hiding} & ~ \\
+{Hardware-Hiding Module} & \\
 \midrule
 
-\multirow{7}{0.3\textwidth}{Behaviour-Hiding} & Input Parameters\\
-& Output Format\\
-& Output Verification\\
-& Temperature ODEs\\
-& Energy Equations\\ 
-& Control Module\\
-& Specification Parameters Module\\
+\multirow{7}{0.3\textwidth}{Behaviour-Hiding Module} 
+& ClientT Module\\
+& GameT Module\\
+& MatchT Module\\
+& UserT Module\\
+& UserStatsT Module\\
+& ProblemT Module\\ 
+& Difficulty Module\\
+& Language Module\\
+& TestCaseT Module\\
+& SubmissionT Module\\
+& JudgeResultT Module\\
+& JudgeVerdict Module\\
+& TestCaseVerdictT Module\\
+& HomePage Module\\
+& ProfilePage Module\\
+& LeaderboardPage Module\\
+& LobbyPage Module\\
+& GamePage Module\\
+& LoginPage Moudle\\
+& SubmissionService Module\\
+& ProblemsService Module\\
+& UserService Module\\
+& AuthService Module\\
+& LobbyService Module\\
+& WebSocketService Module\\
+& GameHandler Module\\
+& Judge Module\\
+& Auth Module\\
+& Problems Module\\
+& User Module\\
 \midrule
 
-\multirow{3}{0.3\textwidth}{Software Decision} & {Sequence Data Structure}\\
-& ODE Solver\\
-& Plotting\\
+\multirow{3}{0.3\textwidth}{Software Decision Module} & {CodeRunner Module}\\
+& Database Module\\
+& Router Module\\
 \bottomrule
 
 \end{tabular}
@@ -156,32 +176,152 @@ The following table is taken directly from the Module Guide document for this pr
 \newpage
 ~\newpage
 
-\section{MIS of \wss{Module Name}} \label{Module} \wss{Use labels for
-  cross-referencing}
 
-\wss{You can reference SRS labels, such as R\ref{R_Inputs}.}
-
-\wss{It is also possible to use \LaTeX for hypperlinks to external documents.}
-
-\subsection{Module}
-
-\wss{Short name for the module}
-
+\section{ClientT Module} \label{ClientT}
+\subsection{Template Module}
+ClientT
 \subsection{Uses}
+\nameref{LobbyService} \\ 
+\nameref{Router}
 
 
 \subsection{Syntax}
 
-\subsubsection{Exported Constants}
+\subsubsection{Exported Types}
+
+ClientT = ?
 
 \subsubsection{Exported Access Programs}
 
 \begin{center}
-\begin{tabular}{p{2cm} p{4cm} p{4cm} p{2cm}}
+\begin{tabular}{ |  p{4cm} | p{3cm} |  p{3cm} | p{5cm} | }
 \hline
 \textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
 \hline
-\wss{accessProg} & - & - & - \\
+ClientT & String, String, String, String, String, $\mathbb{N}$  &  ClientT &  \\
+getID & & String & \\
+getEmail & & String & \\
+getName & & String & \\
+getPicture & & String & \\
+getGame & & String & \\
+getCompleteRound & & $\mathbb{N}$ & \\
+getLobbyService & & LobbyService & \\
+getRouterModule & & RouterModule & \\
+
+\hline
+\end{tabular}
+\end{center}
+
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+
+id: String\\
+email: String\\
+name: String\\
+picture: String\\
+game: String\\
+lastCompletedRound: $\mathbb{N}$\\
+ls: LobbyService = LobbyService() \\
+rm: RouterModule = RouterModule() 
+
+
+\subsubsection{Environment Variables}
+None
+
+\subsubsection{Assumptions}
+The constructor ClientT is called for each object instance before any other access routine is called for that object. The constructor cannot be called on an existing object.
+
+\subsubsection{Access Routine Semantics}
+
+\noindent ClientT(i, e, n, p, g, lcr):
+\begin{itemize}
+\item transition: $id, email, name, picture, game, lastCompletedRound, ls, rm := i, e, n, p, g, lcr$
+\item output: $out := self$
+\item exception: None
+\end{itemize}
+
+\noindent getID():
+\begin{itemize}
+\item output: $out := id$
+\item exception: None
+\end{itemize}
+
+\noindent getEmail():
+\begin{itemize}
+\item output: $out := email$
+\item exception: None
+\end{itemize}
+
+\noindent getName():
+\begin{itemize}
+\item output: $out := name$
+\item exception: None
+\end{itemize}
+
+\noindent getPicture():
+\begin{itemize}
+\item output: $out := picture$
+\item exception: None
+\end{itemize}
+
+\noindent getGame():
+\begin{itemize}
+\item output: $out := game$
+\item exception: None
+\end{itemize}
+
+\noindent getLastCompletedRound():
+\begin{itemize}
+\item output: $out := lastCompletedRound$
+\item exception: None
+\end{itemize}
+
+\noindent getLobbyService():
+\begin{itemize}
+\item output: $out := ls$
+\item exception: None
+\end{itemize}
+
+\noindent getRouterModule():
+\begin{itemize}
+\item output: $out := rm$
+\item exception: None
+\end{itemize}
+
+\subsubsection{Local Functions}
+None
+
+\newpage
+
+\section{GameT Module} \label{GameT}
+
+\subsection{Template Module}
+
+GameT
+
+\subsection{Uses}
+\nameref{ClientT}
+
+\subsection{Syntax}
+
+\subsubsection{Exported Types}
+
+GameT = ?
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{ |  p{4cm} | p{3cm} |  p{3cm} | p{5cm} | }
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+GameT & seq of ClientT, String, $\mathbb{N}$  &  GameT &  \\
+getClients & & seq of ClientT & \\
+getID & & String & \\
+getRound & & $\mathbb{N}$ & \\
+
 \hline
 \end{tabular}
 \end{center}
@@ -190,42 +330,2448 @@ The following table is taken directly from the Module Guide document for this pr
 
 \subsubsection{State Variables}
 
-\wss{Not all modules will have state variables.  State variables give the module
-  a memory.}
+id: String\\
+clients: seq of ClientT\\
+round:  $\mathbb{N}$\\
 
 \subsubsection{Environment Variables}
 
-\wss{This section is not necessary for all modules.  Its purpose is to capture
-  when the module has external interaction with the environment, such as for a
-  device driver, screen interface, keyboard, file, etc.}
+None
 
 \subsubsection{Assumptions}
-
-\wss{Try to minimize assumptions and anticipate programmer errors via
-  exceptions, but for practical purposes assumptions are sometimes appropriate.}
+The constructor GameT is called for each object instance before any other access routine is called for that object. The constructor cannot be called on an existing object.
 
 \subsubsection{Access Routine Semantics}
 
-\noindent \wss{accessProg}():
+\noindent GameT(c, id, r):
 \begin{itemize}
-\item transition: \wss{if appropriate} 
-\item output: \wss{if appropriate} 
-\item exception: \wss{if appropriate} 
+\item transition: $userID, clients, id, round := c, id, r$
+\item output: $out := self$
+\item exception: None
 \end{itemize}
 
-\wss{A module without environment variables or state variables is unlikely to
-  have a state transition.  In this case a state transition can only occur if
-  the module is changing the state of another module.}
+\noindent getClients():
+\begin{itemize}
+\item output: $out := clients$
+\item exception: None
+\end{itemize}
 
-\wss{Modules rarely have both a transition and an output.  In most cases you
-  will have one or the other.}
+\noindent getID():
+\begin{itemize}
+\item output: $out := id$
+\item exception: None
+\end{itemize}
+
+\noindent getRound():
+\begin{itemize}
+\item output: $out := round$
+\item exception: None
+\end{itemize}
 
 \subsubsection{Local Functions}
 
-\wss{As appropriate} \wss{These functions are for the purpose of specification.
-  They are not necessarily something that is going to be implemented
-  explicitly.  Even if they are implemented, they are not exported; they only
-  have local scope.}
+None
+\newpage
+
+\section{MatchT Module} \label{MatchT}
+
+\subsection{Template Module}
+
+MatchT
+
+\subsection{Uses}
+
+None
+
+
+\subsection{Syntax}
+
+\subsubsection{Exported Types}
+
+MatchT = ?
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{ |  p{4cm} | p{3cm} |  p{3cm} | p{5cm} | }
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+MatchT & String, $\mathbb{Z}$, String  & MatchT & \\
+getUserID & & String & \\
+getIsWin & & $\mathbb{B}$ & \\
+getDate & & String & \\
+
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+
+\subsubsection{State Variables}
+
+userID: String\\
+win: $\mathbb{B}$\\
+date: String
+
+\subsubsection{Environment Variables}
+None
+
+\subsubsection{Assumptions}
+The constructor MatchT is called for each object instance before any other access routine is called for that object. The constructor cannot be called on an existing object.
+
+\subsubsection{Access Routine Semantics}
+
+\noindent MatchT(uid, r, d):
+\begin{itemize}
+\item transition: $userID, ranking, date := uid, r, d$
+\item output: $out := self$
+\item exception: None
+\end{itemize}
+
+\noindent getUserID():
+\begin{itemize}
+\item output: $out := userID$
+\item exception: None
+\end{itemize}
+
+\noindent getIsWin():
+\begin{itemize}
+\item output: $out := win$
+\item exception: None
+\end{itemize}
+
+\noindent getDate():
+\begin{itemize}
+\item output: $out := date$
+\item exception: None
+\end{itemize}
+\subsubsection{Local Functions}
+
+None
+
+\newpage
+
+\section{UserT Module}  \label{UserT}
+\subsection{Template Module}
+UserT
+\subsection{Uses}
+
+None
+
+\subsection{Syntax}
+
+\subsubsection{Exported Types}
+
+UserT = ?
+
+\subsubsection{Exported Access Programs}
+\begin{center}
+\begin{tabular}{ |  p{4cm} | p{3cm} |  p{3cm} | p{5cm} | }
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+UserT & String, String, String, String  & UserT & \\
+getUserID & & String & \\
+getUsername & & String & \\
+getEmail & & String & \\
+getProfilePicture & & String & \\
+
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+
+userID: String \\
+username: String\\
+email: String\\
+profilePicture: String\\
+
+\subsubsection{Environment Variables}
+None
+
+\subsubsection{Assumptions}
+The constructor UserT is called for each object instance before any other access routine is called for that object. The constructor cannot be called on an existing object.\\
+
+The password for the user is not sent or stored by any of the modules and is instead handled by an external service.
+
+\subsubsection{Access Routine Semantics}
+
+\noindent UserT(id, u, e, pic):
+\begin{itemize}
+\item transition: $userID, username, email, profilePicture := id, u, e, pic$
+\item output: $out := self$
+\item exception: None
+\end{itemize}
+
+\noindent getUserID():
+\begin{itemize}
+\item output: $out := userID$
+\item exception: None
+\end{itemize}
+
+\noindent getUsername():
+\begin{itemize}
+\item output: $out := username$
+\item exception: None
+\end{itemize}
+
+\noindent getEmail():
+\begin{itemize}
+\item output: $out := email$
+\item exception: None
+\end{itemize}
+
+\noindent getProfilePicture():
+\begin{itemize}
+\item output: $out := profilePicture$
+\item exception: None
+\end{itemize}
+
+\subsubsection{Local Functions}
+
+None
+
+\newpage
+\section{UserStatsT Module}  \label{UserStatsT}
+\subsection{Template Module}
+UserStatsT
+\subsection{Uses}
+None
+
+\subsection{Syntax}
+\subsubsection{Exported Types}
+UserStatsT = ?
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{ |  p{4cm} | p{3cm} |  p{3cm} | p{5cm} | }
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+UserStatsT & String, $\mathbb{Z}$, $\mathbb{Z}$ & UserStatsT & IllegalArgumentException \\
+getUserID & & String & \\
+getWins & & $\mathbb{Z}$  & \\
+getLosses & & $\mathbb{Z}$ & \\
+getWinRate & & $\mathbb{R}$ & \\
+
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+
+userID: String \\
+wins: $\mathbb{Z}$ \\
+losses:  $\mathbb{Z}$
+
+\subsubsection{Environment Variables}
+None
+
+\subsubsection{Assumptions}
+The constructor UserStatsT is called for each object instance before any other access routine is called for that object. The constructor cannot be called on an existing object.
+
+\subsubsection{Access Routine Semantics}
+
+\noindent UserStatsT(id, w, l):
+\begin{itemize}
+\item transition: $userID, wins, losses := id, w, l$
+\item output: $out := self$
+\item exception: $(w < 0 \lor l < 0) \implies IllegalArgumentException$
+\end{itemize}
+
+\noindent getUserID():
+\begin{itemize}
+\item output: $out := userID$
+\item exception: None
+\end{itemize}
+
+\noindent getWins():
+\begin{itemize}
+\item output: $out := username$
+\item exception: None
+\end{itemize}
+
+\noindent getLosses():
+\begin{itemize}
+\item output: $out := losses$
+\item exception: None
+\end{itemize}
+
+\noindent getWinRate():
+\begin{itemize}
+\item output: $out := (wins / losses) * 100$
+\item exception: None
+\end{itemize}
+
+\subsubsection{Local Functions}
+
+None
+\newpage
+
+\newpage
+
+\section{ProblemT Module} \label{ProblemT} 
+
+\subsection{Template Module}
+
+ProblemT
+
+\subsection{Uses}
+\nameref{Difficulty}\\
+\nameref{TestCaseT}
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+
+MINIMUM\_MEMORY = 32\\
+MINIMUM\_TIME = 0.5
+
+\subsubsection{Exported Types}
+
+ProblemT = ?
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{ |  p{4cm} | p{3cm} |  p{3cm} | p{5cm} | }
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+ProblemT & String, String, String, $\mathbb{R}$, $\mathbb{N}$, seq of TestCaseT, Difficulty, seq of String  & ProblemT  & IllegalArgumentException \\
+getID & & String & \\
+getName & & String & \\
+getDescription & & String & \\
+getTimeLimit & & $\mathbb{R}$  & \\
+getMemoryLimit & & $\mathbb{N}$ & \\
+getTestCases & & seq of TestCaseT & \\
+getDifficulty & & Difficulty & \\
+getProblemType & & seq of String & \\
+
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+
+id: string\\
+name: string\\
+description: string\\
+timeLimit: $\mathbb{R}$\\
+memoryLimit: $\mathbb{N}$\\
+testCases: seq of TestCaseT\\
+difficulty: Difficulty\\
+problemType: seq of string
+
+\subsubsection{State Invariant}
+$\forall \, tc : TestCaseT \,|\,  tc \in testCases \,:\, tc.getMemoryLimit() = memoryLimit \, \land \, tc.getTimeLimit() = timeLimit$
+
+\subsubsection{Environment Variables}
+None
+
+\subsubsection{Assumptions}
+The constructor ProblemT is called for each object instance before any other access routine is called for that object. The constructor cannot be called on an existing object.
+
+\subsubsection{Considerations}
+The minimum memory represents the memory in megabytes. The minimum time represents the time in seconds.
+
+\subsubsection{Access Routine Semantics}
+
+\noindent ProblemT(id, n, d, tl, ml, tc, d, pt):
+\begin{itemize}
+\item transition: $id, name, description, time\_limit, memory\_limit, test\_cases, difficulty, problem\_type := id, n, d, tl, ml, tc, d, pt$
+\item output: $out := self$
+\item exception: $exc := (tl < MINIMUM\_TIME \, \lor \, ml < MINIMUM\_MEMORY) \implies \\IllegalArgumentException$
+\end{itemize}
+
+\noindent getID():
+\begin{itemize}
+\item output: $out := id$
+\item exception: None
+\end{itemize}
+
+\noindent getName():
+\begin{itemize}
+\item output: $out := name$
+\item exception: None
+\end{itemize}
+
+\noindent getDescription():
+\begin{itemize}
+\item output: $out := description$
+\item exception: None
+\end{itemize}
+
+\noindent getTimeLimit():
+\begin{itemize}
+\item output: $out := timeLimit$
+\item exception: None
+\end{itemize}
+
+\noindent getMemoryLimit():
+\begin{itemize}
+\item output: $out := memoryLimit$
+\item exception: None
+\end{itemize}
+
+\noindent getTestCases():
+\begin{itemize}
+\item output: $out := testCases$
+\item exception: None
+\end{itemize}
+
+\noindent getDifficulty():
+\begin{itemize}
+\item output: $out := difficulty$
+\item exception: None
+\end{itemize}
+
+\noindent getProblemType():
+\begin{itemize}
+\item output: $out := problemType$
+\item exception: None
+\end{itemize}
+
+\subsubsection{Local Functions}
+None
+
+
+
+\newpage
+
+\section{Difficulty Module} \label{Difficulty} 
+
+\subsection{Module}
+
+Difficulty
+
+\subsection{Uses}
+
+None
+
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+
+Difficulty = \{
+    Easy,
+    Medium,
+    Hard
+\}
+
+\subsubsection{Exported Access Programs}
+None
+
+
+\subsection{Semantics}
+
+None
+
+
+
+\newpage
+
+\section{Language Module} \label{Language} 
+
+\subsection{Module}
+
+Language
+
+\subsection{Uses}
+
+None
+
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+
+Language = \{ JavaScript, Python \}
+
+\subsubsection{Exported Access Programs}
+None
+
+
+\subsection{Semantics}
+
+None
+
+
+
+\newpage
+
+\section{TestCaseT Module} \label{TestCaseT} 
+
+\subsection{Template Module}
+
+TestCaseT
+
+\subsection{Uses}
+
+None
+
+\subsection{Syntax}
+
+\subsubsection{Exported Types}
+
+TestCaseT = ?
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{ |  p{4cm} | p{3cm} |  p{3cm} | p{5cm} | }
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+TestCaseT & String, String, $\mathbb{B}$, $\mathbb{R}$, $\mathbb{N}$ & TestCaseT & \\
+getInput & & String & \\
+getOutput & & String & \\
+getHidden & & $\mathbb{B}$ & \\
+getTimeLimit & & $\mathbb{R}$  & \\
+getMemoryLimit & & $\mathbb{N}$ & \\
+
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+input: String\\
+output: String\\
+hidden: $\mathbb{B}$\\
+timeLimit: $\mathbb{R}$\\
+memoryLimit: $\mathbb{N}$
+
+\subsubsection{Environment Variables}
+None
+
+\subsubsection{Assumptions}
+The constructor TestCaseT is called for each object instance before any other access routine is called for that object. The constructor cannot be called on an existing object.
+
+\subsubsection{Access Routine Semantics}
+
+\noindent TestCaseT(i, o, h, ml, tl):
+\begin{itemize}
+\item transition: $input, output, hidden, timeLimit, memoryLimit := i, o, h, ml, tl$
+\item output: $out := self$
+\item exception: None
+\end{itemize}
+
+\noindent getInput():
+\begin{itemize}
+\item output: $out := input$
+\item exception: None
+\end{itemize}
+
+\noindent getOutput():
+\begin{itemize}
+\item output: $out := output$
+\item exception: None
+\end{itemize}
+
+\noindent getHidden():
+\begin{itemize}
+\item output: $out := hidden$
+\item exception: None
+\end{itemize}
+
+\noindent getTimeLimit():
+\begin{itemize}
+\item output: $out := time\_limit$
+\item exception: None
+\end{itemize}
+
+\noindent getMemoryLimit():
+\begin{itemize}
+\item output: $out := memory\_limit$
+\item exception: None
+\end{itemize}
+
+\subsubsection{Local Functions}
+None
+
+
+\newpage
+
+\section{SubmissionT Module} \label{SubmissionT} 
+
+\subsection{Template Module}
+
+SubmissionT
+
+\subsection{Uses}
+
+\nameref{Language}
+
+\subsection{Syntax}
+
+\subsubsection{Exported Types}
+
+SubmissionT = ?
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{ |  p{4cm} | p{3cm} |  p{3cm} | p{4cm} | }
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+SubmissionT & String, Language & SubmissionT & \\
+getCode & & String & \\
+getLanguage & & Language & \\
+
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+
+code: string\\
+language: Language
+
+\subsubsection{Environment Variables}
+None
+
+\subsubsection{Assumptions}
+The constructor SubmissionT is called for each object instance before any other access routine is called for that object. The constructor cannot be called on an existing object.
+
+\subsubsection{Access Routine Semantics}
+
+\noindent SubmissionT(c, l):
+\begin{itemize}
+\item transition: $code, language := c, l$
+\item output: $out := self$
+\item exception: None
+\end{itemize}
+
+\noindent getCode():
+\begin{itemize}
+\item output: $out := code$
+\item exception: None
+\end{itemize}
+
+\noindent getLanguage():
+\begin{itemize}
+\item output: $out := language$
+\item exception: None
+\end{itemize}
+
+\subsubsection{Local Functions}
+None
+
+\newpage
+
+\section{JudgeResultT Module} \label{JudgeResultT} 
+
+\subsection{Template Module}
+
+JudgeResultT
+
+\subsection{Uses}
+
+\nameref{JudgeVerdict}\\
+\nameref{TestCaseVerdictT}
+
+\subsection{Syntax}
+
+\subsubsection{Exported Types}
+
+JudgeResultT = ?
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{ |  p{4cm} | p{5cm} |  p{3cm} | p{5cm} | }
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+JudgeResultT & set of TestCaseVerdictT & JudgeResultT &  IllegalArgumentException \\
+getVerdict &   & JudgeVerdict &  \\
+getTestCaseVerdicts &   & set of TestCaseVerdictT &  \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+
+verdict: JudgeVerdict\\
+testCaseVerdicts: set of TestCaseVerdictT
+
+\subsubsection{Environment Variables}
+
+None
+
+\subsubsection{Assumptions}
+
+The constructor JudgeResultT is called for each object instance before any other access routine is called for that object. The constructor cannot be called on an existing object.
+
+\subsubsection{Access Routine Semantics}
+
+\noindent JudgeResultT(testVerdicts):
+\begin{itemize}
+% TODO youssef
+\item transition: $verdict := ((\forall\, v: TestCaseVerdictT \,|\, v \in testCaseVerdicts \,:\, v.getVerdict() = Correct) \implies Correct) \, \lor \, (tcv: JudgeVerdict$ such that $(\exists\, v: TestCaseVerdictT \,|\, tcv \in testCaseVerdicts \,:\, tcv.getVerdict() \neq Correct \land v = tcv.getVerdict()))$ 
+\item output: $out := self$
+\item exception: $exc := (testVerdicts = \, \{\}) \implies$ IllegalArgumentException 
+\end{itemize}
+
+\noindent getVerdict():
+\begin{itemize}
+\item output: $out := verdict$
+\item exception: None
+\end{itemize}
+
+\noindent getTestCaseVerdicts():
+\begin{itemize}
+\item output: $out := testCaseVerdicts$
+\item exception: None
+\end{itemize}
+
+\subsubsection{Local Functions}
+
+None
+
+\newpage
+
+\section{JudgeVerdict Module} \label{JudgeVerdict} 
+
+\subsection{Module}
+
+JudgeVerdict
+
+\subsection{Uses}
+
+None
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+
+None
+
+\subsubsection{Exported Types}
+
+JudgeVerdict = \{ Correct, Wrong, TimeLimitExceeded, MemoryLimitExceeded, \\RuntimeError, CompileError \} 
+
+\subsubsection{Exported Access Programs}
+
+None
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+
+None
+
+\subsubsection{Environment Variables}
+
+None
+
+\subsubsection{Assumptions}
+
+None
+
+\subsubsection{Access Routine Semantics}
+
+None
+
+\subsubsection{Local Functions}
+
+None
+
+
+
+\newpage
+
+\section{TestCaseVerdictT Module} \label{TestCaseVerdictT} 
+
+\subsection{Template Module}
+
+TestCaseVerdictT
+
+\subsection{Uses}
+
+\nameref{TestCaseT}
+
+\subsection{Syntax}
+
+\subsubsection{Exported Types}
+
+TestCaseVerdictT = ?
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{ |  p{4cm} | p{3cm} |  p{3cm} | p{5cm} | }
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+TestCaseVerdictT & JudgeVerdict, String, TestCaseT & TestCaseVerdictT & \\
+getVerdict & & JudgeVerdict & \\
+getUserOutput & & String & \\
+getTestCase & & TestCaseT & \\
+
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+
+verdict: JudgeVerdict \\
+userOutput: string \\
+testCase: TestCaseT
+
+\subsubsection{Environment Variables}
+
+None
+
+\subsubsection{Assumptions}
+
+The constructor TestCaseVerdictT is called for each object instance before any other access routine is called for that object. The constructor cannot be called on an existing object.
+
+
+\subsubsection{Access Routine Semantics}
+
+\noindent getVerdict():
+\begin{itemize}
+\item output: $out := verdict$
+\item exception: None
+\end{itemize}
+
+\noindent getUserOutput():
+\begin{itemize}
+\item output: $out := userOutput$
+\item exception: None
+\end{itemize}
+
+\noindent getTestCase():
+\begin{itemize}
+\item output: $out := testCase$
+\item exception: None
+\end{itemize}
+
+\subsubsection{Local Functions}
+None
+\newpage
+
+\section{Home Page Module} \label{HomePage} 
+\subsection{Module}
+HomePage
+\subsection{Uses}
+\nameref{WebSocketService}
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+None
+\subsubsection{Exported Access Programs}
+\begin{center}
+\begin{tabular}{p{2cm} p{4cm} p{4cm} p{2cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+init & - & - & - \\
+handleEvent & Browser.Event & - & -\\
+\hline
+\end{tabular}
+\end{center}
+\subsection{Semantics}
+\subsubsection{State Variables}
+
+code: String
+
+\subsubsection{Environment Variables}
+\textit{Screen: } A window displayed on user's screen\\
+\textit{Browser: } The user's browser
+
+\subsubsection{Assumptions}
+
+init() will be ran everytime the browser url is set to "/"\\
+handleEvent() will be called by the browser for input events
+
+\subsubsection{Access Routine Semantics}
+\noindent init():
+\begin{itemize}
+\item transition:
+$code :=$ ""\\
+$Screen :=$ Displays the home page. 
+\end{itemize}
+
+
+\noindent handleEvent(event: Browser.Event):
+\begin{itemize}
+\item transition: \begin{tabular}{p{5cm} p{4cm}}
+\hline
+\textbf{event} & \textbf{function} \\
+\hline
+On-click onto create game button & CreateGameButton() \\
+On-click onto join game button & JoinGameButton() \\
+On-click onto find game button & FindGameButton() \\
+On-click onto profile page button & ProfilePageButton() \\
+On-click onto leaderboard button & LeaderboardButton() \\
+Handle typing into code field  & handleCodeChangeField() \\
+\hline
+\end{tabular}
+\end{itemize}
+
+
+\subsubsection{Local Functions}
+\noindent CreateGameButton(): 
+\begin{itemize}
+\item transition: WebSocketService.createGame()
+\end{itemize}
+\noindent JoinGameButton():
+\begin{itemize}
+\item transition: WebSocketService.joinGame()
+\end{itemize}
+\noindent FindGameButton():
+\begin{itemize}
+\item transition: WebSocketService.findGame(code)
+\end{itemize}
+\noindent ProfilePageButton():
+\begin{itemize}
+\item transition: Router.navigate('/profile')
+\end{itemize}
+\noindent LeaderboardButton():
+\begin{itemize}
+\item transition: Router.navigate('/profile')
+\end{itemize}
+\noindent handleCodeChangeField():
+\begin{itemize}
+\item transition: Modify code with new changes of input
+\end{itemize}
+\newpage
+
+
+
+\section{Profile Page Module} \label{ProfilePage} 
+\subsection{Module}
+ProfilePage
+\subsection{Uses}
+\nameref{Router}\\
+\nameref{User} \\
+
+\subsection{Syntax}
+\subsubsection{Exported Constants}
+None
+\subsubsection{Exported Access Programs}
+\begin{center}
+\begin{tabular}{p{2cm} p{4cm} p{4cm} p{2cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+init & - & - & - \\
+handleEvent & Browser.Event & - & -\\
+\hline
+\end{tabular}
+\end{center}
+\subsection{Semantics}
+\subsubsection{State Variables}
+None
+\subsubsection{Environment Variables}
+\textit{Screen: } A window displayed on user's screen\\
+\textit{Browser: } The user's browser
+
+\subsubsection{Assumptions}
+
+init() will be ran everytime the browser url is set to "/profile"\\
+handleEvent() will be called by the browser for input events
+
+\subsubsection{Access Routine Semantics}
+\noindent init():
+\begin{itemize}
+\item transition: $currentStats :=$ "",\\
+$currentStats :=$ User.getUserStats(Browser.params.id),\\
+$matchHistory :=$ User.getUserMatches(Browser.params.id),\\
+$Screen :=$ Displays the profile page with the $currentStats$ and $matchHistory$. 
+\end{itemize}
+
+\noindent handleEvent(event: Browser.Event):
+\begin{itemize}
+\item transition: \begin{tabular}{p{5cm} p{4cm}}
+\hline
+\textbf{event} & \textbf{function} \\
+\hline
+On-click onto leave button & handleLeave() \\
+\hline
+\end{tabular}
+    
+\end{itemize}
+
+\subsubsection{Local Functions}
+
+\noindent handleLeave():
+\begin{itemize}
+\item transition: Router.navigate("/")
+\end{itemize}
+
+
+\newpage
+
+\section{Leaderboard Page Module} \label{Leaderboard}
+\subsection{Module}
+Leaderboard
+\subsection{Uses}
+\nameref{Router}\\
+\nameref{User}
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+None
+\subsubsection{Exported Access Programs}
+\begin{center}
+\begin{tabular}{p{2cm} p{4cm} p{4cm} p{2cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+init & - & - & - \\
+handleEvent & Browser.Event & - & -\\
+\hline
+\end{tabular}
+\end{center}
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+None
+\subsubsection{Environment Variables}
+
+$Screen: $ A window displayed on user's screen\\
+$Browser: $ The user's browser
+
+\subsubsection{Assumptions}
+
+init() will be ran everytime the browser url is set to "/leaderboard"\\
+handleEvent() will be called by the browser for input events
+
+\subsubsection{Access Routine Semantics}
+
+\noindent init():
+\begin{itemize}
+\item transition: $currentLeaderboard :=$ "",\\
+$currentLeaderboard :=$ User.getLeaderboard(),\\
+$Screen :=$ Displays the leaderboard page with the currentLeaderboard. 
+\end{itemize}
+
+\noindent handleEvent(event: Browser.Event):
+\begin{itemize}
+\item transition: \begin{tabular}{p{5cm} p{4cm}}
+\hline
+\textbf{event} & \textbf{function} \\
+\hline
+On-click onto leave button & handleLeave() \\
+\hline
+\end{tabular}
+    
+\end{itemize}
+
+\subsubsection{Local Functions}
+
+\noindent handleLeave():
+\begin{itemize}
+\item transition: Router.navigate("/")
+\end{itemize}
+
+\newpage
+
+\section{Lobby Page Module} \label{LobbyPage}
+
+\subsection{Module}
+LobbyPage
+
+\subsection{Uses}
+\nameref{WebSocketService}
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+None
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{p{2cm} p{2cm} p{2cm} p{5cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+init & - & - & - \\
+handleEvent & Browser.Event & - & -\\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+
+lobbyCode: String\\
+currentLobby: seq of UserT
+
+\subsubsection{Environment Variables}
+
+$screen: $ a browser window displayed on the user's screen. \\
+$clipboard: $ the user's clipboard, which string variables can be copied into.\\
+$Browser: $ Includes input events and params for browser url params
+
+\subsubsection{Assumptions}
+
+init() will be ran everytime the browser url is set to "/lobby"\\
+handleEvent() will be called by the browser for input events
+
+\subsubsection{Access Routine Semantics}
+
+\noindent init():
+\begin{itemize}
+\item transition: $currentCode := $ Browser.params,\\
+$currentLobby :=$ LobbyService.getWaitingRoom(),\\
+$Screen := $ Displays the Lobby Page screen with lobbyCode displayed and a card for every user in currentLobby.
+\end{itemize}
+
+
+
+\noindent handleEvent(event: Browser.Event):
+\begin{itemize}
+\item transition: \begin{tabular}{p{5cm} p{4cm}}
+\hline
+\textbf{event} & \textbf{function} \\
+\hline
+On-click onto copy code button & copyCode() \\
+On-click onto start button & startGame() \\
+On-click onto leave button & leaveLobby() \\
+\hline
+\end{tabular}
+    
+\end{itemize}
+
+\subsubsection{Local Functions}
+
+\noindent copyCode():
+\begin{itemize}
+\item transition: $clipboard := lobbyCode$
+\item exception: $exc := $ User does not grant permission to access clipboard content \\ $ \implies PermissionDeniedException$
+\end{itemize}
+
+\noindent startGame():
+\begin{itemize}
+\item transition: $|currentLobby| > 1 \implies WebSocketService.nextRound()$
+\item exception: None
+\end{itemize}
+
+\noindent leaveLobby():
+\begin{itemize}
+\item transition: Router.navigate("/")
+\item exception: None
+\end{itemize}
+
+\newpage
+
+\section{Game Page Module} \label{GamePage} 
+
+\subsection{Module}
+
+GamePage
+
+\subsection{Uses}
+\nameref{ProblemsServiceModule}\\
+\nameref{SubmissionService}\\
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+
+None
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{p{2cm} p{4cm} p{4cm} p{2cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+init & - & - & - \\
+handleEvent & Browser.Event & - & -\\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+
+currentCode: string \\
+currentProblem: ProblemT \\
+currentLobby: seq of UserT
+
+\subsubsection{Environment Variables}
+
+Browser: Includes input events and params for browser url params\\
+Screen\\
+
+\subsubsection{Assumptions}
+
+init() will be ran everytime the browser url is set to "/problem"\\
+handleEvent() will be called by the browser for input events
+
+\subsubsection{Access Routine Semantics}
+
+
+\noindent init():
+\begin{itemize}
+\item transition: $currentCode :=$ "",\\
+$currentProblem :=$ ProblemsService.getProblem(Browser.params),\\
+$currentLobby :=$ LobbyService.getWaitingRoom(),\\
+$Screen :=$ Displays the Game Page screen with currentCode and currentProblem. Displays players current status in LobbyService.waitingRoom, If LobbyService.endData is not empty, displays end game screen.
+\end{itemize}
+
+
+
+\noindent handleEvent(event: Browser.Event):
+\begin{itemize}
+\item transition: \begin{tabular}{p{5cm} p{4cm}}
+\hline
+\textbf{event} & \textbf{function} \\
+\hline
+On-click onto submission button & handleSubmit() \\
+On-click onto back button & handleLeave() \\
+Handle typing into submission box & handleCodeEdit() \\
+\hline
+\end{tabular}
+    
+\end{itemize}
+
+\subsubsection{Local Functions}
+
+\noindent handleSubmit():
+\begin{itemize}
+\item transition: SubmissionService.submitSolution(currentCode)
+\end{itemize}
+
+\noindent handleLeave():
+\begin{itemize}
+\item transition: Router.navigate("/")
+\end{itemize}
+
+\noindent handleCodeEdit():
+\begin{itemize}
+\item transition: Modify currentCode with new changes of input
+\end{itemize}
+
+\noindent displaySubmissionResult(judgeResult: JudgeResultT)
+\begin{itemize}
+\item transition: Display judgeResult into pop up onto $Screen$
+\end{itemize}
+
+\newpage
+
+\section{Login Page Module}\label{LoginPage} 
+
+\subsection{Module}
+
+LoginPage
+
+\subsection{Uses}
+\nameref{AuthService}
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+
+None
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{| p{4cm} | p{4cm} | p{4cm} | p{3cm} | }
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+init & - & - & - \\
+handleEvent & Browser.Event & - & -\\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+
+usernameField: String
+passwordField: String
+profilePicField: String
+emailField: String
+
+\subsubsection{Environment Variables}
+$screen: $ a browser window displayed on the user's screen.
+
+\subsubsection{Assumptions}
+
+init() will be ran everytime the browser url is set to "/login"\\
+handleEvent() will be called by the browser for input events
+
+\subsubsection{Access Routine Semantics}
+\noindent init():
+\begin{itemize}
+\item transition: $screen := $ update the browser window such all users see a login button.
+\end{itemize}
+
+\noindent handleEvent(event: Browser.Event):
+\begin{itemize}
+\item transition: \begin{tabular}{p{5cm} p{4cm}}
+\hline
+\textbf{event} & \textbf{function} \\
+\hline
+On-click onto login button & handleLogin() \\
+Handle typing into username field  & hanldeUserNameFieldEdit() \\
+Handle typing into password field & hanldePasswordFieldEdit() \\
+Handle typing into profile pic field & hanldeProfilePicFieldEdit() \\
+Handle typing into email field & hanldeEmailFieldEdit() \\
+\hline
+\end{tabular}
+    
+\end{itemize}
+
+\subsubsection{Local Functions}
+
+\noindent handleLogin():
+\begin{itemize}
+\item transition: AuthService.login(usernameField, passwordField, emailField, profilePicField)
+\end{itemize}
+
+\noindent hanldeUserNameFieldEdit():
+\begin{itemize}
+\item transition: Modify usernameField with new changes of input
+\end{itemize}
+
+\noindent hanldePasswordFieldEdit():
+\begin{itemize}
+\item transition: Modify passwordField with new changes of input
+\end{itemize}
+
+\noindent hanldeProfilePicFieldEdit():
+\begin{itemize}
+\item transition: Modify profilePicField with new changes of input
+\end{itemize}
+
+\noindent hanldeEmailFieldEdit():
+\begin{itemize}
+\item transition: Modify emailField with new changes of input
+\end{itemize}
+
+\subsubsection{Considerations}
+
+The login module functions are implemented by Google's OAuth component
+
+\newpage
+
+\section{SubmissionService Module} \label{SubmissionService}
+
+\subsection{Module}
+
+SubmissionService
+\subsection{Uses}
+\nameref{Judge}
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+None
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{p{4cm} p{4cm} p{4cm} p{2cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+submitSolution & ProblemT, SubmissionT & JudgeResultT & \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+
+None
+
+\subsubsection{Environment Variables}
+
+None
+
+\subsubsection{Assumptions}
+
+The exported access programs successfully make an HTTP request to the Judge API and receive a response.
+
+\subsubsection{Access Routine Semantics}
+
+\noindent submitSolution(problem, submission):
+\begin{itemize}
+% TODO: this is sus cuz judge has a constructor
+\item output: $out := Judge.judgeSubmission(problem, submission)$
+\item exception: None
+\end{itemize}
+
+\subsubsection{Local Functions}
+None
+
+\newpage
+
+\section{ProblemsService Module} \label{ProblemsServiceModule}
+
+\subsection{Module}
+
+ProblemsService
+
+\subsection{Uses}
+\nameref{Problems}
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+
+None
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{p{2cm} p{4cm} p{4cm} p{2cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+getProblem & String & ProblemT & - \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+
+None
+
+\subsubsection{Environment Variables}
+
+None
+
+\subsubsection{Assumptions}
+
+None
+
+\subsubsection{Access Routine Semantics}
+
+\noindent getProblem(problemID: string): ProblemT
+\begin{itemize}
+\item output: ProblemsModule.getProblem(problemT)
+\end{itemize}
+
+\subsubsection{Local Functions}
+
+None
+
+\newpage
+
+\section{UserService Module} \label{UserService}
+
+
+\subsection{Module}
+UserService
+
+\subsection{Uses}
+\nameref{User}
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{|p{4cm} |p{4cm} |p{4cm} |p{3cm}|}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+ getLeaderboard & - & seq of UserT & - \\
+ getUser & string & UserStats T& - \\
+ getUserMatches & string &  Seq of MatchT T& - \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+
+\subsubsection{Environment Variables}
+
+\subsubsection{Assumptions}
+
+\subsubsection{Access Routine Semantics}
+
+\noindent getLeaderboard():
+\begin{itemize}
+\item transition: User.getLeaderboard()
+\end{itemize}
+
+\noindent getUserStats(userid):
+\begin{itemize}
+\item output: $out :=$ User.getUserStats(userid)
+\end{itemize}
+
+\noindent getUserMatches(userid):
+\begin{itemize}
+\item output: $out :=$ User.getUserMatches(userid)
+\end{itemize}
+
+\newpage
+
+\section{AuthService Module} \label{AuthService} 
+\subsection{Module}
+
+AuthService
+
+\subsection{Uses}
+\nameref{Auth}\\
+\nameref{User}\\
+\nameref{Router}
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{ | p{2cm} | p{4cm} | p{4cm} |  p{3cm} |}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+logout &  &  &  \\
+login & String, String, String, String & & \\
+isLoggedIn &  &  $\mathbb{B}$ &  \\
+getToken &  &  UserT &  \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+user: UserT
+
+\subsubsection{Environment Variables}
+
+\subsubsection{Assumptions}
+
+\subsubsection{Access Routine Semantics}
+
+\noindent logout():
+\begin{itemize}
+\item transition: user := $<>$\\
+\end{itemize}
+
+\noindent login(username, password, password, profilepic):
+\begin{itemize}
+\item transition: user := Auth.login(username, password)\\
+if user is empty then User.createUser(username, email, password, profilepic) then user := User.getUserByEmail(email) then Router.navigate("/")
+\end{itemize}
+
+\noindent isLoggedIn():
+\begin{itemize} 
+\item output:= (user is not empty $\implies true | false$)
+\end{itemize}
+
+\noindent getUser():
+\begin{itemize}
+\item output:= user
+\end{itemize}
+
+\subsubsection{Local Functions}
+
+\newpage
+
+
+\section{LobbyService Module} \label{LobbyService} 
+
+\subsection{Module}
+
+LobbyService
+
+\subsection{Uses}
+None
+
+\subsection{Syntax}
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{| p{5cm} | p{4cm} | p{2.2cm} | p{2.25cm} |}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+updateWaitingRoom & seq of User & - & - \\
+\hline
+updateEndData & $\mathbb{B}$ & - & - \\
+\hline
+updateCurrentRound & $\mathbb{N}$& - & - \\
+\hline
+getWaitingRoom & - & seq of User & - \\
+\hline
+getEndData & - & $\mathbb{B}$ & - \\
+\hline
+getCurrentRound & - & $\mathbb{N}$ & - \\
+
+
+
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+
+waitingRoom: Seq of User \\
+endData: $\mathbb{B}$ \\
+currentRound: $\mathbb{N}$
+
+\subsubsection{Environment Variables}
+
+\subsubsection{Assumptions}
+
+
+\subsubsection{Access Routine Semantics}
+
+\noindent updateWaitingRoom(clients):
+\begin{itemize}
+\item transition: $waitingRoom := clients$
+\end{itemize}
+
+\noindent updateEndData(endData):
+\begin{itemize}
+\item transition: $endData := endData$
+\end{itemize}
+
+\noindent updateCurrentRound(round):
+\begin{itemize}
+\item transition: $currentRound := round$
+\end{itemize}
+
+\noindent getWaitingRoom():
+\begin{itemize}
+\item output: $out := waitingRoom$
+\end{itemize}
+
+\noindent getWaitingRoom():
+\begin{itemize}
+\item output: $out := endData$
+\end{itemize}
+
+\noindent getCurrentRound():
+\begin{itemize}
+\item output: $out := currentRound$
+\end{itemize}
+
+
+\newpage
+
+\section{WebSocketService Module} \label{WebSocketService}
+
+
+\subsection{Module}
+
+WebSocketService
+
+\subsection{Uses}
+
+\nameref{GameHandler} \\
+\nameref{User}
+
+\subsection{Syntax}
+
+
+\subsubsection{Exported Constants}
+None
+
+\subsubsection{Exported Access Programs}
+None
+
+\begin{center}
+\begin{tabular}{|p{2cm} | p{4cm} | p{4cm} | p{2cm} |}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+
+\hline
+createGame & - & - & - \\
+\hline
+findGame & - & - & - \\
+\hline
+joinGame & String & - & - \\
+\hline
+nextRound & - & - & - \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+
+currentGameID: string
+clientID: String 
+
+\subsubsection{Environment Variables}
+
+UUID\\
+gen() $\rightarrow$ string:
+\begin{itemize}
+    \item output: $out := $ returns a unique id
+    \item exception:    None
+\end{itemize}
+
+\subsubsection{Assumptions}
+
+None
+
+\subsubsection{Access Routine Semantics}
+
+\noindent createGame():
+\begin{itemize}
+\item transition: $clientID, currentGameID :=  UUID.gen(),\\ GameHandler.createGame(clientID)\\
+Router.navigate("/problem/\{currentGameID\}")$
+\end{itemize}
+
+\noindent findGame():
+\begin{itemize}
+\item transition: $currentGameID := GameHandler.findGame(clientID), 
+\\GameHandler.joinGame(clientID, gameID), 
+\\Router.navigate("/problem/\{currentGameID\}")$ 
+\end{itemize}
+
+\noindent joinGame(gameID):
+\begin{itemize}
+\item transition: $currentGameID := GameHandler.joinGame(clientID, gameID),\\ Router.navigate("/problem/\{currentGameID\}")$
+\end{itemize}
+
+\noindent nextRound():
+\begin{itemize}
+\item transition: $GameHandler.gameNextRound(gameID)$\\
+if 
+\end{itemize}
+
+
+\subsubsection{Local Functions}
+
+None
+
+
+\newpage
+
+
+
+\section{GameHandler Module} \label{GameHandler} 
+
+\subsection{Module}
+
+GameHandler
+
+\subsection{Uses}
+
+\nameref{GameT}\\
+\nameref{Router}\\
+\nameref{Problems}\\
+
+\subsection{Syntax}
+
+
+\subsubsection{Exported Constants}
+None
+
+\subsubsection{Exported Access Programs}
+None
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{| p{5cm} | p{4cm} | p{4cm} | p{2.25cm} |}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+addClient & String, String, String, String & - & - \\
+\hline
+createGame & String & String & - \\
+\hline
+findGame & String & String & - \\
+\hline
+joinGame & String, String & - & - \\
+\hline
+endGame & String & - & - \\
+\hline
+gameNextRound & String & - & - \\
+\hline
+playerCompleteRound & String, String & - & - \\
+\hline
+sendUpdatedPlayers &  String & - & - \\
+\hline
+
+
+\end{tabular}
+\end{center}
+
+\subsubsection{Environment Variables}
+
+UUID\\
+gen() $\rightarrow$ string:
+\begin{itemize}
+    \item output: $out := $ returns a unique id
+    \item exception:    None
+\end{itemize}
+
+Date: Gets the current time on the machine\\
+getTime() $\rightarrow$ string:
+\begin{itemize}
+    \item output: $out := $ returns the current time on the machine
+    \item exception:    None
+\end{itemize}
+
+\subsubsection{Assumptions}
+
+UUID technology is supported by implementation environment
+
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+
+clients: map$<$String, ClientT$>$ \\
+games: map$<$String, GameT$>$
+
+
+\subsubsection{Access Routine Semantics}
+
+\noindent addClient(clientID: String, email: String, name: String, picture: String)
+\begin{itemize}
+\item transition:$clients := clients \;\cup\;  Tuple(clientID, ClientT(clientID, email, name, picture, NULL, 0))$ \\
+\end{itemize}
+
+
+\noindent createGame(clientID: String, ) : String
+\begin{itemize}
+\item transition: \\$gameID := UUID.gen() \;\land\; games := games \; \cup \;$ \\ $Tuple(gameID, GameT(gameID, [Clients[ClidentID]], 0))$
+\item output: out := $gameID$ \\
+\end{itemize}
+
+
+\noindent findGame(clientID: String) : String
+\begin{itemize}
+\item transition: \\ 
+$(\exists \; game \in games: game.round = 0) \Rightarrow  game \in games: game.round = 0 \Rightarrow gameID = game.id \; \land$  \\
+$(\forall \; game \in games: game.round > 0) \Rightarrow gameID = createGame()$
+\item output: out: = gameID \\
+\end{itemize}
+
+
+\noindent joinGame(clientID: String, gameID: String)
+\begin{itemize}
+\item transition: $addClient(clientID) \Rightarrow$  \\
+$(games[gameID].clients := games[gameID].clients. \cup clients[clientID]$ \\
+$clients[clientID].game := gameID) \Rightarrow sendUpdatedPlayers(gameID)$ \\
+\end{itemize}
+
+
+\noindent endGame(gameID: String)
+\begin{itemize}
+\item transition: \\
+$ client \in games[gameID].clients: client.ls.updateEndData(client.lastCompletedRound = games[gameID].round) \Rightarrow games := games - games[gameID] \Rightarrow \\ User.saveMatch(MatchT(client.getUserId(), \\client.lastCompletedRound = games[gameID].round, Date.getTime())) $
+\end{itemize}
+
+\noindent gameNextRound(gameID: String)
+\begin{itemize}
+\item transition: \\ 
+$(game, games[gameID].round := games[gameID], games[gameID].round+1) \Rightarrow$ \\
+$(game.round \textgreater 1 \Rightarrow client \in game.clients : client.lastCompletedRound < game.round \Rightarrow client.ls.updateEndData(false)) \Rightarrow game.clients := game.clients - client \Rightarrow$ \\
+$sendUpdatedPlayers(gameID) \Rightarrow \\client \in clients: client.rm.('problem/' + ProblemsModule.getRandomProblem())$ \\
+\end{itemize}
+
+
+\noindent playerCompleteRound(clientID: String, gameID: String)
+\begin{itemize}
+\item transition: \\ 
+$clients[clientID].lastCompletedRound := clients[clientID].lastCompletedRound + 1$ \\
+$playersCompleted := size(client \in games[gameID] | client.lastCompletedRound = games[gameID].round)$ \\ 
+$playersCompleted = 1 \land size(games[gameID].clients = 2) \Rightarrow endGame(gameID) \lor$ \\ 
+$playersCompleted \geq size(games[gameID].clients)/2 \;\textgreater\; 1 \Rightarrow gameNextRound(gameID)$ \\ 
+\end{itemize}
+
+
+\subsubsection{Local Functions}
+
+\noindent sendUpdatedPlayers(gameID: String)
+\begin{itemize}
+\item transition: \\ $client \in games[gameID].clients: client.ls.updateWaitingRoom(games[gameID].clients)$
+\end{itemize}
+
+\noindent getUsersInLobby(gameID: String): set of Users
+\begin{itemize}
+\item output: $out := \{ users: gameID | client \exists games[gameID].clients : User(client)$
+\end{itemize}
+
+
+\newpage
+
+\section{Judge Module} \label{Judge}
+
+\subsection{Module}
+
+Judge
+
+\subsection{Uses}
+\nameref{CodeRunner}\\
+\nameref{GameHandler}\\
+\nameref{JudgeResultT}
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+None
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{p{4cm} p{4cm} p{4cm} p{2cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+init & CodeRunner & Judge & \\
+judgeSubmission & ProblemT, SubmissionT, String, String  & JudgeResultT & \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+
+codeRunner: CodeRunner
+
+\subsubsection{Assumptions}
+
+The init function is called at the start of the life-cycle of the module before any other access routine is called for that object. The user of the module provides a CodeRunner instance.
+
+\subsubsection{Access Routine Semantics}
+
+\noindent init(cr):
+\begin{itemize}
+\item transition: $codeRunner := cr$
+\item output: $out := self$
+\item exception: None
+\end{itemize}
+
+\noindent judgeSubmission(problem, submission, clientID, gameID):
+\begin{itemize}
+\item transition: $(JudgeResultT(getVerdicts(problem, submission)).getVerdict() = Correct) \implies gameHandler.playerCompleteRound(clientID, gameID)$
+\item output:  $out := JudgeResultT(getVerdicts(problem, submission))$
+\item exception: None
+\end{itemize}
+
+\subsubsection{Local Functions}
+\noindent getVerdicts(p: ProblemT, s: SubmissionT) $\rightarrow$ set of JudgeVerdict:
+\begin{itemize}
+\item output: $out := \{ tc: TestCaseT \, | \, tc \in p.getTestCases() : codeRunner.runCode(s, tc )\}$
+\item exception: None
+\end{itemize}
+
+\newpage
+
+\section{CodeRunner Module} \label{CodeRunner} 
+
+\subsection{Module}
+
+CodeRunner
+
+\subsection{Uses}
+
+\nameref{SubmissionT}\\
+\nameref{TestCaseVerdictT}
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+
+None
+
+\subsubsection{Exported Types}
+
+CodeRunner = ?
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{|p{2cm} | p{4cm} | p{4cm} | p{3cm} |}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+
+\hline
+runCode & SubmissionT, TestCaseT & TestCaseVerdictT & \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+
+None
+
+\subsubsection{Environment Variables}
+
+containerEngine: A containerized run-time environment providing intractability with the run-time's standard input and standard output streams as well as code compilation capabilities.\\
+compileAndRun(code: string, language: Language, input: string, timeLimit: $\mathbb{R}$, memoryLimit: $\mathbb{N}$) $\rightarrow$ string:
+\begin{itemize}
+    \item output: $out := $ the output from the standard output stream
+    \item exception: \begin{tabular}{p{5cm} p{4cm}}
+    \hline
+    \textbf{condition} & \textbf{exc :=} \\
+    \hline
+    Code execution time exceeds $timeLimit$ & TimeoutException \\
+    Memory used exceeds $memoryLimit$ & MemoryExceededException \\
+    Code crashes unexpectedly & RuntimeException \\
+    Code fails to compile & CompileException \\
+    \hline
+    \end{tabular}
+\end{itemize}
+
+
+\subsubsection{Assumptions}
+
+The container engine is provided enough memory to run with the specified memory limit. The container engine supports the provided input language. The container engine is capable of emitting signals that correspond to the specified exceptions.
+
+\subsubsection{Access Routine Semantics}
+
+\noindent runCode(submission, testCase):
+\begin{itemize}
+\item output:\begin{tabular}{p{6cm} p{5cm}}
+    \hline
+    \textbf{condition} & \textbf{out :=} \\
+    \hline
+    No exceptions $\land \, userOutput = testCase.output$ & TestCaseVerdictT(Correct, userOutput, testCase) \\
+    No exceptions $\land \, userOutput \neq testCase.output$ & TestCaseVerdictT(Wrong, userOutput, testCase) \\
+    TimeoutException & TestCaseVerdictT(TimeLimitExceeded, $<>$, testCase) \\
+    MemoryExceededException & TestCaseVerdictT(MemoryLimitExceeded, $<>$, testCase) \\
+    RuntimeException & TestCaseVerdictT(RuntimeError, $<>$, testCase) \\
+    CompileException & TestCaseVerdictT(CompileError, $<>$, testCase) \\
+
+    \hline
+    \end{tabular}  
+\\\\ where  $userOutput = compileAndRun(submission.getCode(), submission.getLanguage(),\\ testCase.getInput(), testCase.getTimeLimit(), testCase.getMemoryLimit())$
+\item exception: None
+\end{itemize}
+
+\subsubsection{Local Functions}
+None
+
+\newpage
+
+\section{Auth Module} \label{Auth} 
+
+\subsection{Module}
+
+Auth
+
+\subsection{Uses}
+
+None
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{| p{4cm} | p{4cm} | p{4cm} | p{3cm} |}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+login & String, String &  UserT &  \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+
+None
+
+\subsubsection{Environment Variables}
+
+OAuth: Authentication provided by oauth
+
+\subsubsection{Assumptions}
+
+None
+
+\subsubsection{Access Routine Semantics}
+
+\noindent login(username, password):
+
+\begin{itemize}
+\item output:= OAuth.login(username, password)
+\end{itemize}
+
+
+\subsubsection{Local Functions}
+None
+
+\subsubsection{Considerations}
+
+This module will be implemented through the usage of Google's OAuth
+
+\newpage
+\section{Problems Module} \label{Problems} 
+
+\subsection{Module}
+
+Problems
+
+\subsection{Uses}
+
+\nameref{Database}
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{ |  p{4cm} | p{2cm} |  p{2cm} | p{3cm} | }
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+getProblem & String & Problem & DoesNotExist \\
+getRandomProblem & -  & Problem & DoesNotExist \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+
+\subsubsection{Environment Variables}
+
+\subsubsection{Assumptions}
+
+\subsubsection{Access Routine Semantics}
+
+\noindent getProblem(problemID: String): Problem
+\begin{itemize}
+\item output: $out := $ problem where there exists a problem in Database.getProblems() where problem.ID equals problemID
+\item exception: There exists no problem in Database.getProblems() where problem.ID equals problemID $\implies$ DoesNotExist
+\end{itemize}
+
+
+\noindent getRandomProblem(): Problem
+\begin{itemize}
+\item output: $out := $ single random selection in Database.getProblems()
+\item exception: There exists no problem in Database.getProblems() $\implies$ DoesNotExist
+\end{itemize}
+
+\subsubsection{Local Functions}
+
+\newpage
+
+
+\section{User Module} \label{User}
+
+\subsection{Template Module}
+
+User
+
+\subsection{Uses}
+
+\nameref{Database}
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{|p{4cm}| p{4cm}| p{4cm} | p{3cm}|}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+createUser & String, String, String, String & - & - \\
+saveUserMatch & MatchT &- &- \\
+getUserMatches & String & Seq of MatchT & -\\
+getUser & String & UserT & -\\
+getUserbyEmail & String & UserT & -\\
+getUserStats & String & UserStatsT & -\\
+getLeaderboard & - & Seq of UserT & -\\
+
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+
+\subsubsection{Environment Variables}
+
+UUID\\
+gen() $\rightarrow$ string:
+\begin{itemize}
+    \item output: $out := $ returns a unique id
+    \item exception:    None
+\end{itemize}
+
+\subsubsection{Assumptions}
+
+UUID technology is supported by implementation environment
+
+\subsubsection{Access Routine Semantics}
+
+\noindent createUser( username, email, profilepic):
+\begin{itemize}
+\item transition: Database.createUser(new UserT(UUID.gen(), username, email, profilepic))
+\item exception: None
+\end{itemize}
+
+\noindent saveUserMatch(match):
+\begin{itemize}
+\item transition: Database.saveMatch(match) 
+\item exception: None
+\end{itemize}
+
+\noindent getUserMatches(userID): 
+\begin{itemize}
+\item output: $out := $ Database.getUserMatches(userID)
+\item exception: None
+\end{itemize}
+
+\noindent getUser(userID):
+\begin{itemize}
+\item output:  $out := $ Database.getUser(userID)
+\item exception: None
+\end{itemize}
+
+
+\noindent getUserByEmail(email):
+\begin{itemize}
+\item output:  $out := $ Database.getUserByEmail(email)
+\item exception: None
+\end{itemize}
+
+\noindent getUserStats(userID):
+\begin{itemize}
+\item output:  $out := $ Database.getUserStats(userID)
+\item exception: None
+\end{itemize}
+
+
+\noindent getLeaderboard():
+\begin{itemize}
+\item output:  $out := $ Database.getLeaderboard(userID)
+\item exception: None
+\end{itemize}
+
+
+\subsubsection{Local Functions}
+None
+
+\newpage
+\section{Database Module} \label{Database} 
+
+\subsection{Module}
+
+Database
+
+\subsection{Uses}
+
+\nameref{ProblemT}\\
+\nameref{UserStatsT}\\
+\nameref{UserT}\\
+\nameref{MatchT}
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{p{6cm} p{2cm} p{3cm} p{2cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+getProblems & - & Set of ProblemT & - \\
+addProblems & ProblemT & - & - \\
+createUser & UserT & - & - \\
+saveMatch & MatchT & - & - \\
+getUserMatches & String & set of MatchT & - \\
+getUser & String & UserT & - \\
+getUserStats & String & UserStatsT & - \\
+getLeaderboard & - & seq of UserT & - \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+
+problems: set of ProblemT\\
+users: set of UserT\\
+userStats: set of UserStatsT\\
+matches: set of MatchT\\
+
+
+\subsubsection{Environment Variables}
+
+None
+
+\subsubsection{Assumptions}
+
+None
+
+\subsubsection{Access Routine Semantics}
+
+\noindent getProblems():
+\begin{itemize}
+\item output: $out :=$ Problems
+\item exception: None
+\end{itemize}
+
+\noindent addProblems(newProblem):
+\begin{itemize}
+\item transition: $problems :=$ problems $\cup$ newProblem
+\item exception: None
+\end{itemize}
+
+\noindent createUser(user):
+\begin{itemize}
+\item transition: users := users  $\cup$ user
+\item exception: None
+\end{itemize}
+
+\noindent saveMatch(match):
+\begin{itemize}
+\item transition: matches $\cup$ match 
+\item exception: None
+\end{itemize}
+
+\noindent getUserMatches(userID):
+\begin{itemize}
+\item output:  $out :=$ userMatches such that userMatches is all userMatch in matches where userMatch.getUserID() = userID
+\item exception: None
+\end{itemize}
+
+\noindent getUser(userID):
+\begin{itemize}
+\item output: $out :=$ user such that user exists in users where user.userID = userID
+\item exception: None 
+\end{itemize}
+
+\noindent getUserStats(userID):
+\begin{itemize}
+\item output: $out :=$ user such that user exists in users where user.userID = userID
+\item exception: None
+\end{itemize}
+
+\noindent getLeaderboard():
+\begin{itemize}
+\item output: $out := $ topUsers where the topUsers is the first 100 user in users where users is sorted in descending order based on user.wins 
+\item exception: None
+\end{itemize}
+
+
+\subsubsection{Local Functions}
+
+None
+
+\newpage
+
+\section{Router Module} \label{Router}
+
+\subsection{Module}
+
+Router
+
+\subsection{Uses}
+
+None
+
+\subsection{Syntax}
+
+\subsubsection{Exported Constants}
+
+None
+
+\subsubsection{Exported Access Programs}
+
+\begin{center}
+\begin{tabular}{p{2cm} p{4cm} p{2cm} p{2cm}}
+\hline
+\textbf{Name} & \textbf{In} & \textbf{Out} & \textbf{Exceptions} \\
+\hline
+navigate & string & - & - \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Semantics}
+
+\subsubsection{State Variables}
+
+None
+
+\subsubsection{Environment Variables}
+
+browser: the web browser used to handle page navigation\\
+navigate(path: string):
+\begin{itemize}
+    \item transition: set the web browser url to path
+    \item exception:    None
+\end{itemize}
+
+\subsubsection{Assumptions}
+
+None
+
+\subsubsection{Access Routine Semantics}
+
+\noindent navigate(path: string):
+\begin{itemize}
+    \item transition: Browser.navigate(path)
+    \item exception: None
+\end{itemize}
+
+
+\subsubsection{Local Functions}
+
+None
 
 \newpage
 
@@ -236,6 +2782,6 @@ The following table is taken directly from the Module Guide document for this pr
 
 \section{Appendix} \label{Appendix}
 
-\wss{Extra information if required}
+None
 
 \end{document}
