@@ -28,15 +28,12 @@ const ELEMENT_DATA: Leaderboard[] = [
   templateUrl: './leaderboard.component.html',
   styleUrls: ['./leaderboard.component.scss']
 })
-export class LeaderboardComponent implements OnInit {
+export class LeaderboardComponent {
   displayedColumns: string[] = ['number', 'name', 'wins', 'losses'];
   dataSource = ELEMENT_DATA;
   constructor(
     private router: Router,
     ) {}
-
-  ngOnInit(): void {
-  }
 
 
   leave() {
