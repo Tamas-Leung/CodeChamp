@@ -7,17 +7,13 @@ import { Router } from '@angular/router';
   templateUrl: './myprofile.component.html',
   styleUrls: ['./myprofile.component.scss']
 })
-export class MyprofileComponent implements OnInit {
+export class MyprofileComponent {
   id: string = '';
   players: PlayerData[] = [];
 
   constructor(
     private router: Router,
   ) {}
-
-  ngOnInit(): void {
-
-  }
 
   leave() {
     this.router.navigate(['/']);
