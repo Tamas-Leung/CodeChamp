@@ -5,15 +5,13 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-myprofile',
   templateUrl: './myprofile.component.html',
-  styleUrls: ['./myprofile.component.scss']
+  styleUrls: ['./myprofile.component.scss'],
 })
 export class MyprofileComponent {
   id: string = '';
   players: PlayerData[] = [];
 
-  constructor(
-    private router: Router,
-  ) {}
+  constructor(private router: Router) {}
 
   leave() {
     this.router.navigate(['/']);
