@@ -2,7 +2,7 @@
   <mat-icon style="padding-right: 30px">share</mat-icon>
   <span> CodeChamp</span>
 </mat-toolbar>
-<div>
+<div style="background: white">
   <div class="row">
     <div class="col-6">
       <app-problem-description
@@ -12,6 +12,14 @@
     </div>
     <div class="col-6">
       <app-code-editor [id]="id"></app-code-editor>
+    </div>
+  </div>
+  <div class="players-in-lobby">
+    <div *ngFor="let player of players">
+      <span>{{ player.name }}:</span>
+      <span>{{
+        player.finishedCurrentRound ? 'Finished' : 'Not finished'
+      }}</span>
     </div>
   </div>
 </div>

@@ -1,12 +1,16 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { CodeEditorComponent } from './problem/code-editor/code-editor.component';
+import {
+  CodeEditorComponent,
+  SubmissionDialogComponent,
+} from './problem/code-editor/code-editor.component';
 import { ProblemComponent } from './problem/problem.component';
 import { ProblemDescriptionComponent } from './problem/problem-description/problem-description.component';
 import { CodeEditorModule } from '@ngstack/code-editor';
@@ -68,10 +72,12 @@ import { LeaderboardComponent } from './leaderboard/leaderboard.component';
     LobbyComponent,
     MyprofileComponent,
     LeaderboardComponent,
+    SubmissionDialogComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    CommonModule,
     BrowserAnimationsModule,
     CodeEditorModule.forRoot(),
     HttpClientModule,

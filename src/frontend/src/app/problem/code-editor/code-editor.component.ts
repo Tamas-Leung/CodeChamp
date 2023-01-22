@@ -1,10 +1,11 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, Inject, Input, OnInit } from '@angular/core';
 import { CodeModel } from '@ngstack/code-editor';
 import { SolutionSubmitService } from '../solution-submit/solution-submit.service';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import * as prettier from 'prettier/standalone';
 import * as tsParser from 'prettier/parser-babel';
+import { AuthService } from 'src/app/services/auth/auth.service';
+import { LobbyService } from 'src/app/services/lobby/lobby.service';
 
 @Component({
   selector: 'app-code-editor',
@@ -29,10 +30,14 @@ export class CodeEditorComponent implements OnInit {
     },
   };
 
+  currentRound = 0;
+
   solution = '';
   constructor(
     private submitSolutionService: SolutionSubmitService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private authService: AuthService,
+    private lobbyService: LobbyService
   ) {}
 
   ngOnInit() {
@@ -41,6 +46,9 @@ export class CodeEditorComponent implements OnInit {
       parser: 'babel',
       plugins: [tsParser],
     });
+    this.lobbyService.currentRound.subscribe(
+      (round) => (this.currentRound = round)
+    );
   }
 
   onCodeChanged(value: string) {
@@ -48,17 +56,28 @@ export class CodeEditorComponent implements OnInit {
   }
 
   submitCode() {
+    const roundWhenSent = this.currentRound;
     this.submitSolutionService
-      .submitSolution(this.id, this.solution, 'js')
+      .submitSolution(
+        this.id,
+        this.solution,
+        'js',
+        this.authService.getToken()!
+      )
       .subscribe((data) => {
-        this.dialog.open(SubmissionDialogComponent, {
-          data: data.result,
-        });
+        // Prevent race condition in which switches rounds but still displays this dialog
+        if (roundWhenSent == this.currentRound) {
+          this.dialog.open(SubmissionDialogComponent, {
+            data: data,
+            disableClose: data.correct,
+          });
+        }
       });
   }
 }
 
 export interface Result {
+  correct: boolean;
   result: string;
 }
 
@@ -67,5 +86,5 @@ export interface Result {
   templateUrl: 'submit-dialog.component.html',
 })
 export class SubmissionDialogComponent {
-  constructor(@Inject(MAT_DIALOG_DATA) public data: string) {}
+  constructor(@Inject(MAT_DIALOG_DATA) public data: Result) {}
 }
