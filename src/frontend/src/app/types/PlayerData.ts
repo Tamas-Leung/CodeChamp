@@ -3,10 +3,10 @@ export type PlayerData = {
   name: string;
   picture: string;
   finishedCurrentRound: boolean;
-  Wins: number;
-  Losses: number;
-  ProblemSolved: number;
-  Easy: number;
-  Medium: number;
-  Hard: number;
+  wins: number;
+  losses: number;
+  problemSolved: number;
+  easy: number;
+  medium: number;
+  hard: number;
 };

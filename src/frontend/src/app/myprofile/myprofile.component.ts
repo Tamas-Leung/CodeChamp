@@ -16,12 +16,12 @@ export class MyProfileComponent {
       name: '',
       picture: '',
       finishedCurrentRound: true,
-      Wins: 10,
-      Losses: 20,
-      ProblemSolved: 30,
-      Easy: 10,
-      Medium: 10,
-      Hard: 10,
+      wins: 10,
+      losses: 20,
+      problemSolved: 30,
+      easy: 10,
+      medium: 10,
+      hard: 10,
     } as PlayerData;
   }
   leave() {
