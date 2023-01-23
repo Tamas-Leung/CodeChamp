@@ -70,7 +70,7 @@ import { LeaderboardComponent } from './leaderboard/leaderboard.component';
     StartpageComponent,
     LoginComponent,
     LobbyComponent,
-    MyprofileComponent,
+    MyProfileComponent,
     LeaderboardComponent,
     SubmissionDialogComponent,
   ],
