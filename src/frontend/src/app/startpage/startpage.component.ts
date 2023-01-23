@@ -42,4 +42,8 @@ export class StartpageComponent implements OnInit {
       this.router.navigate(['/lobby/' + this.joinGameFormControl.value]);
     }
   }
+
+  gotoProfile() {
+    this.router.navigate(['/profile']);
+  }
 }
