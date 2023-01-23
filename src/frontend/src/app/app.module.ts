@@ -57,7 +57,7 @@ import { StartpageComponent } from './startpage/startpage.component';
 import { LoginComponent } from './login/login.component';
 import { WebSocketService } from './services/websocket/websocket.service';
 import { LobbyComponent } from './lobby/lobby.component';
-import { MyprofileComponent } from './myprofile/myprofile.component';
+import { MyProfileComponent } from './myprofile/myprofile.component';
 
 @NgModule({
   declarations: [
@@ -69,7 +69,7 @@ import { MyprofileComponent } from './myprofile/myprofile.component';
     StartpageComponent,
     LoginComponent,
     LobbyComponent,
-    MyprofileComponent,
+    MyProfileComponent,
     SubmissionDialogComponent,
   ],
   imports: [

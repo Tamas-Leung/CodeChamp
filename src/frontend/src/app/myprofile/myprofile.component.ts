@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   templateUrl: './myprofile.component.html',
   styleUrls: ['./myprofile.component.scss'],
 })
-export class MyprofileComponent {
+export class MyProfileComponent {
   id: string = '';
   players: PlayerData[] = [];
 
