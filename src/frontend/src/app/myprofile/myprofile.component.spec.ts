@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-
 import { MyProfileComponent } from './myprofile.component';
 
 describe('MyProfileComponent', () => {

@@ -8,9 +8,8 @@ describe('LeaderboardComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LeaderboardComponent ]
-    })
-    .compileComponents();
+      declarations: [LeaderboardComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(LeaderboardComponent);
     component = fixture.componentInstance;
