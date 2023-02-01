@@ -11,8 +11,6 @@ import { AuthService } from '../services/auth/auth.service';
 export class MyProfileComponent {
   player: PlayerData;
   playerStats: any;
-  playerPicture: string;
-  playerName: string;
 
   constructor(private router: Router, private authService: AuthService) {
     this.player = {
@@ -28,8 +26,8 @@ export class MyProfileComponent {
       hard: 10,
     } as PlayerData;
     this.playerStats = authService.getPlayerData();
-    this.playerPicture = this.playerStats.picture;
-    this.playerName = this.playerStats.name;
+    this.player.picture = this.playerStats.picture;
+    this.player.name = this.playerStats.name;
   }
   leave() {
     this.router.navigate(['/']);
