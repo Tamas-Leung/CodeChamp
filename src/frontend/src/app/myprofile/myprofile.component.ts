@@ -10,7 +10,6 @@ import { AuthService } from '../services/auth/auth.service';
 })
 export class MyProfileComponent {
   player: PlayerData;
-  playerStats: any;
 
   constructor(private router: Router, private authService: AuthService) {
     this.player = {
@@ -25,9 +24,9 @@ export class MyProfileComponent {
       medium: 10,
       hard: 10,
     } as PlayerData;
-    this.playerStats = authService.getPlayerData();
-    this.player.picture = this.playerStats.picture;
-    this.player.name = this.playerStats.name;
+    var playerStats = authService.getPlayerData();
+    this.player.picture = playerStats.picture;
+    this.player.name = playerStats.name;
   }
   leave() {
     this.router.navigate(['/']);
