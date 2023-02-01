@@ -44,6 +44,7 @@ const routes: Routes = [
     component: LeaderboardComponent,
     canActivate: [AuthGuardService],
   },
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
