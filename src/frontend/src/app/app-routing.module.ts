@@ -7,6 +7,7 @@ import { LoginComponent } from './login/login.component';
 import { AuthGuardService } from './services/auth-guard/auth-guard.service';
 import { LobbyComponent } from './lobby/lobby.component';
 import { MyProfileComponent } from './myprofile/myprofile.component';
+import { LeaderboardComponent } from './leaderboard/leaderboard.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -37,7 +38,12 @@ const routes: Routes = [
     component: MyProfileComponent,
     canActivate: [AuthGuardService],
   },
-];
+
+  {
+    path: 'leaderboard',
+    component: LeaderboardComponent,
+    canActivate: [AuthGuardService],
+  },
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

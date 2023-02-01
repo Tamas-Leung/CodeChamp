@@ -15,6 +15,7 @@ export class MyProfileComponent {
   playerName: string;
 
   constructor(private router: Router, private authService: AuthService) {
+
     this.player = {
       id: 'a',
       name: '',
