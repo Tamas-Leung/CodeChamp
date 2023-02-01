@@ -28,6 +28,27 @@
   color: white;
 }
 
+.playerDiv {
+  margin: auto;
+  margin-top: 40px;
+  width: 300px;
+}
+
+.player-img {
+  border-radius: 50%;
+  width: 45.22px;
+  height: 45.22px;
+  float: left;
+}
+
+.player-name {
+  color: #ffffff;
+  font-family: 'Mulish';
+  float: right;
+  font-size: 40px;
+  margin-top: 5px;
+}
+
 /* Pattern styles */
 .container {
   display: grid;
