@@ -27,4 +27,8 @@ export class AuthService {
   getToken(): string | null {
     return localStorage.getItem('token');
   }
+
+  getPlayerData(): any {
+    return JSON.parse(atob(localStorage.getItem('token')!.split('.')[1]));
+  }
 }

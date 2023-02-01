@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PlayerData } from '../types/PlayerData';
 import { Router } from '@angular/router';
+import { AuthService } from '../services/auth/auth.service';
 
 @Component({
   selector: 'app-myprofile',
@@ -9,8 +10,12 @@ import { Router } from '@angular/router';
 })
 export class MyProfileComponent {
   player: PlayerData;
+  playerStats: any;
+  playerPicture: string;
+  playerName: string;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, 
+    private authService: AuthService) {
     this.player = {
       id: 'a',
       name: '',
@@ -23,6 +28,9 @@ export class MyProfileComponent {
       medium: 10,
       hard: 10,
     } as PlayerData;
+    this.playerStats = authService.getPlayerData();
+    this.playerPicture = this.playerStats.picture;
+    this.playerName = this.playerStats.name;
   }
   leave() {
     this.router.navigate(['/']);
