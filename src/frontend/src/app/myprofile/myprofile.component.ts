@@ -24,7 +24,7 @@ export class MyProfileComponent {
       medium: 10,
       hard: 10,
     } as PlayerData;
-    var playerStats = authService.getPlayerData();
+    const playerStats = authService.getPlayerData();
     this.player.picture = playerStats.picture;
     this.player.name = playerStats.name;
   }
