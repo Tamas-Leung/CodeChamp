@@ -14,8 +14,7 @@ export class MyProfileComponent {
   playerPicture: string;
   playerName: string;
 
-  constructor(private router: Router, 
-    private authService: AuthService) {
+  constructor(private router: Router, private authService: AuthService) {
     this.player = {
       id: 'a',
       name: '',
