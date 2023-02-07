@@ -10,7 +10,7 @@ export const Events = {
   FIND_GAME: 'findGame',
   DISCONNECT: 'disconnect',
   LEAVE_GAME: 'leaveGame',
-  RECONNECT: 'reconnect'
+  RECONNECT: 'reconnect',
 };
 
 export default class WebSocketManager {
@@ -20,7 +20,7 @@ export default class WebSocketManager {
 
   addClient(ws, token) {
     const decodedToken = decodeToken(token);
-    this.disconnectClient(ws, token)
+    this.disconnectClient(ws, token);
 
     this.clients.set(decodedToken.email, {
       ws,
@@ -85,31 +85,41 @@ export default class WebSocketManager {
     ) {
       this.clients
         .get(decodedToken.email)
-        .ws.send(JSON.stringify({ method: Events.DISCONNECT, message: 'Another user from the same email has connected, Disconnected from lobby' }));
+        .ws.send(
+          JSON.stringify({
+            method: Events.DISCONNECT,
+            message:
+              'Another user from the same email has connected, Disconnected from lobby',
+          })
+        );
     }
   }
 
   reconnectToGame(ws, token) {
     const decodedToken = decodeToken(token);
-    this.disconnectClient(ws, decodeToken)
+    this.disconnectClient(ws, decodeToken);
 
     let gameID = null;
     let currentGame = null;
 
-
     this.games.forEach((game, key) => {
       if (game.clientIds.includes(decodedToken.email)) {
         gameID = key;
-        currentGame = game
+        currentGame = game;
       }
-    })
+    });
 
     if (!this.clients.has(decodedToken.email) || gameID == null) {
-      ws.send(JSON.stringify({ method: Events.DISCONNECT, message: "Not in any game, Disconnected from lobby" }));
+      ws.send(
+        JSON.stringify({
+          method: Events.DISCONNECT,
+          message: 'Not in any game, Disconnected from lobby',
+        })
+      );
       return;
     }
-    
-    const originalClient = this.clients.get(decodedToken.email)
+
+    const originalClient = this.clients.get(decodedToken.email);
 
     this.clients.set(decodedToken.email, {
       ws,
@@ -119,7 +129,14 @@ export default class WebSocketManager {
       game: gameID,
       lastCompletedRound: originalClient.lastCompletedRound,
     });
-    ws.send(JSON.stringify({ method: Events.RECONNECT, problemID: currentGame.problemsPlayed[currentGame.problemsPlayed.length-1], round: currentGame.round }));
+    ws.send(
+      JSON.stringify({
+        method: Events.RECONNECT,
+        problemID:
+          currentGame.problemsPlayed[currentGame.problemsPlayed.length - 1],
+        round: currentGame.round,
+      })
+    );
     this.sendUpdatedPlayers(this.games.get(gameID));
   }
 

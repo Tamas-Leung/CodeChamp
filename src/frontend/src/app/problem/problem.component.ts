@@ -31,7 +31,7 @@ export class ProblemComponent implements OnInit, OnDestroy {
     private router: Router,
     private lobbyService: LobbyService,
     public dialog: MatDialog,
-    private ws: WebSocketService,
+    private ws: WebSocketService
   ) {}
 
   ngOnInit() {
@@ -45,10 +45,10 @@ export class ProblemComponent implements OnInit, OnDestroy {
       this.players = players;
     });
 
-    console.log(this.players)
+    console.log(this.players);
     if (this.players.length == 0) {
       //From a refresh, re add client
-      this.ws.reconnectToGame()
+      this.ws.reconnectToGame();
     }
 
     this.endDataSub = this.lobbyService.endData.subscribe((endData) => {

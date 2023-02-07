@@ -7,7 +7,7 @@ export enum GameEvent {
   FIND_GAME = 'findGame',
   DISCONNECT = 'disconnect',
   LEAVE_GAME = 'leaveGame',
-  RECONNECT = 'reconnect'
+  RECONNECT = 'reconnect',
 }
 
 export interface CreateGameResponse {

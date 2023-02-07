@@ -60,18 +60,12 @@ export class WebSocketService {
         return;
       case GameEvent.DISCONNECT:
         this.router.navigate(['/']);
-        this.snackBar.open(
-          data.message,
-          'OK'
-        );
+        this.snackBar.open(data.message, 'OK');
         return;
       case GameEvent.RECONNECT:
         this.lobbyService.updateCurrentRound(data.round);
         this.router.navigate(['/problems/' + data.problemID]);
-        this.snackBar.open(
-          "Reconnected",
-          'OK'
-        );
+        this.snackBar.open('Reconnected', 'OK');
         return;
     }
   }
@@ -141,15 +135,15 @@ export class WebSocketService {
 
   waitForConnection(callback: Function, interval: number) {
     if (this.websocket.readyState === 1) {
-        callback();
+      callback();
     } else {
-        var that = this;
-        // optional: implement backoff for interval here
-        setTimeout(function () {
-            that.waitForConnection(callback, interval);
-        }, interval);
+      var that = this;
+      // optional: implement backoff for interval here
+      setTimeout(function () {
+        that.waitForConnection(callback, interval);
+      }, interval);
     }
-  };
+  }
 
   public close() {
     this.websocket.close();
