@@ -9,7 +9,7 @@ export const Events = {
   PLAYERS_UPDATE: 'playersUpdate',
   FIND_GAME: 'findGame',
   DISCONNECT: 'disconnect',
-  LEAVE_GAME: 'leaveGame'
+  LEAVE_GAME: 'leaveGame',
 };
 
 export default class WebSocketManager {
@@ -19,8 +19,13 @@ export default class WebSocketManager {
 
   addClient(ws, token) {
     const decodedToken = decodeToken(token);
-    if (this.clients.has(decodedToken.email) && this.clients.get(decodedToken.email).ws !== ws) {
-      this.clients.get(decodedToken.email).ws.send(JSON.stringify({ method: Events.DISCONNECT }));
+    if (
+      this.clients.has(decodedToken.email) &&
+      this.clients.get(decodedToken.email).ws !== ws
+    ) {
+      this.clients
+        .get(decodedToken.email)
+        .ws.send(JSON.stringify({ method: Events.DISCONNECT }));
     }
 
     this.clients.set(decodedToken.email, {
@@ -61,7 +66,7 @@ export default class WebSocketManager {
     const game = this.games.get(gameID);
 
     // Prevent crash on game not existing
-    if (!game) return
+    if (!game) return;
 
     // Prevent clients from same email
     const clientIndex = game.clientIds.findIndex(
@@ -221,9 +226,12 @@ export default class WebSocketManager {
 
   leaveGame(ws, token) {
     const decodedToken = decodeToken(token);
-    this.games.forEach((value, key) => {
-      value.clientIds = value.clientIds.filter((clientId) => clientId !== decodedToken.email)
-      this.sendUpdatedPlayers(value)
+    this.games.forEach((value) => {
+      /* eslint-disable no-param-reassign */
+      value.clientIds = value.clientIds.filter(
+        (clientId) => clientId !== decodedToken.email
+      );
+      this.sendUpdatedPlayers(value);
     });
     const client = this.clients.get(decodedToken.email);
     client.gameID = null;
