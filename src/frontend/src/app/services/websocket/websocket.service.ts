@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Route, Router } from '@angular/router';
 
 import { AsyncSubject, BehaviorSubject, Observable, of, Subject } from 'rxjs';
@@ -19,7 +20,8 @@ export class WebSocketService {
   constructor(
     private lobbyService: LobbyService,
     private router: Router,
-    private auth: AuthService
+    private auth: AuthService,
+    private snackBar: MatSnackBar
   ) {}
 
   public open() {
@@ -58,6 +60,7 @@ export class WebSocketService {
         return;
       case GameEvent.DISCONNECT:
         this.router.navigate(['/']);
+        this.snackBar.open("Another user from the same email has connected, Disconnected from lobby", "OK");
         return;
     }
   }
