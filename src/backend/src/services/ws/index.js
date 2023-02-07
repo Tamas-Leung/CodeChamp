@@ -8,6 +8,8 @@ export const Events = {
   NEXT_ROUND: 'nextRound',
   PLAYERS_UPDATE: 'playersUpdate',
   FIND_GAME: 'findGame',
+  DISCONNECT: 'disconnect',
+  LEAVE_GAME: 'leaveGame'
 };
 
 export default class WebSocketManager {
@@ -17,6 +19,10 @@ export default class WebSocketManager {
 
   addClient(ws, token) {
     const decodedToken = decodeToken(token);
+    if (this.clients.has(decodedToken.email) && this.clients.get(decodedToken.email).ws !== ws) {
+      this.clients.get(decodedToken.email).ws.send(JSON.stringify({ method: Events.DISCONNECT }));
+    }
+
     this.clients.set(decodedToken.email, {
       ws,
       id: decodedToken.email,
@@ -53,6 +59,10 @@ export default class WebSocketManager {
     const decodedToken = decodeToken(token);
     const client = this.clients.get(decodedToken.email);
     const game = this.games.get(gameID);
+
+    // Prevent crash on game not existing
+    if (!game) return
+
     // Prevent clients from same email
     const clientIndex = game.clientIds.findIndex(
       (findClientId) => findClientId === client.id
@@ -207,5 +217,15 @@ export default class WebSocketManager {
         gameID: gamesInLobby.length > 0 ? gamesInLobby[rand] : '',
       })
     );
+  }
+
+  leaveGame(ws, token) {
+    const decodedToken = decodeToken(token);
+    this.games.forEach((value, key) => {
+      value.clientIds = value.clientIds.filter((clientId) => clientId !== decodedToken.email)
+      this.sendUpdatedPlayers(value)
+    });
+    const client = this.clients.get(decodedToken.email);
+    client.gameID = null;
   }
 }
