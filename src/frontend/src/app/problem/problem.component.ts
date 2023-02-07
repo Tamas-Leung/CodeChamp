@@ -10,6 +10,7 @@ import {
   MatDialogRef,
 } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
+import { WebSocketService } from '../services/websocket/websocket.service';
 
 @Component({
   selector: 'app-problem',
@@ -29,13 +30,26 @@ export class ProblemComponent implements OnInit, OnDestroy {
     private aRoute: ActivatedRoute,
     private router: Router,
     private lobbyService: LobbyService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private ws: WebSocketService,
   ) {}
 
   ngOnInit() {
+    //Workaround to disable back button in a way
+    history.pushState(null, '', location.href);
+    window.onpopstate = function () {
+      history.go(1);
+    };
+
     this.lobbyService.waitingRoom.subscribe((players) => {
       this.players = players;
     });
+
+    console.log(this.players)
+    if (this.players.length == 0) {
+      //From a refresh, re add client
+      this.ws.reconnectToGame()
+    }
 
     this.endDataSub = this.lobbyService.endData.subscribe((endData) => {
       if (endData) {

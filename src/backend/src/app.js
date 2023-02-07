@@ -82,6 +82,7 @@ wss.on('connection', (ws) => {
     if (message.method === Events.NEXT_ROUND) wsm.gameNextRound(message.gameID);
     if (message.method === Events.FIND_GAME) wsm.findGame(ws);
     if (message.method === Events.LEAVE_GAME) wsm.leaveGame(ws, message.token);
+    if (message.method === Events.RECONNECT) wsm.reconnectToGame(ws, message.token);
   });
 });
 
