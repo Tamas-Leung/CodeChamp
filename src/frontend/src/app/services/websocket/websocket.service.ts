@@ -60,7 +60,10 @@ export class WebSocketService {
         return;
       case GameEvent.DISCONNECT:
         this.router.navigate(['/']);
-        this.snackBar.open("Another user from the same email has connected, Disconnected from lobby", "OK");
+        this.snackBar.open(
+          'Another user from the same email has connected, Disconnected from lobby',
+          'OK'
+        );
         return;
     }
   }
