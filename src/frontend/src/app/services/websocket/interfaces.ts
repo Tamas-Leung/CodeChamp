@@ -6,7 +6,7 @@ export enum GameEvent {
   PLAYERS_UPDATE = 'playersUpdate',
   FIND_GAME = 'findGame',
   DISCONNECT = 'disconnect',
-  LEAVE_GAME = 'leaveGame'
+  LEAVE_GAME = 'leaveGame',
 }
 
 export interface CreateGameResponse {
