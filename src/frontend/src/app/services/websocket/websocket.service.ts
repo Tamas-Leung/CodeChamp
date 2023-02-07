@@ -137,7 +137,7 @@ export class WebSocketService {
     if (this.websocket.readyState === 1) {
       callback();
     } else {
-      var that = this;
+      const that = this;
       // optional: implement backoff for interval here
       setTimeout(function () {
         that.waitForConnection(callback, interval);
