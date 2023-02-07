@@ -26,6 +26,12 @@ export class LobbyComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    //Workaround to disable back button in a way
+    history.pushState(null, '', location.href);
+    window.onpopstate = function () {
+      history.go(1);
+    };
+
     this.lobbyService.waitingRoom.subscribe((players) => {
       this.players = players;
       this.numOfPlayers = this.players.length;
@@ -54,8 +60,7 @@ export class LobbyComponent implements OnInit {
   }
 
   leave() {
-    this.ws.close();
-    this.ws.open();
+    this.ws.leaveGame();
     this.router.navigate(['/']);
   }
 }

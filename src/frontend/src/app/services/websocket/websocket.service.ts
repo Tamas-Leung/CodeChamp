@@ -56,6 +56,9 @@ export class WebSocketService {
         this.lobbyService.updateCurrentRound(0);
         this.lobbyService.updateEndData(data.endData);
         return;
+      case GameEvent.DISCONNECT:
+        this.router.navigate(['/']);
+        return;
     }
   }
 
@@ -94,6 +97,15 @@ export class WebSocketService {
         })
       );
     }
+  }
+
+  leaveGame() {
+    this.sendMessage(
+      JSON.stringify({
+        method: GameEvent.LEAVE_GAME,
+        token: this.auth.getToken(),
+      })
+    );
   }
 
   public sendMessage(message: string) {
