@@ -60,10 +60,12 @@ export class WebSocketService {
         return;
       case GameEvent.DISCONNECT:
         this.router.navigate(['/']);
-        this.snackBar.open(
-          'Another user from the same email has connected, Disconnected from lobby',
-          'OK'
-        );
+        this.snackBar.open(data.message, 'OK');
+        return;
+      case GameEvent.RECONNECT:
+        this.lobbyService.updateCurrentRound(data.round);
+        this.router.navigate(['/problems/' + data.problemID]);
+        this.snackBar.open('Reconnected', 'OK');
         return;
     }
   }
@@ -94,6 +96,15 @@ export class WebSocketService {
     );
   }
 
+  reconnectToGame() {
+    this.sendMessage(
+      JSON.stringify({
+        method: GameEvent.RECONNECT,
+        token: this.auth.getToken(),
+      })
+    );
+  }
+
   nextRound() {
     if (this.newGameID.value) {
       this.sendMessage(
@@ -117,7 +128,21 @@ export class WebSocketService {
   public sendMessage(message: string) {
     console.log('Send data: ');
     console.log(message);
-    this.websocket.send(message);
+    this.waitForConnection(() => {
+      this.websocket.send(message);
+    }, 1000);
+  }
+
+  waitForConnection(callback: Function, interval: number) {
+    if (this.websocket.readyState === 1) {
+      callback();
+    } else {
+      const that = this;
+      // optional: implement backoff for interval here
+      setTimeout(function () {
+        that.waitForConnection(callback, interval);
+      }, interval);
+    }
   }
 
   public close() {
