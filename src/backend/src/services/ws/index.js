@@ -83,15 +83,13 @@ export default class WebSocketManager {
       this.clients.has(decodedToken.email) &&
       this.clients.get(decodedToken.email).ws !== ws
     ) {
-      this.clients
-        .get(decodedToken.email)
-        .ws.send(
-          JSON.stringify({
-            method: Events.DISCONNECT,
-            message:
-              'Another user from the same email has connected, Disconnected from lobby',
-          })
-        );
+      this.clients.get(decodedToken.email).ws.send(
+        JSON.stringify({
+          method: Events.DISCONNECT,
+          message:
+            'Another user from the same email has connected, Disconnected from lobby',
+        })
+      );
     }
   }
 
