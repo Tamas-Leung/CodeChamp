@@ -45,7 +45,6 @@ export class ProblemComponent implements OnInit, OnDestroy {
       this.players = players;
     });
 
-    console.log(this.players);
     if (this.players.length == 0) {
       //From a refresh, re add client
       this.ws.reconnectToGame();
