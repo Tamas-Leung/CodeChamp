@@ -15,7 +15,10 @@
 \usepackage{float}
 \usepackage{amsmath}
 \usepackage{tikz}
+\usepackage[normalem]{ulem}
+\usepackage{xcolor}
 \usetikzlibrary{automata,positioning,arrows}
+\newcommand\redsout{\bgroup\markoverwith{\textcolor{red}{\rule[0.5ex]{2pt}{0.4pt}}}\ULon}
 
 \title{SE 4G06: Software Requirements Specification\\Team \#12 - CodeChamp}
 
@@ -48,6 +51,7 @@
 \begin{tabularx}{\textwidth}{p{3cm}p{2cm}X}
 \toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
 \midrule
+Feb. 7, 2023& 0.3 & Updated Functional and Non functional requirements\\
 Oct. 4, 2022 & 0.2 & Prioritization, Traceability and Phase In Plan for Requirements; Appendix Reflections; Minor changes to requirements; State Machine Formal definition\\
 Sept. 27, 2022 & 0.1 & Initial Version\\
 \bottomrule
@@ -72,8 +76,8 @@ Sept. 27, 2022 & 0.1 & Initial Version\\
 
 \section*{Naming Conventions and Terminology}
 \begin{itemize}
-    \item Leetcode: An online platform to learn data structures and algorithms. It provides the user with the ability to solve questions from the database by giving them the ability to write code and compile within the platform. It will also provide feedbacks by giving number of test cases passed.
-    \item DMOJ: Another online platform to learn data structures and algorithms
+    \item \href{http://www.leetcode.com}{LeetCode}: An online platform to learn data structures and algorithms. It provides the user with the ability to solve questions from the database by giving them the ability to write code and compile within the platform. It will also provide feedbacks by giving number of test cases passed.
+    \item \href{http://www.dmoj.ca}{DMOJ}: Another online platform to learn data structures and algorithms
     \item SRS: Software Requirement Specification
     \item UI: User interface
 \end{itemize}
@@ -171,53 +175,49 @@ Practicing coding the traditional way can be daunting. The current most popular 
 \subsection{Functional Requirements}
 \subsubsection{Priority 0}
 \begin{enumerate}[label=FR.\arabic*]
-    \item The system shall match-make users into a match. \label{FR.1}
-    \item The system shall start a match when 20 players are match-made. \label{FR.2}
-    \item The system shall have 3 rounds per match. \label{FR.3}
+    \item \textcolor{red}{The system shall match-make users into a lobby.} \label{FR.1}
+    \item \textcolor{red}{The system shall allow the user to be start the game whenever there is one or more player in a lobby.} \label{FR.2}
+    \item \textcolor{red}{The system shall allow for multiple rounds in a match
+Removing FR9 and 10.} \label{FR.3}
     \item The system shall display one coding problem per round. \label{FR.4}
     \item The system shall allow users to submit code through the web interface. \label{FR.5}
     \item The system shall compile the user's code. \label{FR.6}
     \item The system shall run the user's code against the test cases for a problem.  \label{FR.7}
     \item The system shall display the result of running the user's code against the test cases to the user.  \label{FR.8}
-    \item The system shall qualify the first 10 users in the first round to solve the coding problem into the second round and shall disqualify the remainder.  \label{FR.9}
-    \item The system shall qualify the first 5 users in the second round to solve the coding problem into the third round and shall disqualify the remainder.  \label{FR.10}
-    \item The system shall declare the first user to solve the coding problem in the final round as the winner and shall disqualify the remainder.  \label{FR.11}
-    \item The system shall allow developers to create, modify and delete coding problems.  \label{FR.12}
-    \item The system shall allow developers to create, modify and delete test cases for a coding problem.  \label{FR.13}
+    \item \textcolor{red}{The system shall allow for players to be eliminated.}  \label{FR.9}
+    \item \textcolor{red}{The system shall only allow for one winner in each match.} \label{FR.10}
+    \item The system shall allow developers to create, modify and delete coding problems.  \label{FR.11}
+    \item The system shall allow developers to create, modify and delete test cases for a coding problem. \label{FR.12}
 
 \end{enumerate}
 
 \subsubsection{Priority 1}
 \begin{enumerate}[label=FR.\arabic*, resume] 
-    \item The system shall detect malicious code.\label{FR.14}
-    \item The system shall prevent malicious code from compiling. \label{FR.15}
-    \item The system shall display the result of the code's compilation and report any errors to the user. \label{FR.16}
-    \item The system shall allow users to sign up using a username, email and password. \label{FR.17}
-    \item The system shall allow users to log in using a username and password. \label{FR.18}
-    \item The system shall display an error if the user fails to log in. \label{FR.19}
-    \item The system shall track the code's running time in seconds and its memory usage in megabytes. \label{FR.20}\\
+    \item \textcolor{red}{The system shall allow users to log in.} \label{FR.14}
+    \item The system shall display an error if the user fails to log in. \label{FR.15}
+    \item The system shall track the code's running time in seconds and its memory usage in megabytes. \label{FR.16}\\
     \textbf{Rationale}: An important part of an algorithm is its time and memory complexity. For some problems, the developers may want to disallow solutions that are not of the optimal time or memory complexity.
-    \item The system shall time-out any code that exceeds the time or memory limit for a coding problem. \label{FR.21} \\
+    \item The system shall time-out any code that exceeds the time or memory limit for a coding problem. \label{FR.17} \\
      \textbf{Rationale}: Inputs that consume more resources than needed should be timed out for performance and safety of the system.  
-    \item The system shall allow developers to define a time in seconds and a memory limit in megabytes for each coding problem. \label{FR.22}
+    \item The system shall allow developers to define a time in seconds and a memory limit in megabytes for each coding problem. \label{FR.18}
 
 \end{enumerate}
 
 \subsubsection{Priority 2}
 \begin{enumerate}[label=FR.\arabic*, resume]
-    \item The system shall allow users to create a lobby link. \label{FR.23}\\
+    \item The system shall allow users to create a lobby link. \label{FR.19}\\
      \textbf{Rationale}: Links will be used to allow users to share a lobby to other users
-    \item The system shall allow users to join a lobby using a link. \label{FR.24}\\
-    \item The system shall allow users to view a history of their previous matches. \label{FR.25}
+    \item The system shall allow users to join a lobby using a link. \label{FR.20}\\
+    \item The system shall allow users to view a history of their previous matches. \label{FR.21}
      \textbf{Rationale}: Allows the user to see their history and progress to track their skill changes over time.
-    \item The system shall display the user's win percentage. \label{FR.26}\\
+    \item The system shall display the user's win percentage. \label{FR.22}\\
      \textbf{Rationale}: Allows the user to track their history and progress to quantify their skills against the competition.
-    \item The system shall display the rounds in which the users qualified or disqualified for a match's history.\\
+    \item \textcolor{red}{The system shall display what placement they received in the match history.} \\
     \textbf{Rationale}: Looking at a previous matches' result is helpful for the user experience, as it can help them recognize what they did wrong and what they could do to improve in the next one.
-    \label{FR.27}
+    \label{FR.23}
     \item The system shall display the coding problem for each round in a match's history.\\
-    \textbf{Rationale}: Looking at previous problems can help users identify their weaknesses and give them a second chance to solve a problem which they could not previously solve in time. \label{FR.28}
-    \item The system shall track and display the top 100 users with the largest number of wins. \label{FR.29}\\
+    \textbf{Rationale}: Looking at previous problems can help users identify their weaknesses and give them a second chance to solve a problem which they could not previously solve in time. \label{FR.24}
+    \item The system shall track and display the top 100 users with the largest number of wins. \label{FR.25}\\
     \textbf{Rationale}: Recognizing the top users can motivate others to practice and give an incentive for improvement, which is important for our user experience. 
 
 \end{enumerate}
@@ -294,46 +294,51 @@ F = \{s\_login\}$
 
 \subsection{Look and Feel Requirements}
 \begin{enumerate}[label=NFR.\arabic*]
-    \item The interface of the system shall be easy to read and the elements are not clumped together. \label{NFR.1}
-    \item The elements on the interface shall be organized and placed in a logical way. \label{NFR.2}
+    \item All interactive elements shall provide feedback for the user. \label{NFR.1}
+    \\\textbf{Fit Criterion}: Interact-able elements must have a hover effect upon mouse over events.
 \end{enumerate}
 
 \subsection{Usability and Humanity Requirements}
 \begin{enumerate}[label=NFR.\arabic*, resume]
-    \item People with basic computer understanding shall be able to navigate the system. \label{NFR.3}
-    \item The system shall be simple to understand and user should spend less than 5 minutes to understand what each part of the system does. \label{NFR.4}
-    \item The system should be easily accessible so that the user can navigate around the system without the use of mouse. \label{NFR.5}
+    \item All text displayed by the system should be readable.
+    \\\textbf{Fit Criterion}: Text elements must have a color contrast ratio of at least 4.5:1 with the foreground element.
+    \label{NFR.2}
+    \item The system shall be simple to understand. \label{NFR.3}
+    \\\textbf{Fit Criterion}: No more than 4 different options will be given to the user at a time.
 \end{enumerate}
 \subsection{Performance Requirements}
 \begin{enumerate}[label=NFR.\arabic*, resume]
-    \item The system shall respond to a user's action within 2 seconds. \label{NFR.6}
-    \item The system shall process and give results base on user's inputs within 10 seconds. \label{NFR.7}
-    \item The system shall be operating 24 hours a day, 7 days a week. \label{NFR.8}
+    \item The system's average response time will be 2 seconds or less. \label{NFR.4}
+    \\\textbf{Fit Criterion}: The monthly average of all system responses must have an average response time of at most 2 seconds.
+    \item The system's up-time percentage will be at least 99\%.
+    \\\textbf{Fit Criterion}: The monthly system up-time must have an up time of 99\%.
+    \label{NFR.5}
 \end{enumerate}
 \subsection{Operational and Environmental Requirements}
 \begin{enumerate}[label=NFR.\arabic*, resume]
-    \item The system should run on major browsers and devices that support these browsers. \label{NFR.9}
+    \item The system should run on major browsers. \label{NFR.6}
+    \\\textbf{Fit Criterion}: All parts of the system can be accessed and used by Google Chrome, Mozilla Firefox, Safari, Opera and Microsoft Edge's long term support versions as of February 2023.
 \end{enumerate}
 \subsection{Maintainability and Support Requirements}
-\begin{enumerate}[label=NFR.\arabic*, resume]
-    \item The system shall provide the ability for developers to add questions and test cases when needed. \label{NFR.10}
-\end{enumerate}
+N/A
 \subsection{Security Requirements}
 \begin{enumerate}[label=NFR.\arabic*, resume]
-    \item The system shall require users to register their own accounts in order to use the system. \label{NFR.11}
-    \item The system shall deny the user access if the user fails to login. \label{NFR.12}
+    \item The system shall deny the user access if the user is not logged in. \label{NFR.7}
+    \\\textbf{Fit Criterion}: Unauthorized users must be redirected to login.
+    \item \textcolor{red}{The system shall prevent user code from accessing the file system.}\label{NFR.8}
+    \item \textcolor{red}{The system shall prevent user code from making network calls.}\label{NFR.9}
 \end{enumerate}
 \subsection{Cultural Requirements}
 \begin{enumerate}[label=NFR.\arabic*, resume]
-    \item The system shall not have anything that is or suggests cultural inappropriate content to society. \label{NFR.13}
+    \item The system shall not have anything that is or suggests cultural inappropriate content to society. \label{NFR.10}
 \end{enumerate}
 \subsection{Legal Requirements}
 \begin{enumerate}[label=NFR.\arabic*, resume]
-    \item The system shall be protected by GNU General Public License (GPL). \label{NFR.14}
+    \item The system shall be protected by the GNU General Public License (GPL). \label{NFR.11}
 \end{enumerate}
 \subsection{Health and Safety Requirements}
 \begin{enumerate}[label=NFR.\arabic*, resume]
-    \item The system shall not have any flashing lights that can put the user under the risk of epilepsy or seizure. \label{NFR.15}
+    \item The system shall not have any flashing lights that can put the user under the risk of epilepsy or seizure. \label{NFR.12}
 \end{enumerate}
 % This section is not in the original Volere template, but health and safety are
 % issues that should be considered for every engineering project.
@@ -346,11 +351,11 @@ F = \{s\_login\}$
     \hline
     Non-Functional Requirements & Functional Requirements & Rationale \\
     \hline
-    \ref{NFR.1} \ref{NFR.2}  \ref{NFR.3} \ref{NFR.4}  \ref{NFR.5} \ref{NFR.15} & \ref{FR.4} \ref{FR.8} \ref{FR.16} \ref{FR.19} \ref{FR.26} \ref{FR.27} \ref{FR.28} \ref{FR.29} & Requirements that are focused on interface design requirements.\\
+    \ref{NFR.1} \ref{NFR.2} \ref{NFR.12} & \ref{FR.4} \ref{FR.8} \ref{FR.14} \ref{FR.21} \ref{FR.22} \ref{FR.23} \ref{FR.24} & Requirements that are focused on interface design requirements.\\
     \hline
-    \ref{NFR.6} \ref{NFR.7}  & \ref{FR.6} \ref{FR.7} \ref{FR.14} \ref{FR.15} \ref{FR.20} \ref{FR.21} \ref{FR.22} & Requirements that are focused on performance of user experience and code compilation.  \\
+    \ref{NFR.4} \ref{NFR.5} \ref{NFR.6} & \ref{FR.6} \ref{FR.7} \ref{FR.15} \ref{FR.16} \ref{FR.17} & Requirements that are focused on performance of user experience and code compilation.  \\
     \hline
-    \ref{NFR.11} \ref{NFR.12} & \ref{FR.17} \ref{FR.18} \ref{FR.19} & Requirements that are focused on account security and management\\
+    \ref{NFR.7} \ref{NFR.8}  \ref{NFR.9}& \ref{FR.17} \ref{FR.18} \ref{FR.19} & Requirements that are focused on account security and management\\
     \hline
     \end{tabularx}
     \caption{Traceability Table for Functional and Non-Functional Requirements}
