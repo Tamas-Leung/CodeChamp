@@ -68,7 +68,8 @@ export default function Judge(webSocketManager) {
           code,
           input,
           output,
-          timeout: problem.time_limit,
+          timeLimit: problem.time_limit,
+          memoryLimit: problem.memory_limit,
         });
         if (!judgeResult) {
           res
