@@ -3,7 +3,7 @@ const languages = Object.freeze({
 });
 
 const languageImages = Object.freeze({
-  mjs: `node`,
+  mjs: `node:19-alpine`,
 });
 
 const languageCommands = Object.freeze({
