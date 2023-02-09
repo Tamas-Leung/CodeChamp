@@ -10,4 +10,7 @@ const languageCommands = Object.freeze({
   mjs: `node`,
 });
 
-export { languages, languageImages, languageCommands };
+const languageIsSupported = (language) =>
+  Object.keys(languages).some((l) => language === l);
+
+export { languages, languageIsSupported, languageImages, languageCommands };
