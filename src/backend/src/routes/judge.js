@@ -3,6 +3,7 @@ import { isValidObjectId } from 'mongoose';
 
 import { Problems } from '../database/mongoose.js';
 import judge from '../services/judge/index.js';
+import { languageIsSupported } from '../services/judge/languages.js';
 
 export default function Judge(webSocketManager) {
   const router = Router();
@@ -50,6 +51,12 @@ export default function Judge(webSocketManager) {
     const { _id } = req.params;
     const { code, language, token } = req.body;
 
+    if (!languageIsSupported(language)) {
+      res
+        .status(400)
+        .send({ error: `${language} is not a supported language.` });
+      return;
+    }
     if (!isValidObjectId(_id)) {
       res.status(400).send({ error: `${_id} is not a valid id.` });
       return;
