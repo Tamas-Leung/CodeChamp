@@ -4,11 +4,15 @@ This project is an Express API.
 
 ## Setup
 
-### Step 1
+### Step 1: Install Packages
 
 Run `npm install` to install packages.
 
-### Step 2: Setup Variables
+### Step 2: Setup Docker
+
+Docker is required for running the judge service. The recommended method is to setup [Docker Desktop](https://www.docker.com/products/docker-desktop/) for local development.
+
+### Step 3: Setup Variables
 
 #### Method 1: Using Export
 
