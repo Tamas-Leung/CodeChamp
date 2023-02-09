@@ -61,7 +61,7 @@ export class CodeEditorComponent implements OnInit {
       .submitSolution(
         this.id,
         this.solution,
-        'js',
+        'mjs',
         this.authService.getToken()!
       )
       .subscribe((data) => {
