@@ -11,6 +11,6 @@ const languageCommands = Object.freeze({
 });
 
 const languageIsSupported = (language) =>
-  Object.keys(languages).some((l) => language === l);
+  Object.values(languages).some((l) => language === l);
 
 export { languages, languageIsSupported, languageImages, languageCommands };
