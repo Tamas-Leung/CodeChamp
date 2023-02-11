@@ -19,7 +19,7 @@ export class LobbyService {
     this.waitingRoom.next(players);
   }
 
-  updateEndData(endData: EndData) {
+  updateEndData(endData: EndData | undefined) {
     this.endData.next(endData);
   }
 

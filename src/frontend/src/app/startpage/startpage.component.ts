@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth/auth.service';
+import { LobbyService } from '../services/lobby/lobby.service';
 import { WebSocketService } from '../services/websocket/websocket.service';
 
 @Component({
@@ -13,12 +14,15 @@ export class StartpageComponent implements OnInit {
   constructor(
     private auth: AuthService,
     private router: Router,
-    public ws: WebSocketService
+    public ws: WebSocketService,
+    private lobbyService: LobbyService
   ) {}
 
   joinGameFormControl = new FormControl('', Validators.required);
 
   ngOnInit() {
+    this.lobbyService.updateEndData(undefined);
+
     this.ws.findGameID.subscribe((gameID) => {
       if (gameID === '') {
         this.createGame();
