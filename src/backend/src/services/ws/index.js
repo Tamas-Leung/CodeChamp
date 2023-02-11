@@ -134,6 +134,7 @@ export default class WebSocketManager {
         problemID:
           currentGame.problemsPlayed[currentGame.problemsPlayed.length - 1],
         round: currentGame.round,
+        endTime: currentGame.endTime,
       })
     );
     this.sendUpdatedPlayers(this.games.get(gameID));
@@ -153,6 +154,54 @@ export default class WebSocketManager {
   gameNextRound(gameID) {
     const game = this.games.get(gameID);
 
+    this.removePlayersNotFinished(gameID);
+
+    game.round += 1;
+
+    const players = this.getPlayersDataToSend(game);
+
+    let newProblem = '63794a6952d8441c74627f63';
+
+    // TEMPORARY HARDCODE TO FORCE A DIFFERENT PROBLEM ON 2nd round
+    if (game.problemsPlayed.includes(newProblem)) {
+      newProblem = '63747e5dfffe067b61c7e67e';
+    }
+
+    game.problemsPlayed.push(newProblem);
+
+    const totalTime = 5 * 60 * 1000; // 5 minutes currently
+
+    const endTime = Date.now() + totalTime;
+    setTimeout(() => {
+      this.checkTimer(gameID, game.round);
+    }, totalTime);
+    game.endTime = endTime;
+
+    game.clientIds.forEach((clientId) => {
+      const client = this.clients.get(clientId);
+      client.ws.send(
+        JSON.stringify({ method: Events.PLAYERS_UPDATE, players })
+      );
+      client.ws.send(
+        JSON.stringify({
+          method: Events.NEXT_ROUND,
+          round: game.round,
+          problemID: newProblem,
+          endTime,
+        })
+      );
+    });
+  }
+
+  checkTimer(gameID, roundNumber) {
+    const game = this.games.get(gameID);
+    if (game.round === roundNumber) {
+      this.removePlayersNotFinished(gameID);
+    }
+  }
+
+  removePlayersNotFinished(gameID) {
+    const game = this.games.get(gameID);
     // Remove players who did not finish, ignore first round
     if (game.round > 0) {
       const clientIdsThatLost = game.clientIds.filter((clientId) => {
@@ -173,32 +222,9 @@ export default class WebSocketManager {
       });
     }
 
-    game.round += 1;
-
-    const players = this.getPlayersDataToSend(game);
-
-    let newProblem = '63794a6952d8441c74627f63';
-
-    // TEMPORARY HARDCODE TO FORCE A DIFFERENT PROBLEM ON 2nd round
-    if (game.problemsPlayed.includes(newProblem)) {
-      newProblem = '63747e5dfffe067b61c7e67e';
+    if (game.clientIds <= 1) {
+      this.endGame(gameID);
     }
-
-    game.problemsPlayed.push(newProblem);
-
-    game.clientIds.forEach((clientId) => {
-      const client = this.clients.get(clientId);
-      client.ws.send(
-        JSON.stringify({ method: Events.PLAYERS_UPDATE, players })
-      );
-      client.ws.send(
-        JSON.stringify({
-          method: Events.NEXT_ROUND,
-          round: game.round,
-          problemID: newProblem,
-        })
-      );
-    });
   }
 
   playerCompleteRound(token) {

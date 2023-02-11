@@ -9,7 +9,7 @@ import {
   MAT_DIALOG_DATA,
   MatDialogRef,
 } from '@angular/material/dialog';
-import { Subscription } from 'rxjs';
+import { interval, Subscription } from 'rxjs';
 import { WebSocketService } from '../services/websocket/websocket.service';
 
 @Component({
@@ -21,9 +21,14 @@ export class ProblemComponent implements OnInit, OnDestroy {
   title: string = '';
   description: string = '';
   id: string = '';
+  timeLeftSeconds: number = 0;
+  timeLeftMinutes: number = 0;
+  endTime: Date = new Date();
 
   players: PlayerData[] = [];
   endDataSub: Subscription | undefined;
+  endTimeSub: Subscription | undefined;
+  currentTimeSub: Subscription | undefined;
 
   constructor(
     private problemService: ProblemsService,
@@ -59,6 +64,14 @@ export class ProblemComponent implements OnInit, OnDestroy {
       }
     });
 
+    this.endTimeSub = this.lobbyService.currentEndTime.subscribe((endTime) => {
+      this.endTime = endTime;
+    });
+
+    this.currentTimeSub = interval(1000).subscribe((x) =>
+      this.setTimeDifference()
+    );
+
     this.aRoute.paramMap.subscribe((params) => {
       const id = params.get('id');
       if (id != null) {
@@ -81,6 +94,18 @@ export class ProblemComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.endDataSub?.unsubscribe();
+    this.currentTimeSub?.unsubscribe();
+    this.endTimeSub?.unsubscribe();
+  }
+
+  private setTimeDifference() {
+    let timeDifference = this.endTime.getTime() - new Date().getTime();
+    if (timeDifference <= 0) {
+      this.currentTimeSub?.unsubscribe();
+      timeDifference = 0;
+    }
+    this.timeLeftSeconds = Math.floor((timeDifference / 1000) % 60);
+    this.timeLeftMinutes = Math.floor((timeDifference / 1000 / 60) % 60);
   }
 }
 
