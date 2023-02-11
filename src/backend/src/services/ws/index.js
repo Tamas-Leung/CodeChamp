@@ -1,6 +1,6 @@
 import { hri } from 'human-readable-ids';
 import { decodeToken } from '../auth/token.js';
-
+import { insertMatch } from '../matchs/index.js';
 export const Events = {
   CREATE: 'create',
   JOIN: 'join',
@@ -145,6 +145,7 @@ export default class WebSocketManager {
 
       const won = client.lastCompletedRound === game.round;
       client.ws.send(JSON.stringify({ method: Events.END, endData: { won } }));
+      insertMatch(gameID, clientId, won, game.problemsPlayed);
     });
   }
 
@@ -167,6 +168,7 @@ export default class WebSocketManager {
         );
         client.game = null;
         client.lastCompletedRound = 0;
+        insertMatch(gameID, clientId, false, game.problemsPlayed);
       });
     }
 
