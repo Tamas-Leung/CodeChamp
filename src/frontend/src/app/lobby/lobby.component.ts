@@ -53,7 +53,7 @@ export class LobbyComponent implements OnInit {
 
   copyCode() {
     this.clipboard.copy(this.id);
-    this.snackBar.open('Code copied!', 'Done');
+    this.snackBar.open('Code copied!', 'Ok');
   }
 
   leave() {
