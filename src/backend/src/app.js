@@ -8,6 +8,7 @@ import judge from './routes/judge.js';
 import problems from './routes/problems.js';
 import WebSocketManager, { Events } from './services/ws/index.js';
 import auth from './routes/auth.js';
+import matchs from './routes/matchs.js';
 
 import { Schemas } from './database/mongoose.js';
 
@@ -64,6 +65,7 @@ const wsm = new WebSocketManager();
 app.use('/judge', judge(wsm));
 app.use('/problems', problems);
 app.use('/auth', auth);
+app.use('/matchs', matchs);
 
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(openapiSpecification));
 
