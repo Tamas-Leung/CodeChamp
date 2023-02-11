@@ -13,6 +13,8 @@ export class LobbyService {
 
   public currentRound = new BehaviorSubject<number>(0);
 
+  public currentEndTime = new BehaviorSubject<Date>(new Date());
+
   constructor() {}
 
   updateWaitingRoom(players: PlayerData[]) {
@@ -25,5 +27,9 @@ export class LobbyService {
 
   updateCurrentRound(round: number) {
     this.currentRound.next(round);
+  }
+
+  updateEndTimer(endTime: number) {
+    this.currentEndTime.next(new Date(endTime));
   }
 }

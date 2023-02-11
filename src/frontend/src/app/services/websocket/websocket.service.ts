@@ -46,6 +46,7 @@ export class WebSocketService {
         return;
       case GameEvent.NEXT_ROUND:
         this.lobbyService.updateCurrentRound(data.round);
+        this.lobbyService.updateEndTimer(data.endTime);
         this.router.navigate(['/problems/' + data.problemID]);
         return;
       case GameEvent.FIND_GAME:
@@ -64,6 +65,7 @@ export class WebSocketService {
         return;
       case GameEvent.RECONNECT:
         this.lobbyService.updateCurrentRound(data.round);
+        this.lobbyService.updateEndTimer(data.endTime);
         this.router.navigate(['/problems/' + data.problemID]);
         this.snackBar.open('Reconnected', 'OK');
         return;
