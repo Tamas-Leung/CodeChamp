@@ -114,6 +114,11 @@ h2 {
   letter-spacing: 1px;
 }
 
+.button-bottom.disabled {
+  border: 2px solid #b1b1b1;
+  color: #b1b1b1;
+}
+
 .code-text {
   font-family: 'Mulish';
   font-style: normal;
@@ -124,7 +129,7 @@ h2 {
   padding-top: 78px;
 }
 
-.button-bottom:hover {
+.button-bottom:hover:not(.disabled) {
   border-color: rgb(2, 2, 2);
 }
 

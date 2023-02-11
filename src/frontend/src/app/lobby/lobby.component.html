@@ -22,7 +22,12 @@
     />
   </h1>
 
-  <button class="button-bottom" (click)="startGame()">
+  <button
+    class="button-bottom"
+    [class.disabled]="players.length < 2"
+    [disabled]="players.length < 2"
+    (click)="startGame()"
+  >
     <div style="padding-left: 150px">Start</div>
   </button>
 </div>
