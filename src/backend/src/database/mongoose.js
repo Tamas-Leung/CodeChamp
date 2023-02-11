@@ -13,7 +13,7 @@ const Matchs = model('matchs', MatchSchema);
 
 const Schemas = {
   Problems: m2s(Problems),
-  Matchs: m2s(Matchs)
+  Matchs: m2s(Matchs),
 };
 
 export { Problems, Schemas, Matchs };
