@@ -5,7 +5,10 @@
 <div style="background: white">
   <div class="row">
     <div class="col-6">
-      <app-problem-description [title]="title" [description]="description"></app-problem-description>
+      <app-problem-description
+        [title]="title"
+        [description]="description"
+      ></app-problem-description>
     </div>
     <div class="col-6">
       <app-code-editor [id]="id"></app-code-editor>
@@ -16,10 +19,13 @@
       <span>{{ player.name }}:</span>
       <span>{{
         player.finishedCurrentRound ? 'Finished' : 'Not finished'
-        }}</span>
+      }}</span>
     </div>
   </div>
   <div class="timer">
-    <span>{{timeLeftMinutes}} : {{timeLeftSeconds.toString().padStart(2,'0')}}</span>
+    <span
+      >{{ timeLeftMinutes }} :
+      {{ timeLeftSeconds.toString().padStart(2, '0') }}</span
+    >
   </div>
 </div>

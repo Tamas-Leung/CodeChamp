@@ -133,7 +133,7 @@ export default class WebSocketManager {
         problemID:
           currentGame.problemsPlayed[currentGame.problemsPlayed.length - 1],
         round: currentGame.round,
-        endTime: currentGame.endTime
+        endTime: currentGame.endTime,
       })
     );
     this.sendUpdatedPlayers(this.games.get(gameID));
@@ -167,10 +167,12 @@ export default class WebSocketManager {
 
     game.problemsPlayed.push(newProblem);
 
-    const totalTime = 5 * 60 * 1000 //5 minutes currently
+    const totalTime = 5 * 60 * 1000; // 5 minutes currently
 
     const endTime = Date.now() + totalTime;
-    setTimeout(() => { this.checkTimer(gameID, game.round) }, totalTime);
+    setTimeout(() => {
+      this.checkTimer(gameID, game.round);
+    }, totalTime);
     game.endTime = endTime;
 
     game.clientIds.forEach((clientId) => {
@@ -183,7 +185,7 @@ export default class WebSocketManager {
           method: Events.NEXT_ROUND,
           round: game.round,
           problemID: newProblem,
-          endTime: endTime
+          endTime,
         })
       );
     });
@@ -191,9 +193,8 @@ export default class WebSocketManager {
 
   checkTimer(gameID, roundNumber) {
     const game = this.games.get(gameID);
-    console.log(game, roundNumber)
-    if (game.round == roundNumber) {
-      this.removePlayersNotFinished(gameID)
+    if (game.round === roundNumber) {
+      this.removePlayersNotFinished(gameID);
     }
   }
 
@@ -222,8 +223,6 @@ export default class WebSocketManager {
       this.endGame(gameID);
     }
   }
-
-
 
   playerCompleteRound(token) {
     const decodedToken = decodeToken(token);
