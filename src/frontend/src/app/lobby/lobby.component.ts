@@ -5,6 +5,7 @@ import { WebSocketService } from '../services/websocket/websocket.service';
 import { PlayerData } from '../types/PlayerData';
 import { Location } from '@angular/common';
 import { Clipboard } from '@angular/cdk/clipboard';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-lobby',
@@ -22,7 +23,8 @@ export class LobbyComponent implements OnInit {
     private lobbyService: LobbyService,
     private location: Location,
     private clipboard: Clipboard,
-    private router: Router
+    private router: Router,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -57,6 +59,7 @@ export class LobbyComponent implements OnInit {
 
   copyCode() {
     this.clipboard.copy(this.id);
+    this.snackBar.open('Code copied!', 'Ok');
   }
 
   leave() {

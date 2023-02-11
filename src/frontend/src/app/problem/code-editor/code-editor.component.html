@@ -7,7 +7,18 @@
 >
 </ngs-code-editor>
 <div class="row" style="float: right; margin: 10px">
-  <button style="width: 100px" mat-flat-button (click)="submitCode()">
+  <mat-spinner
+    *ngIf="submissionPending"
+    style="margin: 10px"
+    [diameter]="25"
+    color="primary"
+  ></mat-spinner>
+  <button
+    [disabled]="submissionPending"
+    style="width: 100px; height: 40px"
+    mat-flat-button
+    (click)="submitCode()"
+  >
     Submit
   </button>
 </div>

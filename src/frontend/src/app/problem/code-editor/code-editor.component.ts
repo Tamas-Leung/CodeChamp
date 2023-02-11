@@ -31,7 +31,7 @@ export class CodeEditorComponent implements OnInit {
   };
 
   currentRound = 0;
-
+  submissionPending = false;
   solution = '';
   constructor(
     private submitSolutionService: SolutionSubmitService,
@@ -57,6 +57,7 @@ export class CodeEditorComponent implements OnInit {
 
   submitCode() {
     const roundWhenSent = this.currentRound;
+    this.submissionPending = true;
     this.submitSolutionService
       .submitSolution(
         this.id,
@@ -65,6 +66,7 @@ export class CodeEditorComponent implements OnInit {
         this.authService.getToken()!
       )
       .subscribe((data) => {
+        this.submissionPending = false;
         // Prevent race condition in which switches rounds but still displays this dialog
         if (roundWhenSent == this.currentRound) {
           this.dialog.open(SubmissionDialogComponent, {
