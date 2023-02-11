@@ -15,11 +15,19 @@
 
   <h1 class="code-text">
     Code: {{ id }}
-    <img class="copy-icon" src="assets/img/content_copy.png" (click)="copyCode()" />
+    <img
+      class="copy-icon"
+      src="assets/img/content_copy.png"
+      (click)="copyCode()"
+    />
   </h1>
 
-  <button class="button-bottom" [class.disabled]="players.length < 2" [disabled]="players.length < 2"
-    (click)="startGame()">
+  <button
+    class="button-bottom"
+    [class.disabled]="players.length < 2"
+    [disabled]="players.length < 2"
+    (click)="startGame()"
+  >
     <div style="padding-left: 150px">Start</div>
   </button>
 </div>

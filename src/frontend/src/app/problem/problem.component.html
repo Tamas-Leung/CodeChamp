@@ -3,27 +3,37 @@
   <span> CodeChamp</span>
   <span class="example-spacer"></span>
   <div *ngFor="let player of players">
-    <img [src]="player.picture" class="players" [ngClass]="{
+    <img
+      [src]="player.picture"
+      class="players"
+      [ngClass]="{
         finished: player.finishedCurrentRound,
         'not-finished': !player.finishedCurrentRound
-      }" [matTooltip]="
+      }"
+      [matTooltip]="
         player.name +
         ', ' +
         (player.finishedCurrentRound ? 'Finished' : 'In progress')
-      " />
+      "
+    />
   </div>
 </mat-toolbar>
 <div style="background: white">
   <div class="row g-0" style="overflow: hidden">
     <div class="col-6">
-      <app-problem-description [title]="title" [description]="description"></app-problem-description>
+      <app-problem-description
+        [title]="title"
+        [description]="description"
+      ></app-problem-description>
     </div>
     <div class="col-6">
       <app-code-editor [id]="id"></app-code-editor>
     </div>
   </div>
   <div class="timer">
-    <span>{{ timeLeftMinutes }} :
-      {{ timeLeftSeconds.toString().padStart(2, '0') }}</span>
+    <span
+      >{{ timeLeftMinutes }} :
+      {{ timeLeftSeconds.toString().padStart(2, '0') }}</span
+    >
   </div>
 </div>
