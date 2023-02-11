@@ -52,10 +52,7 @@ export class ProblemComponent implements OnInit, OnDestroy {
 
     this.endDataSub = this.lobbyService.endData.subscribe((endData) => {
       if (endData) {
-        this.dialog.open(EndGameDialogComponent, {
-          data: endData,
-          disableClose: true,
-        });
+        this.router.navigate(['/end']);
       }
     });
 
@@ -81,22 +78,5 @@ export class ProblemComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.endDataSub?.unsubscribe();
-  }
-}
-
-@Component({
-  selector: 'app-end-game-dialog',
-  templateUrl: 'end-game-dialog.component.html',
-})
-export class EndGameDialogComponent {
-  constructor(
-    public dialogRef: MatDialogRef<EndGameDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: EndData,
-    private router: Router
-  ) {}
-
-  onHomeClick() {
-    this.dialogRef.close();
-    this.router.navigate(['/']);
   }
 }

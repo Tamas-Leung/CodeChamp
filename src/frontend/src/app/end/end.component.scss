@@ -1,0 +1,43 @@
+.main-container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-family: 'Mulish';
+    gap: 5rem
+}
+
+@keyframes expand {
+    to {font-size: 10rem;}
+}
+
+.status-text-container {
+    text-align: center;
+    height: 10rem;
+}
+
+.status-text {
+    font-size: 0;
+    color: white;
+    animation-name: expand;
+    animation-duration: 0.4s;
+    animation-timing-function:  ease-out;
+    animation-delay: 0.5s;
+    animation-fill-mode: forwards;
+}
+
+.leave-button {
+  
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    color: white;
+
+    font-family: 'Mulish';
+    font-style: normal;
+    font-weight: 400;
+    padding: 1rem 2rem;
+    font-size: 32px;
+  }

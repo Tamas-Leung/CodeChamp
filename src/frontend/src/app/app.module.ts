@@ -59,6 +59,7 @@ import { WebSocketService } from './services/websocket/websocket.service';
 import { LobbyComponent } from './lobby/lobby.component';
 import { MyProfileComponent } from './myprofile/myprofile.component';
 import { LeaderboardComponent } from './leaderboard/leaderboard.component';
+import { EndComponent } from './end/end.component';
 
 @NgModule({
   declarations: [
@@ -73,6 +74,7 @@ import { LeaderboardComponent } from './leaderboard/leaderboard.component';
     MyProfileComponent,
     LeaderboardComponent,
     SubmissionDialogComponent,
+    EndComponent,
   ],
   imports: [
     BrowserModule,
