@@ -99,9 +99,10 @@ export class ProblemComponent implements OnInit, OnDestroy {
   }
 
   private setTimeDifference() {
-    const timeDifference = this.endTime.getTime() - new Date().getTime();
+    let timeDifference = this.endTime.getTime() - new Date().getTime();
     if (timeDifference <= 0) {
       this.currentTimeSub?.unsubscribe();
+      timeDifference = 0;
     }
     this.timeLeftSeconds = Math.floor((timeDifference / 1000) % 60);
     this.timeLeftMinutes = Math.floor((timeDifference / 1000 / 60) % 60);
