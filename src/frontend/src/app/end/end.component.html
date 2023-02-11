@@ -1,0 +1,6 @@
+<div class="main-container">
+  <div class="status-text-container" *ngIf="endData">
+    <span class="status-text">{{ endData.won ? 'You Win!' : 'You Lose' }}</span>
+  </div>
+  <button class="leave-button" (click)="onHomeClick()">Home</button>
+</div>

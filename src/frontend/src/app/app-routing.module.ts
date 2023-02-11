@@ -8,6 +8,7 @@ import { AuthGuardService } from './services/auth-guard/auth-guard.service';
 import { LobbyComponent } from './lobby/lobby.component';
 import { MyProfileComponent } from './myprofile/myprofile.component';
 import { LeaderboardComponent } from './leaderboard/leaderboard.component';
+import { EndComponent } from './end/end.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -42,6 +43,11 @@ const routes: Routes = [
   {
     path: 'leaderboard',
     component: LeaderboardComponent,
+    canActivate: [AuthGuardService],
+  },
+  {
+    path: 'end',
+    component: EndComponent,
     canActivate: [AuthGuardService],
   },
 ];
