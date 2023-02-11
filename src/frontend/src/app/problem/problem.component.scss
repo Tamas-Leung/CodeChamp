@@ -3,3 +3,21 @@
   color: rgba(255, 255, 255, 0.87);
   width: 100%;
 }
+
+.players {
+  height: 40px;
+  border-radius: 40px;
+  margin-left: 10px;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.finished {
+  border: 3px solid rgb(36, 229, 36);
+}
+
+.not-finished {
+  border: 3px solid rgb(231, 185, 48);
+}
