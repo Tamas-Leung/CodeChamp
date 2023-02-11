@@ -7,7 +7,8 @@
 .timer {
   position: fixed;
   top: 6px;
-  right: 6px;
+  right: 50%;
+  transform: translateX(50%) translateX(12px);
   border-radius: 4px;
   padding: 1rem 1.5rem;
   background: linear-gradient(
