@@ -114,7 +114,7 @@ export class ProblemComponent implements OnInit, OnDestroy {
       this.snackBar.open(
         `${this.timeLeftMinutes} : ${this.timeLeftSeconds} remaining!`,
         '',
-        { duration: 2500 }
+        { duration: 2500, panelClass: ['warning-snackbar'] }
       );
     }
   }
