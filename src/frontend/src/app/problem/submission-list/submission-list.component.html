@@ -20,7 +20,8 @@
         {{ submission.result }}
       </mat-panel-title>
       <mat-panel-description>
-        ({{ submission.language }}) {{ submission.submittedAt | date:'shortTime' }}
+        ({{ submission.language }})
+        {{ submission.submittedAt | date: 'shortTime' }}
       </mat-panel-description>
     </mat-expansion-panel-header>
     <p *ngIf="submission.additionalInfo" class="code">
