@@ -8,19 +8,23 @@
     </mat-chip-list>
     <mat-icon matTooltip="Time Limit" fontIcon="alarm"></mat-icon>
     <p style="margin: 3px">{{ timeLimitSeconds }} seconds</p>
-    <mat-icon matTooltip="Memory Limit" style="margin-left: 12px" fontIcon="memory"></mat-icon>
+    <mat-icon
+      matTooltip="Memory Limit"
+      style="margin-left: 12px"
+      fontIcon="memory"
+    ></mat-icon>
     <p style="margin: 3px">{{ problem.memory_limit }} MB</p>
   </div>
 
   <p>{{ problem.description }}</p>
 
-
-  <div class="padding" *ngFor="let testcase of problem.test_cases; index as i;">
-    <h3><strong>Test case {{i + 1}}:</strong></h3>
+  <div class="padding" *ngFor="let testcase of problem.test_cases; index as i">
+    <h3>
+      <strong>Test case {{ i + 1 }}:</strong>
+    </h3>
     <mat-card class="card mat-elevation-z0">
-      <p><strong>Input:</strong> {{testcase.input}}</p>
-      <p><strong>Output:</strong> {{testcase.output}}</p>
+      <p><strong>Input:</strong> {{ testcase.input }}</p>
+      <p><strong>Output:</strong> {{ testcase.output }}</p>
     </mat-card>
   </div>
-
 </div>
