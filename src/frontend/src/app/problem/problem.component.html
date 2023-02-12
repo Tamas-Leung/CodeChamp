@@ -1,61 +1,65 @@
-<mat-toolbar color="black">
-  <mat-icon style="padding-right: 30px">share</mat-icon>
-  <span> CodeChamp</span>
-  <span class="example-spacer"></span>
-  <div
-    class="player-count"
-    [matTooltip]="
-      'Finish before ' +
-      (nextRoundCapacity - playersInNextRound) +
-      ' player(s) to continue.'
-    "
-  >
-    Players: {{ playersInNextRound }}/{{ nextRoundCapacity }}
-  </div>
-  <div *ngFor="let player of players">
-    <img
-      [src]="player.picture"
-      class="players"
-      [ngClass]="{
-        finished: player.finishedCurrentRound,
-        'not-finished': !player.finishedCurrentRound
-      }"
+<div style="background: white; height: 100vh">
+  <mat-toolbar color="black">
+    <mat-icon style="padding-right: 30px">share</mat-icon>
+    <span> CodeChamp</span>
+    <span class="example-spacer"></span>
+    <div
+      class="player-count"
       [matTooltip]="
-        player.name +
-        ', ' +
-        (player.finishedCurrentRound ? 'Finished' : 'In progress')
+        'Finish before ' +
+        (nextRoundCapacity - playersInNextRound) +
+        ' player(s) to continue.'
       "
-    />
-  </div>
-</mat-toolbar>
-<div style="background: white">
-  <div *ngIf="problem" class="row g-0" style="overflow: hidden">
-    <div class="col-6">
-      <mat-tab-group>
-        <mat-tab label="Problem Description">
-          <app-problem-description [problem]="problem"></app-problem-description
-        ></mat-tab>
-        <mat-tab label="Submissions">
-          <app-submission-list
-            [submissions]="submissions"
-          ></app-submission-list>
-        </mat-tab>
-      </mat-tab-group>
-    </div>
-    <div class="col-6">
-      <app-code-editor
-        [id]="problem._id"
-        (newSubmissionResult)="submissions.unshift($event)"
-      ></app-code-editor>
-    </div>
-  </div>
-  <div
-    class="timer"
-    [ngClass]="{ 'timer-warning': timeLeftMinutes < this.WARNING_TIME_MINS }"
-  >
-    <span
-      >{{ timeLeftMinutes }} :
-      {{ timeLeftSeconds.toString().padStart(2, '0') }}</span
     >
+      Players: {{ playersInNextRound }}/{{ nextRoundCapacity }}
+    </div>
+    <div *ngFor="let player of players">
+      <img
+        [src]="player.picture"
+        class="players"
+        [ngClass]="{
+          finished: player.finishedCurrentRound,
+          'not-finished': !player.finishedCurrentRound
+        }"
+        [matTooltip]="
+          player.name +
+          ', ' +
+          (player.finishedCurrentRound ? 'Finished' : 'In progress')
+        "
+      />
+    </div>
+  </mat-toolbar>
+  <div>
+    <div *ngIf="problem" class="row g-0" style="overflow: hidden">
+      <div class="col-6">
+        <mat-tab-group>
+          <mat-tab label="Problem Description">
+            <app-problem-description
+              [problem]="problem"
+            ></app-problem-description
+          ></mat-tab>
+          <mat-tab label="Submissions">
+            <app-submission-list
+              [submissions]="submissions"
+            ></app-submission-list>
+          </mat-tab>
+        </mat-tab-group>
+      </div>
+      <div class="col-6">
+        <app-code-editor
+          [id]="problem._id"
+          (newSubmissionResult)="submissions.unshift($event)"
+        ></app-code-editor>
+      </div>
+    </div>
+    <div
+      class="timer"
+      [ngClass]="{ 'timer-warning': timeLeftMinutes < this.WARNING_TIME_MINS }"
+    >
+      <span
+        >{{ timeLeftMinutes }} :
+        {{ timeLeftSeconds.toString().padStart(2, '0') }}</span
+      >
+    </div>
   </div>
 </div>
