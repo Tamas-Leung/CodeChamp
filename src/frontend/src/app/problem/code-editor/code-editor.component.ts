@@ -67,16 +67,19 @@ export class CodeEditorComponent implements OnInit {
 
   submitCode() {
     this.submissionPending = true;
+    const code = this.solution;
+
     this.submitSolutionService
-      .submitSolution(
-        this.id,
-        this.solution,
-        'mjs',
-        this.authService.getToken()!
-      )
+      .submitSolution(this.id, code, 'mjs', this.authService.getToken()!)
       .subscribe((data) => {
         this.submissionPending = false;
-        this.submissionResult = data;
+        this.submissionResult = {
+          correct: data.correct,
+          result: data.result,
+          code,
+          language: 'JavaScript',
+          submittedAt: new Date(),
+        };
       });
   }
 }
