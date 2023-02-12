@@ -18,12 +18,22 @@
   </div>
 
   <div class="right-half">
-    <mat-card class="match-history-card" *ngFor = "let match of userStats; let i = index">
-      <h1 class="history-text" [ngClass]="{'green': match.win, 'red': !match.win}">
-        {{ match.win ? 'Victory' : 'Defeat&nbsp;' }}</h1>
-      <h1 class="history-text"> &nbsp; &nbsp; &nbsp; &nbsp; {{ match.problems }}</h1>
+    <mat-card
+      class="match-history-card"
+      *ngFor="let match of userStats; let i = index"
+    >
+      <h1
+        class="history-text"
+        [ngClass]="{ green: match.win, red: !match.win }"
+      >
+        {{ match.win ? 'Victory' : 'Defeat&nbsp;' }}
+      </h1>
+      <h1 class="history-text">
+        &nbsp; &nbsp; &nbsp; &nbsp; {{ match.problems }}
+      </h1>
     </mat-card>
-    <h1 *ngIf="userStats?.length==0" class="history-text2">Play a match to see your match history!</h1>
-    
+    <h1 *ngIf="userStats?.length == 0" class="history-text2">
+      Play a match to see your match history!
+    </h1>
   </div>
 </section>
