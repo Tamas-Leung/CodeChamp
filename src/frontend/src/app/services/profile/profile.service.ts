@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ProfileService {
   url = 'http://localhost:3000';
@@ -13,7 +13,7 @@ export class ProfileService {
   }
 
   getUserStats() {
-    return this.http.get<Stats[]>(this.url + '/matchs/user/'+this.id);
+    return this.http.get<Stats[]>(this.url + '/matchs/user/' + this.id);
   }
 }
 
