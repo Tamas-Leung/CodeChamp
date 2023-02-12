@@ -34,7 +34,7 @@ export default ({ language, code, input, output, timeLimit, memoryLimit }) =>
             const cmd = dockerRunCmd(id, id, memoryLimit);
             const child = exec(
               cmd,
-              { timeout: timeLimit, signal: 'SIGKILL' },
+              { timeout: timeLimit, killSignal: 'SIGKILL' },
               (err, _, stderr) => {
                 if (stderr) {
                   cleanUpEnvironment({ codePath, dockerPath });
