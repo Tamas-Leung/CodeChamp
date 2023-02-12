@@ -35,12 +35,10 @@ export class CodeEditorComponent implements OnInit {
   submissionPending = false;
   endData: EndData | undefined = undefined;
   solution = '';
-  submissionResult = '';
+  submissionResult: Result | null = null;
 
   get submissionColor() {
-    return this.submissionResult === 'Correct Answer'
-      ? 'success-text'
-      : 'wrong-text';
+    return this.submissionResult?.correct ? 'success-text' : 'wrong-text';
   }
 
   constructor(
@@ -77,7 +75,7 @@ export class CodeEditorComponent implements OnInit {
       )
       .subscribe((data) => {
         this.submissionPending = false;
-        this.submissionResult = data.result;
+        this.submissionResult = data;
       });
   }
 }
