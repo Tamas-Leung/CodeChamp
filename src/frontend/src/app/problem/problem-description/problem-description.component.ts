@@ -9,6 +9,9 @@ import { Problem } from 'src/app/services/problems/problems.service';
 export class ProblemDescriptionComponent {
   @Input()
   problem!: Problem;
+  get timeLimitSeconds() {
+    return Math.floor(this.problem.time_limit.valueOf() / 1000);
+  }
   get chipColor() {
     return this.problem.difficulty === 'Easy'
       ? 'success'
