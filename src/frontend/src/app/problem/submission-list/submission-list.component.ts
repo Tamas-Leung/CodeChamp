@@ -16,12 +16,6 @@ export class SubmissionListComponent {
   }
 
   getFormattedCode(submissionResult: SubmissionResult) {
-    console.log(
-      prettier.format(submissionResult.code, {
-        parser: 'babel',
-        plugins: [tsParser],
-      })
-    );
     return prettier.format(submissionResult.code, {
       parser: 'babel',
       plugins: [tsParser],
