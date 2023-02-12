@@ -57,6 +57,7 @@ import { LobbyComponent } from './lobby/lobby.component';
 import { MyProfileComponent } from './myprofile/myprofile.component';
 import { LeaderboardComponent } from './leaderboard/leaderboard.component';
 import { EndComponent } from './end/end.component';
+import { SubmissionListComponent } from './problem/submission-list/submission-list.component';
 
 @NgModule({
   declarations: [
@@ -71,6 +72,7 @@ import { EndComponent } from './end/end.component';
     MyProfileComponent,
     LeaderboardComponent,
     EndComponent,
+    SubmissionListComponent,
   ],
   imports: [
     BrowserModule,
