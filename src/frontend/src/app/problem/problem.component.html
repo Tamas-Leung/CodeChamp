@@ -36,7 +36,7 @@
   </div>
   <div
     class="timer"
-    [ngClass]="{ 'timer-close': timeLeftMinutes < this.WARNING_TIME_MINS }"
+    [ngClass]="{ 'timer-warning': timeLeftMinutes < this.WARNING_TIME_MINS }"
   >
     <span
       >{{ timeLeftMinutes }} :

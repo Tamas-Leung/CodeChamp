@@ -33,7 +33,7 @@ export class ProblemComponent implements OnInit, OnDestroy {
   currentTimeSub: Subscription | undefined;
 
   warningDisplayed = false;
-  WARNING_TIME_MINS = 3;
+  WARNING_TIME_MINS = 5;
 
   constructor(
     private problemService: ProblemsService,
@@ -108,7 +108,7 @@ export class ProblemComponent implements OnInit, OnDestroy {
     this.timeLeftMinutes = Math.floor((timeDifference / 1000 / 60) % 60);
     if (
       !this.warningDisplayed &&
-      this.timeLeftMinutes <= this.WARNING_TIME_MINS
+      this.timeLeftMinutes < this.WARNING_TIME_MINS
     ) {
       this.warningDisplayed = true;
       this.snackBar.open(
