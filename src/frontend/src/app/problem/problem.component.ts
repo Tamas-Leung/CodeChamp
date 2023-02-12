@@ -14,6 +14,7 @@ import {
 } from '@angular/material/dialog';
 import { interval, Subscription } from 'rxjs';
 import { WebSocketService } from '../services/websocket/websocket.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-problem',
@@ -31,6 +32,7 @@ export class ProblemComponent implements OnInit, OnDestroy {
   endTimeSub: Subscription | undefined;
   currentTimeSub: Subscription | undefined;
 
+  warningDisplayed = false;
   WARNING_TIME_MINS = 3;
 
   constructor(
@@ -39,7 +41,8 @@ export class ProblemComponent implements OnInit, OnDestroy {
     private router: Router,
     private lobbyService: LobbyService,
     public dialog: MatDialog,
-    private ws: WebSocketService
+    private ws: WebSocketService,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit() {
@@ -103,5 +106,16 @@ export class ProblemComponent implements OnInit, OnDestroy {
     }
     this.timeLeftSeconds = Math.floor((timeDifference / 1000) % 60);
     this.timeLeftMinutes = Math.floor((timeDifference / 1000 / 60) % 60);
+    if (
+      !this.warningDisplayed &&
+      this.timeLeftMinutes <= this.WARNING_TIME_MINS
+    ) {
+      this.warningDisplayed = true;
+      this.snackBar.open(
+        `${this.timeLeftMinutes} : ${this.timeLeftSeconds} remaining!`,
+        '',
+        { duration: 2500 }
+      );
+    }
   }
 }
