@@ -307,27 +307,16 @@ export default class WebSocketManager {
   }
 
   leaveGame(ws, token) {
-    const decodedToken = decodeToken(token);
-    let gameToRemove;
-    this.games.forEach((game, gameID) => {
-      /* eslint-disable no-param-reassign */
-      const updatedClients = game.clientIds.filter(
-        (clientId) => clientId !== decodedToken.email
-      );
+    const { email } = decodeToken(token);
+    const gameID = this.clients.get(email).game;
+    if (!gameID) return;
+    const game = this.games.get(gameID);
+    game.clientIds = game.clientIds.filter((clientId) => clientId !== email);
 
-      if (updatedClients.length < game.clientIds.length) {
-        game.clientIds = updatedClients;
-        if (game.clientIds.length) {
-          this.sendUpdatedPlayers(game);
-        } else {
-          gameToRemove = gameID;
-        }
-      }
-    });
-    const client = this.clients.get(decodedToken.email);
-    client.gameID = null;
-    if (gameToRemove) {
-      this.games.delete(gameToRemove);
+    if (game.clientIds.length) {
+      this.sendUpdatedPlayers(game);
+    } else {
+      this.games.delete(gameID);
     }
   }
 }
