@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { PlayerData } from '../types/PlayerData';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth/auth.service';
+import { Stats, ProfileService } from '../services/profile/profile.service';
+import { ProblemsService } from '../services/problems/problems.service';
 
 @Component({
   selector: 'app-myprofile',
@@ -10,23 +12,38 @@ import { AuthService } from '../services/auth/auth.service';
 })
 export class MyProfileComponent {
   player: PlayerData;
-
-  constructor(private router: Router, private authService: AuthService) {
+  userStats: Stats[] | undefined;
+  constructor(private router: Router, private authService: AuthService, private profileService: ProfileService, private problemService: ProblemsService) {
     this.player = {
       id: 'a',
       name: '',
       picture: '',
       finishedCurrentRound: true,
-      wins: 10,
-      losses: 20,
-      problemSolved: 30,
-      easy: 10,
-      medium: 10,
-      hard: 10,
+      wins: 0,
+      losses: 0,
+      problemSolved: 0,
     } as PlayerData;
     const playerStats = authService.getPlayerData();
     this.player.picture = playerStats.picture;
     this.player.name = playerStats.name;
+  }
+  ngOnInit(): void {
+    this.profileService.getUserStats().subscribe((res) => {
+      console.log(res);
+      this.userStats = res;
+      let won = 0;
+      let problemSolved = 0;
+      this.userStats.forEach(element => {
+        if (element.win) {won++;}
+        problemSolved += element.problems.length;
+      });
+      const tempPlayerStats = this.player
+      tempPlayerStats.wins = won;
+      tempPlayerStats.losses = this.userStats.length-won;
+      tempPlayerStats.problemSolved = problemSolved;
+      this.player = tempPlayerStats;
+      console.log(this.userStats.length);
+    });
   }
   leave() {
     this.router.navigate(['/']);
