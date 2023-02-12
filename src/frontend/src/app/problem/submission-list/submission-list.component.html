@@ -1,1 +1,13 @@
-<p>submission-list works!</p>
+<div class="centered" *ngIf="!submissions || submissions.length === 0">
+  <mat-icon color="primary" style="transform: scale(3); margin: 25px"
+    >code_off</mat-icon
+  >
+  <h2 class="headline-2">No submissions found.</h2>
+  <div style="text-align: center" class="mat-subtitle">
+    We couldn't find any submissions for this problem.
+  </div>
+  <div style="text-align: center" class="mat-subtitle">
+    Click the submit button in the bottom right corner to test out your
+    solution!
+  </div>
+</div>

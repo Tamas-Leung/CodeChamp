@@ -15,6 +15,7 @@ import {
 import { interval, Subscription } from 'rxjs';
 import { WebSocketService } from '../services/websocket/websocket.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { SubmissionResult } from '../types/SubmissionResult';
 
 @Component({
   selector: 'app-problem',
@@ -23,6 +24,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class ProblemComponent implements OnInit, OnDestroy {
   problem: Problem | null = null;
+  submissions: Array<SubmissionResult> = [];
   timeLeftSeconds: number = 0;
   timeLeftMinutes: number = 0;
   endTime: Date = new Date();
