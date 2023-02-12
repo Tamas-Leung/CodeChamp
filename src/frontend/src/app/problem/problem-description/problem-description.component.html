@@ -1,6 +1,11 @@
 <div style="padding: 20px; padding-top: 30px">
   <h2 class="mat-h2">
-    {{ title }}
+    {{ problem.name }}
   </h2>
-  <p>{{ description }}</p>
+
+  <mat-chip-list>
+    <mat-chip selected [color]="chipColor">{{ problem.difficulty }}</mat-chip>
+  </mat-chip-list>
+
+  <p>{{ problem.description }}</p>
 </div>
