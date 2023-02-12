@@ -21,7 +21,12 @@
 <div style="background: white">
   <div *ngIf="problem" class="row g-0" style="overflow: hidden">
     <div class="col-6">
-      <app-problem-description [problem]="problem"></app-problem-description>
+      <mat-tab-group>
+        <mat-tab label="Problem Description">
+          <app-problem-description [problem]="problem"></app-problem-description
+        ></mat-tab>
+        <mat-tab label="Submissions"> Coming Soon! </mat-tab>
+      </mat-tab-group>
     </div>
     <div class="col-6">
       <app-code-editor [id]="problem._id"></app-code-editor>
