@@ -9,12 +9,12 @@ export class LeaderboardService {
   constructor(private http: HttpClient) {}
 
   getLeaderboard(top = 100) {
-    return this.http.get<Leader[]>(`${this.url}/leaderboard/${top}`);
+    return this.http.get<Leader[]>(`${this.url}/matchs/leaderboard/${top}`);
   }
 }
 
 export interface Leader {
-  id: string;
+  _id: string;
   wins: Number;
   rounds: Number;
 }
