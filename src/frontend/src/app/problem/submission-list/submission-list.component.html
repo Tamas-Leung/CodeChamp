@@ -20,7 +20,7 @@
         {{ submission.result }}
       </mat-panel-title>
       <mat-panel-description>
-        ({{ submission.language }}) 5 minutes ago
+        ({{ submission.language }}) {{ submission.submittedAt | timeAgo }}
       </mat-panel-description>
     </mat-expansion-panel-header>
     <p>{{ submission.code }}</p>
