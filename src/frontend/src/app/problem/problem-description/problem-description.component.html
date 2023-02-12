@@ -1,6 +1,20 @@
 <div style="padding: 20px; padding-top: 30px">
   <h2 class="mat-h2">
-    {{ title }}
+    {{ problem.name }}
   </h2>
-  <p>{{ description }}</p>
+  <div class="problem-info">
+    <mat-chip-list style="margin-right: 15px">
+      <mat-chip selected [color]="chipColor">{{ problem.difficulty }}</mat-chip>
+    </mat-chip-list>
+    <mat-icon matTooltip="Time Limit" fontIcon="alarm"></mat-icon>
+    <p style="margin: 3px">{{ timeLimitSeconds }} seconds</p>
+    <mat-icon
+      matTooltip="Memory Limit"
+      style="margin-left: 12px"
+      fontIcon="memory"
+    ></mat-icon>
+    <p style="margin: 3px">{{ problem.memory_limit }} MB</p>
+  </div>
+
+  <p>{{ problem.description }}</p>
 </div>
