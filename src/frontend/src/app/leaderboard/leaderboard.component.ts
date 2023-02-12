@@ -5,13 +5,6 @@ import {
   LeaderboardService,
 } from '../services/leaderboard/leaderboard.service';
 
-export interface Leaderboard {
-  name: string;
-  number: number;
-  wins: number;
-  losses: number;
-}
-
 @Component({
   selector: 'app-leaderboard',
   templateUrl: './leaderboard.component.html',
