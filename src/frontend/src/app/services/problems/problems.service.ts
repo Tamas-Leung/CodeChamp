@@ -7,14 +7,20 @@ import { filter, map } from 'rxjs';
 })
 export class ProblemsService {
   url = 'http://localhost:3000';
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getProblems() {
     return this.http.get<Problem[]>(this.url + '/problems');
   }
 }
 
+export type TestCase = {
+  input: string;
+  output: string;
+}
+
 export interface Problem {
+  test_cases: Array<TestCase>;
   description: string;
   difficulty: string;
   memory_limit: Number;
