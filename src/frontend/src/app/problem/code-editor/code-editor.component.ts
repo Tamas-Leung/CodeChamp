@@ -35,6 +35,8 @@ export class CodeEditorComponent implements OnInit {
   submissionPending = false;
   endData: EndData | undefined = undefined;
   solution = '';
+  submissionResult = '';
+
   constructor(
     private submitSolutionService: SolutionSubmitService,
     public dialog: MatDialog,
@@ -70,6 +72,7 @@ export class CodeEditorComponent implements OnInit {
       )
       .subscribe((data) => {
         this.submissionPending = false;
+        this.submissionResult = data.result;
         // Prevent race condition in which switches rounds but still displays this dialog
         if (roundWhenSent == this.currentRound && !this.endData) {
           this.dialog.open(SubmissionDialogComponent, {
