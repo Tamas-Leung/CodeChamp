@@ -8,6 +8,6 @@ import { SubmissionResult } from 'src/app/types/SubmissionResult';
 })
 export class SubmissionListComponent {
   @Input()
-  submissions!: Array<SubmissionResult>;
+  submissions: Array<SubmissionResult> = [];
   constructor() {}
 }
