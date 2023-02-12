@@ -38,8 +38,13 @@ const setupEnvironment = async (code, language) => {
 };
 
 const cleanUpEnvironment = async ({ codePath, dockerPath }) => {
-  await fs.unlink(dockerPath);
-  await fs.unlink(codePath);
+  try {
+    await fs.unlink(dockerPath);
+    await fs.unlink(codePath);
+  } catch (exc) {
+    // Ideally we could have a retry mechanism / check if the files existed in the first place
+    // But it's not a big deal if the files are not deleted every once in a while.
+  }
 };
 
 export { setupEnvironment, cleanUpEnvironment, dockerRunCmd };
