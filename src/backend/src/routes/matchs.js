@@ -17,4 +17,36 @@ router.get('/user/:_id', async (req, res) => {
   }
 });
 
+router.get('/leaderboard/:top?', async (req, res) => {
+  try {
+    let top = 100;
+    if (req.params.top) {
+      top = parseInt(req.params.top);
+    }
+    const matchs = await Matchs.aggregate([
+      {
+        $group: {
+          _id: '$player_id',
+          sum: {
+            $sum: {
+              $toInt: '$rounds_completed',
+            },
+          },
+        },
+      },
+      {
+        $sort: {
+          sum: -1,
+        },
+      },
+      { $limit: top },
+    ]);
+    res.status(200).send(matchs);
+  } catch (e) {
+    res.status(500).send({
+      message: e,
+    });
+  }
+});
+
 export default router;
