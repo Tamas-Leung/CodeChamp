@@ -71,7 +71,7 @@ export default function Judge(webSocketManager) {
       }
       // eslint-disable-next-line no-restricted-syntax
       for await (const { input, output } of problem.test_cases) {
-        const { verdict } = await judge({
+        const { verdict, additionalInfo } = await judge({
           language,
           code,
           input,
@@ -80,7 +80,9 @@ export default function Judge(webSocketManager) {
           memoryLimit: problem.memory_limit,
         });
         if (verdict !== judgeVerdict.CA) {
-          res.status(200).send({ correct: false, result: verdict });
+          res
+            .status(200)
+            .send({ correct: false, result: verdict, additionalInfo });
           return;
         }
       }
