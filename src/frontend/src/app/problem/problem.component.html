@@ -43,7 +43,10 @@
       </mat-tab-group>
     </div>
     <div class="col-6">
-      <app-code-editor [id]="problem._id"></app-code-editor>
+      <app-code-editor
+        [id]="problem._id"
+        (newSubmissionResult)="submissions.push($event)"
+      ></app-code-editor>
     </div>
   </div>
   <div
