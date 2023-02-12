@@ -6,13 +6,7 @@
   (valueChanged)="onCodeChanged($event)"
 >
 </ngs-code-editor>
-<div class="row" style="float: right; margin: 10px">
-  <mat-spinner
-    *ngIf="submissionPending"
-    style="margin: 10px"
-    [diameter]="25"
-    color="primary"
-  ></mat-spinner>
+<div class="submission-row">
   <button
     [disabled]="submissionPending"
     style="width: 100px; height: 40px"
@@ -21,4 +15,10 @@
   >
     Submit
   </button>
+  <mat-spinner
+    *ngIf="submissionPending"
+    style="margin: 10px"
+    [diameter]="25"
+    color="primary"
+  ></mat-spinner>
 </div>
