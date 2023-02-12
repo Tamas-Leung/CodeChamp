@@ -68,7 +68,33 @@
 
 .right-half {
   grid-column: 2;
+  height: 600px;
+  overflow-y: scroll;
 }
+
+/* ===== Scrollbar CSS ===== */
+  /* Firefox */
+  .right-half {
+    scrollbar-width: 14px;
+    scrollbar-color: white transparent;
+  }
+
+  /* Chrome, Edge, and Safari */
+  .right-half::-webkit-scrollbar {
+    width: 30px;
+  }
+
+  .right-half::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .right-half::-webkit-scrollbar-thumb {
+    background-color: white;
+    background-clip: padding-box;
+    border-radius: 30px;
+    border: 13px solid transparent;
+  }
+
 
 .stats-title {
   background: transparent;
@@ -106,6 +132,7 @@
 }
 
 .match-history-card {
+  display:flex;
   width: 100%;
   height: 100px;
   margin-top: 10px;
@@ -118,9 +145,25 @@
   align-items: center;
 }
 
+.green {
+  color: rgb(12, 211, 12);
+  font-weight:700;
+}
+
+.red {
+  color: rgb(253, 71, 71);
+  font-weight:700
+}
 .history-text {
   font-family: 'Mulish';
   padding-left: 2%;
   padding-top: 1%;
   font-size: 30px;
+}
+.history-text2 {
+  font-family: 'Mulish';
+  padding-left: 25%;
+  padding-top: 1%;
+  font-size: 30px;
+  color: white;
 }
