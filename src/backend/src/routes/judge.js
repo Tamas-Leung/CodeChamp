@@ -80,9 +80,7 @@ export default function Judge(webSocketManager) {
           memoryLimit: problem.memory_limit,
         });
         if (verdict !== judgeVerdict.CA) {
-          res
-            .status(200)
-            .send({ correct: false, result: verdict });
+          res.status(200).send({ correct: false, result: verdict });
           return;
         }
       }
