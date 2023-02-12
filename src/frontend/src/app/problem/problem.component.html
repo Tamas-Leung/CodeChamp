@@ -23,8 +23,10 @@
     <div class="col-6">
       <mat-tab-group>
         <mat-tab label="Problem Description">
-          <app-problem-description [problem]="problem"></app-problem-description
-        ></mat-tab>
+          <app-problem-description
+            [problem]="problem"
+          ></app-problem-description>
+        </mat-tab>
         <mat-tab label="Submissions"> Coming Soon! </mat-tab>
       </mat-tab-group>
     </div>
@@ -32,7 +34,10 @@
       <app-code-editor [id]="problem._id"></app-code-editor>
     </div>
   </div>
-  <div class="timer">
+  <div
+    class="timer"
+    [ngClass]="{ 'timer-close': timeLeftMinutes < this.WARNING_TIME_MINS }"
+  >
     <span
       >{{ timeLeftMinutes }} :
       {{ timeLeftSeconds.toString().padStart(2, '0') }}</span

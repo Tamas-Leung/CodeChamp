@@ -31,6 +31,8 @@ export class ProblemComponent implements OnInit, OnDestroy {
   endTimeSub: Subscription | undefined;
   currentTimeSub: Subscription | undefined;
 
+  WARNING_TIME_MINS = 3;
+
   constructor(
     private problemService: ProblemsService,
     private aRoute: ActivatedRoute,
