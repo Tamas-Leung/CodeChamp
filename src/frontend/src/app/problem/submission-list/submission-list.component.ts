@@ -9,5 +9,10 @@ import { SubmissionResult } from 'src/app/types/SubmissionResult';
 export class SubmissionListComponent {
   @Input()
   submissions: Array<SubmissionResult> = [];
+
+  getSubmissionColor(submissionResult: SubmissionResult) {
+    return submissionResult.correct ? 'success-text' : 'wrong-text';
+  }
+
   constructor() {}
 }

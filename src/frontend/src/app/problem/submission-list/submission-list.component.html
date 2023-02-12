@@ -11,3 +11,18 @@
     solution!
   </div>
 </div>
+<div *ngIf="submissions && submissions.length > 0">
+  <mat-expansion-panel *ngFor="let submission of submissions; index as i">
+    <mat-expansion-panel-header>
+      <mat-panel-title
+        class="mat-body-strong {{ getSubmissionColor(submission) }}"
+      >
+        {{ submission.result }}
+      </mat-panel-title>
+      <mat-panel-description>
+        ({{ submission.language }}) 5 minutes ago
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <p>{{ submission.code }}</p>
+  </mat-expansion-panel>
+</div>
