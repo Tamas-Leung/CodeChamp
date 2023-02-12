@@ -304,14 +304,22 @@ export default class WebSocketManager {
 
   leaveGame(ws, token) {
     const decodedToken = decodeToken(token);
-    this.games.forEach((value) => {
+    let gameToRemove;
+    this.games.forEach((game, gameID) => {
       /* eslint-disable no-param-reassign */
-      value.clientIds = value.clientIds.filter(
+      game.clientIds = game.clientIds.filter(
         (clientId) => clientId !== decodedToken.email
       );
-      this.sendUpdatedPlayers(value);
+      if (game.clientIds.length) {
+        this.sendUpdatedPlayers(game);
+      } else {
+        gameToRemove = gameID;
+      }
     });
     const client = this.clients.get(decodedToken.email);
     client.gameID = null;
+    if (gameToRemove) {
+      this.games.delete(gameToRemove);
+    }
   }
 }
