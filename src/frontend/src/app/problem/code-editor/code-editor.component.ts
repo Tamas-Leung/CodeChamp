@@ -6,6 +6,7 @@ import * as prettier from 'prettier/standalone';
 import * as tsParser from 'prettier/parser-babel';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { LobbyService } from 'src/app/services/lobby/lobby.service';
+import { EndData } from 'src/app/types/EndData';
 
 @Component({
   selector: 'app-code-editor',
@@ -20,7 +21,7 @@ export class CodeEditorComponent implements OnInit {
     language: 'javascript',
     uri: 'solution.js',
     value:
-      "import readline from 'readline'; const stdin = readline.createInterface({ input: process.stdin, output: process.stdout, }); stdin.question('', (input) => { const x = input.split(' '); const target = parseInt(x[1]); const nums = x[0].split(',').map(Number); const map = new Map(); let result = []; for (let i = 0; i < nums.length; i++) { const current = nums[i]; const match = map.get(target - current); if (match !== undefined) { result = [i, match]; break; } map.set(current, i); } console.log(result); stdin.close(); });",
+      "import readline from 'readline'; const stdin = readline.createInterface({ input: process.stdin, output: process.stdout, }); stdin.question('', (input) => { console.log(\"Your answer here...\"); stdin.close(); });",
   };
 
   options = {
@@ -32,6 +33,7 @@ export class CodeEditorComponent implements OnInit {
 
   currentRound = 0;
   submissionPending = false;
+  endData: EndData | undefined = undefined;
   solution = '';
   constructor(
     private submitSolutionService: SolutionSubmitService,
@@ -49,6 +51,7 @@ export class CodeEditorComponent implements OnInit {
     this.lobbyService.currentRound.subscribe(
       (round) => (this.currentRound = round)
     );
+    this.lobbyService.endData.subscribe((endData) => (this.endData = endData));
   }
 
   onCodeChanged(value: string) {
@@ -68,7 +71,8 @@ export class CodeEditorComponent implements OnInit {
       .subscribe((data) => {
         this.submissionPending = false;
         // Prevent race condition in which switches rounds but still displays this dialog
-        if (roundWhenSent == this.currentRound) {
+        if (roundWhenSent == this.currentRound && !this.endData) {
+          console.log(this.endData);
           this.dialog.open(SubmissionDialogComponent, {
             data: data,
             disableClose: data.correct,

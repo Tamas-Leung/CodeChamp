@@ -1,6 +1,7 @@
 import { hri } from 'human-readable-ids';
 import { decodeToken } from '../auth/token.js';
 import { insertMatch } from '../matchs/index.js';
+import { getRandomProblemId } from '../problems/index.js';
 
 export const Events = {
   CREATE: 'create',
@@ -151,7 +152,7 @@ export default class WebSocketManager {
     });
   }
 
-  gameNextRound(gameID) {
+  async gameNextRound(gameID) {
     const game = this.games.get(gameID);
 
     this.removePlayersNotFinished(gameID);
@@ -160,12 +161,7 @@ export default class WebSocketManager {
 
     const players = this.getPlayersDataToSend(game);
 
-    let newProblem = '63794a6952d8441c74627f63';
-
-    // TEMPORARY HARDCODE TO FORCE A DIFFERENT PROBLEM ON 2nd round
-    if (game.problemsPlayed.includes(newProblem)) {
-      newProblem = '63747e5dfffe067b61c7e67e';
-    }
+    let newProblem = await getRandomProblemId(game.problemsPlayed);
 
     game.problemsPlayed.push(newProblem);
 
