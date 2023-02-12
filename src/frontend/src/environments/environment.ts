@@ -8,6 +8,8 @@ export const environment = {
     '1049277800628-djvnt32n0odf07kqelkn1t0iee33kk0n.apps.googleusercontent.com',
   apiUrl: 'http://localhost:3000',
   wsUrl: 'ws://localhost:7070/ws',
+  //   apiUrl: 'http://167.99.177.152:3000',
+  //   wsUrl: 'ws://167.99.177.152:7070/ws',
 };
 
 /*
