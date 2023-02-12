@@ -80,18 +80,17 @@ export default class WebSocketManager {
     this.sendUpdatedPlayers(game);
   }
 
-  disconnectClient(ws, decodedToken) {
-    if (
-      this.clients.has(decodedToken.email) &&
-      this.clients.get(decodedToken.email).ws !== ws
-    ) {
-      this.clients.get(decodedToken.email).ws.send(
+  disconnectClient(ws, token) {
+    const { email } = decodeToken(token);
+    if (this.clients.has(email) && this.clients.get(email).ws !== ws) {
+      this.clients.get(email).ws.send(
         JSON.stringify({
           method: Events.DISCONNECT,
           message:
             'Another user from the same email has connected, Disconnected from lobby',
         })
       );
+      this.leaveGame(ws, token);
     }
   }
 
