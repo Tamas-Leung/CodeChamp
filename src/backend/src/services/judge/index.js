@@ -40,6 +40,9 @@ export default ({ language, code, input, output, timeLimit, memoryLimit }) =>
                   resolve({ verdict: judgeVerdict.SE });
                 }
                 if (err) {
+                  if (err.code === 137) {
+                    resolve({ verdict: judgeVerdict.MLE });
+                  }
                   resolve({ verdict: judgeVerdict.SE });
                 }
               }
