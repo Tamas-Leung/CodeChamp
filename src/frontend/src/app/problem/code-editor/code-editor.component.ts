@@ -37,6 +37,12 @@ export class CodeEditorComponent implements OnInit {
   solution = '';
   submissionResult = '';
 
+  get submissionColor() {
+    return this.submissionResult === 'Correct Answer'
+      ? 'success-text'
+      : 'wrong-text';
+  }
+
   constructor(
     private submitSolutionService: SolutionSubmitService,
     public dialog: MatDialog,
