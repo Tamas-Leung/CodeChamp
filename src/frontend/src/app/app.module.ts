@@ -7,10 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import {
-  CodeEditorComponent,
-  SubmissionDialogComponent,
-} from './problem/code-editor/code-editor.component';
+import { CodeEditorComponent } from './problem/code-editor/code-editor.component';
 import { ProblemComponent } from './problem/problem.component';
 import { ProblemDescriptionComponent } from './problem/problem-description/problem-description.component';
 import { CodeEditorModule } from '@ngstack/code-editor';
@@ -73,7 +70,6 @@ import { EndComponent } from './end/end.component';
     LobbyComponent,
     MyProfileComponent,
     LeaderboardComponent,
-    SubmissionDialogComponent,
     EndComponent,
   ],
   imports: [

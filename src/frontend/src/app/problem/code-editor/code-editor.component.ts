@@ -67,7 +67,6 @@ export class CodeEditorComponent implements OnInit {
   }
 
   submitCode() {
-    const roundWhenSent = this.currentRound;
     this.submissionPending = true;
     this.submitSolutionService
       .submitSolution(
@@ -79,13 +78,6 @@ export class CodeEditorComponent implements OnInit {
       .subscribe((data) => {
         this.submissionPending = false;
         this.submissionResult = data.result;
-        // Prevent race condition in which switches rounds but still displays this dialog
-        if (roundWhenSent == this.currentRound && !this.endData) {
-          this.dialog.open(SubmissionDialogComponent, {
-            data: data,
-            disableClose: data.correct,
-          });
-        }
       });
   }
 }
@@ -93,12 +85,4 @@ export class CodeEditorComponent implements OnInit {
 export interface Result {
   correct: boolean;
   result: string;
-}
-
-@Component({
-  selector: 'app-submit-dialog',
-  templateUrl: 'submit-dialog.component.html',
-})
-export class SubmissionDialogComponent {
-  constructor(@Inject(MAT_DIALOG_DATA) public data: Result) {}
 }
