@@ -83,6 +83,7 @@ export class CodeEditorComponent implements OnInit {
         this.submissionResult = {
           correct: data.correct,
           result: data.result,
+          additionalInfo: data.additionalInfo,
           code,
           language: 'JavaScript',
           submittedAt: new Date(),

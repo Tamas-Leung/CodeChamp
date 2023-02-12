@@ -4,4 +4,5 @@ export interface SubmissionResult {
   code: string;
   language: string;
   submittedAt: Date;
+  additionalInfo: string;
 }
