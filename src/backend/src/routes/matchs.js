@@ -23,7 +23,7 @@ router.get('/leaderboard/:top?', async (req, res) => {
     if (req.params.top) {
       top = parseInt(req.params.top);
     }
-    const matchs = await Matchs.aggregate([
+    const leaderboard = await Matchs.aggregate([
       {
         $group: {
           _id: '$player_id',
@@ -41,7 +41,7 @@ router.get('/leaderboard/:top?', async (req, res) => {
       },
       { $limit: top },
     ]);
-    res.status(200).send(matchs);
+    res.status(200).send(leaderboard);
   } catch (e) {
     res.status(500).send({
       message: e,
