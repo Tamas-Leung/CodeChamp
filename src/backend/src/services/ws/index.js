@@ -169,7 +169,7 @@ export default class WebSocketManager {
 
     game.problemsPlayed.push(newProblem);
 
-    const totalTime = 5 * 60 * 1000; // 5 minutes currently
+    const totalTime = 15 * 60 * 1000; // 15 minutes currently
 
     const endTime = Date.now() + totalTime;
     setTimeout(() => {
