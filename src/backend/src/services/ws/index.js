@@ -161,7 +161,7 @@ export default class WebSocketManager {
 
     const players = this.getPlayersDataToSend(game);
 
-    let newProblem = await getRandomProblemId(game.problemsPlayed);
+    const newProblem = await getRandomProblemId(game.problemsPlayed);
 
     game.problemsPlayed.push(newProblem);
 
