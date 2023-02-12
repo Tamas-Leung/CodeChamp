@@ -18,6 +18,7 @@ export interface Problem {
   description: string;
   difficulty: string;
   memory_limit: Number;
+  time_limit: Number;
   name: string;
   problem_type: string[];
   _id: string;
