@@ -8,7 +8,7 @@
 </ngs-code-editor>
 <div class="submission-row">
   <button
-    [disabled]="submissionPending"
+    [disabled]="submissionPending || submissionResult?.correct"
     style="width: 100px; height: 40px"
     mat-flat-button
     color="success"
@@ -23,11 +23,11 @@
     color="primary"
   ></mat-spinner>
   <p
-    *ngIf="!submissionPending"
+    *ngIf="!submissionPending && submissionResult"
     class="mat-body-strong {{ submissionColor }}"
     style="margin: 10px"
     color="success"
   >
-    {{ submissionResult }}
+    {{ submissionResult.result }}
   </p>
 </div>
