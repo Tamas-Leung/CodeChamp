@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Result } from 'src/app/types/Result';
+import { SubmissionResult } from 'src/app/types/SubmissionResult';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -16,7 +16,7 @@ export class SolutionSubmitService {
   constructor(private http: HttpClient) {}
 
   submitSolution(id: string, code: string, language: string, token: string) {
-    return this.http.post<Result>('http://localhost:3000/judge/' + id, {
+    return this.http.post<SubmissionResult>('http://localhost:3000/judge/' + id, {
       code: code,
       language: language,
       token: token,

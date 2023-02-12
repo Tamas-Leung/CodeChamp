@@ -1,4 +1,4 @@
-export interface Result {
+export interface SubmissionResult {
   correct: boolean;
   result: string;
 }

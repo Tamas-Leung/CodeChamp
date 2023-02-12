@@ -6,8 +6,8 @@ import * as prettier from 'prettier/standalone';
 import * as tsParser from 'prettier/parser-babel';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { LobbyService } from 'src/app/services/lobby/lobby.service';
-import { Result } from 'src/app/types/Result';
 import { EndData } from 'src/app/types/EndData';
+import { SubmissionResult } from 'src/app/types/SubmissionResult';
 
 @Component({
   selector: 'app-code-editor',
@@ -36,7 +36,7 @@ export class CodeEditorComponent implements OnInit {
   submissionPending = false;
   endData: EndData | undefined = undefined;
   solution = '';
-  submissionResult: Result | null = null;
+  submissionResult: SubmissionResult | null = null;
 
   get submissionColor() {
     return this.submissionResult?.correct ? 'success-text' : 'wrong-text';
