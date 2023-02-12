@@ -34,7 +34,7 @@ export default ({ language, code, input, output, timeLimit, memoryLimit }) =>
             const cmd = dockerRunCmd(id, id, memoryLimit);
             const child = exec(
               cmd,
-              { timeout: timeLimit },
+              { timeout: timeLimit, signal: 'SIGKILL' },
               (err, _, stderr) => {
                 if (stderr) {
                   resolve({ verdict: judgeVerdict.SE });
@@ -47,6 +47,13 @@ export default ({ language, code, input, output, timeLimit, memoryLimit }) =>
                 }
               }
             );
+
+            child.on('exit', (_, signal) => {
+              if (signal === 'SIGKILL') {
+                exec(`docker kill ${id}`);
+                resolve({ verdict: judgeVerdict.TLE });
+              }
+            });
 
             child.stdout.on('data', (stdout) => {
               cleanUpEnvironment({ codePath, dockerPath })
