@@ -23,6 +23,6 @@
         ({{ submission.language }}) {{ submission.submittedAt | timeAgo }}
       </mat-panel-description>
     </mat-expansion-panel-header>
-    <p>{{ submission.code }}</p>
+    <p>{{ getFormattedCode(submission) }}</p>
   </mat-expansion-panel>
 </div>
