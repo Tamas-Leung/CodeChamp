@@ -3,6 +3,7 @@ import { isValidObjectId } from 'mongoose';
 
 import { Problems } from '../database/mongoose.js';
 import judge from '../services/judge/index.js';
+import judgeVerdict from '../services/judge/judge-verdict.js';
 import { languageIsSupported } from '../services/judge/languages.js';
 
 export default function Judge(webSocketManager) {
@@ -70,7 +71,7 @@ export default function Judge(webSocketManager) {
       }
       // eslint-disable-next-line no-restricted-syntax
       for await (const { input, output } of problem.test_cases) {
-        const judgeResult = await judge({
+        const { verdict } = await judge({
           language,
           code,
           input,
@@ -78,10 +79,10 @@ export default function Judge(webSocketManager) {
           timeLimit: problem.time_limit,
           memoryLimit: problem.memory_limit,
         });
-        if (!judgeResult) {
+        if (verdict !== judgeVerdict.CA) {
           res
             .status(200)
-            .send({ correct: false, result: 'A test case failed.' });
+            .send({ correct: false, result: verdict });
           return;
         }
       }
