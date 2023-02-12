@@ -37,9 +37,11 @@ export default ({ language, code, input, output, timeLimit, memoryLimit }) =>
               { timeout: timeLimit, signal: 'SIGKILL' },
               (err, _, stderr) => {
                 if (stderr) {
+                  cleanUpEnvironment({ codePath, dockerPath });
                   resolve({ verdict: judgeVerdict.SE });
                 }
                 if (err) {
+                  cleanUpEnvironment({ codePath, dockerPath });
                   if (err.code === 137) {
                     resolve({ verdict: judgeVerdict.MLE });
                   }
@@ -51,23 +53,21 @@ export default ({ language, code, input, output, timeLimit, memoryLimit }) =>
             child.on('exit', (_, signal) => {
               if (signal === 'SIGKILL') {
                 exec(`docker kill ${id}`);
+                cleanUpEnvironment({ codePath, dockerPath });
                 resolve({ verdict: judgeVerdict.TLE });
               }
             });
 
             child.stderr.on('data', (stderr) => {
+              cleanUpEnvironment({ codePath, dockerPath });
               resolve({ verdict: judgeVerdict.CE, info: stderr });
             });
 
             child.stdout.on('data', (stdout) => {
-              cleanUpEnvironment({ codePath, dockerPath })
-                .then(() => {
-                  resolve({
-                    verdict:
-                      stdout === output ? judgeVerdict.CA : judgeVerdict.WA,
-                  });
-                })
-                .catch((err) => reject(err));
+              cleanUpEnvironment({ codePath, dockerPath });
+              resolve({
+                verdict: stdout === output ? judgeVerdict.CA : judgeVerdict.WA,
+              });
             });
             child.stdin.setEncoding('utf-8');
             // This option is helpful for debugging:
