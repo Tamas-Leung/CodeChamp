@@ -1,11 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LeaderboardService {
-  url = 'http://localhost:3000';
+  url = environment.apiUrl;
   constructor(private http: HttpClient) {}
 
   getLeaderboard(top = 100) {

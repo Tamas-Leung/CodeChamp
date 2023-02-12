@@ -6,13 +6,14 @@ import { AsyncSubject, BehaviorSubject, Observable, of, Subject } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
 import { LobbyService } from '../lobby/lobby.service';
 import { GameEvent } from './interfaces';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class WebSocketService {
   private websocket!: WebSocket;
-  private address = 'ws://localhost:7070/ws';
+  private address = environment.wsUrl;
   public newGameID = new BehaviorSubject<string>('');
   public gameJoined = new Subject<boolean>();
   public findGameID = new Subject();

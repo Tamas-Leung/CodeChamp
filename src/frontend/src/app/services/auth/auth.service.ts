@@ -2,11 +2,14 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
+  url = environment.apiUrl;
+
   constructor(private httpClient: HttpClient, private router: Router) {}
 
   logout = () => {
@@ -15,7 +18,7 @@ export class AuthService {
   };
 
   login(credentials: string): Observable<any> {
-    return this.httpClient.post('http://localhost:3000/auth/login', {
+    return this.httpClient.post(this.url + '/auth/login', {
       token: credentials,
     });
   }
