@@ -11,7 +11,7 @@ import { CodeEditorComponent } from './problem/code-editor/code-editor.component
 import { ProblemComponent } from './problem/problem.component';
 import { ProblemDescriptionComponent } from './problem/problem-description/problem-description.component';
 import { CodeEditorModule } from '@ngstack/code-editor';
-import {NgPipesModule} from 'ngx-pipes';
+import { NgPipesModule } from 'ngx-pipes';
 
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatBadgeModule } from '@angular/material/badge';

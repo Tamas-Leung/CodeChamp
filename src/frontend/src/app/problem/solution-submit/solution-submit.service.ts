@@ -16,10 +16,13 @@ export class SolutionSubmitService {
   constructor(private http: HttpClient) {}
 
   submitSolution(id: string, code: string, language: string, token: string) {
-    return this.http.post<SubmissionResult>('http://localhost:3000/judge/' + id, {
-      code: code,
-      language: language,
-      token: token,
-    });
+    return this.http.post<SubmissionResult>(
+      'http://localhost:3000/judge/' + id,
+      {
+        code: code,
+        language: language,
+        token: token,
+      }
+    );
   }
 }
