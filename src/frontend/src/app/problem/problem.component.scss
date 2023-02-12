@@ -11,14 +11,12 @@
   transform: translateX(50%) translateX(12px);
   border-radius: 4px;
   padding: 1rem 1.5rem;
-  background: linear-gradient(
-    248.93deg,
-    rgba(45, 42, 176, 0.7) 14.74%,
-    rgba(49, 96, 151, 0.7) 91.26%
-  );
-  background-color: white;
+  background-color: black;
   color: white;
   font-size: 1.5rem;
+  padding: 15px;
+  border-radius: 12px;
+  border: 1.5px solid white;
 }
 
 .players {
