@@ -1,7 +1,10 @@
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { LobbyService } from '../services/lobby/lobby.service';
-import { Problem, ProblemsService } from '../services/problems/problems.service';
+import {
+  Problem,
+  ProblemsService,
+} from '../services/problems/problems.service';
 import { EndData } from '../types/EndData';
 import { PlayerData } from '../types/PlayerData';
 import {
