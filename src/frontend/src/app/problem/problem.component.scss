@@ -6,21 +6,21 @@
 
 .timer {
   position: fixed;
-  top: 6px;
+  top: 8px;
   right: 50%;
   transform: translateX(50%) translateX(12px);
   border-radius: 4px;
   padding: 1rem 1.5rem;
   background-color: black;
   color: white;
-  font-size: 1.5rem;
-  padding: 15px;
+  font-size: 1.2rem;
+  padding: 12px;
   border-radius: 12px;
-  border: 1.5px solid white;
+  border: 2px solid white;
 }
 
 .timer-warning {
-  border: 1.5px solid rgb(233, 155, 86);
+  border: 2px solid rgb(233, 155, 86);
 }
 
 ::ng-deep .warning-snackbar {
