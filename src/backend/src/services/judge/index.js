@@ -6,6 +6,7 @@ import {
   cleanUpEnvironment,
   dockerRunCmd,
 } from './docker.js';
+import judgeVerdict from './judge-verdict.js';
 
 import { JUDGE_DIR } from './path-generator.js';
 
@@ -36,10 +37,10 @@ export default ({ language, code, input, output, timeLimit, memoryLimit }) =>
               { timeout: timeLimit },
               (err, _, stderr) => {
                 if (stderr) {
-                  reject(stderr);
+                  resolve({ verdict: judgeVerdict.SE });
                 }
                 if (err) {
-                  reject(err);
+                  resolve({ verdict: judgeVerdict.SE });
                 }
               }
             );
@@ -47,11 +48,13 @@ export default ({ language, code, input, output, timeLimit, memoryLimit }) =>
             child.stdout.on('data', (stdout) => {
               cleanUpEnvironment({ codePath, dockerPath })
                 .then(() => {
-                  resolve(stdout === output);
+                  resolve({
+                    verdict:
+                      stdout === output ? judgeVerdict.CA : judgeVerdict.WA,
+                  });
                 })
                 .catch((err) => reject(err));
             });
-
             child.stdin.setEncoding('utf-8');
             // This option is helpful for debugging:
             // child.stdout.pipe(process.stdout);
