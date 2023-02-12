@@ -45,7 +45,7 @@
     <div class="col-6">
       <app-code-editor
         [id]="problem._id"
-        (newSubmissionResult)="submissions.push($event)"
+        (newSubmissionResult)="submissions.unshift($event)"
       ></app-code-editor>
     </div>
   </div>
