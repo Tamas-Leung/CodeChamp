@@ -40,10 +40,8 @@ export class CodeEditorComponent implements OnInit {
     },
   };
 
-  currentRound = 0;
-  submissionPending = false;
-  endData: EndData | undefined = undefined;
   solution = '';
+  submissionPending = false;
   submissionResult: SubmissionResult | null = null;
 
   get submissionColor() {
@@ -63,9 +61,8 @@ export class CodeEditorComponent implements OnInit {
       plugins: [tsParser],
     });
     this.lobbyService.currentRound.subscribe(
-      (round) => (this.currentRound = round)
+      (round) => (this.submissionResult = null)
     );
-    this.lobbyService.endData.subscribe((endData) => (this.endData = endData));
   }
 
   onCodeChanged(value: string) {
