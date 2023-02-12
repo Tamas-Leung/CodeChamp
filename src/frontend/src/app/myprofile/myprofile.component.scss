@@ -73,28 +73,27 @@
 }
 
 /* ===== Scrollbar CSS ===== */
-  /* Firefox */
-  .right-half {
-    scrollbar-width: 14px;
-    scrollbar-color: white transparent;
-  }
+/* Firefox */
+.right-half {
+  scrollbar-width: 14px;
+  scrollbar-color: white transparent;
+}
 
-  /* Chrome, Edge, and Safari */
-  .right-half::-webkit-scrollbar {
-    width: 30px;
-  }
+/* Chrome, Edge, and Safari */
+.right-half::-webkit-scrollbar {
+  width: 30px;
+}
 
-  .right-half::-webkit-scrollbar-track {
-    background: transparent;
-  }
+.right-half::-webkit-scrollbar-track {
+  background: transparent;
+}
 
-  .right-half::-webkit-scrollbar-thumb {
-    background-color: white;
-    background-clip: padding-box;
-    border-radius: 30px;
-    border: 13px solid transparent;
-  }
-
+.right-half::-webkit-scrollbar-thumb {
+  background-color: white;
+  background-clip: padding-box;
+  border-radius: 30px;
+  border: 13px solid transparent;
+}
 
 .stats-title {
   background: transparent;
@@ -132,7 +131,7 @@
 }
 
 .match-history-card {
-  display:flex;
+  display: flex;
   width: 100%;
   height: 100px;
   margin-top: 10px;
@@ -147,12 +146,12 @@
 
 .green {
   color: rgb(12, 211, 12);
-  font-weight:700;
+  font-weight: 700;
 }
 
 .red {
   color: rgb(253, 71, 71);
-  font-weight:700
+  font-weight: 700;
 }
 .history-text {
   font-family: 'Mulish';
