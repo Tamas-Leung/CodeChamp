@@ -17,4 +17,14 @@
   </div>
 
   <p>{{ problem.description }}</p>
+
+  <div class="padding" *ngFor="let testcase of problem.test_cases; index as i">
+    <h3>
+      <strong>Test case {{ i + 1 }}:</strong>
+    </h3>
+    <mat-card class="card mat-elevation-z0">
+      <p><strong>Input:</strong> {{ testcase.input }}</p>
+      <p><strong>Output:</strong> {{ testcase.output }}</p>
+    </mat-card>
+  </div>
 </div>

@@ -14,7 +14,13 @@ export class ProblemsService {
   }
 }
 
+export type TestCase = {
+  input: string;
+  output: string;
+};
+
 export interface Problem {
+  test_cases: Array<TestCase>;
   description: string;
   difficulty: string;
   memory_limit: Number;
