@@ -49,3 +49,11 @@
 .not-finished {
   border: 3px solid rgb(231, 185, 48);
 }
+
+.player-count {
+  font-size: 1.2rem;
+}
+
+.player-count:hover {
+  cursor: pointer;
+}

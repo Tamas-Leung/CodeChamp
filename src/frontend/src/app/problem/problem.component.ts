@@ -26,6 +26,8 @@ export class ProblemComponent implements OnInit, OnDestroy {
   timeLeftSeconds: number = 0;
   timeLeftMinutes: number = 0;
   endTime: Date = new Date();
+  playersInNextRound = 0;
+  nextRoundCapacity = 0;
 
   players: PlayerData[] = [];
   endDataSub: Subscription | undefined;
@@ -54,6 +56,10 @@ export class ProblemComponent implements OnInit, OnDestroy {
 
     this.lobbyService.waitingRoom.subscribe((players) => {
       this.players = players;
+      this.playersInNextRound = this.players.filter(
+        (player) => player.finishedCurrentRound
+      ).length;
+      this.nextRoundCapacity = Math.floor(this.players.length / 2);
     });
 
     if (this.players.length === 0) {
