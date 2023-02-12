@@ -311,13 +311,17 @@ export default class WebSocketManager {
     let gameToRemove;
     this.games.forEach((game, gameID) => {
       /* eslint-disable no-param-reassign */
-      game.clientIds = game.clientIds.filter(
+      const updatedClients = game.clientIds.filter(
         (clientId) => clientId !== decodedToken.email
       );
-      if (game.clientIds.length) {
-        this.sendUpdatedPlayers(game);
-      } else {
-        gameToRemove = gameID;
+
+      if (updatedClients.length < game.clientIds.length) {
+        game.clientIds = updatedClients;
+        if (game.clientIds.length) {
+          this.sendUpdatedPlayers(game);
+        } else {
+          gameToRemove = gameID;
+        }
       }
     });
     const client = this.clients.get(decodedToken.email);
