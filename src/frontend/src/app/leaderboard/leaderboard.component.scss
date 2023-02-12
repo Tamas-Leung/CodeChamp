@@ -17,6 +17,7 @@
   font-weight: 400;
   font-size: 16px;
 }
+
 .title {
   width: 500px;
   height: 70px;
@@ -26,6 +27,7 @@
   font-family: 'Mulish';
   color: white;
 }
+
 .title2 {
   width: 500px;
   height: 50px;
@@ -43,39 +45,27 @@
 }
 
 .mat-column-number {
-  padding-top: 15px;
-  width: 32px;
+  padding: 15px;
   padding-right: 24px;
-
-  text-align: center;
-  font-weight: bold;
   color: white;
   font-size: large;
 }
 
 .mat-column-name {
-  padding-top: 15px;
-  width: 0px;
+  padding: 15px;
   padding-left: 16px;
-  text-align: center;
-  font-weight: bold;
   color: white;
   font-size: large;
 }
 
 .mat-column-wins {
-  padding-top: 15px;
-  text-align: center;
-  font-weight: bold;
+  padding: 15px;
   color: white;
   font-size: large;
 }
 
 .mat-column-losses {
-  padding-top: 15px;
-  width: 32px;
-  text-align: center;
-  font-weight: bold;
+  padding: 15px;
   color: white;
   font-size: large;
 }
