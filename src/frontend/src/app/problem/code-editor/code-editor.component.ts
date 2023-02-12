@@ -1,7 +1,6 @@
 import { Component, Inject, Input, OnInit } from '@angular/core';
 import { CodeModel } from '@ngstack/code-editor';
 import { SolutionSubmitService } from '../solution-submit/solution-submit.service';
-import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import * as prettier from 'prettier/standalone';
 import * as tsParser from 'prettier/parser-babel';
 import { AuthService } from 'src/app/services/auth/auth.service';
@@ -44,7 +43,6 @@ export class CodeEditorComponent implements OnInit {
 
   constructor(
     private submitSolutionService: SolutionSubmitService,
-    public dialog: MatDialog,
     private authService: AuthService,
     private lobbyService: LobbyService
   ) {}
