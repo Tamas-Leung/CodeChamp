@@ -1,4 +1,11 @@
-import { Component, Inject, Input, OnInit } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Inject,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { CodeModel } from '@ngstack/code-editor';
 import { SolutionSubmitService } from '../solution-submit/solution-submit.service';
 import * as prettier from 'prettier/standalone';
@@ -15,6 +22,8 @@ import { SubmissionResult } from 'src/app/types/SubmissionResult';
 })
 export class CodeEditorComponent implements OnInit {
   @Input() id = '';
+  @Output() newSubmissionResult: EventEmitter<SubmissionResult> =
+    new EventEmitter();
   theme = 'vs-dark';
 
   codeModel: CodeModel = {
@@ -78,6 +87,7 @@ export class CodeEditorComponent implements OnInit {
           language: 'JavaScript',
           submittedAt: new Date(),
         };
+        this.newSubmissionResult.emit(this.submissionResult);
       });
   }
 }
