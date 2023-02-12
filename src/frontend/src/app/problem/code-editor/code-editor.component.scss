@@ -2,9 +2,17 @@
   height: 85vh;
 }
 
-.mat-flat-button {
-  background-color: rgb(81, 191, 77);
-  color: white;
+.mat-success {
+  background-color: #1ea822;
+  color: rgb(255, 255, 255);
+}
+
+.success-text {
+  color: #1ea822;
+}
+
+.wrong-text {
+  color:rgb(189, 48, 48)
 }
 
 .submission-row {

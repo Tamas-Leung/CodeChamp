@@ -11,6 +11,7 @@
     [disabled]="submissionPending"
     style="width: 100px; height: 40px"
     mat-flat-button
+    color="success"
     (click)="submitCode()"
   >
     Submit
@@ -21,5 +22,12 @@
     [diameter]="25"
     color="primary"
   ></mat-spinner>
-  <p *ngIf="!submissionPending">{{submissionResult}}</p>
+  <p
+    *ngIf="!submissionPending"
+    class="mat-body-strong {{ submissionColor }}"
+    style="margin: 10px"
+    color="success"
+  >
+    {{ submissionResult }}
+  </p>
 </div>
