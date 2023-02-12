@@ -21,10 +21,7 @@
 <div style="background: white">
   <div *ngIf="problem" class="row g-0" style="overflow: hidden">
     <div class="col-6">
-      <app-problem-description
-        [title]="problem.name"
-        [description]="problem.description"
-      ></app-problem-description>
+      <app-problem-description [problem]="problem"></app-problem-description>
     </div>
     <div class="col-6">
       <app-code-editor [id]="problem._id"></app-code-editor>
