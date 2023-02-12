@@ -60,7 +60,11 @@ export default ({ language, code, input, output, timeLimit, memoryLimit }) =>
 
             child.stderr.on('data', (stderr) => {
               cleanUpEnvironment({ codePath, dockerPath });
-              resolve({ verdict: judgeVerdict.CE, additionalInfo: stderr });
+              resolve({
+                verdict: judgeVerdict.CE,
+                // Remove the first line of stderr as it contains the file name.
+                additionalInfo: stderr.substring(stderr.indexOf('\n') + 1),
+              });
             });
 
             child.stdout.on('data', (stdout) => {
