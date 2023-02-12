@@ -192,6 +192,9 @@ export default class WebSocketManager {
 
   checkTimer(gameID, roundNumber) {
     const game = this.games.get(gameID);
+    if (!game) {
+      return;
+    }
     if (game.round === roundNumber) {
       this.removePlayersNotFinished(gameID);
     }
