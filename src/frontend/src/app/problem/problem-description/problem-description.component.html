@@ -2,10 +2,13 @@
   <h2 class="mat-h2">
     {{ problem.name }}
   </h2>
-
-  <mat-chip-list>
-    <mat-chip selected [color]="chipColor">{{ problem.difficulty }}</mat-chip>
-  </mat-chip-list>
+  <div class="row">
+    <mat-chip-list>
+      <mat-chip selected [color]="chipColor">{{ problem.difficulty }}</mat-chip>
+    </mat-chip-list>
+    <p>Time Limit: {{ timeLimitSeconds }}s</p>
+    <p>Memory Limit: {{ problem.memory_limit }}MB</p>
+  </div>
 
   <p>{{ problem.description }}</p>
 </div>
