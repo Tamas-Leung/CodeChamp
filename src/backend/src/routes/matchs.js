@@ -27,16 +27,21 @@ router.get('/leaderboard/:top?', async (req, res) => {
       {
         $group: {
           _id: '$player_id',
-          sum: {
+          rounds: {
             $sum: {
               $toInt: '$rounds_completed',
+            },
+          },
+          wins: {
+            $sum: {
+              $toInt: '$win',
             },
           },
         },
       },
       {
         $sort: {
-          sum: -1,
+          wins: -1,
         },
       },
       { $limit: top },
