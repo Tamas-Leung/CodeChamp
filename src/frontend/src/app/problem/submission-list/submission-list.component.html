@@ -23,6 +23,9 @@
         ({{ submission.language }}) {{ submission.submittedAt | timeAgo }}
       </mat-panel-description>
     </mat-expansion-panel-header>
+    <p *ngIf="submission.additionalInfo" class="code">
+      {{ submission.additionalInfo }}
+    </p>
     <p class="code">{{ getFormattedCode(submission) }}</p>
   </mat-expansion-panel>
 </div>
