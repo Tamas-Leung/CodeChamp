@@ -21,7 +21,7 @@ router.get('/leaderboard/:top?', async (req, res) => {
   try {
     let top = 100;
     if (req.params.top) {
-      top = parseInt(req.params.top);
+      top = Number(req.params.top);
     }
     const leaderboard = await Matchs.aggregate([
       {
