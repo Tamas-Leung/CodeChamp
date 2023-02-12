@@ -72,7 +72,6 @@ export class CodeEditorComponent implements OnInit {
         this.submissionPending = false;
         // Prevent race condition in which switches rounds but still displays this dialog
         if (roundWhenSent == this.currentRound && !this.endData) {
-          console.log(this.endData);
           this.dialog.open(SubmissionDialogComponent, {
             data: data,
             disableClose: data.correct,
