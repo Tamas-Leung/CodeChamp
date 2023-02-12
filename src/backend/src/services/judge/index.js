@@ -55,6 +55,10 @@ export default ({ language, code, input, output, timeLimit, memoryLimit }) =>
               }
             });
 
+            child.stderr.on('data', (stderr) => {
+              resolve({ verdict: judgeVerdict.CE, info: stderr });
+            });
+
             child.stdout.on('data', (stdout) => {
               cleanUpEnvironment({ codePath, dockerPath })
                 .then(() => {
