@@ -6,6 +6,7 @@ import * as prettier from 'prettier/standalone';
 import * as tsParser from 'prettier/parser-babel';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { LobbyService } from 'src/app/services/lobby/lobby.service';
+import { Result } from 'src/app/types/Result';
 import { EndData } from 'src/app/types/EndData';
 
 @Component({
@@ -78,9 +79,4 @@ export class CodeEditorComponent implements OnInit {
         this.submissionResult = data;
       });
   }
-}
-
-export interface Result {
-  correct: boolean;
-  result: string;
 }

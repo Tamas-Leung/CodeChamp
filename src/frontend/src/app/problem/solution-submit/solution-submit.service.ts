@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Result } from '../code-editor/code-editor.component';
+import { Result } from 'src/app/types/Result';
 
 const httpOptions = {
   headers: new HttpHeaders({
