@@ -48,7 +48,6 @@ export class MyProfileComponent {
       tempPlayerStats.losses = this.userStats.length - won;
       tempPlayerStats.problemSolved = problemSolved;
       this.player = tempPlayerStats;
-      console.log(this.userStats.length);
     });
   }
   leave() {
