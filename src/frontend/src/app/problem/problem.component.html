@@ -19,15 +19,15 @@
   </div>
 </mat-toolbar>
 <div style="background: white">
-  <div class="row g-0" style="overflow: hidden">
+  <div *ngIf="problem" class="row g-0" style="overflow: hidden">
     <div class="col-6">
       <app-problem-description
-        [title]="title"
-        [description]="description"
+        [title]="problem.name"
+        [description]="problem.description"
       ></app-problem-description>
     </div>
     <div class="col-6">
-      <app-code-editor [id]="id"></app-code-editor>
+      <app-code-editor [id]="problem._id"></app-code-editor>
     </div>
   </div>
   <div class="timer">
