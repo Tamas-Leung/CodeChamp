@@ -19,7 +19,7 @@ export class SolutionSubmitService {
   constructor(private http: HttpClient) {}
 
   submitSolution(id: string, code: string, language: string, token: string) {
-    return this.http.post<SubmissionResult>(this.url + id, {
+    return this.http.post<SubmissionResult>(this.url + '/judge/' + id, {
       code: code,
       language: language,
       token: token,
