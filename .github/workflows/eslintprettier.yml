@@ -31,10 +31,15 @@ jobs:
           cd src/backend
           npm install
 
-      - name: Run ESLint backend
+      - name: Run ESLint backend for source files
         run: |
           cd src/backend/src
           npx eslint . --config ../.eslintrc.json --ext .js,.jsx,.ts,.tsx
+
+      - name: Run ESLint backend for test files
+        run: |
+          cd src/backend/test
+          npx eslint . --config .eslintrc.json --ext .js,.jsx,.ts,.tsx
 
       - name: Prettify code backend
         run: |
