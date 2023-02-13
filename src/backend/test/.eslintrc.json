@@ -1,9 +1,9 @@
 {
-  "extends": "../src/.eslintrc.json",
+  "extends": "../.eslintrc.json",
   "env": {
     "mocha": true
   },
   "rules": {
-    "import/no-extraneous-dependencies": "error"
+    "import/no-extraneous-dependencies": ["error", { "devDependencies": true }]
   }
 }
