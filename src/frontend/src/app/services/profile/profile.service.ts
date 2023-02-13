@@ -10,7 +10,7 @@ export class ProfileService {
   url = environment.apiUrl;
   id = '';
   constructor(private http: HttpClient, private authService: AuthService) {
-    this.id = authService.getPlayerData().id;
+    this.id = authService.getPlayerData().email;
   }
 
   getUserStats() {
