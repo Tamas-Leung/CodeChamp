@@ -28,8 +28,8 @@
       >
         {{ match.win ? 'Victory' : 'Defeat&nbsp;' }}
       </h1>
-      <h1 class="history-text">
-        &nbsp; &nbsp; &nbsp; &nbsp; {{ match.problems }}
+      <h1 class="history-text1">
+        {{ match.problems }}
       </h1>
     </mat-card>
     <h1 *ngIf="userStats?.length == 0" class="history-text2">
