@@ -34,7 +34,6 @@ export class MyProfileComponent {
   }
   ngOnInit(): void {
     this.profileService.getUserStats().subscribe((res) => {
-      console.log(res);
       this.userStats = res;
       let won = 0;
       let problemSolved = 0;
@@ -49,7 +48,6 @@ export class MyProfileComponent {
       tempPlayerStats.losses = this.userStats.length - won;
       tempPlayerStats.problemSolved = problemSolved;
       this.player = tempPlayerStats;
-      console.log(this.userStats.length);
     });
   }
   leave() {
