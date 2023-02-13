@@ -1,12 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProfileService {
-  url = 'http://localhost:3000';
+  url = environment.apiUrl;
   id = '';
   constructor(private http: HttpClient, private authService: AuthService) {
     this.id = authService.getPlayerData().id;
