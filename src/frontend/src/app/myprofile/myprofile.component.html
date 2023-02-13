@@ -18,10 +18,16 @@
   </div>
 
   <div class="right-half">
-    <mat-expansion-panel *ngFor="let match of userStats" class="match-history-card">
-      <mat-expansion-panel-header style="padding: 40px;">
+    <mat-expansion-panel
+      *ngFor="let match of userStats"
+      class="match-history-card"
+    >
+      <mat-expansion-panel-header style="padding: 40px">
         <mat-panel-title>
-          <h1 class=" history-text" [ngClass]="{ green: match.win, red: !match.win }">
+          <h1
+            class="history-text"
+            [ngClass]="{ green: match.win, red: !match.win }"
+          >
             {{ match.win ? 'Victory' : 'Defeat&nbsp;' }}
           </h1>
         </mat-panel-title>
@@ -29,7 +35,9 @@
           {{ match.problems.length }} problem(s) attempted
         </mat-panel-description>
       </mat-expansion-panel-header>
-      <p *ngFor="let problem of match.problems">{{problem.name}} - {{problem.difficulty}}</p>
+      <p *ngFor="let problem of match.problems">
+        {{ problem.name }} - {{ problem.difficulty }}
+      </p>
     </mat-expansion-panel>
   </div>
 </section>
