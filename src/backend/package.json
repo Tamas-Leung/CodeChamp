@@ -6,7 +6,7 @@
   "main": "./src/app.js",
   "scripts": {
     "start": "nodemon ./src/app.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "node ./node_modules/mocha/bin/mocha --recursive ./test/**/*.js",
     "format:check": "prettier --check .",
     "format:fix": "prettier --write .",
     "lint:check": "eslint . --config .eslintrc.json --ext .js,.jsx,.ts,.tsx",
