@@ -39,6 +39,7 @@
   width: 45.22px;
   height: 45.22px;
   float: left;
+  margin-top: 20px;
 }
 
 .player-name {
@@ -46,7 +47,7 @@
   font-family: 'Mulish';
   float: right;
   font-size: 40px;
-  margin-top: 5px;
+  margin-top: 20px;
 }
 
 /* Pattern styles */
@@ -57,7 +58,7 @@
   margin-top: 100px;
   margin-left: 2%;
   margin-right: 2%;
-  grid-template-columns: 35% 55%;
+  grid-template-columns: 35% 58%;
   column-gap: 2%;
 }
 
@@ -136,7 +137,6 @@
   background: rgba(255, 255, 255, 0.05);
   border: 2px solid #ffffff;
   color: white;
-
 }
 
 .green {
