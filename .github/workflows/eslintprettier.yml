@@ -34,7 +34,7 @@ jobs:
       - name: Run ESLint backend
         run: |
           cd src/backend/src
-          npx eslint . --config ../eslintrc.json --ext .js,.jsx,.ts,.tsx
+          npx eslint . --config ../.eslintrc.json --ext .js,.jsx,.ts,.tsx
 
       - name: Prettify code backend
         run: |
