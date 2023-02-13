@@ -18,10 +18,17 @@ export class ProfileService {
   }
 }
 
+interface ProblemInStats {
+  _id: string;
+  name: string;
+  description: string;
+  difficulty: string;
+}
+
 export interface Stats {
   game_id: string;
   player_id: string;
   win: Boolean;
   rounds_completed: Number;
-  problems: string[];
+  problems: ProblemInStats[];
 }
