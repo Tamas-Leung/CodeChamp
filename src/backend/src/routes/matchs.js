@@ -8,7 +8,11 @@ router.get('/user/:_id', async (req, res) => {
     const filter = {
       player_id: req.params._id,
     };
-    const matchs = await Matchs.find(filter);
+    const matchs = await Matchs.find(filter).populate({
+      path: 'problems',
+      model: 'problems',
+      select: { name: 1, description: 1, difficulty: 1 },
+    });
     res.status(200).send(matchs);
   } catch (e) {
     res.status(500).send({
