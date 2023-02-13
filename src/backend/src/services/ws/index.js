@@ -312,12 +312,14 @@ export default class WebSocketManager {
     const gameID = this.clients.get(email).game;
     if (!gameID) return;
     const game = this.games.get(gameID);
+    if (!game) return;
     game.clientIds = game.clientIds.filter((clientId) => clientId !== email);
 
     if (game.clientIds.length) {
       this.sendUpdatedPlayers(game);
-    } else {
-      this.games.delete(gameID);
     }
+    // } else {
+    //   // this.games.delete(gameID);
+    // }
   }
 }
