@@ -1,7 +1,6 @@
 import {
   Component,
   EventEmitter,
-  Inject,
   Input,
   OnInit,
   Output,
@@ -12,8 +11,8 @@ import * as prettier from 'prettier/standalone';
 import * as tsParser from 'prettier/parser-babel';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { LobbyService } from 'src/app/services/lobby/lobby.service';
-import { EndData } from 'src/app/types/EndData';
 import { SubmissionResult } from 'src/app/types/SubmissionResult';
+import { Language, languages } from 'src/app/types/Language';
 
 @Component({
   selector: 'app-code-editor',
@@ -40,6 +39,7 @@ export class CodeEditorComponent implements OnInit {
     },
   };
 
+  language: Language = languages.javaScript;
   solution = '';
   submissionPending = false;
   submissionResult: SubmissionResult | null = null;
@@ -74,7 +74,7 @@ export class CodeEditorComponent implements OnInit {
     const code = this.solution;
 
     this.submitSolutionService
-      .submitSolution(this.id, code, 'mjs', this.authService.getToken()!)
+      .submitSolution(this.id, code, this.language.extension, this.authService.getToken()!)
       .subscribe((data) => {
         this.submissionPending = false;
         this.submissionResult = {
@@ -82,7 +82,7 @@ export class CodeEditorComponent implements OnInit {
           result: data.result,
           additionalInfo: data.additionalInfo,
           code,
-          language: 'JavaScript',
+          language: this.language.displayName,
           submittedAt: new Date(),
         };
         this.newSubmissionResult.emit(this.submissionResult);
