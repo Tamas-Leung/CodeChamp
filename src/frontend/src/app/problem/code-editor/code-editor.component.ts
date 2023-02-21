@@ -34,7 +34,7 @@ export class CodeEditorComponent implements OnInit {
   };
 
   dropdownLanguages = Object.values(languages);
-  selectedLanguage: Language = languages.python;
+  selectedLanguage: Language = languages.javaScript;
   solution = '';
   submissionPending = false;
   submissionResult: SubmissionResult | null = null;
