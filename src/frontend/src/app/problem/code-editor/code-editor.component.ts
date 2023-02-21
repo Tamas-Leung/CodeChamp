@@ -1,10 +1,4 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  OnInit,
-  Output,
-} from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CodeModel } from '@ngstack/code-editor';
 import { SolutionSubmitService } from '../solution-submit/solution-submit.service';
 import * as prettier from 'prettier/standalone';
@@ -39,7 +33,8 @@ export class CodeEditorComponent implements OnInit {
     },
   };
 
-  language: Language = languages.javaScript;
+  dropdownLanguages = Object.values(languages);
+  selectedLanguage: Language = languages.python;
   solution = '';
   submissionPending = false;
   submissionResult: SubmissionResult | null = null;
@@ -74,7 +69,12 @@ export class CodeEditorComponent implements OnInit {
     const code = this.solution;
 
     this.submitSolutionService
-      .submitSolution(this.id, code, this.language.extension, this.authService.getToken()!)
+      .submitSolution(
+        this.id,
+        code,
+        this.selectedLanguage.extension,
+        this.authService.getToken()!
+      )
       .subscribe((data) => {
         this.submissionPending = false;
         this.submissionResult = {
@@ -82,7 +82,7 @@ export class CodeEditorComponent implements OnInit {
           result: data.result,
           additionalInfo: data.additionalInfo,
           code,
-          language: this.language.displayName,
+          language: this.selectedLanguage.displayName,
           submittedAt: new Date(),
         };
         this.newSubmissionResult.emit(this.submissionResult);

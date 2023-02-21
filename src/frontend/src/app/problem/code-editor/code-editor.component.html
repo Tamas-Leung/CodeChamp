@@ -1,3 +1,11 @@
+<mat-form-field appearance="fill">
+  <mat-select [(value)]="selectedLanguage">
+    <mat-option *ngFor="let language of dropdownLanguages" [value]="language">
+      {{ language.displayName }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
 <ngs-code-editor
   class="editor"
   [theme]="theme"
