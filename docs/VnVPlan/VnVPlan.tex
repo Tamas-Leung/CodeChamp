@@ -290,7 +290,7 @@ An external software validation plan is not planned because the requirements are
 
 \item{TC-MM-1: Join a random match}
 
-Testing Type: Functional, Automatic, Dynamic
+Testing Type: Functional, Manual, Dynamic
 					
 Initial State: On Main Menu Page
 					
@@ -300,7 +300,7 @@ Output: Screen changes to lobby page
 
 Test Case Derivation: The system receives the ``find a match" input and return the user a lobby match id to join, in which sends the user to the lobby page.
 					
-How test will be performed: TestCafe will be used to find and press the ``find a match" button, waits INPUT\_RESPONSE\_TIME, and then checks the HTML of the page to ensure the lobby page is displayed.
+How test will be performed: Tester will be used to find and press the ``find a match" button, waits INPUT\_RESPONSE\_TIME, and then checks the HTML of the page to ensure the lobby page is displayed.
 					
 \item{TC-MM-2: Join an existing page with a code}
 
@@ -318,7 +318,7 @@ How test will be performed: Tester creates a lobby with one machine, receives th
 
 \item{TC-MM-3: Create a match}
 
-Testing Type: Functional, Automatic, Dynamic 
+Testing Type: Functional, Manual, Dynamic 
 					
 Initial State: On Main Menu Page
 					
@@ -328,7 +328,7 @@ Output: Screen changes to lobby page.
 
 Test Case Derivation: The system receives the ``create match" input with a code and return the user the lobby match with a new code, which sends the user to the lobby page.
 					
-How test will be performed: TestCafe will be used to press the ``create match" button, waits INPUT\_RESPONSE\_TIME, and then checks the HTML of the page to ensure the lobby page is displayed.
+How test will be performed: Tester will be used to press the ``create match" button, waits INPUT\_RESPONSE\_TIME, and then checks the HTML of the page to ensure the lobby page is displayed.
 
 \end{enumerate}
 
@@ -352,10 +352,12 @@ How test will be performed: A user will start a game. The user will manually fin
 
 \item{TC-IG-2: Compiles code}
 
-Testing Type: Functional, Automatic, Dynamic
+Testing Type: Functional, Manual, Dynamic
 					
 Initial State: In-game Page
 					
+\end{enumerate} 
+
 Input: The following code snippet with the JavaScript language option:
 \begin{verbatim}
 console.log(`Hello, World!');
@@ -365,29 +367,13 @@ Output: Returns success status and presents user with the number of passed test 
 
 Test Case Derivation: The system receives the submit code input with user written code. The system then validates and compiles the code. The system then returns the number of passed test cases.
 					
-How test will be performed: TestCafe will type the input code into a pre-determined Hello World problem and input it into the code editor. TestCafe will choose the JavaScript language option from a dropdown menu. TestCafe will wait for INPUT\_RESPONSE\_TIME and check the HTML to ensure that all test cases were passed.
-
-\item{TC-IG-3: Submit malicious code}
-
-Testing Type: Functional, Automatic, Dynamic
-					
-Initial State: In-game Page
-					
-Input: Enter ``rm -rf *" into code editor and submit code
-					
-Output: Code is rejected and displays number of passed test cases is equal to 0. It also displays that there was an error with the inputted code.
-
-Test Case Derivation: The system receives the malicious code input. The system then validates and rejects the code. The system then returns the 0 passed test cases.
-					
-How test will be performed:  TestCafe will type the malicious code and input it into the code editor. TestCafe will choose the JavaScript language option from a dropdown menu. TestCafe will wait for INPUT\_RESPONSE\_TIME and check the HTML to ensure that none of the test cases were passed. 
-
-\end{enumerate}
+How test will be performed: Tester will type the input code into a pre-determined Hello World problem and input it into the code editor. Tester will choose the JavaScript language option from a dropdown menu. Tester will wait for INPUT\_RESPONSE\_TIME and check the HTML to ensure that all test cases were passed.
 
 \subsubsection{Problem Maintenance Tests}
 \begin{enumerate}
 \item{TC-PM-1: Add a new problem}
 
-Testing Type: Functional, Automatic, Dynamic
+Testing Type: Functional, Manual, Dynamic
 					
 Initial State: problem maintenance page
 					
@@ -403,11 +389,11 @@ Output: List of problems on problem maintenance page shows new problem with the 
 
 Test Case Derivation: The system receives the new problem and updates the database. The system then updates the display to show the new problem.
 					
-How test will be performed: TestCafe will type the test problem data and clicks ``Add Problem". TestCafe will check the list of problems displayed includes the new problem.
+How test will be performed: Tester will type the test problem data and clicks ``Add Problem". Tester will check the list of problems displayed includes the new problem.
 
 \item{TC-PM-2: Modify a problem}
 
-Testing Type: Functional, Automatic, Dynamic
+Testing Type: Functional, Manual, Dynamic
 					
 Initial State: problem maintenance page
 					
@@ -417,11 +403,11 @@ Output: List of problems on problem maintenance page shows the problem with name
 
 Test Case Derivation: The system receives the new problem name and updates the database. They system then updates the display to show the updated problem name.
 					
-How test will be performed: TestCafe will click edit on a test problem and edit the problem name. TestCafe will check the list of problems displayed includes the new problem name.
+How test will be performed: Tester will click edit on a test problem and edit the problem name. Tester will check the list of problems displayed includes the new problem name.
 
 \item{TC-PM-3: Delete a problem}
 
-Testing Type: Functional, Automatic, Dynamic
+Testing Type: Functional, Tester, Dynamic
 					
 Initial State: problem maintenance page
 					
@@ -431,55 +417,8 @@ Output: List of problems on problem maintenance page does not shows the problem
 
 Test Case Derivation: The system receives the delete problem and updates the database. The system then updates the display to show the problem is gone from the list.
 					
-How test will be performed: TestCafe will click delete on a test problem. TestCafe will check the list of problems displayed does not include the deleted test problem.
+How test will be performed: Tester will click delete on a test problem. Tester will check the list of problems displayed does not include the deleted test problem.
 \end{enumerate}
-
-\subsubsection{Login/Sign up Tests}
-
-\begin{enumerate}
-\item {TC-LS-1: Sign Up}
-    
-Testing Type: Functional, Automatic, Dynamic
-					
-Initial State: Sign Up Page
-					
-Input: Types username ``test1" and password ``testpassword1" into text-boxes and then clicks the sign-up button.
-					
-Output: Page displays that the sign-up was successful and logs the user into the system.
-
-Test Case Derivation: The system receives the credentials and updates the database. The system then sends a successful response which prompts an update to the display. 
-					
-How test will be performed: TestCafe will run in a special environment to ensure that the username is available. TestCafe will find the username and password text-box inputs and type the aforementioned input. TestCafe will click the sign-up button and check the HTML to ensure that the sign-up success dialog was displayed and that the user was redirected to the page with logged in credentials.
-
-\item {TC-LS-2: Login}
-    
-Testing Type: Functional, Automatic, Dynamic
-					
-Initial State: Login Page
-					
-Input: Types username ``test1" and password ``testpassword1" into text-boxes and then clicks the login button.
-					
-Output: Page displays that the login was successful and logs the user into the system.
-
-Test Case Derivation: The system receives the credentials and verifies that the account exists and that the credentials are correct. The system then sends a successful response which prompts an update to the display.
-					
-How test will be performed: TestCafe will run in a special environment to ensure that the account is registered. TestCafe will find the username and password text-box inputs and type the aforementioned input. TestCafe will click the login button and check the HTML to ensure that the login success dialog was displayed and that the user was redirected to the page with logged in credentials.
-
-\item {TC-LS-3: Login Failure}
-    
-Testing Type: Functional, Automatic, Dynamic
-					
-Initial State: Login Page
-					
-Input: Types username ``test1" and password ``testpassword2" into text-boxes and then clicks the login button.
-					
-Output: Page displays that the login was unsuccessful.
-
-Test Case Derivation: The system receives the credentials and discovers that the account credentials are incorrect. The system then sends a failure response which prompts an update to the display.
-					
-How test will be performed: TestCafe will run in a special environment to ensure that the account is not registered with the input credentials. TestCafe will find the username and password text-box inputs and type the aforementioned input. TestCafe will click the login button and check the HTML to ensure that the login failure dialog was displayed.
-\end{enumerate}
-
 
 \subsubsection{Profile View Tests}
 
@@ -488,7 +427,7 @@ How test will be performed: TestCafe will run in a special environment to ensure
 \begin{enumerate}
 \item {TC-PV-1: Profile View Displays Win Percentage}
 
-Testing Type: Functional, Automatic, Dynamic
+Testing Type: Functional, Manual, Dynamic
 					
 Initial State: Profile View Page
 					
@@ -498,11 +437,11 @@ Output: Page displays the number of matches the player has played, the number th
 
 Test Case Derivation: The system retrieves the match statistics from the database and sends it to the client. The system then calculates and displays the appropriate statistics for the player.
 					
-How test will be performed: TestCafe will run in a special environment with mock-data which includes several matches. TestCafe will check the HTML for an element which contains the win percentage number and ensure it matches the expected value in accordance with the mock-data.
+How test will be performed: Tester will run in a special environment with mock-data which includes several matches. Tester will check the HTML for an element which contains the win percentage number and ensure it matches the expected value in accordance with the mock-data.
 
 \item {TC-PV-2: Profile View Displays Match History}
 
-Testing Type: Functional, Automatic, Dynamic
+Testing Type: Functional, Manual, Dynamic
 					
 Initial State: Profile View Page
 					
@@ -512,7 +451,7 @@ Output: Match history displays the match result, the result for each round in th
 
 Test Case Derivation: The system retrieves the match statistics from the database and sends it to the client. The system then displays the appropriate statistics for match which the user specified.
 					
-How test will be performed: TestCafe will run in a special environment with mock-data which includes several matches. TestCafe will click on the first match on the list and check the HTML to ensure that the match data is displayed correctly in accordance with the provided mock-data.
+How test will be performed: Tester will run in a special environment with mock-data which includes several matches. Tester will click on the first match on the list and check the HTML to ensure that the match data is displayed correctly in accordance with the provided mock-data.
 
 \end{enumerate}
 
@@ -521,7 +460,7 @@ How test will be performed: TestCafe will run in a special environment with mock
 
 \begin{enumerate}
     \item {TC-LB-1}
-    Testing Type: Functional, Automatic, Dynamic
+    Testing Type: Functional, Manual, Dynamic
 					
 Initial State: Home Page
 					
@@ -531,19 +470,18 @@ Output: The system displays up to 100 users, sorted by their number of wins in d
 
 Test Case Derivation: The system receives the leader board input and queries the database for the top 100 users by based on the number of wins of each user. The system then displays the results from the query.
 					
-How test will be performed: TestCafe will run in a special environment with mock-data which includes multiple users with different number of wins. TestCafe will click on the leaderboard tab. TestCafe will check HTML for each leader-board placement element to ensure that it is in the correct location in accordance with the mock-data.
+How test will be performed: Tester will run in a special environment with mock-data which includes multiple users with different number of wins. Tester will click on the leaderboard tab. Tester will check HTML for each leader-board placement element to ensure that it is in the correct location in accordance with the mock-data.
 \end{enumerate}
 
 
 \subsection{Tests for Nonfunctional Requirements}
-
 
 \subsubsection{Look and Feel}
 
 \paragraph{Interface Navigability}
 
 \begin{enumerate}
-\item{TC-LF-1: Interface should be easy to navigate}
+\item{TC-LF-1: Interface should be easy to navigate and consistent}
 
 Type: Non-Functional, Manual, Static
 					
@@ -607,24 +545,6 @@ Output/Result: Compiled results of the solution returned BACKEND\_COMPILE\_TIME 
 How test will be performed: The test will be performed manually by a member of the team. They will open Chrome's Dev Tools and record themselves performing the actions and getting the results back. They will then profile the recorded data to verify the time constraint was met.
 \end{enumerate}
 
-\paragraph{Concurrent Game Capacity}
-
-\begin{enumerate}
-
-\item{TC-P-3: The server should be able to handle at least 50 concurrent games without performance impacts}
-
-Type: Non-Functional, Performance, Stress, Automatic, Dynamic
-					
-Initial State: The server has no games running
-					
-Input/Condition: 50 games are created and started.
-					
-Output/Result: The server should be able to receive inputs from all games and handle them accordingly without violating the INPUT\_RESPONSE\_TIME max latency requirement.
-					
-How test will be performed: The test will be performed with a script that automatically creates 50 games and sends inputs to all the games. It will time responses and output them to a file for later viewing.
-
-\end{enumerate}
-
 \subsubsection{Operational and Environmental}
 
 \paragraph{Browser and Device Compatibility}
@@ -666,7 +586,7 @@ How test will be performed: The test will be performed manually by a team member
 \paragraph{User Privacy}
 
 \begin{enumerate}
-\item{TC-S-2: The server must only store the minimum required data about the player}
+\item{TC-S-2: The server must only store and display the minimum required data about the player}
 
 Type: Security, Manual, Dynamic
 					
@@ -676,7 +596,7 @@ Input/Condition: A user connects to the game
 					
 Output/Result: The server only obtains the minimum amount of information from the user to run the game. Only the game stats is stored after the game ends and other information is disposed.
 					
-How test will be performed: The test will be performed manually by a team member. They will connect to the game through normal means. They will then view the server's logs to see what information was accessed by the server.
+How test will be performed: The test will be performed manually by a team member. They will connect to the game through normal means. They will then view the server's logs to see what information was accessed by the server. They will also navigate to all of the pages to see if any data that poses a security threat or is not necessary to be displayed, if noticed these displays will be adjusted to not to include them.
 \end{enumerate}
 
 \subsubsection{Cultural}
@@ -755,12 +675,12 @@ How test will be performed: The test will be performed manually by a team member
      \hline
     TC-PM-3 & FR.12, FR.13, FR.22, NFR.10 & Should be able to delete problems (admin).\\
      \hline
-    TC-LS-1 & FR.17 & New users can sign up. \\
-     \hline
-    TC-LS-2 & FR.18  & Existing users can log in. \\
-     \hline
-    TC-LS-3 & FR.19  & Login with invalid information is rejected and a error message is displayed. \\
-     \hline
+    % TC-LS-1 & FR.17 & New users can sign up. \\
+    %  \hline
+    % TC-LS-2 & FR.18  & Existing users can log in. \\
+    %  \hline
+    % TC-LS-3 & FR.19  & Login with invalid information is rejected and a error message is displayed. \\
+     % \hline
     TC-PV-1 & FR.26 & Profile should view win percentage.\\
      \hline
     TC-PV-2 & FR.25, FR.27, FR.28  & Profile should view match history.\\
