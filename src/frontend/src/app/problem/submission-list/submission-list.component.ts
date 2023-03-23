@@ -15,12 +15,5 @@ export class SubmissionListComponent {
     return submissionResult.correct ? 'success-text' : 'wrong-text';
   }
 
-  getFormattedCode(submissionResult: SubmissionResult) {
-    return prettier.format(submissionResult.code, {
-      parser: 'babel',
-      plugins: [tsParser],
-    });
-  }
-
   constructor() {}
 }
