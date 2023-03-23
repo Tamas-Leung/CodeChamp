@@ -1,5 +1,8 @@
 <mat-form-field class="lang-dropdown" appearance="outline">
-  <mat-select [(value)]="selectedLanguage">
+  <mat-select
+    (selectionChange)="onLanguageChanged($event)"
+    [(value)]="selectedLanguage"
+  >
     <mat-option *ngFor="let language of dropdownLanguages" [value]="language">
       {{ language.displayName }}
     </mat-option>

@@ -1,12 +1,11 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CodeModel } from '@ngstack/code-editor';
 import { SolutionSubmitService } from '../solution-submit/solution-submit.service';
-import * as prettier from 'prettier/standalone';
-import * as tsParser from 'prettier/parser-babel';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { LobbyService } from 'src/app/services/lobby/lobby.service';
 import { SubmissionResult } from 'src/app/types/SubmissionResult';
 import { Language, languages } from 'src/app/types/Language';
+import { MatSelectChange } from '@angular/material/select';
 
 @Component({
   selector: 'app-code-editor',
@@ -19,11 +18,13 @@ export class CodeEditorComponent implements OnInit {
     new EventEmitter();
   theme = 'vs-dark';
 
+  dropdownLanguages = Object.values(languages);
+  selectedLanguage: Language = languages.javaScript;
+
   codeModel: CodeModel = {
-    language: 'javascript',
+    language: this.selectedLanguage.displayName.toLowerCase(),
     uri: 'solution.js',
-    value:
-      "import readline from 'readline'; const stdin = readline.createInterface({ input: process.stdin, output: process.stdout, }); stdin.question('', (input) => { console.log(\"Your answer here...\"); stdin.close(); });",
+    value: this.selectedLanguage.templateCode,
   };
 
   options = {
@@ -33,9 +34,7 @@ export class CodeEditorComponent implements OnInit {
     },
   };
 
-  dropdownLanguages = Object.values(languages);
-  selectedLanguage: Language = languages.javaScript;
-  solution = '';
+  solutions: Map<string, string> = new Map();
   submissionPending = false;
   submissionResult: SubmissionResult | null = null;
 
@@ -50,23 +49,36 @@ export class CodeEditorComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.solution = this.codeModel.value;
-    this.codeModel.value = prettier.format(this.codeModel.value, {
-      parser: 'babel',
-      plugins: [tsParser],
-    });
+    this.codeModel.value = this.selectedLanguage.format(
+      this.selectedLanguage.templateCode
+    );
+    this.solutions.set(this.selectedLanguage.extension, this.codeModel.value);
     this.lobbyService.currentRound.subscribe(
       (round) => (this.submissionResult = null)
     );
   }
 
   onCodeChanged(value: string) {
-    this.solution = value;
+    this.solutions.set(this.selectedLanguage.extension, value);
+  }
+
+  onLanguageChanged(change: MatSelectChange) {
+    const newLanguage = change.value as Language;
+    if (!this.solutions.has(newLanguage.extension)) {
+      this.solutions.set(newLanguage.extension, newLanguage.templateCode);
+    }
+    this.codeModel = {
+      language: this.selectedLanguage.displayName.toLowerCase(),
+      uri: `solution.${this.selectedLanguage.extension}`,
+      value: this.selectedLanguage.format(
+        this.solutions.get(this.selectedLanguage.extension)!
+      ),
+    };
   }
 
   submitCode() {
     this.submissionPending = true;
-    const code = this.solution;
+    const code = this.solutions.get(this.selectedLanguage.extension)!;
 
     this.submitSolutionService
       .submitSolution(
