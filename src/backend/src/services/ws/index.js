@@ -162,7 +162,7 @@ export default class WebSocketManager {
 
     const players = this.getPlayersDataToSend(game);
 
-    const newProblem = await getRandomProblemId(game.problemsPlayed);
+    let newProblem = await getRandomProblemId(game.problemsPlayed);
 
     if (game.round === 1) {
       newProblem = '63794a6952d8441c74627f63';
@@ -212,7 +212,7 @@ export default class WebSocketManager {
     if (game.round > 0) {
       const clientIdsThatLost = game.clientIds.filter((clientId) => {
         const client = this.clients.get(clientId);
-        if (client.gameID !== gameID) return false;
+        if (client.game !== gameID) return false;
         return client.lastCompletedRound < game.round;
       });
       clientIdsThatLost.forEach((clientId) => {
