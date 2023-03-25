@@ -299,7 +299,7 @@ export default class WebSocketManager {
     // Find a game that hasn't started yet
     const gamesInLobby = [];
     this.games.forEach((value, key) => {
-      if (value.round === 0) {
+      if (value.round === 0 && value.clientIds.length > 0) {
         gamesInLobby.push(key);
       }
     });
