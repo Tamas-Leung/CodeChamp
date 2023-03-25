@@ -164,6 +164,12 @@ export default class WebSocketManager {
 
     const newProblem = await getRandomProblemId(game.problemsPlayed);
 
+    if (game.round === 1) {
+      newProblem = '63794a6952d8441c74627f63';
+    } else if (game.round === 2) {
+      newProblem = '63747e5dfffe067b61c7e67e';
+    }
+
     game.problemsPlayed.push(newProblem);
 
     const totalTime = 15 * 60 * 1000; // 15 minutes currently
@@ -206,6 +212,7 @@ export default class WebSocketManager {
     if (game.round > 0) {
       const clientIdsThatLost = game.clientIds.filter((clientId) => {
         const client = this.clients.get(clientId);
+        if (client.gameID !== gameID) return false;
         return client.lastCompletedRound < game.round;
       });
       clientIdsThatLost.forEach((clientId) => {
