@@ -39,16 +39,16 @@ N/A
 
 Table 1: Failure Modes and Effects Analysis
 
-# Introduction
+# 1 Introduction
 To ensure the system that is built hazard free, potential problematic behaviours must be identified. This document aims to outline the hazard analysis of CodeChamp and to build a roadmap for achieving that goal.
 
-# Background
+# 2 Background
 CodeChamp is a online collaborative web platform used to learn data structure and algorithms. 
 
 
-# Scope and Purpose of Hazard Analysis
+# 3 Scope and Purpose of Hazard Analysis
 The scope of a hazard analysis is to identify possible hazards from each component of the system, and the purpose of a hazard analysis is to document hazards, the cause and effect of each hazard and how to mitigate each hazard.
-# System Boundary
+# 4 System Boundary
 Hazard analysis will be conducted on the following components of CodeChamp:
 1. Judge Server
 2. Connected Communication
@@ -58,23 +58,23 @@ Hazard analysis will be conducted on the following components of CodeChamp:
 
 
 The system boundary includes five components of the application. The judge server, connected communication service, the database, authentication service, and deployment service. The reliability of the database and deployment services in terms of up time is out of the control of CodeChamp. These play a role in ensuring appropriate data store and uptime of the web application, so they are necessary to be included in the hazard analysis.
-# Definition of Hazard
+# 5 Definition of Hazard
 The definition of a hazard used throughout this document is anything that poses a threat to the security, performance, or functionality of the CodeChamp web application.
-# Critical Assumptions
+# 6 Critical Assumptions
 There are no critical assumptions being made.
 
 
-# Failure Modes and Effects Analysis
+# 7 Failure Modes and Effects Analysis
 The Failure Modes and Effects Analysis model was chosen to identify and analyze the system's hazards as well as to define recommended actions and requirements to mitigate them.
 
-## Hazards Out of Scope
+## 7.1 Hazards Out of Scope
 1. Deployment issues and outages by the Cloud Provider
 2. Database provider outages
 3. Failures of the External Identity Management System
 
 These hazards are not managed directly the developers, so our system cannot be directly responsible for them. In the case of hazards, we can attempt to minimize their effects but cannot completely mitigate them.
 
-## Failure Modes and Effects Analysis Table
+## 7.2 Failure Modes and Effects Analysis Table
 
 
 
@@ -90,14 +90,14 @@ These hazards are not managed directly the developers, so our system cannot be d
 
 <center>Table 2: Failure Modes and Effects Analysis</center>
 
-# Safety and Security Requirements
+# 8 Safety and Security Requirements
 
-## Access Requirements
+## 8.1 Access Requirements
 - AR1 - Users must be logged in to view data they are authorized for
 - AR2 - Only admins will be allowed to modify and add new problem data
 - AR3 - Requests from unauthenticated users should be rejected
  
-## Integrity Requirements
+## 8.2 Integrity Requirements
 - IR1 - Problem data will be automatically back up on a weekly basis
 - IR2 - User profile data will be automatically back up on a daily basis
 - IR3 - User data will not be modified
@@ -106,14 +106,14 @@ These hazards are not managed directly the developers, so our system cannot be d
 - IR6 - Clients will be rate-limited on requests to the server
 - IR7 - Distribute connection/requests evenly among servers
 
-## Privacy Requirements
+## 8.3 Privacy Requirements
 - PR1 - Users will not be able to access unauthorized data of other users
 
-## Audit Requirements
+## 8.4 Audit Requirements
 N/A
 
-## Immunity Requirements
+## 8.5 Immunity Requirements
 N/A
 
-# Roadmap
+# 9 Roadmap
 The hazard analysis has brought forward more requirements that will be implemented within the final application. We will try to implement all requirements based on priority, but may not be able to due to time constraints of the projects. As we approach the end of the project, the hazard analysis will be revisited, to see the hazards that were mitigated, and those which still persist or require additional work.
