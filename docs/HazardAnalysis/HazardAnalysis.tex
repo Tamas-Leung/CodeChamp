@@ -1,0 +1,254 @@
+\documentclass{article}
+
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{changepage}
+\usepackage{fullpage}
+\usepackage{rotating}
+\usepackage{multirow}
+\usepackage{float}
+\usepackage{geometry}
+\usepackage{array}
+\usepackage{lmodern}
+\usepackage{enumitem}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{lscape} 
+
+\title{Hazard Analysis\\\progname}
+
+\author{\authname}
+
+\date{}
+
+\input{../Comments}
+\input{../Common}
+
+\begin{document}
+\maketitle
+
+\begin{table}[hp]
+\caption{Revision History} \label{TblRevisionHistory}
+\begin{tabularx}{\textwidth}{llX}
+\toprule
+\textbf{Date} & \textbf{Developer(s)} & \textbf{Change}\\
+\midrule
+3/30/2023 & Anton Kanugalawattage & Added additional hazards, failure modes and modified old failure modes. Rewrote in Latex. Fixed grammatical and spelling errors. \\
+  & Dipendra Subedi & \\
+  & Youssef Rizkalla &\\
+  & Tamas Leung & \\
+  & Zhiming Zhao & \\
+\midrule
+10/18/2022 & Anton Kanugalawattage & Initial Document\\
+  & Dipendra Subedi & \\
+  & Youssef Rizkalla &\\
+  & Tamas Leung & \\
+  & Zhiming Zhao & \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\newpage
+\tableofcontents
+\listoftables
+\listoffigures
+
+\newpage
+\section{Introduction}
+To ensure the system that is being built is safe, unsafe behaviours must be identified. This document aims to identify potential hazards and describes the effects that they could have on the CodeChamp system. Additionally, requirements are specified to mitigate or prevent the identified hazards from occurring or negatively affecting the system. 
+
+\section{Scope and Purpose of Hazard Analysis}
+A hazard is a property or condition in the system together with a condition in the environment that has the potential to cause harm or damage. The scope of a hazard analysis is to identify possible hazards from each component of the system, and the purpose of a hazard analysis is to document hazards, the cause and effect of each hazard and how to mitigate each hazard.
+
+\section{System Boundary}
+Hazard analysis will be conducted on the following components of CodeChamp:
+\begin{enumerate}
+  \item Judge Server
+  \item Connected Communication
+  \item Database
+  \item Authentication
+  \item Deployment
+  \item Users
+\end{enumerate}
+
+The system boundary includes five components of the application: the judge server, connected communication services, the database, authentication services and deployment services. The reliability of the database and deployment services in terms of up time is out of the control of CodeChamp but still play a role in ensuring appropriate storage and retrieval of data, so it is necessary to be included in the hazard analysis.
+
+
+\section{Definition of Hazard}
+
+The definition of a hazard used throughout this document is anything that poses a threat to the security, performance, or functionality of the CodeChamp web application.
+
+\section{Critical Assumptions}
+There are no critical assumptions being made.
+
+\section{Failure Modes \& Effects Analysis Table}
+The Failure Modes and Effects Analysis model was chosen to identify and analyze the system's hazards as well as to define recommended actions and requirements to mitigate them.
+
+\subsection{Hazards Out Of Scope}
+These are hazards which are not managed directly the developers, so our system cannot be directly control them. In the case of such hazards, we can attempt to minimize their effects or work around them but cannot completely mitigate them. The out of scope hazards are as follows: 
+\begin{enumerate}
+    \item Deployment issues and outages by the cloud provider
+    \item Database provider outages
+    \item Failures of the external identity management system
+\end{enumerate}
+
+
+
+\begin{landscape}
+\subsection{Failure Modes and Effect Analysis Table}
+\begin{table}[H]
+    \begin{tabularx}{1.46\textwidth}{|p{2.3cm}|p{2.3cm}|p{3.5cm}|p{4.4cm}|p{4.5cm}|p{1cm}|p{1cm}|}
+        \hline
+        Component & Failure Modes & Effect of Failure & Causes of Failure & Recommended Action & SR & REF \\
+        \hline
+        Judge Server & 
+        Malicious Use of Server & 
+        Denial of Service & 
+        \begin{enumerate}
+            \item Execution of malicious user code
+            \item Failure to timeout code beyond specified time limit
+        \end{enumerate} &
+        Ensure that code is checked before compilation, similar to accounting for a SQL injection attack. Enforce a time and memory limit for each problem. &
+        \ref{IR3} \& \ref{AR2} &
+        HR1\\
+        \hline
+        Connected Communications & 
+        Loss of connections	 & 
+        Communication between server and clients are lost. & 
+        \begin{enumerate}
+            \item Unintentional server restart
+            \item Loss/out of memory
+        \end{enumerate} &
+        Backup states of the current connections to be used when restarting. &
+        \ref{IR4}&
+        HR2 \\
+        \hline
+        Database & 
+        Data Deleted & 
+        All data is lost. No problems will be able to be sent to users. No profile information can be viewed & 
+        \begin{enumerate}
+            \item SQL injection attacks
+            \item Unintentional deletes
+        \end{enumerate} &
+        Maintain automatic backups and restore database to latest backup version. &
+        \ref{IR1} \& \ref{IR2} &
+        HR3 \\
+        \hline
+        Database & 
+        Overload of database & 
+        Server requests will be slowed drastically & 
+        \begin{enumerate}
+            \item Too many requests
+        \end{enumerate} &
+        Automatic scaling of database. &
+        \ref{IR5}&
+        HR4 \\ \hline
+    \end{tabularx}
+\end{table}
+\begin{table}[H]
+    \begin{tabularx}{1.46\textwidth}{|p{2.3cm}|p{2.3cm}|p{3.5cm}|p{4.4cm}|p{4.5cm}|p{1cm}|p{1cm}|}
+        \hline
+        Server	 & 
+        Server Outage	 & 
+        Denial of Service & 
+        \begin{enumerate}
+            \item DDoS Attack
+            \item Hardware Issues
+        \end{enumerate} &
+        Introducing load balancing and server redundancy to ensure one server having outages does not affect the entire platform.
+        &\ref{IR6} &
+        HR5 
+        \\\hline
+        Server	 & 
+        Overload of server	 & 
+        Server requests will be slowed drastically & 
+        \begin{enumerate}
+            \item Too many client requests
+        \end{enumerate} &
+        \begin{enumerate}
+            \item Rate Limiting, which will only affect unusually high traffic.
+            \item Vertical scaling of servers.
+        \end{enumerate}
+        &
+        \ref{IR6} \& \ref{IR5} & 
+        HR6\\
+        \hline
+        Authentication & 
+        Unauthenticated use of services & 
+        \begin{enumerate}
+            \item Services are used without an identity, preventing the system from logging events
+            \item Jeopardizes the integrity of the games the user participates in
+        \end{enumerate} & 
+        \begin{enumerate}
+            \item Failure of the external Identify Management system
+            \item Failure of authentication middleware in the server
+        \end{enumerate} &
+        Safeguard the authentication middleware so that on failure all requests are rejected.	 &
+        \ref{AR1} \& \ref{AR2}&
+        HR7 \\
+        \hline
+        Authentication	 & 
+        Failure to login to service	 & 
+        Users are unable to use service	 & 
+        \begin{enumerate}
+            \item Failure of the external Identify Management system
+            \item Failure of authentication middle ware in the server
+        \end{enumerate} &
+        Safeguard the authentication middleware so that on failure all requests are rejected. &
+        \ref{AR3} &
+        HR8 \\ \hline
+        Users	 & 
+        Frustrated Users	 & 
+        Low engage-ability on the platform & 
+        \begin{enumerate}
+            \item Repetitive losses from users
+        \end{enumerate} &
+        System will adapt the difficulty of the game to the skill of the player, preventing enjoyable experiences. &
+        \ref{IR7} &
+        HR8 \\ \hline
+    \end{tabularx}
+    \caption{Failure Modes and Effects Analysis}
+\end{table}
+
+\end{landscape}
+
+
+
+\section{Safety \& Security Requirements}
+
+\subsection{Access Requirements}
+\begin{enumerate}[label=AR.\arabic*]
+    \item Users must be logged in to view data they are authorized to view. \label{AR1}
+    \item Only admins will be allowed to modify and add new problem data. \label{AR2}
+    \item Requests from unauthenticated users should be rejected. \label{AR3}
+\end{enumerate}
+
+\subsection{Integrity Requirements}
+\begin{enumerate}[label=IR.\arabic*]
+    \item Problem data will be automatically backed up on a weekly basis. \label{IR1}
+    \item User profile data will be automatically backed up on a daily basis. \label{IR2}
+    \item All problems must have a time and memory limit set. \label{IR3}
+    \item Backup connection state every minute to ensure connectivity on restart. \label{IR4}
+    \item Clients will be rate-limited on requests with unusually high traffic to the server. \label{IR5}
+    \item Connection and requests must be distributed evenly among servers. \label{IR6}
+    \item The application should not be detrimental to the user's mental health. \label{IR7}
+\end{enumerate}
+
+\subsection{Privacy Requirements}
+\begin{enumerate}[label=PR.\arabic*]
+    \item Users will not be able to access unauthorized data of other users. \label{PR1}
+\end{enumerate}
+
+\subsection{Audit Requirements}
+N/A
+
+\subsection{Immunity Requirements}
+N/A
+
+\section{Roadmap}
+
+The hazard analysis has brought forward more requirements that will be implemented within the final application. The development team will try to implement all requirements based on priority, but may not be able to due to time constraints of the project. As the team approaches the end of the project, the hazard analysis will be revisited, to verify that the intended hazards were mitigated and to identify hazards which still persist or require additional work.
+
+\end{document}
