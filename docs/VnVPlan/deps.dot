@@ -1,0 +1,10 @@
+digraph {
+    node [shape = rectangle;];
+    MM1 -> MM3;
+    MM2 -> MM3;
+    IG1 -> MM3;
+    IG1 -> IG2;
+    PM2 -> PM1;
+    PM3 -> PM1;
+    TCP1 -> MM3;
+}
