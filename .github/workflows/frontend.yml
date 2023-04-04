@@ -1,4 +1,4 @@
-name: CI
+name: FE Build and Deploy
 
 on:
   push:
