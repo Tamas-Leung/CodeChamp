@@ -47,6 +47,8 @@
 \toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
 \midrule
 February 18, 2023 & 1.0 & Initial Version\\
+April 3, 2023 & 1.1 & Added higher quality diagrams. Updated introduction tests for Scope, Component Diagram and User Interfaces sections. Added explanation for why HTTPS is preferable in Communication Protocols section. \\
+
 \bottomrule
 \end{tabularx}
 
@@ -107,17 +109,17 @@ This document is written to describe the architecture and the design decisions i
 
 
 \section{Scope}
-
+Figure \ref{fig:context} demonstrates the context of the CodeChamp system by showing the interactions between the system and external actors. The behavior of the systerm as well as details for its intended interactions are further detailed in Section \ref{sec:nb}.
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.65]{Design/SystDesign/SystemBoundary.png}
-\caption{Context Diagram for the CodeChamp System}
+\includegraphics[scale=1.0]{Design/SystDesign/SystemBoundary.pdf}
+\caption{Context Diagram for the CodeChamp System}\label{fig:context}
 \end{figure}
 
 \section{Project Overview}
 
-\subsection{Normal Behaviour}
+\subsection{Normal Behaviour}\label{sec:nb}
 The CodeChamp system is seperated into an Angular front-end and a Node.js backend. Normally, the user will access the front-end throw a web browser on a desktop application. The client will send network requests using HTTPS to the back-end and successfully receive a response. For parts of the application which require bidirectional connectivity, such as live updates during a game or in the lobby, a WebSocket connection will be used. Additionally, the CodeChamp system will interact with various external services. For storing and retrieving items from the database, a MongoDB cluster will be used. When needed, the backend will query MongoDB to retrieve and/or store an object when a client requests it. Furthermore, for authentication purposes, such as for signing in users, Google Oauth will be queried. Finally, when a user submits code to be executed, a docker container will be created to execute and evaluate the submission.
 
 The following user journey specifies the average expected experience for a user of the CodeChamp system:
@@ -137,11 +139,11 @@ The following user journey specifies the average expected experience for a user 
 Exceptions which occur in the Backend APIs will be propagated as HTTP status codes. The engineers will ensure to follow the conventions established in the \href{https://developer.mozilla.org/en-US/docs/Web/HTTP/Status}{MDN Web Docs} in order to distinguish client error responses and server error responses. Furthermore, internal server errors will be logged and will be made accessible for developers through the AWS portal in production. This ensures that developers can quickly identify and debug issues that arise. The front-end will use the Angular error interceptor in order to detect error responses and will forward them to the pages to handle accordingly. In the case of errors, the front-end will display a dialog mentioning the event in natural language to the user and suggesting an solution. For example, for client errors, this may be to take a different action. For internal server errors, it may suggest for them to retry the action at a different time. Additionally, errors occurring on the front-end will also be made accessible for developers through the AWS portal in production .
 
 \subsection{Component Diagram}
-
+Figure \ref{fig:comp} showcases the major components in the CodeChamp system and groups them by their common functionality. Additionally, it showcases the use relation at a high-level.
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.8\textwidth]{Design/SystDesign/ComponentDiagram.png}
-\caption{Component Diagram for the CodeChamp System}
+\includegraphics[width=1.0\textwidth]{Design/SystDesign/ComponentDiagram.pdf}
+\caption{Component Diagram for the CodeChamp System}\label{fig:comp}
 \end{figure}
 
 \subsection{Connection Between Requirements and Design} \label{SecConnection}
@@ -173,12 +175,12 @@ FR.1 & System uses random matchmaking instead of the other option, skill based m
 
 \section{User Interfaces}
 
-The following mock-ups were produced using Figma for the CodeChamp user interface: 
+The following mock-ups (Figure \ref{fig:ui-start}-\ref{fig:ui-end}) were produced using Figma for the CodeChamp user interface: 
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{Design/SystDesign/LoginPage.png}
-\caption{Mock-up for CodeChamp's Login Page}
+\caption{Mock-up for CodeChamp's Login Page}\label{fig:ui-start}
 \end{figure}
 
 \begin{figure}[H]
@@ -208,13 +210,16 @@ The following mock-ups were produced using Figma for the CodeChamp user interfac
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{Design/SystDesign/ProfilePage.png}
-\caption{Mock-up for CodeChamp's Profile Page}
+\caption{Mock-up for CodeChamp's Profile Page}\label{fig:ui-end}
 \end{figure}
+
+Figure \ref{fig:statemachine} illustrates the state of the user interface along with the various events that have the ability to transition between pages.
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=1\textwidth]{Design/SystDesign/State.png}
+\includegraphics[width=1\textwidth]{Design/SystDesign/State.pdf}
 \caption{State Machine for front end pages}
+\label{fig:statemachine}
 \end{figure}
 
 \section{Design of Hardware}
@@ -227,7 +232,7 @@ N/A
 
 \section{Design of Communication Protocols}
 
-HTTPS is utilized to send requests from the front-end and retrieve data from the servers and database. For bi-directional messaging between clients and servers, WebSocket technology is used. These are standard technologies and are not implemented by the CodeChamp team.
+WebSockets are used for parts of the application which require bidirectional connectivity, such as live updates during a game or in the lobby. Otherwise, HTTPS will be used by client will send network requests using HTTPS to the back-end and successfully receive a response. This is preferable to using HTTP, as HTTPS uses Transport Layer Security (TLS) which is a cryptographic protocol used to secure information exchanged over the network. This is essential when handling sensitive information but is also a web-standard for any modern application. HTTPS and WebSockets are standard technologies and are not implemented by the CodeChamp team.
 
 \section{Timeline}
 
