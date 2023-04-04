@@ -55,6 +55,7 @@ urlcolor=cyan          % color of external links
 \midrule
 01/17/2023 & 1.0 & Initial draft\\
 01/18/2023 & 1.1 & Small Changes\\
+04/03/2023 & 1.2 & Fixed kerning and quotation formatting issues\\
 \bottomrule
 \end{tabularx}
 
@@ -691,7 +692,7 @@ The minimum memory represents the memory in megabytes. The minimum time represen
 \begin{itemize}
 \item transition: $id, name, description, time\_limit, memory\_limit, test\_cases, difficulty, problem\_type := id, n, d, tl, ml, tc, d, pt$
 \item output: $out := self$
-\item exception: $exc := (tl < MINIMUM\_TIME \, \lor \, ml < MINIMUM\_MEMORY) \implies \\IllegalArgumentException$
+\item exception: $exc := (tl < \text{MINIMUM\_TIME} \, \lor \, ml < \text{MINIMUM\_MEMORY}) \implies \\IllegalArgumentException$
 \end{itemize}
 
 \noindent getID():
@@ -1204,14 +1205,14 @@ code: String
 
 \subsubsection{Assumptions}
 
-init() will be ran everytime the browser url is set to "/"\\
+init() will be ran everytime the browser url is set to ``/"\\
 handleEvent() will be called by the browser for input events
 
 \subsubsection{Access Routine Semantics}
 \noindent init():
 \begin{itemize}
 \item transition:
-$code :=$ ""\\
+$code := <>$ \\
 $Screen :=$ Displays the home page. 
 \end{itemize}
 
@@ -1248,11 +1249,11 @@ Handle typing into code field  & handleCodeChangeField() \\
 \end{itemize}
 \noindent ProfilePageButton():
 \begin{itemize}
-\item transition: Router.navigate('/profile')
+\item transition: Router.navigate(`/profile')
 \end{itemize}
 \noindent LeaderboardButton():
 \begin{itemize}
-\item transition: Router.navigate('/profile')
+\item transition: Router.navigate(`/profile')
 \end{itemize}
 \noindent handleCodeChangeField():
 \begin{itemize}
@@ -1292,13 +1293,13 @@ None
 
 \subsubsection{Assumptions}
 
-init() will be ran everytime the browser url is set to "/profile"\\
+init() will be ran everytime the browser url is set to ``/profile"\\
 handleEvent() will be called by the browser for input events
 
 \subsubsection{Access Routine Semantics}
 \noindent init():
 \begin{itemize}
-\item transition: $currentStats :=$ "",\\
+\item transition: $currentStats :=$ ``",\\
 $currentStats :=$ User.getUserStats(Browser.params.id),\\
 $matchHistory :=$ User.getUserMatches(Browser.params.id),\\
 $Screen :=$ Displays the profile page with the $currentStats$ and $matchHistory$. 
@@ -1320,7 +1321,7 @@ On-click onto leave button & handleLeave() \\
 
 \noindent handleLeave():
 \begin{itemize}
-\item transition: Router.navigate("/")
+\item transition: Router.navigate(``/")
 \end{itemize}
 
 
@@ -1359,14 +1360,14 @@ $Browser: $ The user's browser
 
 \subsubsection{Assumptions}
 
-init() will be ran everytime the browser url is set to "/leaderboard"\\
+init() will be ran everytime the browser url is set to ``/leaderboard"\\
 handleEvent() will be called by the browser for input events
 
 \subsubsection{Access Routine Semantics}
 
 \noindent init():
 \begin{itemize}
-\item transition: $currentLeaderboard :=$ "",\\
+\item transition: $currentLeaderboard :=$ ``",\\
 $currentLeaderboard :=$ User.getLeaderboard(),\\
 $Screen :=$ Displays the leaderboard page with the currentLeaderboard. 
 \end{itemize}
@@ -1387,7 +1388,7 @@ On-click onto leave button & handleLeave() \\
 
 \noindent handleLeave():
 \begin{itemize}
-\item transition: Router.navigate("/")
+\item transition: Router.navigate(``/")
 \end{itemize}
 
 \newpage
@@ -1433,7 +1434,7 @@ $Browser: $ Includes input events and params for browser url params
 
 \subsubsection{Assumptions}
 
-init() will be ran everytime the browser url is set to "/lobby"\\
+init() will be ran everytime the browser url is set to ``/lobby"\\
 handleEvent() will be called by the browser for input events
 
 \subsubsection{Access Routine Semantics}
@@ -1477,7 +1478,7 @@ On-click onto leave button & leaveLobby() \\
 
 \noindent leaveLobby():
 \begin{itemize}
-\item transition: Router.navigate("/")
+\item transition: Router.navigate(``/")
 \item exception: None
 \end{itemize}
 
@@ -1527,7 +1528,7 @@ Screen\\
 
 \subsubsection{Assumptions}
 
-init() will be ran everytime the browser url is set to "/problem"\\
+init() will be ran everytime the browser url is set to ``/problem"\\
 handleEvent() will be called by the browser for input events
 
 \subsubsection{Access Routine Semantics}
@@ -1535,7 +1536,7 @@ handleEvent() will be called by the browser for input events
 
 \noindent init():
 \begin{itemize}
-\item transition: $currentCode :=$ "",\\
+\item transition: $currentCode :=$ ``",\\
 $currentProblem :=$ ProblemsService.getProblem(Browser.params),\\
 $currentLobby :=$ LobbyService.getWaitingRoom(),\\
 $Screen :=$ Displays the Game Page screen with currentCode and currentProblem. Displays players current status in LobbyService.waitingRoom, If LobbyService.endData is not empty, displays end game screen.
@@ -1566,7 +1567,7 @@ Handle typing into submission box & handleCodeEdit() \\
 
 \noindent handleLeave():
 \begin{itemize}
-\item transition: Router.navigate("/")
+\item transition: Router.navigate(``/")
 \end{itemize}
 
 \noindent handleCodeEdit():
@@ -1623,7 +1624,7 @@ $screen: $ a browser window displayed on the user's screen.
 
 \subsubsection{Assumptions}
 
-init() will be ran everytime the browser url is set to "/login"\\
+init() will be ran everytime the browser url is set to ``/login"\\
 handleEvent() will be called by the browser for input events
 
 \subsubsection{Access Routine Semantics}
@@ -1890,7 +1891,7 @@ user: UserT
 \noindent login(username, password, password, profilepic):
 \begin{itemize}
 \item transition: user := Auth.login(username, password)\\
-if user is empty then User.createUser(username, email, password, profilepic) then user := User.getUserByEmail(email) then Router.navigate("/")
+if user is empty then User.createUser(username, email, password, profilepic) then user := User.getUserByEmail(email) then Router.navigate(``/")
 \end{itemize}
 
 \noindent isLoggedIn():
@@ -2055,19 +2056,19 @@ None
 \noindent createGame():
 \begin{itemize}
 \item transition: $clientID, currentGameID :=  UUID.gen(),\\ GameHandler.createGame(clientID)\\
-Router.navigate("/problem/\{currentGameID\}")$
+Router.navigate(``/problem/\{currentGameID\}")$
 \end{itemize}
 
 \noindent findGame():
 \begin{itemize}
 \item transition: $currentGameID := GameHandler.findGame(clientID), 
 \\GameHandler.joinGame(clientID, gameID), 
-\\Router.navigate("/problem/\{currentGameID\}")$ 
+\\Router.navigate(``/problem/\{currentGameID\}")$ 
 \end{itemize}
 
 \noindent joinGame(gameID):
 \begin{itemize}
-\item transition: $currentGameID := GameHandler.joinGame(clientID, gameID),\\ Router.navigate("/problem/\{currentGameID\}")$
+\item transition: $currentGameID := GameHandler.joinGame(clientID, gameID),\\ Router.navigate(``/problem/\{currentGameID\}")$
 \end{itemize}
 
 \noindent nextRound():
@@ -2168,7 +2169,7 @@ games: map$<$String, GameT$>$
 
 \noindent addClient(clientID: String, email: String, name: String, picture: String)
 \begin{itemize}
-\item transition:$clients := clients \;\cup\;  Tuple(clientID, ClientT(clientID, email, name, picture, NULL, 0))$ \\
+\item transition:$clients := clients \;\cup\;  Tuple(clientID, ClientT(clientID, email, name, picture, \text{NULL}, 0))$ \\
 \end{itemize}
 
 
@@ -2776,7 +2777,8 @@ None
 \newpage
 
 \bibliographystyle {plainnat}
-\bibliography {../../../refs/References}
+\bibliography {References}
+% \bibliography {../../../refs/References}
 
 \newpage
 
