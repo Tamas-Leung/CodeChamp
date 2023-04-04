@@ -19,7 +19,7 @@ jobs:
       - name: Build
         run: |
           cd src/frontend
-          npm run build-prod
+          npm run build
       - name: Archive Production Artifact
         uses: actions/upload-artifact@master
         with:
