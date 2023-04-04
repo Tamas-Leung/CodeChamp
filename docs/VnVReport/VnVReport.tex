@@ -33,7 +33,9 @@
 \begin{tabularx}{\textwidth}{p{3cm}p{2cm}X}
 \toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
 \midrule
-March 6, 2023 & 1.0 & Initial Vesrion\\
+April 3, 2023 & 1.1 & Updated test cases to reflect VnV Plan changes. Fixed grammatical and styling issues. Added next steps.\\
+\midrule
+March 6, 2023 & 1.0 & Initial Version\\
 \bottomrule
 \end{tabularx}
 
@@ -106,7 +108,7 @@ This document describes the verification \& validation effort for the CodeChamp 
 
 \section{Purpose}
 
-This document is written to describe the steps taken to verify \& validate the  requirements and the implementation for the CodeChamp system. Primarily, it describes the functional requirements evaluated in accordance to the Validation \& Verification plan. Moreover, it reports the results of the testing in regards to non-functional requirement. It  also delves deeper into the validation and verification of two non-functional requirements: usability and security, which are of particular importance to the CodeChamp system. Additionally, unit testing done by the testers is summarized, as well as the ways in which automated testing tools were leveraged. Finally, the changes due to testing are summarized and justified and the tractability between the requirements, modules and tests are given. 
+This document is written to describe the steps taken to verify \& validate the  requirements and the implementation of the CodeChamp system. Primarily, it describes the functional requirements evaluated in accordance with the Validation \& Verification plan. Moreover, it reports the results of the testing regarding non-functional requirements. It  also delves deeper into the validation and verification of two non-functional requirements: usability and security, which are of particular importance to the CodeChamp system. Additionally, unit testing done by the testers is summarized, as well as how automated testing tools were leveraged. Finally, the changes due to testing are summarized and justified and the tractability between the requirements, modules and tests are given. 
 
 \section{Functional Requirements Evaluation}
 The functional requirements evaluation is summarized by Table \ref{tab:functional Tests Requirements}:
@@ -115,7 +117,7 @@ The functional requirements evaluation is summarized by Table \ref{tab:functiona
     \hline
     Test Case ID & Testing Result\\
     \hline
-    TC-MM-1 & Passed, tester found response time to be well below the maximum response time.\\
+    TC-MM-1 & Passed, tester pressed the "find a match" button and the correct page shows up.\\
     \hline
     TC-MM-2 & Passed, tester was able to join a existing lobby with the correct lobby code shared by friends. \\ 
      \hline
@@ -136,6 +138,10 @@ The functional requirements evaluation is summarized by Table \ref{tab:functiona
     TC-PV-2 & Passed, profile was able to display match history.\\
      \hline
     TC-LB-1 & Passed, tester was able to see data of leaderboard tests.\\
+     \hline
+     TC-A-1 & Passed, tester was able to login with correct credentials.\\
+     \hline
+     TC-A-2 & Passed, tester was not able to login with wrong credentials. The system returns an error message.\\
      \hline
     % \end{tabularx}
     \caption{Functional Test Cases and Requirements}
@@ -162,11 +168,11 @@ The non-functional requirements evaluation is summarized by Table \ref{tab:non-f
      \hline
     TC-S-1 & Passed after changes, testers were able to call functions for other users as long as they had their user id and the game id they were currently in. Changes were made to fix this through authentication checking. Further discussed in \ref{sec:changes}.\\
      \hline
-    TC-S-2 & Passed after changes, the leaderboard page displays user emails.\\
-     \hline
     TC-C-1 & Passed, the game did not have any cultural references.\\
      \hline
-    TC-L-2 & Passed, the repository was protected by the GNU license.\\
+    TC-L-1 & Passed, the repository was protected by the GNU license.\\
+     \hline
+     TC-HS-1 & Passed, the game did not have any flashing lights that could cause harm to users.\\
      \hline
     % \end{tabularx}
     \caption{Non-Functional Test Cases and Requirements}
@@ -181,26 +187,26 @@ In addition to the non-functional tests for usability, a semi-structured intervi
     \item From 1 - 10, How easy was the interface to navigate? 
     1 being un-navigatable, 10 being no issues navigating.
 
-    If users answered less than 8, we would follow up and ask for feedback. The result for this question were that all users said the interface was simple and all ratings were 9 or above. Figure \ref{FigUH-1} below summarizes the results for this question:
+    If users answered less than 8, we would follow up and ask for feedback. The result for this question was that all users said the interface was simple and all ratings were 9 or above. Figure \ref{FigUH-1} below summarizes the results for this question:
 
     \begin{figure}[H]
     \centering
     \includegraphics[width=1\textwidth]{question1chart.png}
     
-    \caption{Graph depicting results for interface navigation usability}
+    \caption{Results for interface navigation usability}
     
     \label{FigUH-1}
     \end{figure}
 
     \item From 1 - 10, How consistent was the visual theming of the website? 1 being not consistent at all, 10 being super consistent. 
 
-    If users answered less than 8, we would follow up and ask for feedback. The result for this question were that most users rated 7 or above. Users who said 7 and 8 mentioned that the game screen and login screen had a different colour scheme than the rest of the website. Figure \ref{FigUH-2} below summarizes the results for this question:
+    If users answered less than 8, we would follow up and ask for feedback. The result for this question was that most users rated 7 or above. Users who said 7 and 8 mentioned that the game screen and login screen had a different colour scheme than the rest of the website. Figure \ref{FigUH-2} below summarizes the results for this question:
 
     \begin{figure}[H]
     \centering
     \includegraphics[width=1\textwidth]{question2chart.png}
     
-    \caption{Graph depicting results for visual theming consistency usability}
+    \caption{Results for visual theming consistency usability}
     
     \label{FigUH-2}
     \end{figure}
@@ -210,20 +216,20 @@ In addition to the non-functional tests for usability, a semi-structured intervi
     \centering
     \includegraphics[width=1\textwidth]{question3chart.png}
     
-    \caption{Graph depicting results for copying url versus copying game id}
+    \caption{Results for copying URL versus copying game id}
     
     \label{FigUH-3}
     \end{figure}
 
-    \item A asked for if users felt that any feature was missing from the game. The most common feature missing was stats. When asked about what information the profile page should give. The most common ask was for the difficulty of problems solved as well as calculating their win rate.
+    \item When asked if users felt that any feature was missing from the game. The most common feature missing was stats. When asked about what information the profile page should give. The most common ask was for the difficulty of problems solved as well as calculating their win rate.
 
-    \item When asked on what additional languages were preferred to be used. The most common response given was Python. Figure \ref{FigUH-4} below summarizes the results for this question:
+    \item When asked what additional languages they preferred to use. The most common response given was Python. Figure \ref{FigUH-4} below summarizes the results for this question:
 
     \begin{figure}[H]
     \centering
-    \includegraphics[width=1\textwidth]{question4chart.png}
+    \includegraphics[width=1\textwidth]{question4chart.pdf}
     
-    \caption{Graph depicting results for most preferred language to use for data structures and algorithms}
+    \caption{Results for most preferred language to use for data structures and algorithms}
     
     \label{FigUH-4}
     \end{figure}
@@ -231,7 +237,7 @@ In addition to the non-functional tests for usability, a semi-structured intervi
 \end{itemize}
 
 \subsection{Security}\label{sec:security}
-A critical part of the CodeChamp system involves compiling and executing user code, which can be potentially destructive to the system's security. To test this, several scripts were written to enact malicious / dangerous submissions and fed into the CodeChamp Judge system. Afterwards, the testers ensured that the system was able to prevent 100\% of the scenarios from negatively affecting or compromising the CodeChamp system.
+A critical part of the CodeChamp system involves compiling and executing user code, which can be potentially destructive to the system's security. To test this, several scripts were written to enact malicious/dangerous submissions and fed into the CodeChamp Judge system. Afterwards, the testers ensured that the system was able to prevent 100\% of the scenarios from negatively affecting or compromising the CodeChamp system.
 
 Table \ref{tab:Security} below summarizes the scenarios which were considered as part of the security evaluation:
 
@@ -267,19 +273,22 @@ Unit testing was done for all applicable modules. For back-end modules, Mocha wa
 
 After receiving feedback from the Rev 0 demo, we changed the mechanism for copying a lobby's unique code. What we initially had was copying the code itself, but we changed the text that would be copied to the URL of the lobby. This way, instead of entering the code to join a lobby, the URL can be used to join the lobby, reducing the number of clicks the user has to go through. This was A/B tested as previously discussed in the usability section, with the majority of users preferring this option.
 
-Feedback from users also initiated the change of statistics that will be shown to the users when viewing their profile. Initially we gave information regarding the win, loss, and the questions solved in each game. According to our testing, users would like to know the number of problems of each difficulty they have solved. Now we have the addition of the types of problems solved in terms of difficulty. This allows users to track their success against easy, medium, and hard level questions. Alongside the total wins and losses for a player, we have added the respective ratio so they do not have to calculate it themselves.
+Feedback from users also initiated the change of statistics that will be shown to the users when viewing their profiles. Initially, we gave information regarding the win, loss, and the questions solved in each game. According to our testing, users would like to know the number of problems of each difficulty they have solved. Now we have the addition of the types of problems solved in terms of difficulty. This allows users to track their success against easy, medium, and hard-level questions. Alongside the total wins and losses for a player, we have added the respective ratio so they do not have to calculate it themselves.
 
-More programming languages are supported to allow individuals with proficiency in different programming languages to compete on the platform. After a survey with the users indicating which languages we should support, Python was voted the highest among other languages like C++, Java, and C. As a result, we have added support for the Python language to be used on the CodeChamp platform. 
+More programming languages are supported to allow individuals with proficiency in different programming languages to compete on the platform. After a survey with the users indicating which languages we should support, Python was voted the highest among other languages like C++, Java, and C. As a result, we have added support for the Python language to be used on the CodeChamp platform. Other languages could be considered later in development but due to time constraints, only the most popular one, Python, was added.
 
-With the user testing for the look and feel non-functional requirement (TC-LF-1) 2 users found that the system's lack of consistency in the design. This included the design of the game page as well as the login page. With this feedback, game and login pages were redesigned and implemented to be consistent with the rest of the application.
+With the user testing for the look and feel non-functional requirement (TC-LF-1) 2 users found the system's lack of consistency in the design. This included the design of the game page as well as the login page. With this feedback, game and login pages were redesigned and implemented to be consistent with the rest of the application.
 
-After user acceptance testing, some users brought up that they were uncomfortable with emails being displayed in the leaderboards. Additionally, this violates a security  requirement of storing and displaying only the necessary data (TC-S-2). As this is a private data point of the user, it should not be displayed as it may compromise the user's Google and other accounts associated. Due to this, the email display was changed to the user's username. 
+After user acceptance testing, some users brought up that they were uncomfortable with emails being displayed in the leaderboards. Additionally, this violates the security requirement of storing and displaying only the necessary data (TC-S-2). As this is a private data point of the user, it should not be displayed as it may compromise the users' Google and other accounts associated. Due to this, the email display was changed to the user's username. 
 
-The current implementation uses a player's ID as their email. Thus, submissions from users that are not actually involved in a game can be allowed if a malicious user discovers this, and is able to somehow reverse-engineer or discover the game ID for a particular game. Due to this an authentication middleware is applied to the backend for communication from clients to fulfil the requirement of user authenticity (UC-S-1). 
+The current implementation uses a player's ID as their email. Thus, submissions from users that are not actually involved in a game can be allowed if a malicious user discovers this, and can somehow reverse-engineer or discover the game ID for a particular game. Due to this an authentication middleware is applied to the backend for communication from clients to fulfil the requirement of user authenticity (UC-S-1).
+
+\section{Next Steps}
+Usability testing should be conducted with larger user groups in order to ensure that the results are statistically significant. Additionally, it would be beneficial to conduct a longer-term study on the learnability of the system in order to ensure that it succeeds in improving the user's algorithmic skills. This would include a comparison to other existing platforms such as Leetcode and would help the developers understand its upsides and shortcomings in comparison to the currently offered market solutions.
 
 \section{Automated Testing}\label{sec:auto}
 
-GitHub Actions were used to automatically test new pull requests using Mocha and Jasmine, which were used to test the back-end and front-end, respectively. Additionally, linting and formatting rules were written using ESLint and Prettier using the \href{https://github.com/airbnb/javascript}{Airbnb style guide} and the \href{https://angular.io/guide/styleguide}{official Angular style guide} for reference. The code-base was checked against these rules using GitHub actions on every pull request as well.
+GitHub Actions were used to automatically test new pull requests using Mocha and Jasmine, which were used to test the back-end and front-end, respectively. Additionally, linting and formatting rules were written using ESLint and Prettier using the \href{https://github.com/airbnb/javascript}{Airbnb style guide} and the \href{https://angular.io/guide/styleguide}{official Angular style guide} for reference. The code base was checked against these rules using GitHub actions on every pull request as well.
 
 \section{Trace to Requirements}
 \begin{longtable}{| p{2.5cm} | p{3cm} | p{8cm}| }
@@ -288,19 +297,19 @@ GitHub Actions were used to automatically test new pull requests using Mocha and
     \hline
     TC-MM-1 & FR.1 & Should join a random match.\\
     \hline
-    TC-MM-2 & FR.24 & Should join an existing page with a code. \\
+    TC-MM-2 & FR.19 & Should join an existing page with a code. \\
      \hline
-    TC-MM-3 & FR.23 & Should create a match. \\
+    TC-MM-3 & FR.18 & Should create a match. \\
      \hline
-    TC-IG-1 & FR.2, FR.3, FR.4, FR.5, FR.8, FR.9, FR.10, FR.11 & Should complete a match. \\
+    TC-IG-1 & FR.2, FR.3, FR.4, FR.5, FR.8, FR.9, FR.10 & Should complete a match. \\
      \hline
-    TC-IG-2 & FR.6, FR.7, FR.20, FR.21 & Should compile solutions from input.\\
+    TC-IG-2 & FR.6, FR.7, FR.15, FR.16, FR.17 & Should compile solutions from the input.\\
      \hline
-    TC-PM-1 & FR.12, FR.13, FR.22, NFR.10 & Should be able to add new problems (admin).\\
+    TC-PM-1 & FR.11, FR.12, FR.16, FR.17 & Should be able to add new problems (admin).\\
      \hline
-    TC-PM-2 & FR.12, FR.13, FR.22, NFR.10 & Should be able to modify problems (admin).\\
+    TC-PM-2 & FR.11, FR.12, FR.16, FR.17 & Should be able to modify problems (admin).\\
      \hline
-    TC-PM-3 & FR.12, FR.13, FR.22, NFR.10 & Should be able to delete problems (admin).\\
+    TC-PM-3 & FR.11, FR.12, FR.16, FR.17 & Should be able to delete problems (admin).\\
      \hline
     % TC-LS-1 & FR.17 & New users can sign up. \\
     %  \hline
@@ -308,29 +317,31 @@ GitHub Actions were used to automatically test new pull requests using Mocha and
     %  \hline
     % TC-LS-3 & FR.19  & Login with invalid information is rejected and a error message is displayed. \\
      % \hline
-    TC-PV-1 & FR.26 & Profile should view win percentage.\\
-     \hline
-    TC-PV-2 & FR.25, FR.27, FR.28  & Profile should view match history.\\
-     \hline
-    TC-LB-1 & FR.29 & Leaderboard view should show the players sorted by their scores.\\
-     \hline
-    TC-LF-1 & NFR.1, NFR.2, NFR.3, NFR.4, NFR.5 & Ease of navigation.\\
+    TC-PV-1 & FR.21 & Profile should view win percentage.\\
     \hline
-    TC-LF-2 & NFR.1, NFR.3  & Compatibility among devices.\\
+    TC-PV-2 & FR.20, FR.22, FR.23  & Profile should view match history.\\
     \hline
-     TC-P-1 & NFR.6 & Performance of user actions.\\
+    TC-LB-1 & FR.24 & Leaderboard view should show the players sorted by their scores.\\
     \hline
-    TC-P-2 & NFR.7 & Performance of user solution compilation.\\
+    TC-A-1 & FR.13 & Users should be able to login\\
+    \hline
+    TC-A-2 & FR.14 & System should error when login credentials are wrong\\
+    \hline
+    TC-LF-1 & NFR.1, NFR.2, NFR.3 & Ease of navigation.\\
+    \hline
+    TC-LF-2 & NFR.2, NFR.3  & Responsive display among devices.\\
+    \hline
+     TC-P-1 & NFR.4 & Performance of user actions.\\
+    \hline
+    TC-P-2 & NFR.10 & Performance of user solution compilation.\\
      \hline
-    TC-OE-1 & NFR.9 & Should run on any modern browser on any device. \\
+    TC-OE-1 & NFR.6 & Should run on any modern browser on any device. \\
      \hline
-    TC-S-1 & NFR.11, NFR.12 & Only requests from authenticated users should be accepted. \\
+    TC-S-1 & NFR.7 & Only requests from authenticated users should be accepted. \\
      \hline
-    TC-S-2 & NFR.11 & Only minimal data about a user should be stored.\\
+    TC-C-1 & NFR.10 & Content of the system should not contain any cultural references.\\
      \hline
-    TC-C-1 & NFR.13 & Content of the system should not contain any cultural references.\\
-     \hline
-    TC-L-2 & NFR.14 & System should be protected by GNU License.\\
+    TC-L-1 & NFR.11 & System should be protected by GNU License.\\
      \hline
     % \end{tabularx}
     \caption{Traceability Table for Test Cases and Requirements}
@@ -364,6 +375,10 @@ GitHub Actions were used to automatically test new pull requests using Mocha and
      \hline
     TC-LB-1 & LeaderboardPage, UserService & Leaderboard view should show the players sorted by their scores.\\
      \hline
+     TC-A-1 & LoginPage, AuthService & Login should successfully login on correct credentials.\\
+     \hline
+     TC-A-2 & LoginPage, AuthService & Login should show a error message on failed login.\\
+     \hline
     TC-LF-1 & All page modules & Ease of navigation.\\
     \hline
     TC-LF-2 & All page modules  & Compatibility among devices.\\
@@ -376,11 +391,11 @@ GitHub Actions were used to automatically test new pull requests using Mocha and
      \hline
     TC-S-1 & LoginPage, AuthService & Only requests from authenticated users should be accepted. \\
      \hline
-    TC-S-2 & AuthService, UserService, SubmissionService & Only minimal data about a user should be stored.\\
-     \hline
     TC-C-1 &  All page modules & Content of the system should not contain any cultural references.\\
      \hline
-    TC-L-2 & N/A & System should be protected by GNU License.\\
+    TC-L-1 & N/A & System should be protected by GNU License.\\
+     \hline
+     TC-HS-1 & All page modules & No flashing lights.\\
      \hline
     % \end{tabularx}
     \caption{Traceability Table for Test Cases and Modules}
@@ -408,11 +423,11 @@ graduate attribute of Reflection.  Please answer the following question:
   evidence that demonstrates the required quality?  (It is expected that most
   teams will have had to deviate from their original VnV Plan.)
   
-  
+   
 \end{enumerate}
 
 
-  The biggest change from the VnV plan was the addition of user acceptance testing. As our platform is user-centric, with the goal of teaching users, it is essential that we measure the user's experience to understand if it fulfills their needs. This involved adding interview questions, as well as reaching out to target demographic members in order to setup a testing session. With the bigger emphasis on usability testing through user acceptance testing, there was less time to spend on automated testing. This resulted in a deviation from the original VnV plan for functional testing, which included automated end-to-end (E2E) tests for the majority of the requirements. While E2E tests are crucial to catching regressions in a constantly evolving system, it was determined to be a sub-optimal use of the team's testing budget at this stage for a multitude of reasons. Primarily, many of the requirements and modules that would be tested using E2E tests are also covered by unit tests. Additionally, the majority of the functional tests were also tested by other users during the user acceptance sessions, as well as by the developers of the platform and the instructors during development and demonstrations. Finally, automating the E2E tests to run using GitHub actions is significantly more time consuming than other types of tests, as it requires to sandbox the entire platform to be run (i.e. the server, client, database, browser). For these reasons, there was enough confidence to modify this section of the VnV plan. In the future, it would be beneficial to consider a broader range of testing techniques from an earlier stage, as the original VnV plan was too focused on functional testing and thus did not consider other aspects such as the user experience. Therefore, with better scoping, we could have anticipated these changes by analyzing the aspects which the end-user will interact with the most, and dividing the testing budget to cover the most crucial aspects.
+  The biggest change from the VnV plan was the addition of user acceptance testing. As our platform is user-centric, with the goal of teaching users, it is essential that we measure the users' experience to understand if it fulfills their needs. This involved adding interview questions, as well as reaching out to target demographic members in order to setup a testing session. With the bigger emphasis on usability testing through user acceptance testing, there was less time to spend on automated testing. This resulted in a deviation from the original VnV plan for functional testing, which included automated end-to-end (E2E) tests for the majority of the requirements. While E2E tests are crucial to catching regressions in a constantly evolving system, it was determined to be a sub-optimal use of the team's testing budget at this stage for a multitude of reasons. Primarily, many of the requirements and modules that would be tested using E2E tests are also covered by unit tests. Additionally, the majority of the functional tests were also tested by other users during the user acceptance sessions, as well as by the developers of the platform and the instructors during development and demonstrations. Finally, automating the E2E tests to run using GitHub actions is significantly more time consuming than other types of tests, as it requires to sandbox the entire platform to be run (i.e. the server, client, database, browser). For these reasons, there was enough confidence to modify this section of the VnV plan. In the future, it would be beneficial to consider a broader range of testing techniques from an earlier stage, as the original VnV plan was too focused on functional testing and thus did not consider other aspects such as the user experience. Therefore, with better scoping, we could have anticipated these changes by analyzing the aspects which the end-user will interact with the most, and dividing the testing budget to cover the most crucial aspects.
   
 \subsection{Usability Interview Rough Notes}\label{roughnotes}
 Questions:
