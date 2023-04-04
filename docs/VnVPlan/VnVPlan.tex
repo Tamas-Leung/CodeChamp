@@ -2,6 +2,8 @@
 \usepackage{longtable}
 
 \usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{svg}
 \usepackage{float}
 \usepackage{tabularx}
 \usepackage{hyperref}
@@ -13,6 +15,7 @@
     urlcolor=blue
 }
 \usepackage[round]{natbib}
+\usepackage{lscape} 
 
 \input{../Comments}
 \input{../Common}
@@ -31,6 +34,8 @@
 
 \begin{tabularx}{\textwidth}{p{3cm}p{2cm}X}
 \toprule {\bf Date} & {\bf Version} & {\bf Notes}\\
+\midrule
+April 3, 2023 & 1.1 & Updated test cases, removed unnecessary test cases. Added new test cases for new requirements. Added usability section and questions. Added Unit testing section. Added Tracability matrix for functional requirements. \\
 \midrule
 November 1, 2022 & 1.0 & Added initial version.\\
 \bottomrule
@@ -82,7 +87,7 @@ November 1, 2022 & 1.0 & Added initial version.\\
   \hline
   VSCode & A light weight code editor.\\
   \hline
-  Jest & A JavaScript testing framework.\\
+  Mocha & A JavaScript testing framework.\\
   \hline
   Jasmine &  A JavaScript testing framework.\\
   \hline
@@ -178,6 +183,8 @@ This section outlines the verification and validation team for CodeChamp alongsi
 
 \end{table}
 
+All team members will participate in testing features all around the tech stack. The roles are intended for each member to have a focus area, which can later change depending on the team's needs. If a team member finishes early, they can help other team members with another part of the testing. Likewise, if a testing area is more labour-intensive than initially expected, other team members can spend additional time helping with that testing area.
+
 \subsection{SRS Verification Plan}
 
 % \wss{List any approaches you intend to use for SRS verification.  This may just
@@ -223,7 +230,7 @@ Outlined system tests will be used to verify that the implementation of the syst
     \item Programming Language: JavaScript
     \item Testing Frameworks:
    \begin{itemize}
-       \item Backend (Unit-Tests): Jest
+       \item Backend (Unit-Tests): Mocha
        \item Frontend (Unit-Tests): Jasmine
        \item End-to-End: TestCafe
    \end{itemize}
@@ -233,9 +240,9 @@ Outlined system tests will be used to verify that the implementation of the syst
        \item Formatter: Prettier
         \item The \href{https://github.com/airbnb/javascript}{Airbnb style guide} will be enforced during code review for all back-end code
         \item The \href{https://angular.io/guide/styleguide}{official Angular style guide} will be enforced during code review for all front-end code
-       \item Husky pre-commit hooks will be used to automatically apply linters and formatters before pushing to remote repository
+       \item Husky pre-commit hooks will be used to automatically apply linters and formatters before pushing to the remote repository
    \end{itemize}
-\item Github Actions CI 
+\item GitHub Actions CI 
     \begin{itemize}
         \item Auto build and test new pull requests using aforementioned testing frameworks
         \item Test new pull requests for linting
@@ -243,8 +250,8 @@ Outlined system tests will be used to verify that the implementation of the syst
     \end{itemize}
 \item Code Coverage
     \begin{itemize}
-        \item All testing frameworks chosen support options for providing code coverage
-        \item Github Actions CI will state code coverage on new pull requests and report regressions
+        \item All testing frameworks support options for providing code coverage
+        \item GitHub Actions CI will state code coverage on new pull requests and report regressions
         
     \end{itemize}
 
@@ -260,11 +267,8 @@ Outlined system tests will be used to verify that the implementation of the syst
 
 \subsection{Software Validation Plan}
 
-An external software validation plan is not planned because the requirements are set by the main developers of the project. An internal software validation will be done by the developers on a weekly basis by reviewing the changes that were made and by doing a walk-through of the system. This will allow the stakeholders (developers in the team) to validate that the implementation of the system meets the desired needs.
+ An internal software validation will be done by the developers weekly by reviewing the changes that were made and by doing a walk-through of the system. This will allow the stakeholders (developers in the team) to validate that the implementation of the system meets the desired needs. To ensure that the platform is helpful to the target demographic, a survey will be conducted with user groups. Section \ref{usability} details how these sessions will be conducted.
 
-% \wss{If there is any external data that can be used for validation, you should
-%   point to it here.  If there are no plans for validation, you should state that
-%   here.}
 
 \section{System Test Description}
 	
@@ -296,11 +300,11 @@ Initial State: On Main Menu Page
 					
 Input: Press the ``find a match" button
 					
-Output: Screen changes to lobby page
+Output: Screen changes to the lobby page
 
-Test Case Derivation: The system receives the ``find a match" input and return the user a lobby match id to join, in which sends the user to the lobby page.
+Test Case Derivation: The system receives the ``find a match" input and returns the user a lobby match id to join, which sends the user to the lobby page.
 					
-How test will be performed: Tester will be used to find and press the ``find a match" button, waits INPUT\_RESPONSE\_TIME, and then checks the HTML of the page to ensure the lobby page is displayed.
+How test will be performed: Tester will be used to find and press the ``find a match" button, wait until the HTML page is loaded, and then checks the HTML of the page to ensure the lobby page is displayed.
 					
 \item{TC-MM-2: Join an existing page with a code}
 
@@ -312,9 +316,9 @@ Input: Inputs an existing lobby's code and presses the ``join match" button.
 					
 Output: Screen changes to lobby page.
 
-Test Case Derivation: The system receives the ``join match" input with a code and return the user the lobby match that matches the inputted code, in which sends the user to the lobby page.
+Test Case Derivation: The system receives the ``join match" input with a code and returns the user the lobby match that matches the inputted code, which sends the user to the lobby page.
 					
-How test will be performed: Tester creates a lobby with one machine, receives the code from the screen, then uses the code to join the match. Tester then checks to see if the page changes to the lobby page and the lobby code matches the inputted lobby code.
+How test will be performed: Tester creates a lobby with one machine, receives the code from the screen, then uses the code to join the match. Tester then checks to see if the page changes to the lobby page and if the lobby code matches the inputted lobby code.
 
 \item{TC-MM-3: Create a match}
 
@@ -326,9 +330,9 @@ Input: Press the ``create match" button.
 					
 Output: Screen changes to lobby page.
 
-Test Case Derivation: The system receives the ``create match" input with a code and return the user the lobby match with a new code, which sends the user to the lobby page.
+Test Case Derivation: The system receives the ``create match" input with a code and returns the user the lobby match with a new code, which sends the user to the lobby page.
 					
-How test will be performed: Tester will be used to press the ``create match" button, waits INPUT\_RESPONSE\_TIME, and then checks the HTML of the page to ensure the lobby page is displayed.
+How test will be performed: Tester will be used to press the ``create match" button, wait until the HTML page is loaded, and then checks the HTML of the page to ensure the lobby page is displayed.
 
 \end{enumerate}
 
@@ -342,11 +346,11 @@ Testing Type: Functional, Manual, Dynamic
 					
 Initial State: Start of In-game Page
 					
-Input: Enter correct code and submit code in NUMBER\_OF\_ROUNDS rounds.
+Input: Enter the correct code and submit the code in NUMBER\_OF\_ROUNDS rounds.
 					
-Output: After every successful submit code input, a new problem is displayed. After the last round's successful submission, a win end game page is displayed.
+Output: After every successful submission code input, a new problem is displayed. After the last round's successful submission, a win-end game page is displayed.
 
-Test Case Derivation: The system receives the submit code input with user written code. The system then validates and allows the user to move to the next round. There is only NUMBER\_OF\_ROUNDS rounds per game, on the last round, the game ends and gives the user a win.
+Test Case Derivation: The system receives the submitted code input with user-written code. The system then validates and allows the user to move to the next round. There are only NUMBER\_OF\_ROUNDS rounds per game, on the last round, the game ends and gives the user a win.
 					
 How test will be performed: A user will start a game. The user will manually find out the answers for each question and inputs them. The user will submit every round and ensure a new problem is displayed when the next round starts or the win end game screen appears if it was the last round. The user also counts to ensure the number of rounds played is equal to NUMBER\_OF\_ROUNDS.
 
@@ -363,11 +367,11 @@ Input: The following code snippet with the JavaScript language option:
 console.log(`Hello, World!');
 \end{verbatim}
 					
-Output: Returns success status and presents user with the number of passed test cases.
+Output: Returns success status and presents the user with the number of passed test cases.
 
-Test Case Derivation: The system receives the submit code input with user written code. The system then validates and compiles the code. The system then returns the number of passed test cases.
+Test Case Derivation: The system receives the submitted code input with user-written code. The system then validates and compiles the code. The system then returns the number of passed test cases.
 					
-How test will be performed: Tester will type the input code into a pre-determined Hello World problem and input it into the code editor. Tester will choose the JavaScript language option from a dropdown menu. Tester will wait for INPUT\_RESPONSE\_TIME and check the HTML to ensure that all test cases were passed.
+How test will be performed: Tester will type the input code into a pre-determined Hello World problem and input it into the code editor. Tester will choose the JavaScript language option from a dropdown menu. The tester waits until the HTML page is loaded and checks the HTML to ensure that all test cases were passed.
 
 \subsubsection{Problem Maintenance Tests}
 \begin{enumerate}
@@ -377,7 +381,7 @@ Testing Type: Functional, Manual, Dynamic
 					
 Initial State: problem maintenance page
 					
-Input: Input new problem with the following data and clicks ``Add Problem" 
+Input: Input a new problem with the following data and click ``Add Problem" 
 \begin{verbatim}
 {
     name: "Hello World Test Problem",
@@ -385,11 +389,11 @@ Input: Input new problem with the following data and clicks ``Add Problem"
 }
 \end{verbatim}
 					
-Output: List of problems on problem maintenance page shows new problem with the new name and description
+Output: List of problems on the problem maintenance page shows the new problem with the new name and description
 
 Test Case Derivation: The system receives the new problem and updates the database. The system then updates the display to show the new problem.
 					
-How test will be performed: Tester will type the test problem data and clicks ``Add Problem". Tester will check the list of problems displayed includes the new problem.
+How test will be performed: Tester will type the test problem data and click ``Add Problem". Tester will check the list of problems displayed including the new problem.
 
 \item{TC-PM-2: Modify a problem}
 
@@ -399,11 +403,11 @@ Initial State: problem maintenance page
 					
 Input: Clicks ``Edit" button onto a problem and edits the problem name to ``Test Problem Name".
 					
-Output: List of problems on problem maintenance page shows the problem with name ``Test Problem Name".
+Output: A list of problems on the problem maintenance page shows the problem with the name ``Test Problem Name".
 
-Test Case Derivation: The system receives the new problem name and updates the database. They system then updates the display to show the updated problem name.
+Test Case Derivation: The system receives the new problem name and updates the database. The system then updates the display to show the updated problem name.
 					
-How test will be performed: Tester will click edit on a test problem and edit the problem name. Tester will check the list of problems displayed includes the new problem name.
+How test will be performed: Tester will click edit on a test problem and edit the problem name. Tester will check the list of problems displayed including the new problem name.
 
 \item{TC-PM-3: Delete a problem}
 
@@ -413,7 +417,7 @@ Initial State: problem maintenance page
 					
 Input: Clicks ``Delete" button onto a problem
 					
-Output: List of problems on problem maintenance page does not shows the problem
+Output: The list of problems on the problem maintenance page does not show the problem
 
 Test Case Derivation: The system receives the delete problem and updates the database. The system then updates the display to show the problem is gone from the list.
 					
@@ -435,9 +439,9 @@ Input: Clicks a button to view their match statistics.
 					
 Output: Page displays the number of matches the player has played, the number they have won as well as their win percentage.
 
-Test Case Derivation: The system retrieves the match statistics from the database and sends it to the client. The system then calculates and displays the appropriate statistics for the player.
+Test Case Derivation: The system retrieves the match statistics from the database and sends them to the client. The system then calculates and displays the appropriate statistics for the player.
 					
-How test will be performed: Tester will run in a special environment with mock-data which includes several matches. Tester will check the HTML for an element which contains the win percentage number and ensure it matches the expected value in accordance with the mock-data.
+How test will be performed: Tester will run in a special environment with mock data which includes several matches. Tester will check the HTML for an element which contains the win percentage number and ensure it matches the expected value in accordance with the mock data.
 
 \item {TC-PV-2: Profile View Displays Match History}
 
@@ -449,9 +453,9 @@ Input: Clicks a match on the page.
 					
 Output: Match history displays the match result, the result for each round in that match and the coding problem for each match.
 
-Test Case Derivation: The system retrieves the match statistics from the database and sends it to the client. The system then displays the appropriate statistics for match which the user specified.
+Test Case Derivation: The system retrieves the match statistics from the database and sends it to the client. The system then displays the appropriate statistics for a match which the user specified.
 					
-How test will be performed: Tester will run in a special environment with mock-data which includes several matches. Tester will click on the first match on the list and check the HTML to ensure that the match data is displayed correctly in accordance with the provided mock-data.
+How test will be performed: Tester will run in a special environment with mock data which includes several matches. Tester will click on the first match on the list and check the HTML to ensure that the match data is displayed correctly in accordance with the provided mock data.
 
 \end{enumerate}
 
@@ -470,9 +474,39 @@ Output: The system displays up to 100 users, sorted by their number of wins in d
 
 Test Case Derivation: The system receives the leader board input and queries the database for the top 100 users by based on the number of wins of each user. The system then displays the results from the query.
 					
-How test will be performed: Tester will run in a special environment with mock-data which includes multiple users with different number of wins. Tester will click on the leaderboard tab. Tester will check HTML for each leader-board placement element to ensure that it is in the correct location in accordance with the mock-data.
+How test will be performed: Tester will run in a special environment with mock data which includes multiple users with a different number of wins. Tester will click on the leaderboard tab. Tester will check HTML for each leader-board placement element to ensure that it is in the correct location in accordance with the mock data.
 \end{enumerate}
 
+\subsubsection{Authentication Tests}
+
+
+\begin{enumerate}
+    \item {TC-A-1}
+    Testing Type: Functional, Manual, Dynamic
+					
+Initial State: Login Page
+					
+Input: Clicks the login button. Select an account to login with and put in the correct credentials.
+					
+Output: The system switch's to Home Page signalling a successful login.
+
+Test Case Derivation: The System receives the login information then checks the authentication service and when successful redirects the user to the Home Page.
+					
+How test will be performed: Tester will click on login button. Tester will input their correct credentials.
+
+ \item {TC-A-2}
+    Testing Type: Functional, Manual, Dynamic
+					
+Initial State: Login Page
+					
+Input: Clicks the login button. Select an account to login with and put in the wrong credentials.
+					
+Output: The system outputs an error message saying the wrong credentials preventing them from logging in.
+
+Test Case Derivation: The System receives the login information then checks the authentication service and when failure, returns an error message.
+					
+How test will be performed: Tester will click on the login button. Tester will input the wrong credentials. Tester checks to see if the error message appears.
+\end{enumerate}
 
 \subsection{Tests for Nonfunctional Requirements}
 
@@ -491,7 +525,7 @@ Input/Condition: User actions
 					
 Output/Result: Completed game
 					
-How test will be performed: The test will be performed manually by a new user. They will have to navigate through the system to join a game and complete a game and will score the navigation on a scale out of 10 based on how easy they found it to navigate. A minimum of 8/10 should be achieved. If this is not achieved, we will implement the user's feedback and  re-run on a new user.
+How test will be performed: The test will be performed manually by a new user. They will have to navigate through the system to join a game and complete a game and will score the navigation on a scale out of 10 based on how easy they found it to navigate. A minimum of 8/10 should be achieved. If this is not achieved, we will implement the user's feedback and  re-run it on a new user.
 \end{enumerate}
 
 \paragraph{Screen Size Compatibility}
@@ -555,7 +589,7 @@ How test will be performed: The test will be performed manually by a member of t
 
 Type: Compatibility, Manual, Dynamic
 					
-Initial State: The game is not running or being displayed on browser window
+Initial State: The game is not running or being displayed on the browser window
 					
 Input/Condition: The game website is accessed on various modern browsers
 					
@@ -583,22 +617,6 @@ Output/Result: The server blocks the connection and ignores any requests sent fr
 How test will be performed: The test will be performed manually by a team member. They will create a WebSocket session outside of the game client and send events to the server. They will note whether or not those actions affected the game.
 \end{enumerate}
 
-\paragraph{User Privacy}
-
-\begin{enumerate}
-\item{TC-S-2: The server must only store and display the minimum required data about the player}
-
-Type: Security, Manual, Dynamic
-					
-Initial State: The game is started, no users are connected
-					
-Input/Condition: A user connects to the game
-					
-Output/Result: The server only obtains the minimum amount of information from the user to run the game. Only the game stats is stored after the game ends and other information is disposed.
-					
-How test will be performed: The test will be performed manually by a team member. They will connect to the game through normal means. They will then view the server's logs to see what information was accessed by the server. They will also navigate to all of the pages to see if any data that poses a security threat or is not necessary to be displayed, if noticed these displays will be adjusted to not to include them.
-\end{enumerate}
-
 \subsubsection{Cultural}
 
 \paragraph{Content Moderation}
@@ -611,9 +629,9 @@ Initial State: Current state of the codebase
 					
 Input/Condition: Snapshot of the current codebase 
 					
-Output/Result: True or False that content is verified to not be culturally inappropriate.
+Output/Result: True or False that content is verified not to be culturally inappropriate.
 					
-How test will be performed: The test will be performed manually by a team member. They will review the code snapshot, and will find any cultural references. If there are at least one cultural reference the test fails. Based on findings, cultural references are to be removed.
+How test will be performed: The test will be performed manually by a team member. They will review the code snapshot and will find any cultural references. If there is at least one cultural reference the test fails. Based on the findings, cultural references are to be removed.
 \end{enumerate}
 
 \subsubsection{Legal}
@@ -630,14 +648,14 @@ Input/Condition: System repository
 					
 Output/Result: True or False that the repository is protected by the GNU General Public License.
 					
-How test will be performed: The test will be performed manually by a team member. They will review the repository and ensure the legal protection is present.
+How test will be performed: The test will be performed manually by a team member. They will review the repository and ensure that legal protection is present.
 \end{enumerate}
 
 \subsubsection{Health and Safety}
 
 \paragraph{Epilepsy shock test}
 \begin{enumerate}
-\item{TC-HS-1: The system has no flashing lights that could cause harm to user}
+\item{TC-HS-1: The system has no flashing lights that could cause harm to the user}
 
 Type: Manual
 					
@@ -650,6 +668,24 @@ Output/Result: True or false that the system did not cause epilepsy.
 How test will be performed: The test will be performed manually by a team member. The member will navigate the site and ensure that there are no flashing lights that could result in an epilepsy shock.
 \end{enumerate}
 
+\subsubsection{Usability Testing}\label{usability}
+
+A semi-structured interview will be conducted with users in the target demographic. To achieve this, a CodeChamp lobby will be setup with a user group. Each session should target around 8-20 users participating in a CodeChamp game. After each user participates in a game, they will be asked several questions. The questions that will be asked can be found in the Appendix Section \ref{UsabilitySurveyQuestions}. As our platform's goal is to help users code, this survey will be used to evaluate the user's experience using the software, to find out if it's helpful in its current state and to determine potential new features that could be valuable to the  users.
+
+
+\subsection{Dependencies Among Tests}
+Some tests cannot be performed until other parts of the testing plans are completed. Figure \ref{fig:deps} demonstrates such dependencies, with an arrow from a test to another representing that the test cannot be performed until the test it points to has been performed.
+
+\begin{figure}[H]
+    \centering
+    \includesvg[width=\textwidth]{deps.svg}
+    \caption{A dependency graph among tests in the CodeChamp system}
+    \label{fig:deps}
+\end{figure}
+
+
+
+
 \subsection{Traceability Between Test Cases and Requirements}
 
 
@@ -659,21 +695,19 @@ How test will be performed: The test will be performed manually by a team member
     \hline
     TC-MM-1 & FR.1 & Should join a random match.\\
     \hline
-    TC-MM-2 & FR.24 & Should join an existing page with a code. \\
+    TC-MM-2 & FR.19 & Should join an existing page with a code. \\
      \hline
-    TC-MM-3 & FR.23 & Should create a match. \\
+    TC-MM-3 & FR.18 & Should create a match. \\
      \hline
-    TC-IG-1 & FR.2, FR.3, FR.4, FR.5, FR.8, FR.9, FR.10, FR.11 & Should complete a match. \\
+    TC-IG-1 & FR.2, FR.3, FR.4, FR.5, FR.8, FR.9, FR.10 & Should complete a match. \\
      \hline
-    TC-IG-2 & FR.6, FR.7, FR.20, FR.21 & Should compile solutions from input.\\
+    TC-IG-2 & FR.6, FR.7, FR.15, FR.16, FR.17 & Should compile solutions from the input.\\
      \hline
-    TC-IG-3 & FR.14, FR.15, FR.16   & Should detect and not run malicious code.\\
+    TC-PM-1 & FR.11, FR.12, FR.16, FR.17 & Should be able to add new problems (admin).\\
      \hline
-    TC-PM-1 & FR.12, FR.13, FR.22, NFR.10 & Should be able to add new problems (admin).\\
+    TC-PM-2 & FR.11, FR.12, FR.16, FR.17 & Should be able to modify problems (admin).\\
      \hline
-    TC-PM-2 & FR.12, FR.13, FR.22, NFR.10 & Should be able to modify problems (admin).\\
-     \hline
-    TC-PM-3 & FR.12, FR.13, FR.22, NFR.10 & Should be able to delete problems (admin).\\
+    TC-PM-3 & FR.11, FR.12, FR.16, FR.17 & Should be able to delete problems (admin).\\
      \hline
     % TC-LS-1 & FR.17 & New users can sign up. \\
     %  \hline
@@ -681,153 +715,86 @@ How test will be performed: The test will be performed manually by a team member
     %  \hline
     % TC-LS-3 & FR.19  & Login with invalid information is rejected and a error message is displayed. \\
      % \hline
-    TC-PV-1 & FR.26 & Profile should view win percentage.\\
-     \hline
-    TC-PV-2 & FR.25, FR.27, FR.28  & Profile should view match history.\\
-     \hline
-    TC-LB-1 & FR.29 & Leaderboard view should show the players sorted by their scores.\\
-     \hline
-    TC-LF-1 & NFR.1, NFR.2, NFR.3, NFR.4, NFR.5 & Ease of navigation.\\
+    TC-PV-1 & FR.21 & Profile should view win percentage.\\
     \hline
-    TC-LF-2 & NFR.1, NFR.3  & Compatibility among devices.\\
+    TC-PV-2 & FR.20, FR.22, FR.23  & Profile should view match history.\\
     \hline
-     TC-P-1 & NFR.6 & Performance of user actions.\\
+    TC-LB-1 & FR.24 & Leaderboard view should show the players sorted by their scores.\\
     \hline
-    TC-P-2 & NFR.7 & Performance of user solution compilation.\\
+    TC-A-1 & FR.13 & Users should be able to login\\
+    \hline
+    TC-A-2 & FR.14 & System should error when login credentials are wrong\\
+    \hline
+    TC-LF-1 & NFR.1, NFR.2, NFR.3 & Ease of navigation.\\
+    \hline
+    TC-LF-2 & NFR.2, NFR.3  & Responsive display among devices.\\
+    \hline
+     TC-P-1 & NFR.4 & Performance of user actions.\\
+    \hline
+    TC-P-2 & NFR.10 & Performance of user solution compilation.\\
      \hline
-    TC-OE-1 & NFR.9 & Should run on any modern browser on any device. \\
+    TC-OE-1 & NFR.6 & Should run on any modern browser on any device. \\
      \hline
-    TC-S-1 & NFR.11, NFR.12 & Only requests from authenticated users should be accepted. \\
+    TC-S-1 & NFR.7 & Only requests from authenticated users should be accepted. \\
      \hline
-    TC-S-2 & NFR.11 & Only minimal data about a user should be stored.\\
+    TC-C-1 & NFR.10 & Content of the system should not contain any cultural references.\\
      \hline
-    TC-C-1 & NFR.13 & Content of the system should not contain any cultural references.\\
-     \hline
-    TC-L-2 & NFR.14 & System should be protected by GNU License.\\
+    TC-L-1 & NFR.11 & System should be protected by GNU License.\\
      \hline
     % \end{tabularx}
     \caption{Traceability Table for Test Cases and Requirements}
     \label{tab:trace}
 \end{longtable}
 
+\begin{landscape}
+
+\begin{table}
+\vspace{-3cm}\hspace{-0.6cm}\begin{tabularx}{1.692\textwidth}{|p{1cm}|p{0.6cm}|p{0.6cm}|p{0.6cm}|p{0.6cm}|p{0.6cm}|p{0.6cm}|p{0.6cm}|p{0.6cm}|p{0.6cm}|p{0.6cm}|p{0.6cm}|p{0.6cm}|p{0.6cm}|p{0.6cm}|p{0.6cm}|p{0.6cm}|p{0.6cm}|p{0.6cm}|p{0.6cm}|p{0.6cm}|p{0.6cm}|}
+    
+    \hline
+    & MM-1 & MM-2 & MM-3  & IG-1  & IG-2  & PM-1  & PM-2  & PM-3  & PV-1  & PV-2 & LB-1 & A-1 & A-2 & LF-1 & LF-2 & P-1 & P-2 & OE-1 & S-1 & C-1 & L-1\\
+    \hline
+  FR.1  & X & & & & & & & & & & & & & & & & & & & &\\\hline
+  FR.2  & & & & X & & & & & & & & & & & & & & & & &\\\hline
+  FR.3  & & & & X & & & & & & & & & & & & & & & & &\\\hline
+  FR.4  & & & & X & & & & & & &  &  & & & & & & & & &\\\hline
+  FR.5  & & & & X & & & & & &  & & & & & & & & & & &\\\hline
+  FR.6  & & &  &  & X & & & &  & & & & & & & & & & & &\\\hline
+  FR.7  & & &  &  & X & & & &  & & & & & & & & & & & &\\\hline
+  FR.8 &  & & & X & & & & & & & &  & & & & & & & & &\\\hline
+  FR.9  & & & & X & & & & & & & & & & & & & & & & &\\\hline
+  FR.10  & & & & X & & & & & & & & & & & & & & & & &\\\hline
+  FR.11  & & & & & & X & X & X & & & & & & & & & & & & &\\\hline
+  FR.12  & & & & & & X & X & X & & & & & & & & & & & & &\\\hline
+  FR.13  & &  & & & & & & & & & &X & & & & & & & & &\\\hline
+  FR.14 &  &  & & & & & & & & & &  &X & & & & & & & &\\\hline
+  FR.15  & & &  &  & X & & & &  & & & & & & & & & & & &\\\hline
+  FR.16  & & &  &  & X & X & X & X &  & & & & & & & & & & & &\\\hline
+  FR.17 &  & & &  & X & X & X & X & & &  & & & & & & & & & &\\\hline
+  FR.18 &  & & X & & & &  &  &  & &  & & & & & & & & & &\\\hline
+  FR.19 &  & X &  & & & &  &  &  & &  & & & & & & & & & &\\\hline
+  FR.20 &  & &  & & & & & & &X &  & & & & & & & & & &\\\hline
+  FR.21 &  &  &  & & & & & &X & & & &  & & & & & & & &\\\hline
+  FR.22 &  &  &  & & & & & & &X & & &  & & & & & & & & \\\hline
+  FR.23 &  &  &  & & & & & & &X & & &  & & & & & & & &\\\hline
+  FR.24 &  &  &  & & & & & & & &X & &  & & & & & & & &\\\hline
+  \end{tabularx}
+    \caption{Traceability Matrix for Requirements and Tests Cases}
+    \label{tab:trace2}
+\end{table}
+\end{landscape} 
+
+
 % \wss{Provide a table that shows which test cases are supporting which
 %   requirements.}
 
-% \section{Unit Test Description}
-
-% \wss{Reference your MIS and explain your overall philosophy for test case
-%   selection.}  
-% \wss{This section should not be filled in until after the MIS has
-%   been completed.}
-
-% \subsection{Unit Testing Scope}
-
-% \wss{What modules are outside of the scope.  If there are modules that are
-%   developed by someone else, then you would say here if you aren't planning on
-%   verifying them.  There may also be modules that are part of your software, but
-%   have a lower priority for verification than others.  If this is the case,
-%   explain your rationale for the ranking of module importance.}
-
-% \subsection{Tests for Functional Requirements}
-
-% \wss{Most of the verification will be through automated unit testing.  If
-%   appropriate specific modules can be verified by a non-testing based
-%   technique.  That can also be documented in this section.}
-
-% \subsubsection{Module 1}
-
-% \wss{Include a blurb here to explain why the subsections below cover the module.
-%   References to the MIS would be good.  You will want tests from a black box
-%   perspective and from a white box perspective.  Explain to the reader how the
-%   tests were selected.}
-
-% \begin{enumerate}
-
-% \item{test-id1\\}
-
-% Type: \wss{Functional, Dynamic, Manual, Automatic, Static etc. Most will
-%   be automatic}
-					
-% Initial State: 
-					
-% Input: 
-					
-% Output: \wss{The expected result for the given inputs}
-
-% Test Case Derivation: \wss{Justify the expected value given in the Output field}
-
-% How test will be performed: 
-					
-% \item{test-id2\\}
-
-% Type: \wss{Functional, Dynamic, Manual, Automatic, Static etc. Most will
-%   be automatic}
-					
-% Initial State: 
-					
-% Input: 
-					
-% Output: \wss{The expected result for the given inputs}
-
-% Test Case Derivation: \wss{Justify the expected value given in the Output field}
-
-% How test will be performed: 
-
-% \item{...\\}
+ \section{Unit Test Summary}
     
-% \end{enumerate}
+Unit testing will be done for all applicable modules, as defined in the \href{https://github.com/Tamas-Leung/CodeChamp/blob/main/docs/Design/MIS/MIS.pdf}{Module Interface Specification}. For back-end modules, Mocha will be used as the unit testing framework. For front-end modules, Jasmine will be used. In particular, for back-end testing, all API endpoints were tested. This covered operations of creating, reading, updating, and deleting data. The data we used to verify these operations were mocked data that was used by a mock database for the purposes of testing. As our project contains two distinct components (the backend and the frontend), the tests themselves will be placed alongside the code for the back-end in the \href{https://github.com/Tamas-Leung/CodeChamp/tree/main/src/backend}{tests directory} tests directory as a separation of concerns. For front-end testing, components will be tested for each page. This involves testing the usability and functionality of menus, buttons, interactions, events and other GUI elements visible to the user using a Chrome runner. In accordance with the Angular convention, the test for each component will be placed in the same directory as the component itself as a `.spec.ts' file. The files for the frontend can be found \href{https://github.com/Tamas-Leung/CodeChamp/tree/main/src/frontend}{here}.
 
-% \subsubsection{Module 2}
+ \subsection{Unit Testing Scope}\label{scope}
 
-% ...
-
-% \subsection{Tests for Nonfunctional Requirements}
-
-% \wss{If there is a module that needs to be independently assessed for
-%   performance, those test cases can go here.  In some projects, planning for
-%   nonfunctional tests of units will not be that relevant.}
-
-% \wss{These tests may involve collecting performance data from previously
-%   mentioned functional tests.}
-
-% \subsubsection{Module ?}
-		
-% \begin{enumerate}
-
-% \item{test-id1\\}
-
-% Type: \wss{Functional, Dynamic, Manual, Automatic, Static etc. Most will
-%   be automatic}
-					
-% Initial State: 
-					
-% Input/Condition: 
-					
-% Output/Result: 
-					
-% How test will be performed: 
-					
-% \item{test-id2\\}
-
-% Type: Functional, Dynamic, Manual, Static etc.
-					
-% Initial State: 
-					
-% Input: 
-					
-% Output: 
-					
-% How test will be performed: 
-
-% \end{enumerate}
-
-% \subsubsection{Module ?}
-
-% ...
-
-% \subsection{Traceability Between Test Cases and Modules}
-
-%\wss{Provide evidence that all of the modules have been considered.}
+Modules M32, M33, M34 are out of scope as they are not developed by the CodeChamp team. In particular, M32 deals with the environment used to compile and execute code, which will be handled by an external service. Likewise, M33, the database module, is out of scope as it's handled by an external service. Finally, the router module is out of scope as it is provided as an abstraction by the Angular framework and ultimately implemented by the browser used. As shown in the \href{https://github.com/Tamas-Leung/CodeChamp/blob/main/docs/Design/MG/MG.pdf}{Module Guide}, many of the modules which are in scope depend on these modules. In these cases, a mock will be used for the modules that are out of scope. For instance, if a module relies on some database operations such as insertions or retrieval of data, the mock will be used to fake those interactions instead.
 				
 \bibliographystyle{plainnat}
 
@@ -858,10 +825,23 @@ Their values are defined in this section for easy maintenance.
     \label{tab:trace}
 \end{table}
 
-\subsection{Usability Survey Questions}
+\subsection{Usability Survey Questions}\label{UsabilitySurveyQuestions} 
 
 % \wss{This is a section that would be appropriate for some projects.}
-N/A
+\begin{itemize}
+    \item From 1 - 10, How easy was the interface to navigate? 
+    1 being un-navigatable, 10 being no issues navigating.
+
+    \item From 1 - 10, How consistent was the visual theming of the website? 1 being not consistent at all, 10 being super consistent. If users answered less than 8, testers should follow up and ask for feedback.
+
+    \item Would you prefer the copy code button to copy the whole URL or just the game id? The team will conduct an A/B test in which half the users are tested on copying the URL then trying copying the game id and vice versa for the other group.
+
+    \item What features do you feel are missing from the game?
+
+    \item Which programming language should the platform support?
+
+
+\end{itemize}
 
 \newpage{}
 \section*{Appendix --- Reflection}
