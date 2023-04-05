@@ -88,7 +88,6 @@ export default class WebSocketManager {
     if (clientIndex >= 0) {
       // Replace client if new client with same
       game.clientIds[clientIndex] = client.id;
-      // TODO: Send event to front end of old client to kick them out
     } else {
       game.clientIds.push(client.id);
     }
@@ -179,13 +178,7 @@ export default class WebSocketManager {
 
     const players = this.getPlayersDataToSend(game);
 
-    let newProblem = await getRandomProblemId(game.problemsPlayed);
-
-    if (game.round === 1) {
-      newProblem = '63794a6952d8441c74627f63';
-    } else if (game.round === 2) {
-      newProblem = '63747e5dfffe067b61c7e67e';
-    }
+    const newProblem = await getRandomProblemId(game.problemsPlayed);
 
     game.problemsPlayed.push(newProblem);
 
@@ -342,8 +335,5 @@ export default class WebSocketManager {
     if (game.clientIds.length) {
       this.sendUpdatedPlayers(game);
     }
-    // } else {
-    //   // this.games.delete(gameID);
-    // }
   }
 }
