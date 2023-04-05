@@ -41,7 +41,9 @@ Run `npm run start` to start the dev server. Nodemon will listen to source file 
 Visit `localhost:3000/docs` to visit api documentation
 
 # Code Standards
+
 This project follows the [AirBnB Style Guide](https://github.com/airbnb/javascript). Prettier formatting and ESLint linting rules were included to help developers follow the guidelines.
+
 ## Linting
 
 This project uses ESLint for linting. You can use `npm run lint:check` to check for linter errors and `npm run lint:fix` to automatically attempt to resolve them.
