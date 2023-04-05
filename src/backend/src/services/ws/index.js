@@ -88,7 +88,6 @@ export default class WebSocketManager {
     if (clientIndex >= 0) {
       // Replace client if new client with same
       game.clientIds[clientIndex] = client.id;
-      // TODO: Send event to front end of old client to kick them out
     } else {
       game.clientIds.push(client.id);
     }
