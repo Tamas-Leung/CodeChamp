@@ -336,8 +336,5 @@ export default class WebSocketManager {
     if (game.clientIds.length) {
       this.sendUpdatedPlayers(game);
     }
-    // } else {
-    //   // this.games.delete(gameID);
-    // }
   }
 }
