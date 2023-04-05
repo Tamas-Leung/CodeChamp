@@ -43,7 +43,7 @@ CodeChamp will find appropriate problems for you. Up to half the players can qua
 ![image](https://user-images.githubusercontent.com/32617102/229898154-0a6f118d-8ffd-4aa0-8fd9-ac8da76ee56c.png)
 
 ### Submissions
-CodeChamp supports code highlighting right in the browser. Choose your favorite language and execute your code on the server without worrying about local build tools.
+CodeChamp supports code editing right in the browser. Choose your favorite language and execute your code on the server without worrying about local build tools.
 
 ![image](https://user-images.githubusercontent.com/32617102/229898214-29baaa0a-b252-4258-bc06-29a05e462f36.png)
 
@@ -63,6 +63,7 @@ The important entry-points for the documentation and development of the system a
 │   │   └── SystDesign (Main System Design Document)
 │   ├── Development Plan
 │   ├── Hazard Analysis
+│   ├── ProblemStatementAndGoals
 │   ├── SRS (Software Requirements Specification)
 │   ├── VnVPlan (Validation and Verification Plan)
 │   ├── VnVReport (Validation and Verification Report)
