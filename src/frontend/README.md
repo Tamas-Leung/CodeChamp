@@ -19,4 +19,13 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
 # Code Standards
+
 This project follows the offical [Angular Style Guide](https://angular.io/guide/styleguide). Prettier formatting and ESLint linting rules were included to help developers follow the guidelines.
+
+## Linting
+
+This project uses ESLint for linting. You can use `npm run lint:check` to check for linter errors and `npm run lint:fix` to automatically attempt to resolve them.
+
+## Formatting
+
+This project uses Prettier for formatting. You can use `npm run format:check` to check for formatting errors and `npm run format:fix` to automatically fix them.
