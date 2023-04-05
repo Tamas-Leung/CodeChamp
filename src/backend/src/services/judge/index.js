@@ -27,6 +27,9 @@ import judgeVerdict from './judge-verdict.js';
 
 import { JUDGE_DIR } from './path-generator.js';
 
+const KILL_SIGNAL_CODE = 'killSignal';
+const DOCKER_MLE_CODE = 137;
+
 const ensureJudgeDirExists = () =>
   new Promise((resolve, reject) => {
     access(JUDGE_DIR, constants.F_OK, (accessFailed) => {
@@ -51,7 +54,7 @@ export default ({ language, code, input, output, timeLimit, memoryLimit }) =>
             const cmd = dockerRunCmd(id, id, memoryLimit);
             const child = exec(
               cmd,
-              { timeout: timeLimit, killSignal: 'SIGKILL' },
+              { timeout: timeLimit, killSignal: KILL_SIGNAL_CODE },
               (err, _, stderr) => {
                 if (stderr) {
                   cleanUpEnvironment({ codePath, dockerPath });
@@ -59,7 +62,7 @@ export default ({ language, code, input, output, timeLimit, memoryLimit }) =>
                 }
                 if (err) {
                   cleanUpEnvironment({ codePath, dockerPath });
-                  if (err.code === 137) {
+                  if (err.code === DOCKER_MLE_CODE) {
                     resolve({ verdict: judgeVerdict.MLE });
                   }
                   resolve({ verdict: judgeVerdict.SE });
@@ -68,7 +71,7 @@ export default ({ language, code, input, output, timeLimit, memoryLimit }) =>
             );
 
             child.on('exit', (_, signal) => {
-              if (signal === 'SIGKILL') {
+              if (signal === KILL_SIGNAL_CODE) {
                 exec(`docker kill ${id}`);
                 cleanUpEnvironment({ codePath, dockerPath });
                 resolve({ verdict: judgeVerdict.TLE });
