@@ -61,7 +61,6 @@ router.get('/user/:_id', async (req, res) => {
   }
 });
 
-
 /**
  * @swagger
  * /leaderboard/{top}:
