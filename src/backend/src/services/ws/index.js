@@ -179,13 +179,7 @@ export default class WebSocketManager {
 
     const players = this.getPlayersDataToSend(game);
 
-    let newProblem = await getRandomProblemId(game.problemsPlayed);
-
-    if (game.round === 1) {
-      newProblem = '63794a6952d8441c74627f63';
-    } else if (game.round === 2) {
-      newProblem = '63747e5dfffe067b61c7e67e';
-    }
+    const newProblem = await getRandomProblemId(game.problemsPlayed);
 
     game.problemsPlayed.push(newProblem);
 
