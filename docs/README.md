@@ -1,8 +1,8 @@
-<Please keep the folder structure as given in the template repo.  We will
+<!---Please keep the folder structure as given in the template repo.  We will
 discuss each artifact as we get to it in the course.  In some cases, like for
 the SRS, you should have a file of the same name.  For other cases, like the
 design documentation, you are required to document your design, but it may not
-be via a module guide and module interface specification documents.>
+be via a module guide and module interface specification documents.-->
 
 <The files and folders have been set-up with tex files that have external links
 so that cross-referencing is possible between documents.>
@@ -20,4 +20,15 @@ information.  They are just intended to be a starting point.>
 
 The folders and files for this folder are as follows:
 
-Describe ...
+```
+├── Design
+│   ├── MG (Module Guide)
+│   └── MIS (Module Interface Specification)
+│   └── SystDesign (Main System Design Document)
+├── Development Plan
+├── Hazard Analysis
+├── ProblemStatementAndGoals
+├── SRS (Software Requirements Specification)
+├── VnVPlan (Validation and Verification Plan)
+├── VnVReport (Validation and Verification Report)
+```
