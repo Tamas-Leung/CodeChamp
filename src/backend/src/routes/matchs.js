@@ -20,6 +20,27 @@ import { Matchs } from '../database/mongoose.js';
 
 const router = Router();
 
+/**
+ * @swagger
+ * /user/{_id}:
+ *   get:
+ *     tags:
+ *        - matches
+ *     summary: Gets all matchges by id
+ *     description: Gets all matchges by id
+ *     responses:
+ *       '200':
+ *         description: Successful operation
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Matches'
+ *       '500':
+ *         description: Internal Failure
+ *
+ */
 router.get('/user/:_id', async (req, res) => {
   try {
     const filter = {
@@ -40,6 +61,28 @@ router.get('/user/:_id', async (req, res) => {
   }
 });
 
+
+/**
+ * @swagger
+ * /leaderboard/{top}:
+ *   get:
+ *     tags:
+ *        - matches
+ *     summary: Gets top players
+ *     description: Gets top players
+ *     responses:
+ *       '200':
+ *         description: Successful operation
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Matches'
+ *       '500':
+ *         description: Internal Failure
+ *
+ */
 router.get('/leaderboard/:top?', async (req, res) => {
   try {
     let top = 100;
