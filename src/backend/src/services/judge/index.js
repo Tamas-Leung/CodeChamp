@@ -27,7 +27,7 @@ import judgeVerdict from './judge-verdict.js';
 
 import { JUDGE_DIR } from './path-generator.js';
 
-const KILL_SIGNAL_CODE = 'killSignal';
+const KILL_SIGNAL_CODE = 'SIGKILL';
 const DOCKER_MLE_CODE = 137;
 
 const ensureJudgeDirExists = () =>
@@ -70,6 +70,18 @@ export default ({ language, code, input, output, timeLimit, memoryLimit }) =>
               }
             );
 
+            let hasStdout = false;
+
+            child.on('close', (exitCode) => {
+              if (!hasStdout) {
+                cleanUpEnvironment({ codePath, dockerPath });
+                resolve({
+                  verdict: judgeVerdict.CE,
+                  additionalInfo: `Exited with status code ${exitCode} without writing to standard output.`,
+                });
+              }
+            });
+
             child.on('exit', (_, signal) => {
               if (signal === KILL_SIGNAL_CODE) {
                 exec(`docker kill ${id}`);
@@ -88,6 +100,7 @@ export default ({ language, code, input, output, timeLimit, memoryLimit }) =>
             });
 
             child.stdout.on('data', (stdout) => {
+              hasStdout = true;
               cleanUpEnvironment({ codePath, dockerPath });
               resolve({
                 verdict: stdout === output ? judgeVerdict.CA : judgeVerdict.WA,
